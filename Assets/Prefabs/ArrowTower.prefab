@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 4189235435986554908}
   - component: {fileID: 8460678773872541786}
   m_Layer: 0
-  m_Name: Build
+  m_Name: ArrowTower
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -90,7 +90,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 2fdff0e1b4c3331478ed0eca1887a9b2, type: 2}
+  - {fileID: 2100000, guid: d6552e0fa471c254aad2c471eee17544, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

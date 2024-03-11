@@ -7,6 +7,7 @@ public class Builder : MonoBehaviour
 {
     [SerializeField] private List<Building> _buildings;
     [SerializeField] private Collider _terrainCollider;
+    [SerializeField] private ConstructedBuildings _constructedBuildings;
 
     private Building _currentBuilding;
     
@@ -20,10 +21,22 @@ public class Builder : MonoBehaviour
     }
 
     [Button()]
-    private void BuildTower()
+    private void BuildGunTower()
     {
         EnableConstructionMode();
         InstantiateBuild(_buildings[0]);
+    }
+
+    [Button()]
+    private void BuildArrowTower()
+    {
+        EnableConstructionMode();
+        InstantiateBuild(_buildings[1]);
+    }
+
+    private void GetBuildings()
+    {
+        
     }
     
     private void InstantiateBuild(Building building)
@@ -37,14 +50,20 @@ public class Builder : MonoBehaviour
     
     private void EnableConstructionMode()
     {
+#if !UNITY_EDITOR
         Cursor.lockState = CursorLockMode.Confined;
         Cursor.visible = false;
+#endif
     }
     
+    [Button()]
     private void DisableConstructionMode()
     {
-        Destroy(_currentBuilding.gameObject);
-        _currentBuilding = null;
+        if (_currentBuilding != null)
+        {
+            Destroy(_currentBuilding.gameObject);
+            _currentBuilding = null;
+        }
     }
     
     private void ClearFollowingBuilding()
@@ -58,6 +77,8 @@ public class Builder : MonoBehaviour
 
     public void ConstructBuilding()
     {
+        _currentBuilding.DisableMouseFollower();
+        _constructedBuildings.SetNewBuilding(_currentBuilding);
         var temp = _currentBuilding;
         _currentBuilding = null;
             

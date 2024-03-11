@@ -10,9 +10,12 @@ namespace Builds
         public virtual void Initialize(Builder builder, Collider terrainCollider)
         {
             _mouseFollower.Init(builder, terrainCollider);
-
             _mouseFollower.enabled = true;
-            // EnableBuildingFollower();
+        }
+
+        public void DisableMouseFollower()
+        {
+            _mouseFollower.enabled = false;
         }
     }
 }
