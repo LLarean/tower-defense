@@ -42,6 +42,11 @@ public class Builder : MonoBehaviour
         {
             DisableConstructionMode();
         }
+        
+        if (Input.GetMouseButtonDown(1) == true && _currentBuilding != null)
+        {
+            DisableConstructionMode();
+        }
     }
 
     private void GetBuildings()
