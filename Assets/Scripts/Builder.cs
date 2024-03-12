@@ -10,70 +10,6 @@ public class Builder : MonoBehaviour
     [SerializeField] private ConstructedBuildings _constructedBuildings;
 
     private Building _currentBuilding;
-    
-    private void Update()
-    {
-        // TODO it is necessary to separate it into a separate entity to control the click
-        if (Input.GetKeyDown(KeyCode.Escape) == true && _currentBuilding != null)
-        {
-            DisableConstructionMode();
-        }
-    }
-
-    [Button()]
-    private void BuildGunTower()
-    {
-        EnableConstructionMode();
-        InstantiateBuild(_buildings[0]);
-    }
-
-    [Button()]
-    private void BuildArrowTower()
-    {
-        EnableConstructionMode();
-        InstantiateBuild(_buildings[1]);
-    }
-
-    private void GetBuildings()
-    {
-        
-    }
-    
-    private void InstantiateBuild(Building building)
-    {
-        EnableConstructionMode();
-        ClearFollowingBuilding();
-                
-        _currentBuilding = Instantiate(building, transform.position, Quaternion.identity);
-        _currentBuilding.Initialize(this, _terrainCollider);
-    }
-    
-    private void EnableConstructionMode()
-    {
-#if !UNITY_EDITOR
-        Cursor.lockState = CursorLockMode.Confined;
-        Cursor.visible = false;
-#endif
-    }
-    
-    [Button()]
-    private void DisableConstructionMode()
-    {
-        if (_currentBuilding != null)
-        {
-            Destroy(_currentBuilding.gameObject);
-            _currentBuilding = null;
-        }
-    }
-    
-    private void ClearFollowingBuilding()
-    {
-        if (_currentBuilding != null)
-        {
-            Destroy(_currentBuilding.gameObject);
-            _currentBuilding = null;
-        }
-    }
 
     public void ConstructBuilding()
     {
@@ -83,5 +19,69 @@ public class Builder : MonoBehaviour
         _currentBuilding = null;
             
         InstantiateBuild(temp);
+    }
+
+    [Button()]
+    public void BuildGunTower()
+    {
+        EnableConstructionMode();
+        InstantiateBuild(_buildings[0]);
+    }
+
+    [Button()]
+    public void BuildArrowTower()
+    {
+        EnableConstructionMode();
+        InstantiateBuild(_buildings[1]);
+    }
+
+    private void Update()
+    {
+        // TODO it is necessary to separate it into a separate entity to control the click
+        if (Input.GetKeyDown(KeyCode.Escape) == true && _currentBuilding != null)
+        {
+            DisableConstructionMode();
+        }
+    }
+
+    private void GetBuildings()
+    {
+        
+    }
+
+    private void InstantiateBuild(Building building)
+    {
+        EnableConstructionMode();
+        ClearFollowingBuilding();
+                
+        _currentBuilding = Instantiate(building, transform.position, Quaternion.identity);
+        _currentBuilding.Initialize(this, _terrainCollider);
+    }
+
+    private void EnableConstructionMode()
+    {
+#if !UNITY_EDITOR
+        Cursor.lockState = CursorLockMode.Confined;
+        Cursor.visible = false;
+#endif
+    }
+
+    [Button()]
+    private void DisableConstructionMode()
+    {
+        if (_currentBuilding != null)
+        {
+            Destroy(_currentBuilding.gameObject);
+            _currentBuilding = null;
+        }
+    }
+
+    private void ClearFollowingBuilding()
+    {
+        if (_currentBuilding != null)
+        {
+            Destroy(_currentBuilding.gameObject);
+            _currentBuilding = null;
+        }
     }
 }
