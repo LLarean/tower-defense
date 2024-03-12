@@ -4,23 +4,22 @@ using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
-    [SerializeField] private Transform _startPoint; 
-    [SerializeField] private Transform _finishPoint; 
+    [SerializeField] private Transform _spawnPoint; 
+    [SerializeField] private Transform _destroyPoint; 
+    [SerializeField] private List<Transform> _wayPoints; 
         
     [Header("Units")]
     [SerializeField] private Enemy _enemy;
 
     private List<Enemy> _enemies = new List<Enemy>();
 
-    private int _maximumEnemies = 5; 
+    private int _maximumEnemies = 5;
     private int _numberEnemiesCreated;
-    private float _spawnDelay = 2f; 
-    private int _damage = 1;
-    private int _costKilling = 10;
+    private float _spawnDelay = 2f;
 
     public void StartSpawn()
     {
-        StartCoroutine(CreatingEnemies());
+        StartCoroutine(CreateEnemies());
     }
 
     public void FinishSpawn()
@@ -38,29 +37,17 @@ public class EnemySpawner : MonoBehaviour
         StartSpawn();
     }
 
-    private IEnumerator CreatingEnemies()
+    private IEnumerator CreateEnemies()
     {
         while (_numberEnemiesCreated < _maximumEnemies)
         {
             _numberEnemiesCreated++;
                 
-            Enemy enemy = Instantiate(_enemy, _startPoint.position, Quaternion.identity);
-            enemy.Init(this, _finishPoint);
+            Enemy enemy = Instantiate(_enemy, _spawnPoint.position, Quaternion.identity);
+            enemy.Initialize(_wayPoints, _destroyPoint);
             _enemies.Add(enemy);
                 
             yield return new WaitForSeconds(_spawnDelay);
         }
-            
-        StartCoroutine(EndWait());
-    }
-        
-    private IEnumerator EndWait()
-    {
-        while (_enemies.Count != 0)
-        {
-            yield return null;
-        }
-
-        yield return new WaitForSeconds(2f);
     }
 }
