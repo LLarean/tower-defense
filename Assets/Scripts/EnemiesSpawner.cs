@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemySpawner : MonoBehaviour
+public class EnemiesSpawner : MonoBehaviour
 {
     [SerializeField] private Transform _spawnPoint; 
     [SerializeField] private Transform _destroyPoint; 
@@ -17,6 +17,11 @@ public class EnemySpawner : MonoBehaviour
     private int _numberEnemiesCreated;
     private float _spawnDelay = 2f;
 
+    public void StartMatch()
+    {
+        StartCoroutine(CreateEnemies());
+    }
+
     public void StartSpawn()
     {
         StartCoroutine(CreateEnemies());
@@ -25,17 +30,12 @@ public class EnemySpawner : MonoBehaviour
     public void FinishSpawn()
     {
     }
-        
+
     public void Finish()
     {
     }
 
     public void DeleteUnit(Enemy enemy) => _enemies.Remove(enemy);
-
-    private void Start()
-    {
-        StartSpawn();
-    }
 
     private IEnumerator CreateEnemies()
     {
