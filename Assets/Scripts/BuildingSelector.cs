@@ -16,7 +16,7 @@ public class BuildingSelector : MonoBehaviour
             {
                 if (hit.collider != null)
                 {
-                    _title.text = hit.collider.gameObject.name;
+                    // _title.text = hit.collider.gameObject.name;
                 }
             }
         }

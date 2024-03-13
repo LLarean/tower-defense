@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
@@ -13,25 +12,44 @@ public class HUD : MonoBehaviour
     
     private GameMediator _gameMediator;
 
-    public event Action OnBuildGunTowerClicked;
-    public event Action OnBuildArrowTowerClicked;
-
     [Inject]
     public void Construction(GameMediator gameMediator)
     {
         _gameMediator = gameMediator;
     }
+
+    public void ShowInfo(BuildModel buildModel) => _infoPanel.ShowInfo(buildModel);
     
     private void Start()
     {
         _menu.onClick.AddListener(OpenMenu);
-        _buildGunTower.onClick.AddListener(BuildGunTower);
+        _buildGunTower.onClick.AddListener(BuildFireTower);
         _buildArrowTower.onClick.AddListener(BuildArrowTower);
     }
 
-    private void BuildGunTower() => OnBuildGunTowerClicked?.Invoke();
+    private void BuildFireTower()
+    {
+        BuildModel buildModel = new BuildModel
+        {
+            Name = "FireTower",
+            Damage = 100,
+        };
 
-    private void BuildArrowTower() => OnBuildArrowTowerClicked?.Invoke();
+        ShowInfo(buildModel);
+        _gameMediator.BuildFireTower();
+    }
+
+    private void BuildArrowTower()
+    {
+        BuildModel buildModel = new BuildModel
+        {
+            Name = "Water Tower",
+            Damage = 50,
+        };
+
+        ShowInfo(buildModel);
+        _gameMediator.BuildWaterTower();
+    }
 
     private void OpenMenu()
     {

@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using Builds;
-using NaughtyAttributes;
 using UnityEngine;
 
 public class Builder : MonoBehaviour
@@ -21,15 +20,13 @@ public class Builder : MonoBehaviour
         InstantiateBuild(temp);
     }
 
-    [Button()]
-    public void BuildGunTower()
+    public void BuildFireTower()
     {
         EnableConstructionMode();
         InstantiateBuild(_buildings[0]);
     }
 
-    [Button()]
-    public void BuildArrowTower()
+    public void BuildWaterTower()
     {
         EnableConstructionMode();
         InstantiateBuild(_buildings[1]);
@@ -71,7 +68,6 @@ public class Builder : MonoBehaviour
 #endif
     }
 
-    [Button()]
     private void DisableConstructionMode()
     {
         if (_currentBuilding != null)

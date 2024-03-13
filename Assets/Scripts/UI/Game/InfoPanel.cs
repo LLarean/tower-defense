@@ -12,7 +12,7 @@ public class InfoPanel : MonoBehaviour
     public void ShowInfo(BuildModel buildModel)
     {
         _name.text = buildModel.Name;
-        _health.text = $"Здоровье: {buildModel.CurrentHealth}/{buildModel.MaximumHealth}";
+        _health.text = $"Здоровье: -";
         _damage.text = $"Урон: {buildModel.Damage}";
     }
 }

@@ -3,13 +3,13 @@ using Zenject;
 
 public class EnemySpawnInstaller : MonoInstaller
 {
-    [SerializeField] private EnemiesSpawner enemiesSpawner;
+    [SerializeField] private EnemiesSpawner _enemiesSpawner;
     
     public override void InstallBindings()
     {
         Container
             .Bind<EnemiesSpawner>()
-            .FromInstance(enemiesSpawner)
+            .FromInstance(_enemiesSpawner)
             .AsSingle();
     }
 }

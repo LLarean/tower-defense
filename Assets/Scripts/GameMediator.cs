@@ -9,6 +9,6 @@ public class GameMediator : MonoBehaviour
 
     [Button()] public void StartMatch() => _enemiesSpawner.StartMatch();
     
-    [Button()] public void BuildGunTower() => _builder.BuildGunTower();
-    [Button()] public void BuildArrowTower() => _builder.BuildArrowTower();
+    [Button()] public void BuildFireTower() => _builder.BuildFireTower();
+    [Button()] public void BuildWaterTower() => _builder.BuildWaterTower();
 }
