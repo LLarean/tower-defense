@@ -4,20 +4,23 @@ namespace Builds
 {
     public class Tower : Building
     {
-        [SerializeField] private Type _type;
-        [SerializeField] private Missile _missile;
+        [SerializeField] private SpellCaster _spellCaster;
 
         private void OnTriggerEnter(Collider collision)
         {
-            var isAvailable = collision.TryGetComponent<Enemy>(out Enemy enemy);
+            var isAvailable = collision.TryGetComponent(out Enemy enemy);
 
             if (isAvailable == false)
             {
                 return;
             }
 
-            var missile = Instantiate(_missile, transform.position, Quaternion.identity);
-            missile.Init(collision.gameObject.transform);
+            _spellCaster.SetTarget(enemy.gameObject);
+        }
+
+        private void OnTriggerExit(Collider other)
+        {
+            _spellCaster.ResetTarget();
         }
     }
 }

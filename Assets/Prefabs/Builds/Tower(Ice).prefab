@@ -9,11 +9,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3645681994161239111}
+  - component: {fileID: 2644000232167014967}
   - component: {fileID: 4780967565265398207}
   - component: {fileID: 8081527268337676020}
   - component: {fileID: 2230214834564452835}
   m_Layer: 0
-  m_Name: Sphere
+  m_Name: SpellCaster
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -35,6 +36,20 @@ Transform:
   - {fileID: 108047758911610712}
   m_Father: {fileID: 4653770146077609468}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2644000232167014967
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 130641383263520401}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6aff7e21f096489c83cf64a2c65717bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  castItem: {fileID: 78987458301905268, guid: 7959e1b7da6ecf046a9b84aaacde7ac1, type: 3}
+  _attackSpeed: 4
 --- !u!33 &4780967565265398207
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -4952,7 +4967,7 @@ GameObject:
   - component: {fileID: 8460678773872541786}
   - component: {fileID: 1027713270084649769}
   m_Layer: 0
-  m_Name: WaterTower
+  m_Name: Tower(Ice)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4986,10 +5001,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a83fd114e86203b4bb14989f6836a52c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _health: 0
   _mouseFollower: {fileID: 7367025078403475088}
-  _type: 1
-  _missile: {fileID: 78987458301905268, guid: 7959e1b7da6ecf046a9b84aaacde7ac1, type: 3}
+  _spellCaster: {fileID: 2644000232167014967}
 --- !u!114 &7367025078403475088
 MonoBehaviour:
   m_ObjectHideFlags: 0

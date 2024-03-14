@@ -4844,7 +4844,7 @@ GameObject:
   - component: {fileID: 152412382999848846}
   - component: {fileID: 3912454660232878138}
   m_Layer: 0
-  m_Name: IceMissile
+  m_Name: CastItem(Ice)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

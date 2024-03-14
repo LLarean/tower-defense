@@ -32,9 +32,9 @@ public class Enemy : MonoBehaviour
         MoveToNextPoint();
     }
 
-    public void TakeDamage(Missile missile)
+    public void TakeDamage(CastItem castItem)
     {
-        _maximumHealth -= missile.Damage;
+        _maximumHealth -= castItem.Damage;
 
         if (_maximumHealth <= 0)
         {
@@ -43,7 +43,7 @@ public class Enemy : MonoBehaviour
         }
         else
         {
-            TakeEffect(missile.Type);
+            TakeEffect(castItem.Type);
         }
     }
 

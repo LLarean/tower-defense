@@ -584,7 +584,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4653770146077609468, guid: 42cf6ce694e43944bb2e3744e171bbce, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -36.9933
+      value: -36.1
       objectReference: {fileID: 0}
     - target: {fileID: 4653770146077609468, guid: 42cf6ce694e43944bb2e3744e171bbce, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1990,7 +1990,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8569267945198883039, guid: c64768c24bc18af4b815ca64105359aa, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -36.593304
+      value: -38.2
       objectReference: {fileID: 0}
     - target: {fileID: 8569267945198883039, guid: c64768c24bc18af4b815ca64105359aa, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1998,7 +1998,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8569267945198883039, guid: c64768c24bc18af4b815ca64105359aa, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 66.94791
+      value: 77.3
       objectReference: {fileID: 0}
     - target: {fileID: 8569267945198883039, guid: c64768c24bc18af4b815ca64105359aa, type: 3}
       propertyPath: m_LocalRotation.w
@@ -4128,7 +4128,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8701881796571817635, guid: 7959e1b7da6ecf046a9b84aaacde7ac1, type: 3}
       propertyPath: m_Name
-      value: IceMissile
+      value: CastItem(Ice)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -4190,7 +4190,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6415975394998326268, guid: c0b807c942807184285ecbe2b4dbfd88, type: 3}
       propertyPath: m_Name
-      value: FireMissile
+      value: CastItem(Fire)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

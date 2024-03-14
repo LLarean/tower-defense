@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Builds
 {
-    public class Missile : MonoBehaviour
+    public class CastItem : MonoBehaviour
     {
         [SerializeField] private Type _type;
         [SerializeField] private int _damage;
