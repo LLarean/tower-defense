@@ -7,6 +7,7 @@ namespace Builds
     public class Missile : MonoBehaviour
     {
         [SerializeField] private Type _type;
+        [SerializeField] private int _damage;
         
         private Tweener _tween;
         private Transform _target;
@@ -23,11 +24,6 @@ namespace Builds
             
             StartCoroutine(Test());
             _isInit = true;
-        }
-
-        private void DestroyBullet()
-        {
-            Destroy(gameObject);
         }
 
         private void Update()
@@ -52,8 +48,6 @@ namespace Builds
 
         private void OnTriggerEnter(Collider collision)
         {
-            Debug.Log("OnTriggerEnter");
-
             var isAvailable = collision.TryGetComponent<Enemy>(out Enemy enemy);
 
             if (isAvailable == false)
@@ -61,6 +55,8 @@ namespace Builds
                 return;
             }
             
+            enemy.TakeDamage(_damage);
+            _tween.Kill();
             Destroy(gameObject);
         }
     }

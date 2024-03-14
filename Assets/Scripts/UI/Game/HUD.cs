@@ -4,6 +4,7 @@ using Zenject;
 
 public class HUD : MonoBehaviour
 {
+    [SerializeField] private TopPanel _topPanel;
     [SerializeField] private InfoPanel _infoPanel;
     
     [SerializeField] private Button _menu;
@@ -20,8 +21,15 @@ public class HUD : MonoBehaviour
 
     public void ShowInfo(BuildModel buildModel) => _infoPanel.ShowInfo(buildModel);
     
+    public void StartClock() => _topPanel.StartClock();
+
+    public void PauseClock() => _topPanel.PauseClock();
+    
+    public void ResetCounting() => _topPanel.ResetCounting();
+    
     private void Start()
     {
+        StartClock();
         _menu.onClick.AddListener(OpenMenu);
         _buildGunTower.onClick.AddListener(BuildFireTower);
         _buildArrowTower.onClick.AddListener(BuildArrowTower);
