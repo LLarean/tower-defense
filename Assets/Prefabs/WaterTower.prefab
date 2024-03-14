@@ -4988,7 +4988,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _health: 0
   _mouseFollower: {fileID: 7367025078403475088}
-  _type: 0
+  _type: 1
   _missile: {fileID: 78987458301905268, guid: 7959e1b7da6ecf046a9b84aaacde7ac1, type: 3}
 --- !u!114 &7367025078403475088
 MonoBehaviour:

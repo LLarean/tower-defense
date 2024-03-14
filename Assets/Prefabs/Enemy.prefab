@@ -49,7 +49,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _moveSpeed: 20
-  _health: 100
+  _maximumHealth: 100
 --- !u!33 &4957217461622791466
 MeshFilter:
   m_ObjectHideFlags: 0

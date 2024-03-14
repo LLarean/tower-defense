@@ -4879,7 +4879,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _type: 0
-  _damage: 50
+  _damage: 35
 --- !u!33 &3726435046838668055
 MeshFilter:
   m_ObjectHideFlags: 0

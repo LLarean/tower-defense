@@ -14,6 +14,9 @@ namespace Builds
         private Vector3 _targetLastPosition;
 
         private bool _isInit = false;
+        
+        public Type Type => _type;
+        public int Damage => _damage;
 
         public void Init(Transform target)
         {
@@ -55,7 +58,7 @@ namespace Builds
                 return;
             }
             
-            enemy.TakeDamage(_damage);
+            enemy.TakeDamage(this);
             _tween.Kill();
             Destroy(gameObject);
         }

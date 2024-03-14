@@ -1,12 +1,18 @@
 using System;
 using System.Collections.Generic;
+using Builds;
 using DG.Tweening;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class Enemy : MonoBehaviour
 {
     [SerializeField] [Range(0, 200)] private float _moveSpeed = 20f;
-    [SerializeField] private int _health;
+    [SerializeField] private int _maximumHealth;
+
+    private int _currentHealth;
+    private float _currentMoveSpeed;
+    private bool _isEffect;
     
     private List<Transform> _wayPoints;
     private Transform _finishPoint;
@@ -17,20 +23,42 @@ public class Enemy : MonoBehaviour
 
     public void Initialize(List<Transform> wayPoints, Transform finishPoint)
     {
+        _currentMoveSpeed = _moveSpeed;
+        _currentHealth = _maximumHealth;
+        
         _wayPoints = wayPoints;
         _finishPoint = finishPoint;
         
         MoveToNextPoint();
     }
 
-    public void TakeDamage(int damage)
+    public void TakeDamage(Missile missile)
     {
-        _health -= damage;
+        _maximumHealth -= missile.Damage;
 
-        if (_health <= 0)
+        if (_maximumHealth <= 0)
         {
             _tweener.Kill();
             Destroy(gameObject);
+        }
+        else
+        {
+            TakeEffect(missile.Type);
+        }
+    }
+
+    private void TakeEffect(Type type)
+    {
+        if (_isEffect == true)
+        {
+            return;
+        }
+        
+        _isEffect = true;
+        
+        if (type == Type.Ice)
+        {
+            _currentMoveSpeed -= 15;
         }
     }
 
@@ -39,7 +67,7 @@ public class Enemy : MonoBehaviour
         if (_currentPointIndex < _wayPoints.Count)
         {
             float distance = Vector3.Distance(_wayPoints[_currentPointIndex].position,gameObject.transform.position);
-            var duration = distance / _moveSpeed;
+            var duration = distance / _currentMoveSpeed;
             
             _tweener = gameObject.transform.DOMove(_wayPoints[_currentPointIndex].position, duration)
                 .OnComplete(() =>
@@ -51,7 +79,7 @@ public class Enemy : MonoBehaviour
         else
         {
             float distance = Vector3.Distance(_finishPoint.position,gameObject.transform.position);
-            var duration = distance / _moveSpeed;
+            var duration = distance / _currentMoveSpeed;
             
             _tweener = gameObject.transform.DOMove(_finishPoint.position, duration);
         }
