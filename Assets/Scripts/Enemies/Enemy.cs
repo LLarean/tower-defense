@@ -2,13 +2,14 @@ using System;
 using System.Collections.Generic;
 using Builds;
 using DG.Tweening;
+using TMPro;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 public class Enemy : MonoBehaviour
 {
     [SerializeField] [Range(0, 200)] private float _moveSpeed = 20f;
     [SerializeField] private int _maximumHealth;
+    [SerializeField] private TMP_Text _statusBar;
 
     private int _currentHealth;
     private float _currentMoveSpeed;
@@ -25,6 +26,8 @@ public class Enemy : MonoBehaviour
     {
         _currentMoveSpeed = _moveSpeed;
         _currentHealth = _maximumHealth;
+
+        _statusBar.text = $"{_currentHealth.ToString()}/{_maximumHealth.ToString()}";
         
         _wayPoints = wayPoints;
         _finishPoint = finishPoint;
@@ -43,6 +46,7 @@ public class Enemy : MonoBehaviour
         }
         else
         {
+            _statusBar.text = $"{_currentHealth.ToString()}/{_maximumHealth.ToString()}";
             TakeEffect(castItem.Type);
         }
     }
@@ -58,6 +62,7 @@ public class Enemy : MonoBehaviour
         
         if (type == Type.Ice)
         {
+            _statusBar.text = $"{_statusBar.text} ({Type.Ice})";
             _currentMoveSpeed -= 15;
         }
     }
