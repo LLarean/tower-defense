@@ -11,13 +11,22 @@ public class GameDirector : MonoBehaviour
     
     private int _currentRound;
     private int _numberDestroyedEnemies;
+    private HUD _hud;
 
     [Inject]
-    public void Construction(EnemiesSpawner enemiesSpawner)
+    public void Construction(EnemiesSpawner enemiesSpawner, HUD hud)
     {
         _enemiesSpawner = enemiesSpawner;
+        _hud = hud;
+        
+        enemiesSpawner.OnDestroyed += AddGold;
     }
-    
+
+    private void AddGold()
+    {
+        _hud.AddGold();
+    }
+
     public void StartMatch()
     {
         StartRound();

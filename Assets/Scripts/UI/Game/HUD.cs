@@ -26,7 +26,9 @@ public class HUD : MonoBehaviour
     public void PauseClock() => _topPanel.PauseClock();
     
     public void ResetCounting() => _topPanel.ResetCounting();
-    
+
+    public void AddGold() => _topPanel.AddGold();
+
     private void Start()
     {
         StartClock();

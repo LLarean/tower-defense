@@ -41,6 +41,7 @@ public class Enemy : MonoBehaviour
 
         if (_maximumHealth <= 0)
         {
+            OnDestroyed?.Invoke();
             _tweener.Kill();
             Destroy(gameObject);
         }
