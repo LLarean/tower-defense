@@ -6,10 +6,10 @@ public class EnemiesSpawner : MonoBehaviour
 {
     [SerializeField] private Transform _spawnPoint; 
     [SerializeField] private Transform _destroyPoint; 
-    [SerializeField] private List<Transform> _wayPoints; 
-        
-    [Header("Units")]
-    [SerializeField] private Enemy _enemy;
+    [SerializeField] private List<Transform> _wayPoints;
+
+    private bool _isActive;
+    private Enemy _enemy;
 
     private List<Enemy> _enemies = new List<Enemy>();
 
@@ -17,29 +17,23 @@ public class EnemiesSpawner : MonoBehaviour
     private int _numberEnemiesCreated;
     private float _spawnDelay = 2f;
 
-    public void StartMatch()
+    public void StartRound(int numberEnemies, Enemy enemy)
     {
+        _enemy = enemy;
+        _isActive = true;
         StartCoroutine(CreateEnemies());
     }
 
-    public void StartSpawn()
+    public void PauseRound()
     {
-        StartCoroutine(CreateEnemies());
-    }
-
-    public void FinishSpawn()
-    {
-    }
-
-    public void Finish()
-    {
+        
     }
 
     public void DeleteUnit(Enemy enemy) => _enemies.Remove(enemy);
 
     private IEnumerator CreateEnemies()
     {
-        while (_numberEnemiesCreated < _maximumEnemies)
+        while (_isActive == true && _numberEnemiesCreated < _maximumEnemies)
         {
             _numberEnemiesCreated++;
                 

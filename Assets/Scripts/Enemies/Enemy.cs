@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
@@ -11,6 +12,8 @@ public class Enemy : MonoBehaviour
     private Transform _finishPoint;
     private int _currentPointIndex = 0;
     private Tweener _tweener;
+    
+    public event Action OnDestroyed;
 
     public void Initialize(List<Transform> wayPoints, Transform finishPoint)
     {
