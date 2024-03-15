@@ -11,11 +11,16 @@ public class Builder : MonoBehaviour
 
     private Building _currentBuilding;
     private HUD _hud;
+    private InputHandler _inputHandler;
 
     [Inject]
-    public void Construct(HUD hud)
+    public void Construct(HUD hud, InputHandler inputHandler)
     {
         _hud = hud;
+        _inputHandler = inputHandler;
+        
+        _inputHandler.OnCancelClicked += DisableConstructionMode;
+        _inputHandler.OnMenuClicked += DisableConstructionMode;
     }
     
     public void ConstructBuilding()
@@ -40,20 +45,6 @@ public class Builder : MonoBehaviour
     {
         EnableConstructionMode();
         InstantiateBuild(_buildings[1]);
-    }
-
-    private void Update()
-    {
-        // TODO it is necessary to separate it into a separate entity to control the click
-        if (Input.GetKeyDown(KeyCode.Escape) == true && _currentBuilding != null)
-        {
-            DisableConstructionMode();
-        }
-        
-        if (Input.GetMouseButtonDown(1) == true && _currentBuilding != null)
-        {
-            DisableConstructionMode();
-        }
     }
 
     private void GetBuildings()

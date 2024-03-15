@@ -1,16 +1,13 @@
+using UI.Game;
 using UnityEngine;
-using UnityEngine.UI;
 using Zenject;
 
 public class HUD : MonoBehaviour
 {
     [SerializeField] private TopPanel _topPanel;
+    [SerializeField] private BuildPanel _buildPanel;
     [SerializeField] private InfoPanel _infoPanel;
-    
-    [SerializeField] private Button _menu;
-    [SerializeField] private Button _buildGunTower;
-    [SerializeField] private Button _buildArrowTower;
-    
+
     private GameMediator _gameMediator;
     private PlayerModel _playerModel;
     
@@ -50,9 +47,11 @@ public class HUD : MonoBehaviour
     private void Start()
     {
         StartClock();
-        _menu.onClick.AddListener(OpenMenu);
-        _buildGunTower.onClick.AddListener(BuildFireTower);
-        _buildArrowTower.onClick.AddListener(BuildIceTower);
+
+        _topPanel.OnMenuClicked += OpenMenu;
+
+        _buildPanel.OnFireTowerClicked += BuildFireTower;
+        _buildPanel.OnIceTowerClicked += BuildIceTower;
         
         _topPanel.ShowGold(_playerModel.Gold);
     }
