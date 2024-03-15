@@ -16,5 +16,10 @@ namespace Builds
         {
             _mouseFollower.enabled = false;
         }
+
+        public void MousePositionChange(float positionX, float positionY)
+        {
+            _mouseFollower.MousePositionChange(positionX, positionY);
+        }
     }
 }

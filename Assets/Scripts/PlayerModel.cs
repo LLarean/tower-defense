@@ -1,5 +1,7 @@
 public class PlayerModel
 {
-    public int Health;
-    public int Gold;
+    public Observable<int> Health;
+    public Observable<int> Gold;
+
+    public Observable<BuildModel> BuildModel;
 }

@@ -1354,8 +1354,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _topPanel: {fileID: 711648377}
-  _buildPanel: {fileID: 0}
+  _buildPanel: {fileID: 273364320}
   _infoPanel: {fileID: 623316783}
+  _abilityPanel: {fileID: 1303961490}
 --- !u!1 &611186998
 GameObject:
   m_ObjectHideFlags: 0
@@ -2671,6 +2672,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1303961487}
+  - component: {fileID: 1303961490}
   - component: {fileID: 1303961489}
   - component: {fileID: 1303961488}
   m_Layer: 5
@@ -2737,6 +2739,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1303961486}
   m_CullTransparentMesh: 1
+--- !u!114 &1303961490
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1303961486}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9192a57524df0604d99c84127bc1c0dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1339831158
 GameObject:
   m_ObjectHideFlags: 0

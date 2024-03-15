@@ -3,9 +3,14 @@ using UnityEngine;
 
 public class InputHandler : MonoBehaviour//, IInputHandler
 {
+    private int _mousePositionX;
+    private int _mousePositionY;
+    
     private int _buildButton = 0;
     private int _cancelButton = 1;
     private KeyCode _menuButton = KeyCode.Escape;
+    
+    public event Action<int, int> OnMousePositionChanged;
     
     public event Action OnBuildClicked;
     public event Action OnCancelClicked;
@@ -13,6 +18,8 @@ public class InputHandler : MonoBehaviour//, IInputHandler
     
     private void Update()
     {
+        ChangeMousePosition();
+        
         if (Input.GetMouseButtonDown(_buildButton) == true)
         {
             OnBuildClicked?.Invoke();
@@ -30,6 +37,20 @@ public class InputHandler : MonoBehaviour//, IInputHandler
         if (Input.GetKeyDown(_menuButton))
         {
             OnMenuClicked?.Invoke();
+        }
+    }
+
+    private void ChangeMousePosition()
+    {
+        var mousePositionX = (int)Input.mousePosition.x;
+        var mousePositionY = (int)Input.mousePosition.y;
+        
+        if (_mousePositionX != mousePositionX || mousePositionY != (int)Input.mousePosition.y)
+        {
+            _mousePositionX = mousePositionX;
+            _mousePositionY = mousePositionY;
+            
+            OnMousePositionChanged?.Invoke(_mousePositionX, _mousePositionY);
         }
     }
 }

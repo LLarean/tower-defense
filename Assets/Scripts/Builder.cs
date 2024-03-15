@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Builds;
+using UI.Game;
 using UnityEngine;
 using Zenject;
 
@@ -19,12 +20,20 @@ public class Builder : MonoBehaviour
         _hud = hud;
         _inputHandler = inputHandler;
         
+        _inputHandler.OnMousePositionChanged += MousePositionChange;
+        
+        _inputHandler.OnBuildClicked += ConstructBuilding;
         _inputHandler.OnCancelClicked += DisableConstructionMode;
         _inputHandler.OnMenuClicked += DisableConstructionMode;
     }
-    
+
     public void ConstructBuilding()
     {
+        if (_currentBuilding == null)
+        {
+            return;
+        }
+        
         _currentBuilding.DisableMouseFollower();
         _constructedBuildings.SetNewBuilding(_currentBuilding);
         var temp = _currentBuilding;
@@ -82,6 +91,14 @@ public class Builder : MonoBehaviour
         }
         
         _hud.ClearInfo();
+    }
+    
+    private void MousePositionChange(int positionX, int positionY)
+    {
+        if (_currentBuilding != null)
+        {
+            _currentBuilding.MousePositionChange(positionX, positionY);
+        }
     }
 
     private void ClearFollowingBuilding()
