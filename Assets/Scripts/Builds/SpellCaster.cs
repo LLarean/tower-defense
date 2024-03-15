@@ -37,7 +37,7 @@ public class SpellCaster : MonoBehaviour
         {
             // TODO you need to use the object pool and add checks
             var missile = Instantiate(castItem, transform.position, Quaternion.identity);
-            missile.Init(_target.transform);
+            missile.Initialize(_target.transform);
             yield return new WaitForSeconds(_attackSpeed);
         }
     }

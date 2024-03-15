@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Builds;
 using UnityEngine;
+using Zenject;
 
 public class Builder : MonoBehaviour
 {
@@ -9,14 +10,23 @@ public class Builder : MonoBehaviour
     [SerializeField] private ConstructedBuildings _constructedBuildings;
 
     private Building _currentBuilding;
+    private HUD _hud;
 
+    [Inject]
+    public void Construct(HUD hud)
+    {
+        _hud = hud;
+    }
+    
     public void ConstructBuilding()
     {
         _currentBuilding.DisableMouseFollower();
         _constructedBuildings.SetNewBuilding(_currentBuilding);
         var temp = _currentBuilding;
         _currentBuilding = null;
-            
+
+        _hud.RemoveGold();
+        
         InstantiateBuild(temp);
     }
 
@@ -55,7 +65,7 @@ public class Builder : MonoBehaviour
     {
         EnableConstructionMode();
         ClearFollowingBuilding();
-                
+        
         _currentBuilding = Instantiate(building, transform.position, Quaternion.identity);
         _currentBuilding.Initialize(this, _terrainCollider);
     }
@@ -70,11 +80,17 @@ public class Builder : MonoBehaviour
 
     private void DisableConstructionMode()
     {
+#if !UNITY_EDITOR
+        Cursor.visible = true;
+#endif
+        
         if (_currentBuilding != null)
         {
             Destroy(_currentBuilding.gameObject);
             _currentBuilding = null;
         }
+        
+        _hud.ClearInfo();
     }
 
     private void ClearFollowingBuilding()

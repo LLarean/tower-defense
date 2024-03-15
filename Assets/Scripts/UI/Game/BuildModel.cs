@@ -3,6 +3,8 @@
 public class BuildModel
 {
     public Sprite Portrait;
-    public string Name;
+    public string Title;
+    public CastType CastType;
     public int Damage;
+    public int Price;
 }

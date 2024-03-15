@@ -6,7 +6,7 @@ namespace Builds
 {
     public class CastItem : MonoBehaviour
     {
-        [SerializeField] private Type _type;
+        [SerializeField] private CastType castType;
         [SerializeField] private int _damage;
         
         private Tweener _tween;
@@ -15,17 +15,17 @@ namespace Builds
 
         private bool _isInit = false;
         
-        public Type Type => _type;
+        public CastType CastType => castType;
         public int Damage => _damage;
 
-        public void Init(Transform target)
+        public void Initialize(Transform target)
         {
             _target = target;
 
             _tween = transform.DOMove(target.position, .2f).SetAutoKill(false);
             _targetLastPosition = target.position;
             
-            StartCoroutine(Test());
+            StartCoroutine(DelayDestroy());
             _isInit = true;
         }
 
@@ -33,6 +33,12 @@ namespace Builds
         {
             if (_isInit == false)
             {
+                return;
+            }
+
+            if (_target == null)
+            {
+                Destroy(gameObject);
                 return;
             }
             
@@ -43,7 +49,7 @@ namespace Builds
             }
         }
 
-        private IEnumerator Test()
+        private IEnumerator DelayDestroy()
         {
             yield return new WaitForSeconds(5f);
             Destroy(gameObject);

@@ -5,14 +5,31 @@ using UnityEngine.UI;
 public class InfoPanel : MonoBehaviour
 {
     [SerializeField] private Image _portrait;
-    [SerializeField] private TMP_Text _name;
-    [SerializeField] private TMP_Text _health;
+    [SerializeField] private TMP_Text _title;
+    [SerializeField] private TMP_Text _castType;
     [SerializeField] private TMP_Text _damage;
+    [SerializeField] private TMP_Text _price;
 
     public void ShowInfo(BuildModel buildModel)
     {
-        _name.text = buildModel.Name;
-        _health.text = $"Здоровье: -";
-        _damage.text = $"Урон: {buildModel.Damage}";
+        _portrait.sprite = buildModel.Portrait;
+        _title.text = buildModel.Title;
+        _castType.text = $"{GlobalStrings.DamageType}: {buildModel.CastType}";
+        _damage.text = $"{GlobalStrings.Damage}: {buildModel.Damage}";
+        _price.text = $"{GlobalStrings.Price}: {buildModel.Price}";
+    }
+
+    public void ClearInfo()
+    {
+        _portrait.sprite = null;
+        _title.text = "";
+        _castType.text = "";
+        _damage.text = "";
+        _price.text = "";
+    }
+
+    private void Start()
+    {
+        ClearInfo();
     }
 }

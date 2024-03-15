@@ -48,11 +48,11 @@ public class Enemy : MonoBehaviour
         else
         {
             _statusBar.text = $"{_currentHealth.ToString()}/{_maximumHealth.ToString()}";
-            TakeEffect(castItem.Type);
+            TakeEffect(castItem.CastType);
         }
     }
 
-    private void TakeEffect(Type type)
+    private void TakeEffect(CastType castType)
     {
         if (_isEffect == true)
         {
@@ -61,9 +61,9 @@ public class Enemy : MonoBehaviour
         
         _isEffect = true;
         
-        if (type == Type.Ice)
+        if (castType == CastType.Ice)
         {
-            _statusBar.text = $"{_statusBar.text} ({Type.Ice})";
+            _statusBar.text = $"{_statusBar.text} ({CastType.Ice})";
             _currentMoveSpeed -= 15;
         }
     }

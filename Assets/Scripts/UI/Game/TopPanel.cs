@@ -9,22 +9,23 @@ public class TopPanel : MonoBehaviour
     [SerializeField] private GameClock _gameClock;
     [SerializeField] private TMP_Text _gold;
 
-    private int _goldCount = 100;
-
+    public event Action OnMenuClicked;
+    
     public void StartClock() => _gameClock.StartCounting();
 
     public void PauseClock() => _gameClock.PauseCounting();
     
-    public void ResetCounting() => _gameClock.ResetCounting();
+    public void ResetClock() => _gameClock.ResetCounting();
 
-    public void AddGold()
+    public void ShowGold(int value)
     {
-        _goldCount += 10;
-        _gold.text = $"Gold: {_goldCount.ToString()}";
+        _gold.text = $"{GlobalStrings.Gold}: {value.ToString()}";
     }
 
     private void Start()
     {
-        _gold.text = $"Gold: {_goldCount.ToString()}";
+        _menu.onClick.AddListener(OnMenuClick);
     }
+
+    private void OnMenuClick() => OnMenuClicked?.Invoke();
 }
