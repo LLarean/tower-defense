@@ -12,20 +12,20 @@ public class GameDirector : MonoBehaviour
     
     private int _currentRound;
     private int _numberDestroyedEnemies;
-    private HUD _hud;
+    private PlayerModel _playerModel;
 
     [Inject]
-    public void Construction(EnemiesSpawner enemiesSpawner, HUD hud)
+    public void Construction(EnemiesSpawner enemiesSpawner, PlayerModel playerModel)
     {
         _enemiesSpawner = enemiesSpawner;
-        _hud = hud;
+        _playerModel = playerModel;
         
         enemiesSpawner.OnDestroyed += AddGold;
     }
 
     private void AddGold()
     {
-        _hud.AddGold();
+        _playerModel.Gold.Value += GlobalParams.RewardMurder;
     }
 
     public void StartMatch()

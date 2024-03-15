@@ -1,20 +1,18 @@
-using UnityEngine;
 using Zenject;
-using Zenject.SpaceFighter;
 
-public class PlayerModelInstaller : MonoInstaller
+namespace Installers
 {
-    public override void InstallBindings()
+    public class PlayerModelInstaller : MonoInstaller
     {
-        PlayerModel playerModel = new PlayerModel
+        public override void InstallBindings()
         {
-            Health = 100,
-            Gold = 150,
-        };
-        
-        Container
-            .Bind<PlayerModel>()
-            .FromInstance(playerModel)
-            .AsSingle();
+            BuildModel currentBuilding = new BuildModel();
+            PlayerModel playerModel = new PlayerModel(100, 150, currentBuilding);
+
+            Container
+                .Bind<PlayerModel>()
+                .FromInstance(playerModel)
+                .AsSingle();
+        }
     }
 }

@@ -12,13 +12,17 @@ public class Builder : MonoBehaviour
 
     private Building _currentBuilding;
     private HUD _hud;
+    private PlayerModel _playerModel;
     private InputHandler _inputHandler;
 
     [Inject]
-    public void Construct(HUD hud, InputHandler inputHandler)
+    public void Construct(HUD hud, PlayerModel playerModel, InputHandler inputHandler)
     {
         _hud = hud;
+        _playerModel = playerModel;
         _inputHandler = inputHandler;
+
+        _playerModel.CurrentBuilding.ValueChanged += BuildTower;
         
         _inputHandler.OnMousePositionChanged += MousePositionChange;
         
@@ -33,27 +37,43 @@ public class Builder : MonoBehaviour
         {
             return;
         }
-        
-        _currentBuilding.DisableMouseFollower();
-        _constructedBuildings.SetNewBuilding(_currentBuilding);
-        var temp = _currentBuilding;
-        _currentBuilding = null;
 
-        _hud.RemoveGold();
-        
-        InstantiateBuild(temp);
+        if (_playerModel.Gold.Value >= _playerModel.CurrentBuilding.Value.Price)
+        {
+            _currentBuilding.DisableMouseFollower();
+            _constructedBuildings.SetNewBuilding(_currentBuilding);
+            var temp = _currentBuilding;
+            _currentBuilding = null;
+
+            _playerModel.Gold.Value -= _playerModel.CurrentBuilding.Value.Price;
+            InstantiateBuild(temp);
+        }
     }
 
-    public void BuildFireTower()
-    {
-        EnableConstructionMode();
-        InstantiateBuild(_buildings[0]);
-    }
+    // public void BuildFireTower()
+    // {
+    //     EnableConstructionMode();
+    //     InstantiateBuild(_buildings[0]);
+    // }
 
-    public void BuildWaterTower()
+    // public void BuildWaterTower()
+    // {
+    //     EnableConstructionMode();
+    //     InstantiateBuild(_buildings[1]);
+    // }
+    
+    private void BuildTower(BuildModel current, BuildModel previous)
     {
         EnableConstructionMode();
-        InstantiateBuild(_buildings[1]);
+        
+        if (current.CastType == CastType.Fire)
+        {
+            InstantiateBuild(_buildings[0]);
+        }
+        else if(current.CastType == CastType.Ice)
+        {
+            InstantiateBuild(_buildings[1]);
+        }
     }
 
     private void GetBuildings()

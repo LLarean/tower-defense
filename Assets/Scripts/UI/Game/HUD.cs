@@ -12,14 +12,15 @@ namespace UI.Game
 
         private GameMediator _gameMediator;
         private PlayerModel _playerModel;
-    
-        private BuildModel _currentBuildModel;
 
         [Inject]
         public void Construction(GameMediator gameMediator, PlayerModel playerModel)
         {
             _gameMediator = gameMediator;
             _playerModel = playerModel;
+
+            _playerModel.Gold.ValueChanged += ChangeGoldValue;
+            _playerModel.CurrentBuilding.ValueChanged += ShowInfo;
         }
 
         public void StartClock() => _topPanel.StartClock();
@@ -30,18 +31,23 @@ namespace UI.Game
         
         public void ShowInfo(BuildModel buildModel) => _infoPanel.ShowInfo(buildModel);
 
+        private void ShowInfo(BuildModel current, BuildModel previous)
+        {
+            if (current != null)
+            {
+                ShowInfo(current);
+            }
+            else
+            {
+                ClearInfo();
+            }
+        }
+        
         public void ClearInfo() => _infoPanel.ClearInfo();
 
-        public void AddGold()
+        public void ChangeGoldValue(int current, int previous)
         {
-            _playerModel.Gold += 50;
-            _topPanel.ShowGold(_playerModel.Gold);
-        }
-
-        public void RemoveGold()
-        {
-            _playerModel.Gold -= _currentBuildModel.Price;
-            _topPanel.ShowGold(_playerModel.Gold);
+            _topPanel.ShowGold(current);
         }
 
         private void Start()
@@ -56,7 +62,7 @@ namespace UI.Game
             _topPanel.ShowGold(_playerModel.Gold);
         }
 
-        private void BuildFireTower()
+        public void BuildFireTower()
         {
             BuildModel buildModel = new BuildModel
             {
@@ -66,13 +72,10 @@ namespace UI.Game
                 Price = GlobalParams.FireTowerPrice,
             };
 
-            _currentBuildModel = buildModel;
-
-            ShowInfo(buildModel);
-            _gameMediator.BuildFireTower();
+            _playerModel.CurrentBuilding.Value = buildModel;
         }
 
-        private void BuildIceTower()
+        public void BuildIceTower()
         {
             BuildModel buildModel = new BuildModel
             {
@@ -81,16 +84,12 @@ namespace UI.Game
                 Damage = GlobalParams.IceTowerDamage,
                 Price = GlobalParams.IceTowerPrice,
             };
-        
-            _currentBuildModel = buildModel;
-
-            ShowInfo(buildModel);
-            _gameMediator.BuildIceTower();
+            
+            _playerModel.CurrentBuilding.Value = buildModel;
         }
 
         private void OpenMenu()
         {
         }
-
     }
 }
