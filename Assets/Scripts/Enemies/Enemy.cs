@@ -64,7 +64,7 @@ public class Enemy : MonoBehaviour
         if (castType == CastType.Ice)
         {
             _statusBar.text = $"{_statusBar.text} ({CastType.Ice})";
-            _currentMoveSpeed -= 15;
+            _currentMoveSpeed -= GlobalParams.IceSlow;
         }
     }
 

@@ -3,6 +3,8 @@ using Zenject;
 
 public class GameDirector : MonoBehaviour
 {
+    [SerializeField] private GameObject _tempWindow;
+    
     [SerializeField] private Enemy _enemy;
     [SerializeField] private int _numberRounds;
     [SerializeField] private int _numberEnemies;
@@ -24,7 +26,10 @@ public class GameDirector : MonoBehaviour
 
     private void AddGold()
     {
+        _numberDestroyedEnemies++;
         _playerModel.Gold.Value += GlobalParams.RewardMurder;
+
+        FinishRound();
     }
 
     public void StartMatch()
@@ -53,5 +58,13 @@ public class GameDirector : MonoBehaviour
     {
         _currentRound++;
         _enemiesSpawner.StartRound(_numberEnemies, _enemy);
+    }
+
+    private void FinishRound()
+    {
+        if (_numberDestroyedEnemies >= _numberEnemies)
+        {
+            _tempWindow.gameObject.SetActive(true);
+        }
     }
 }
