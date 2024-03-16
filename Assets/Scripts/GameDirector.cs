@@ -6,8 +6,11 @@ public class GameDirector : MonoBehaviour
     [SerializeField] private GameObject _tempWindow;
     
     [SerializeField] private Enemy _enemy;
+    
     [SerializeField] private int _numberRounds;
     [SerializeField] private int _numberEnemies;
+    [Space]
+    [SerializeField] private MatchSettings _matchSettings;
     
     private EnemiesSpawner _enemiesSpawner;
     
