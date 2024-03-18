@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using EventBusSystem;
 using UnityEngine;
@@ -12,6 +13,7 @@ public class RoundStarter : MonoBehaviour, IEnemyHandler
     
     private int _currentRoundIndex;
     private int _numberDestroyedEnemies;
+    private Coroutine _coroutine;
 
     [Inject]
     public void Construction(PlayerModel playerModel)
@@ -22,7 +24,20 @@ public class RoundStarter : MonoBehaviour, IEnemyHandler
     public void StartMatch()
     {
         Debug.Log("The match is started");
-        StartCoroutine(Waiting(_matchModel.RoundDelay));
+        _coroutine = StartCoroutine(Waiting(_matchModel.RoundDelay));
+    }
+
+    public void StopMatch()
+    {
+        Debug.Log("The match is stopped");
+
+        if (_coroutine != null)
+        {
+            StopCoroutine(_coroutine);
+        }
+        
+        _currentRoundIndex = Int32.MaxValue;
+        _numberDestroyedEnemies = Int32.MaxValue;
     }
 
     private void Start()
@@ -85,6 +100,7 @@ public class RoundStarter : MonoBehaviour, IEnemyHandler
     {
         Debug.Log("The enemy has reached the end");
         _playerModel.Notification.Value = GlobalStrings.EnemyReached;
+        _playerModel.Health.Value -= GlobalParams.DamagePlayer;
         
         DestroyUnit();
     }

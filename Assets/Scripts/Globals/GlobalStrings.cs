@@ -8,6 +8,7 @@ public static class GlobalStrings
     public const string Price = "Price";
     
     public const string Gold = "Gold";
+    public const string HP = "HP";
     
     public const string RoundWillStart = "The round will start in";
     public const string Seconds = "seconds";

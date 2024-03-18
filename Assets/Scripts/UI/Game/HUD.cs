@@ -20,6 +20,7 @@ namespace UI.Game
             _gameMediator = gameMediator;
             _playerModel = playerModel;
 
+            _playerModel.Health.ValueChanged += ChangeHealthValue;
             _playerModel.Gold.ValueChanged += ChangeGoldValue;
             _playerModel.CurrentBuilding.ValueChanged += ShowInfo;
             _playerModel.Notification.ValueChanged += ShowMessage;
@@ -48,6 +49,18 @@ namespace UI.Game
         }
         
         public void ClearInfo() => _infoPanel.ClearInfo();
+
+        public void ChangeHealthValue(int current, int previous)
+        {
+            _topPanel.ShowHealth(current);
+
+            if (current <= 0)
+            {
+                Debug.Log("You've lost");
+                _playerModel.Notification = "u lost";
+                _gameMediator.StopMatch();
+            }
+        }
 
         public void ChangeGoldValue(int current, int previous)
         {

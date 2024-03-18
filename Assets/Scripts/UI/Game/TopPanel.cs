@@ -10,6 +10,7 @@ namespace UI.Game
     {
         [SerializeField] private Button _menu;
         [SerializeField] private GameClock _gameClock;
+        [SerializeField] private TMP_Text _health;
         [SerializeField] private TMP_Text _gold;
 
         public event Action OnMenuClicked;
@@ -20,6 +21,11 @@ namespace UI.Game
     
         public void ResetClock() => _gameClock.ResetCounting();
 
+        public void ShowHealth(int value)
+        {
+            _health.text = $"{GlobalStrings.HP}: {value.ToString()}";
+        }
+        
         public void ShowGold(int value)
         {
             _gold.text = $"{GlobalStrings.Gold}: {value.ToString()}";
