@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 7734772003773703397}
   - component: {fileID: 8822734898651821768}
   m_Layer: 0
-  m_Name: Enemy
+  m_Name: Enemy(Ice)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -80,7 +80,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: fa615ea0ad154d2418f0b37cdf43594b, type: 2}
+  - {fileID: 2100000, guid: de7f429a52ff0064ea01ae0796b0e633, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

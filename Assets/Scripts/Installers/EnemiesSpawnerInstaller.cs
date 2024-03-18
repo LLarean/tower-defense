@@ -1,7 +1,7 @@
 using UnityEngine;
 using Zenject;
 
-public class EnemySpawnInstaller : MonoInstaller
+public class EnemiesSpawnerInstaller : MonoInstaller
 {
     [SerializeField] private EnemiesSpawner _enemiesSpawner;
     

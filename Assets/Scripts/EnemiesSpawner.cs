@@ -9,43 +9,27 @@ public class EnemiesSpawner : MonoBehaviour
     [SerializeField] private Transform _destroyPoint; 
     [SerializeField] private List<Transform> _wayPoints;
 
-    private bool _isActive;
-    private Enemy _enemy;
-
-    private List<Enemy> _enemies = new List<Enemy>();
-
-    private int _maximumEnemies = 5;
+    private RoundModel _roundModel;
     private int _numberEnemiesCreated;
-    private float _spawnDelay = 2f;
-    
+
     public event Action OnDestroyed;
 
-    public void StartRound(int numberEnemies, Enemy enemy)
+    public void StartRound(RoundModel roundModel)
     {
-        _enemy = enemy;
-        _isActive = true;
-        StartCoroutine(CreateEnemies());
+        _roundModel = roundModel;
+        StartCoroutine(CreatingEnemies());
     }
 
-    public void PauseRound()
+    private IEnumerator CreatingEnemies()
     {
-        
-    }
-
-    public void DeleteUnit(Enemy enemy) => _enemies.Remove(enemy);
-
-    private IEnumerator CreateEnemies()
-    {
-        while (_isActive == true && _numberEnemiesCreated < _maximumEnemies)
+        while (_numberEnemiesCreated < _roundModel.NumberEnemies)
         {
-            _numberEnemiesCreated++;
-                
-            Enemy enemy = Instantiate(_enemy, _spawnPoint.position, Quaternion.identity);
+            Enemy enemy = Instantiate(_roundModel.Enemy, _spawnPoint.position, Quaternion.identity);
             enemy.Initialize(_wayPoints, _destroyPoint);
             enemy.OnDestroyed += OnEnemyDestroy;
-            _enemies.Add(enemy);
                 
-            yield return new WaitForSeconds(_spawnDelay);
+            _numberEnemiesCreated++;
+            yield return new WaitForSeconds(_roundModel.SpawnDelay);
         }
     }
 

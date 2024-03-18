@@ -21,6 +21,7 @@ public class Enemy : MonoBehaviour
     private Tweener _tweener;
     
     public event Action OnDestroyed;
+    public event Action OnFinished;
 
     public void Initialize(List<Transform> wayPoints, Transform finishPoint)
     {
@@ -51,6 +52,8 @@ public class Enemy : MonoBehaviour
             TakeEffect(castItem.CastType);
         }
     }
+
+    public void Finish() => OnFinished?.Invoke();
 
     private void TakeEffect(CastType castType)
     {

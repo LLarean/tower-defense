@@ -5,11 +5,11 @@ using Zenject;
 
 public class GameMediator : MonoBehaviour
 {
-    [Inject] private GameDirector _gameDirector;
+    [Inject] private RoundStarter _roundStarter;
     [Inject] private Builder _builder;
     [Inject] private HUD _hud;
 
-    [Button()] public void StartMatch() => _gameDirector.StartMatch();
+    [Button()] public void StartMatch() => _roundStarter.StartMatch();
     
     [Button()] public void BuildFireTower() => _hud.BuildFireTower();
     [Button()] public void BuildIceTower() => _hud.BuildIceTower();

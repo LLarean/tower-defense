@@ -2,8 +2,8 @@ using System;
 using System.Collections.Generic;
 
 [Serializable]
-public class MatchSettings
+public class MatchModel
 {
     public int RoundDelay;
-    public List<RoundSettings> RoundSettings;
+    public List<RoundModel> RoundSettings;
 }
