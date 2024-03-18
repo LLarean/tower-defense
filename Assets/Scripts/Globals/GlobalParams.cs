@@ -10,4 +10,5 @@ public static class GlobalParams
     [Space]
     public const int RewardMurder = 50;
     public const int IceSlow = 15;
+    public const int DamageReduction = 10;
 }

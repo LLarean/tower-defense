@@ -10,6 +10,8 @@ public class InputHandler : MonoBehaviour//, IInputHandler
     private int _cancelButton = 1;
     private KeyCode _menuButton = KeyCode.Escape;
     
+    
+    // TODO Convert actions to an event bus call
     public event Action<int, int> OnMousePositionChanged;
     
     public event Action OnBuildClicked;

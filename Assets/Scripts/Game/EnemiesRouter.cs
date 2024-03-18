@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemiesSpawner : MonoBehaviour
+public class EnemiesRouter : MonoBehaviour
 {
     [SerializeField] private Transform _spawnPoint; 
     [SerializeField] private Transform _destroyPoint; 
@@ -14,6 +14,7 @@ public class EnemiesSpawner : MonoBehaviour
     public void StartRound(RoundModel roundModel)
     {
         _roundModel = roundModel;
+        _numberEnemiesCreated = 0;
         StartCoroutine(CreatingEnemies());
     }
 

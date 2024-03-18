@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Builds;
 using DG.Tweening;
@@ -11,6 +10,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] [Range(0, 200)] private float _moveSpeed = 20f;
     [SerializeField] private int _maximumHealth;
     [SerializeField] private TMP_Text _statusBar;
+    [SerializeField] private ResistType _resistType;
 
     private int _currentHealth;
     private float _currentMoveSpeed;
@@ -36,7 +36,15 @@ public class Enemy : MonoBehaviour
 
     public void TakeDamage(CastItem castItem)
     {
-        _maximumHealth -= castItem.Damage;
+        if (_resistType.ToString() == castItem.CastType.ToString())
+        {
+            var damage = castItem.Damage - GlobalParams.DamageReduction;
+            _maximumHealth -= damage;
+        }
+        else
+        {
+            _maximumHealth -= castItem.Damage;
+        }
 
         if (_maximumHealth <= 0)
         {
@@ -94,5 +102,10 @@ public class Enemy : MonoBehaviour
             
             _tweener = gameObject.transform.DOMove(_finishPoint.position, duration);
         }
+    }
+
+    private void OnDestroy()
+    {
+        _tweener.Kill();
     }
 }

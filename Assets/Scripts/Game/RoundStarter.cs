@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using EventBusSystem;
 using UnityEngine;
@@ -6,23 +5,23 @@ using Zenject;
 
 public class RoundStarter : MonoBehaviour, IEnemyHandler
 {
+    [SerializeField] private EnemiesRouter _enemiesRouter;
     [SerializeField] private MatchModel _matchModel;
     
-    private EnemiesSpawner _enemiesSpawner;
     private PlayerModel _playerModel;
     
     private int _currentRoundIndex;
     private int _numberDestroyedEnemies;
 
     [Inject]
-    public void Construction(EnemiesSpawner enemiesSpawner, PlayerModel playerModel)
+    public void Construction(PlayerModel playerModel)
     {
-        _enemiesSpawner = enemiesSpawner;
         _playerModel = playerModel;
     }
 
     public void StartMatch()
     {
+        Debug.Log("The match is started");
         StartCoroutine(Waiting(_matchModel.RoundDelay));
     }
 
@@ -41,11 +40,12 @@ public class RoundStarter : MonoBehaviour, IEnemyHandler
         _numberDestroyedEnemies++;
         _playerModel.Gold.Value += GlobalParams.RewardMurder;
         
-        if (_numberDestroyedEnemies < _matchModel.RoundSettings[_currentRoundIndex].NumberEnemies - 1)
+        if (_numberDestroyedEnemies < _matchModel.RoundSettings[_currentRoundIndex].NumberEnemies)
         {
             return;
         }
 
+        Debug.Log("The round is over");
         StartCoroutine(Waiting(_matchModel.RoundDelay));
     }
 
@@ -59,7 +59,8 @@ public class RoundStarter : MonoBehaviour, IEnemyHandler
     {
         if (_currentRoundIndex < _matchModel.RoundSettings.Count)
         {
-            _enemiesSpawner.StartRound(_matchModel.RoundSettings[_currentRoundIndex]);
+            Debug.Log("The round is started");
+            _enemiesRouter.StartRound(_matchModel.RoundSettings[_currentRoundIndex]);
             _currentRoundIndex++;
         }
         else

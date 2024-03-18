@@ -34,6 +34,12 @@ namespace EventBusSystem
         public static void RaiseEvent<TSubscriber>(Action<TSubscriber> action)
             where TSubscriber : class, IGlobalSubscriber
         {
+            if (_subscribers.Count == 0)
+            {
+                Debug.Log("There are no subscribers");
+                return;
+            }
+            
             SubscribersList<IGlobalSubscriber> subscribers = _subscribers[typeof(TSubscriber)];
             subscribers.Executing = true;
             
@@ -45,7 +51,8 @@ namespace EventBusSystem
                 }
                 catch (Exception e)
                 {
-                    Debug.LogError(e);
+                    // TODO change?
+                    // Debug.LogError(e);
                 }
             }
             
