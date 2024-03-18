@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,8 +11,6 @@ public class EnemiesSpawner : MonoBehaviour
     private RoundModel _roundModel;
     private int _numberEnemiesCreated;
 
-    public event Action OnDestroyed;
-
     public void StartRound(RoundModel roundModel)
     {
         _roundModel = roundModel;
@@ -26,12 +23,8 @@ public class EnemiesSpawner : MonoBehaviour
         {
             Enemy enemy = Instantiate(_roundModel.Enemy, _spawnPoint.position, Quaternion.identity);
             enemy.Initialize(_wayPoints, _destroyPoint);
-            enemy.OnDestroyed += OnEnemyDestroy;
-                
             _numberEnemiesCreated++;
             yield return new WaitForSeconds(_roundModel.SpawnDelay);
         }
     }
-
-    private void OnEnemyDestroy() => OnDestroyed?.Invoke();
 }

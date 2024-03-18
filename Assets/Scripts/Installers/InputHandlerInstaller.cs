@@ -11,4 +11,5 @@ public class InputHandlerInstaller : MonoInstaller
             .Bind<InputHandler>()
             .FromInstance(_inputHandler)
             .AsSingle();
-    }}
+    }
+}

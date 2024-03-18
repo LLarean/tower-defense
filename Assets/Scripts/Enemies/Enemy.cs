@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using Builds;
 using DG.Tweening;
+using EventBusSystem;
 using TMPro;
 using UnityEngine;
 
@@ -19,9 +20,6 @@ public class Enemy : MonoBehaviour
     private Transform _finishPoint;
     private int _currentPointIndex = 0;
     private Tweener _tweener;
-    
-    public event Action OnDestroyed;
-    public event Action OnFinished;
 
     public void Initialize(List<Transform> wayPoints, Transform finishPoint)
     {
@@ -42,7 +40,8 @@ public class Enemy : MonoBehaviour
 
         if (_maximumHealth <= 0)
         {
-            OnDestroyed?.Invoke();
+            EventBus.RaiseEvent<IEnemyHandler>(h => h.HandleDestroy());
+            
             _tweener.Kill();
             Destroy(gameObject);
         }
@@ -53,7 +52,10 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    public void Finish() => OnFinished?.Invoke();
+    public void Finish()
+    {
+        EventBus.RaiseEvent<IEnemyHandler>(enemyHandler => enemyHandler.HandleFinish());
+    }
 
     private void TakeEffect(CastType castType)
     {

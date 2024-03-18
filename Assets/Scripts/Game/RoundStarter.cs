@@ -1,8 +1,10 @@
+using System;
 using System.Collections;
+using EventBusSystem;
 using UnityEngine;
 using Zenject;
 
-public class RoundStarter : MonoBehaviour
+public class RoundStarter : MonoBehaviour, IEnemyHandler
 {
     [SerializeField] private MatchModel _matchModel;
     
@@ -17,8 +19,6 @@ public class RoundStarter : MonoBehaviour
     {
         _enemiesSpawner = enemiesSpawner;
         _playerModel = playerModel;
-        
-        enemiesSpawner.OnDestroyed += DestroyUnit;
     }
 
     public void StartMatch()
@@ -26,12 +26,22 @@ public class RoundStarter : MonoBehaviour
         StartCoroutine(Waiting(_matchModel.RoundDelay));
     }
 
+    private void Start()
+    {
+        EventBus.Subscribe(this);
+    }
+
+    private void OnDestroy()
+    {
+        EventBus.Unsubscribe(this);
+    }
+
     private void DestroyUnit()
     {
         _numberDestroyedEnemies++;
         _playerModel.Gold.Value += GlobalParams.RewardMurder;
         
-        if (_numberDestroyedEnemies < _matchModel.RoundSettings[_currentRoundIndex].NumberEnemies)
+        if (_numberDestroyedEnemies < _matchModel.RoundSettings[_currentRoundIndex].NumberEnemies - 1)
         {
             return;
         }
@@ -56,5 +66,17 @@ public class RoundStarter : MonoBehaviour
         {
             Debug.Log("WON");
         }
+    }
+
+    public void HandleDestroy()
+    {
+        Debug.Log("The tower destroyed the enemy");
+        DestroyUnit();
+    }
+
+    public void HandleFinish()
+    {
+        Debug.Log("The enemy has reached the end");
+        DestroyUnit();
     }
 }
