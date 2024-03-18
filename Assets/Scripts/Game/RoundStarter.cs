@@ -46,11 +46,14 @@ public class RoundStarter : MonoBehaviour, IEnemyHandler
         }
 
         Debug.Log("The round is over");
+        _playerModel.Notification.Value = GlobalStrings.RoundOver;
+        
         StartCoroutine(Waiting(_matchModel.RoundDelay));
     }
 
     private IEnumerator Waiting(float waitingTime)
     {
+        _playerModel.Notification.Value = $"{GlobalStrings.RoundWillStart} {waitingTime} {GlobalStrings.Seconds}";
         yield return new WaitForSeconds(waitingTime);
         StartRound();
     }
@@ -60,12 +63,15 @@ public class RoundStarter : MonoBehaviour, IEnemyHandler
         if (_currentRoundIndex < _matchModel.RoundSettings.Count)
         {
             Debug.Log("The round is started");
+            _playerModel.Notification.Value = GlobalStrings.RoundStart;
+
             _enemiesRouter.StartRound(_matchModel.RoundSettings[_currentRoundIndex]);
             _currentRoundIndex++;
         }
         else
         {
             Debug.Log("WON");
+            _playerModel.Notification.Value = "WON";
         }
     }
 
@@ -78,6 +84,8 @@ public class RoundStarter : MonoBehaviour, IEnemyHandler
     public void HandleFinish()
     {
         Debug.Log("The enemy has reached the end");
+        _playerModel.Notification.Value = GlobalStrings.EnemyReached;
+        
         DestroyUnit();
     }
 }

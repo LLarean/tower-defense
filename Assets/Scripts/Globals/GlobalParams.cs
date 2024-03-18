@@ -11,4 +11,6 @@ public static class GlobalParams
     public const int RewardMurder = 50;
     public const int IceSlow = 15;
     public const int DamageReduction = 10;
+    [Space]
+    public const int MessageDisplayTime = 5;
 }

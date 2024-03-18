@@ -9,6 +9,7 @@ namespace UI.Game
         [SerializeField] private BuildPanel _buildPanel;
         [SerializeField] private InfoPanel _infoPanel;
         [SerializeField] private AbilityPanel _abilityPanel;
+        [SerializeField] private NotificationsPanel _notificationsPanel;
 
         private GameMediator _gameMediator;
         private PlayerModel _playerModel;
@@ -21,6 +22,7 @@ namespace UI.Game
 
             _playerModel.Gold.ValueChanged += ChangeGoldValue;
             _playerModel.CurrentBuilding.ValueChanged += ShowInfo;
+            _playerModel.Notification.ValueChanged += ShowMessage;
         }
 
         public void StartClock() => _topPanel.StartClock();
@@ -30,6 +32,8 @@ namespace UI.Game
         public void ResetClock() => _topPanel.ResetClock();
         
         public void ShowInfo(BuildModel buildModel) => _infoPanel.ShowInfo(buildModel);
+
+        private void ShowMessage(string current, string previous) => _notificationsPanel.ShowMessage(current);
 
         private void ShowInfo(BuildModel current, BuildModel previous)
         {
