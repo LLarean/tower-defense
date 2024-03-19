@@ -3914,10 +3914,10 @@ MonoBehaviour:
   _matchModel:
     RoundDelay: 4
     RoundSettings:
-    - SpawnDelay: 2
+    - SpawnDelay: 1
       NumberEnemies: 2
       Enemy: {fileID: 7786142572879946961, guid: c64768c24bc18af4b815ca64105359aa, type: 3}
-    - SpawnDelay: 2
+    - SpawnDelay: 1
       NumberEnemies: 2
       Enemy: {fileID: 7786142572879946961, guid: 109b39f565642bd4daf97aabadf6ba00, type: 3}
 --- !u!1 &1594349636

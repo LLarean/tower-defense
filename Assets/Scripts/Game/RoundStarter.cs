@@ -54,8 +54,11 @@ public class RoundStarter : MonoBehaviour, IEnemyHandler
     {
         _numberDestroyedEnemies++;
         _playerModel.Gold.Value += GlobalParams.RewardMurder;
+
+        // TODO rename
+        var index = _currentRoundIndex - 1;
         
-        if (_numberDestroyedEnemies < _matchModel.RoundSettings[_currentRoundIndex].NumberEnemies)
+        if (_numberDestroyedEnemies < _matchModel.RoundSettings[index].NumberEnemies)
         {
             return;
         }
@@ -78,6 +81,7 @@ public class RoundStarter : MonoBehaviour, IEnemyHandler
         if (_currentRoundIndex < _matchModel.RoundSettings.Count)
         {
             Debug.Log("The round is started");
+            _numberDestroyedEnemies = 0;
             _playerModel.Notification.Value = GlobalStrings.RoundStart;
 
             _enemiesRouter.StartRound(_matchModel.RoundSettings[_currentRoundIndex]);
@@ -85,8 +89,8 @@ public class RoundStarter : MonoBehaviour, IEnemyHandler
         }
         else
         {
-            Debug.Log("WON");
-            _playerModel.Notification.Value = "WON";
+            Debug.Log("Don't start");
+            _playerModel.Notification.Value = "End";
         }
     }
 

@@ -51,8 +51,7 @@ namespace Infrastructure
                 }
                 catch (Exception e)
                 {
-                    // TODO change?
-                    // Debug.LogError(e);
+                    Debug.LogError(e);
                 }
             }
             
