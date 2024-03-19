@@ -9,7 +9,7 @@ public static class GlobalParams
     public const int IceTowerPrice = 50;
     [Space]
     public const int RewardMurder = 50;
-    public const int DamagePlayer = 50;
+    public const int DamagePlayer = 5;
     public const int IceSlow = 15;
     public const int DamageReduction = 10;
     [Space]

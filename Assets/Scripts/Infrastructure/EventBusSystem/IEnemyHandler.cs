@@ -1,7 +1,8 @@
-using EventBusSystem;
-
-public interface IEnemyHandler : IGlobalSubscriber
+namespace Infrastructure
 {
-    void HandleDestroy();
-    void HandleFinish();
+    public interface IEnemyHandler : IGlobalSubscriber
+    {
+        void HandleDestroy();
+        void HandleFinish();
+    }
 }

@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using Builds;
 using DG.Tweening;
-using EventBusSystem;
+using Infrastructure;
 using TMPro;
 using UnityEngine;
 
@@ -48,7 +48,7 @@ public class Enemy : MonoBehaviour
 
         if (_maximumHealth <= 0)
         {
-            EventBus.RaiseEvent<IEnemyHandler>(h => h.HandleDestroy());
+            EventBus.RaiseEvent<IEnemyHandler>(handler => handler.HandleDestroy());
             
             _tweener.Kill();
             Destroy(gameObject);
@@ -74,7 +74,7 @@ public class Enemy : MonoBehaviour
         
         _isEffect = true;
         
-        if (castType == CastType.Ice)
+        if (castType == CastType.Ice && _resistType != ResistType.Ice)
         {
             _statusBar.text = $"{_statusBar.text} ({CastType.Ice})";
             _currentMoveSpeed -= GlobalParams.IceSlow;

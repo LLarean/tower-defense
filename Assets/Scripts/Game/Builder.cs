@@ -1,10 +1,11 @@
 using System.Collections.Generic;
 using Builds;
+using Infrastructure;
 using UI.Game;
 using UnityEngine;
 using Zenject;
 
-public class Builder : MonoBehaviour
+public class Builder : MonoBehaviour, IInputHandler
 {
     [SerializeField] private List<Building> _buildings;
     [SerializeField] private Collider _terrainCollider;
@@ -13,22 +14,14 @@ public class Builder : MonoBehaviour
     private Building _currentBuilding;
     private HUD _hud;
     private PlayerModel _playerModel;
-    private InputHandler _inputHandler;
 
     [Inject]
-    public void Construct(HUD hud, PlayerModel playerModel, InputHandler inputHandler)
+    public void Construct(HUD hud, PlayerModel playerModel)
     {
         _hud = hud;
         _playerModel = playerModel;
-        _inputHandler = inputHandler;
 
         _playerModel.CurrentBuilding.ValueChanged += BuildTower;
-        
-        _inputHandler.OnMousePositionChanged += MousePositionChange;
-        
-        _inputHandler.OnBuildClicked += ConstructBuilding;
-        _inputHandler.OnCancelClicked += DisableConstructionMode;
-        _inputHandler.OnMenuClicked += DisableConstructionMode;
     }
 
     public void ConstructBuilding()
@@ -49,19 +42,37 @@ public class Builder : MonoBehaviour
             InstantiateBuild(temp);
         }
     }
-
-    // public void BuildFireTower()
-    // {
-    //     EnableConstructionMode();
-    //     InstantiateBuild(_buildings[0]);
-    // }
-
-    // public void BuildWaterTower()
-    // {
-    //     EnableConstructionMode();
-    //     InstantiateBuild(_buildings[1]);
-    // }
     
+    public void HandleMousePosition(int positionX, int positionY)
+    {
+        MousePositionChange(positionX, positionY);
+    }
+
+    public void HandleBuild()
+    {
+        ConstructBuilding();
+    }
+
+    public void HandleCancel()
+    {
+        DisableConstructionMode();
+    }
+
+    public void HandleMenu()
+    {
+        DisableConstructionMode();
+    }
+
+    private void Start()
+    {
+        EventBus.Subscribe(this);
+    }
+
+    private void OnDestroy()
+    {
+        EventBus.Unsubscribe(this);
+    }
+
     private void BuildTower(BuildModel current, BuildModel previous)
     {
         EnableConstructionMode();

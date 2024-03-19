@@ -1,58 +1,53 @@
-using System;
 using UnityEngine;
 
-public class InputHandler : MonoBehaviour//, IInputHandler
+namespace Infrastructure
 {
-    private int _mousePositionX;
-    private int _mousePositionY;
-    
-    private int _buildButton = 0;
-    private int _cancelButton = 1;
-    private KeyCode _menuButton = KeyCode.Escape;
-    
-    
-    // TODO Convert actions to an event bus call
-    public event Action<int, int> OnMousePositionChanged;
-    
-    public event Action OnBuildClicked;
-    public event Action OnCancelClicked;
-    public event Action OnMenuClicked;
-    
-    private void Update()
+    public class InputHandler : MonoBehaviour
     {
-        ChangeMousePosition();
-        
-        if (Input.GetMouseButtonDown(_buildButton) == true)
+        private int _mousePositionX;
+        private int _mousePositionY;
+
+        // TODO add settings
+        private int _buildButton = 0;
+        private int _cancelButton = 1;
+        private KeyCode _menuButton = KeyCode.Escape;
+    
+        private void Update()
         {
-            OnBuildClicked?.Invoke();
+            ChangeMousePosition();
+        
+            if (Input.GetMouseButtonDown(_buildButton) == true)
+            {
+                EventBus.RaiseEvent<IInputHandler>(handler => handler.HandleBuild());
+            }
+
+            if (Input.GetMouseButtonDown(_cancelButton) == true)
+            {
+                EventBus.RaiseEvent<IInputHandler>(handler => handler.HandleCancel());
+            }
+
+            if (Input.GetMouseButtonDown(2) == true)
+            {
+            }
+        
+            if (Input.GetKeyDown(_menuButton))
+            {
+                EventBus.RaiseEvent<IInputHandler>(handler => handler.HandleMenu());
+            }
         }
 
-        if (Input.GetMouseButtonDown(_cancelButton) == true)
+        private void ChangeMousePosition()
         {
-            OnCancelClicked?.Invoke();
-        }
-
-        if (Input.GetMouseButtonDown(2) == true)
-        {
-        }
+            var positionX = (int)Input.mousePosition.x;
+            var positionY = (int)Input.mousePosition.y;
         
-        if (Input.GetKeyDown(_menuButton))
-        {
-            OnMenuClicked?.Invoke();
-        }
-    }
-
-    private void ChangeMousePosition()
-    {
-        var mousePositionX = (int)Input.mousePosition.x;
-        var mousePositionY = (int)Input.mousePosition.y;
-        
-        if (_mousePositionX != mousePositionX || mousePositionY != (int)Input.mousePosition.y)
-        {
-            _mousePositionX = mousePositionX;
-            _mousePositionY = mousePositionY;
+            if (_mousePositionX != positionX || positionY != (int)Input.mousePosition.y)
+            {
+                _mousePositionX = positionX;
+                _mousePositionY = positionY;
             
-            OnMousePositionChanged?.Invoke(_mousePositionX, _mousePositionY);
+                EventBus.RaiseEvent<IInputHandler>(handler => handler.HandleMousePosition(_mousePositionX, _mousePositionY));
+            }
         }
     }
 }

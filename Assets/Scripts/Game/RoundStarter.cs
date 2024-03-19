@@ -1,6 +1,6 @@
 using System;
 using System.Collections;
-using EventBusSystem;
+using Infrastructure;
 using UnityEngine;
 using Zenject;
 
