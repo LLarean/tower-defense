@@ -1,5 +1,8 @@
 public static class GlobalStrings
 {
+    public const string Menu = "Menu";
+    public const string Demo = "Demo";
+    
     public const string FireTower = "Fire Tower";
     public const string IceTower = "Ice Tower";
     

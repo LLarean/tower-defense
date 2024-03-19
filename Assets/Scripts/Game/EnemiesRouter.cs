@@ -20,7 +20,7 @@ public class EnemiesRouter : MonoBehaviour
 
     private IEnumerator CreatingEnemies()
     {
-        while (_numberEnemiesCreated < _roundModel.NumberEnemies)
+        while (_roundModel.IsInfinite == true || _numberEnemiesCreated < _roundModel.NumberEnemies)
         {
             Enemy enemy = Instantiate(_roundModel.Enemy, _spawnPoint.position, Quaternion.identity);
             enemy.Initialize(_wayPoints, _destroyPoint);

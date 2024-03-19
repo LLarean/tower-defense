@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using Zenject;
 
 namespace UI.Game
@@ -107,6 +108,7 @@ namespace UI.Game
 
         private void OpenMenu()
         {
+            SceneManager.LoadScene(GlobalStrings.Menu);
         }
     }
 }

@@ -43,6 +43,7 @@ public class RoundStarter : MonoBehaviour, IEnemyHandler
     private void Start()
     {
         EventBus.Subscribe(this);
+        StartMatch();
     }
 
     private void OnDestroy()
@@ -59,6 +60,11 @@ public class RoundStarter : MonoBehaviour, IEnemyHandler
         var index = _currentRoundIndex - 1;
         
         if (_numberDestroyedEnemies < _matchModel.RoundSettings[index].NumberEnemies)
+        {
+            return;
+        }
+        
+        if (_matchModel.RoundSettings[index].IsInfinite == true)
         {
             return;
         }
