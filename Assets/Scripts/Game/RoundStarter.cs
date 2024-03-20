@@ -24,7 +24,7 @@ public class RoundStarter : MonoBehaviour, IEnemyHandler
     public void StartMatch()
     {
         Debug.Log("The match is started");
-        _coroutine = StartCoroutine(Waiting(_matchModel.RoundDelay));
+        _coroutine = StartCoroutine(Waiting(_matchModel.RoundStartDelay));
     }
 
     public void StopMatch()
@@ -49,6 +49,7 @@ public class RoundStarter : MonoBehaviour, IEnemyHandler
     private void OnDestroy()
     {
         EventBus.Unsubscribe(this);
+        StopMatch();
     }
 
     private void DestroyUnit()
@@ -56,7 +57,7 @@ public class RoundStarter : MonoBehaviour, IEnemyHandler
         _numberDestroyedEnemies++;
         _playerModel.Gold.Value += GlobalParams.RewardMurder;
 
-        // TODO rename
+        // TODO rename?
         var index = _currentRoundIndex - 1;
         
         if (_numberDestroyedEnemies < _matchModel.RoundSettings[index].NumberEnemies)
@@ -72,7 +73,7 @@ public class RoundStarter : MonoBehaviour, IEnemyHandler
         Debug.Log("The round is over");
         _playerModel.Notification.Value = GlobalStrings.RoundOver;
         
-        StartCoroutine(Waiting(_matchModel.RoundDelay));
+        StartCoroutine(Waiting(_matchModel.RoundStartDelay));
     }
 
     private IEnumerator Waiting(float waitingTime)
@@ -90,7 +91,7 @@ public class RoundStarter : MonoBehaviour, IEnemyHandler
             _numberDestroyedEnemies = 0;
             _playerModel.Notification.Value = GlobalStrings.RoundStart;
 
-            _enemiesRouter.StartRound(_matchModel.RoundSettings[_currentRoundIndex]);
+            _enemiesRouter.StartRouting(_matchModel.RoundSettings[_currentRoundIndex]);
             _currentRoundIndex++;
         }
         else

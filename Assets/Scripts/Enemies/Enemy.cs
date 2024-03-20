@@ -17,19 +17,19 @@ public class Enemy : MonoBehaviour
     private bool _isEffect;
     
     private List<Transform> _wayPoints;
-    private Transform _finishPoint;
+    private DestroyPoint _destroyPoint;
     private int _currentPointIndex = 0;
     private Tweener _tweener;
 
-    public void Initialize(List<Transform> wayPoints, Transform finishPoint)
+    public void Initialize(in PathModel pathModel)
     {
         _currentMoveSpeed = _moveSpeed;
         _currentHealth = _maximumHealth;
 
         _statusBar.text = $"{_currentHealth.ToString()}/{_maximumHealth.ToString()}";
         
-        _wayPoints = wayPoints;
-        _finishPoint = finishPoint;
+        _wayPoints = pathModel.WayPoints;
+        _destroyPoint = pathModel.DestroyPoint;
         
         MoveToNextPoint();
     }
@@ -72,10 +72,10 @@ public class Enemy : MonoBehaviour
             return;
         }
         
-        _isEffect = true;
         
         if (castType == CastType.Ice && _resistType != ResistType.Ice)
         {
+            _isEffect = true;
             _statusBar.text = $"{_statusBar.text} ({CastType.Ice})";
             _currentMoveSpeed -= GlobalParams.IceSlow;
         }
@@ -97,10 +97,10 @@ public class Enemy : MonoBehaviour
         }
         else
         {
-            float distance = Vector3.Distance(_finishPoint.position,gameObject.transform.position);
+            float distance = Vector3.Distance(_destroyPoint.gameObject.transform.position,gameObject.transform.position);
             var duration = distance / _currentMoveSpeed;
             
-            _tweener = gameObject.transform.DOMove(_finishPoint.position, duration);
+            _tweener = gameObject.transform.DOMove(_destroyPoint.gameObject.transform.position, duration);
         }
     }
 

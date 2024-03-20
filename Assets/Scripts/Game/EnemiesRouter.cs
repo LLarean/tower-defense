@@ -1,31 +1,49 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemiesRouter : MonoBehaviour
 {
-    [SerializeField] private Transform _spawnPoint; 
-    [SerializeField] private Transform _destroyPoint; 
-    [SerializeField] private List<Transform> _wayPoints;
-
-    private RoundModel _roundModel;
+    [SerializeField] private PathModel _pathModel;
+    
     private int _numberEnemiesCreated;
+    private Coroutine _coroutine;
 
-    public void StartRound(RoundModel roundModel)
+    public void StartRouting(RoundModel roundModel)
     {
-        _roundModel = roundModel;
-        _numberEnemiesCreated = 0;
-        StartCoroutine(CreatingEnemies());
+        if (roundModel == null)
+        {
+            Debug.LogError("Class: 'EnemiesRouter', Method: 'StartRoute', Message: 'roundModel == null'");
+            return;
+        }
+        
+        if (roundModel.Enemy == null)
+        {
+            Debug.LogError("Class: 'EnemiesRouter', Method: 'StartRoute', Message: 'roundModel.Enemy == null'");
+            return;
+        }
+        
+        _coroutine = StartCoroutine(CreatingEnemies(roundModel));
     }
 
-    private IEnumerator CreatingEnemies()
+    private IEnumerator CreatingEnemies(RoundModel roundModel)
     {
-        while (_roundModel.IsInfinite == true || _numberEnemiesCreated < _roundModel.NumberEnemies)
+        _numberEnemiesCreated = 0;
+        
+        while (roundModel.IsInfinite == true || _numberEnemiesCreated < roundModel.NumberEnemies)
         {
-            Enemy enemy = Instantiate(_roundModel.Enemy, _spawnPoint.position, Quaternion.identity);
-            enemy.Initialize(_wayPoints, _destroyPoint);
+            Enemy enemy = Instantiate(roundModel.Enemy, _pathModel.SpawnPoint.position, Quaternion.identity);
+            enemy.Initialize(_pathModel);
             _numberEnemiesCreated++;
-            yield return new WaitForSeconds(_roundModel.SpawnDelay);
+            
+            yield return new WaitForSeconds(roundModel.EnemySpawnDelay);
+        }
+    }
+
+    private void OnDestroy()
+    {
+        if (_coroutine != null)
+        {
+            StopCoroutine(_coroutine);
         }
     }
 }
