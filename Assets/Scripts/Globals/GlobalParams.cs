@@ -14,4 +14,5 @@ public static class GlobalParams
     public const int DamageReduction = 10;
     [Space]
     public const int MessageDisplayTime = 5;
+    public const float DebuffTime = 5;
 }

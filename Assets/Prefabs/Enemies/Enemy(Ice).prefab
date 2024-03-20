@@ -49,10 +49,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97acb203f4b982a4a9b2a185c11e9b56, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _moveSpeed: 20
-  _maximumHealth: 100
+  _enemyModel:
+    MoveSpeed: 20
+    CurrentMoveSpeed: 0
+    MaximumHealth: 100
+    CurrentHealth: 0
+    ResistType: 2
+    Debuffs: 0
   _statusBar: {fileID: 6839989417416660633}
-  _resistType: 2
 --- !u!33 &4957217461622791466
 MeshFilter:
   m_ObjectHideFlags: 0

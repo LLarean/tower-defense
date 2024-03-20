@@ -6,17 +6,15 @@ namespace Builds
 {
     public class CastItem : MonoBehaviour
     {
-        [SerializeField] private CastType castType;
-        [SerializeField] private int _damage;
+        [SerializeField] private CastItemModel _castItemModel;
         
         private Tweener _tween;
         private Transform _target;
         private Vector3 _targetLastPosition;
 
         private bool _isInit = false;
-        
-        public CastType CastType => castType;
-        public int Damage => _damage;
+
+        public CastItemModel CastItemModel => _castItemModel;
 
         public void Initialize(Transform target)
         {
@@ -64,7 +62,7 @@ namespace Builds
                 return;
             }
             
-            enemy.TakeDamage(this);
+            enemy.TakeDamage(CastItemModel);
             _tween.Kill();
             Destroy(gameObject);
         }

@@ -27,6 +27,12 @@ public class EnemiesRouter : MonoBehaviour
 
     private IEnumerator CreatingEnemies(RoundModel roundModel)
     {
+        if (_pathModel == null)
+        {
+            Debug.LogError("Class: 'EnemiesRouter', Method: 'CreatingEnemies', Message: '_pathModel == null'");
+            yield break;
+        }
+        
         _numberEnemiesCreated = 0;
         
         while (roundModel.IsInfinite == true || _numberEnemiesCreated < roundModel.NumberEnemies)
