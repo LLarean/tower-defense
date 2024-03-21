@@ -14,6 +14,7 @@ namespace Infrastructure
     
         private void Update()
         {
+            // EventBus.RaiseEvent<IUpdateHandler>(handler => handler.HandleUpdate());
             ChangeMousePosition();
         
             if (Input.GetMouseButtonDown(_buildButton) == true)

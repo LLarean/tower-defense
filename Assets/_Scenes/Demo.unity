@@ -1550,11 +1550,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb57fe1a9fa743441922337d7302a32d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _spawnPoint: {fileID: 840073322}
-  _destroyPoint: {fileID: 2088998711}
-  _wayPoints:
-  - {fileID: 1020171080}
-  - {fileID: 2082748647}
+  _pathModel:
+    SpawnPoint: {fileID: 840073322}
+    DestroyPoint: {fileID: 2088998715}
+    WayPoints:
+    - {fileID: 1020171080}
+    - {fileID: 2082748647}
 --- !u!4 &611187000
 Transform:
   m_ObjectHideFlags: 0
@@ -3912,13 +3913,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _enemiesRouter: {fileID: 611186999}
   _matchModel:
-    RoundDelay: 4
+    RoundStartDelay: 5
     RoundSettings:
-    - SpawnDelay: 1
+    - EnemySpawnDelay: 2
       NumberEnemies: 2
+      IsInfinite: 0
       Enemy: {fileID: 7786142572879946961, guid: c64768c24bc18af4b815ca64105359aa, type: 3}
-    - SpawnDelay: 1
+    - EnemySpawnDelay: 2
       NumberEnemies: 2
+      IsInfinite: 0
       Enemy: {fileID: 7786142572879946961, guid: 109b39f565642bd4daf97aabadf6ba00, type: 3}
 --- !u!1 &1594349636
 GameObject:
@@ -4957,6 +4960,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2633740816431561199, guid: d752495adefa5e6458b63f7370bceacb, type: 3}
   m_PrefabInstance: {fileID: 1874498003305285663}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2088998715 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 120252904179205430, guid: d752495adefa5e6458b63f7370bceacb, type: 3}
+  m_PrefabInstance: {fileID: 1874498003305285663}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4313958f7b8e70b4c9756eaedc0c940e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2098334061
 GameObject:
   m_ObjectHideFlags: 0

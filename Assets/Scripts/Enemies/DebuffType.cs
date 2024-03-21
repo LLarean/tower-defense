@@ -1,6 +1,5 @@
-﻿public enum Debuff
+﻿public enum DebuffType
 {
-    None,
     Burning,
     Wet,
     Slow,

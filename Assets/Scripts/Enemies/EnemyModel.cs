@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 [Serializable]
@@ -11,5 +12,5 @@ public class EnemyModel
     [HideInInspector] public int CurrentHealth;
     
     public ResistType ResistType;
-    [HideInInspector] public Debuff Debuffs;
+    [HideInInspector] public List<DebuffModel> DebuffModels = new List<DebuffModel>();
 }
