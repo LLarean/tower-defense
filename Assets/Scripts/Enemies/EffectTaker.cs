@@ -1,55 +1,36 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-
-public class EffectTaker
+﻿// TODO it needs to be renamed
+public class HealthLogic
 {
     private EnemyModel _enemyModel;
-
-    public void Initialize(EnemyModel enemyModel)
+    
+    public HealthLogic(EnemyModel enemyModel)
     {
         _enemyModel = enemyModel;
     }
     
-    public void UpdateBuffsStatus()
+    public void TakeDamage(CastItemModel castItemModel)
     {
-        foreach (var debuffModel in _enemyModel.DebuffModels)
+        var damage = GetCalculatedDamage(castItemModel);
+        _enemyModel.CurrentHealth.Value -= damage;
+
+        if (_enemyModel.CurrentHealth <= 0)
+        {
+            return;
+        }
+
+        UpdateDebuffModels(castItemModel.CastType);
+    }
+
+    public void UpdateDebuffsDuration()
+    {
+        foreach (var debuffModel in _enemyModel.DebuffModels.Value)
         {
             debuffModel.Duration -= GlobalParams.TickTime;
         }
         
-        List<DebuffModel> debuffModels = _enemyModel.DebuffModels.Where(item => item.Duration <= 0).ToList();
-        _enemyModel.DebuffModels.RemoveAll(item => item.Duration <= 0);
-
-        foreach (var debuffModel in debuffModels)
-        {
-            if (debuffModel.DebuffType == DebuffType.Burning)
-            {
-                _enemyModel.CurrentHealth -= GlobalParams.BurningDamage;
-            }
-            else if (debuffModel.DebuffType == DebuffType.Slow)
-            {
-                _enemyModel.CurrentMoveSpeed = _enemyModel.MoveSpeed - GlobalParams.IceSlow;
-                // _unitMover.ChangeSpeed(_enemyModel.CurrentMoveSpeed);
-            }
-            else if (debuffModel.DebuffType == DebuffType.Frozen)
-            {
-                _enemyModel.CurrentMoveSpeed = 0;
-                // _unitMover.ChangeSpeed(_enemyModel.CurrentMoveSpeed);
-            }
-        }
-    }
-
-    private void DisplayHealth()
-    {
-        // _statusBar.text = $"{_enemyModel.CurrentHealth.ToString()}/{_enemyModel.MaximumHealth.ToString()}";
-    }
-    
-    private void ShowDebuffs()
-    {
-        foreach (var debuffModel in _enemyModel.DebuffModels)
-        {
-            // _statusBar.text = $"{_statusBar.text} ({debuffModel.DebuffType})";
-        }
+        // List<DebuffModel> debuffModels = _enemyModel.DebuffModels.Value.Where(item => item.Duration <= 0).ToList();
+        _enemyModel.DebuffModels.Value.RemoveAll(item => item.Duration <= 0);
+        TakeEffect();
     }
 
     private int GetCalculatedDamage(CastItemModel castItemModel)
@@ -63,90 +44,148 @@ public class EffectTaker
 
         return damage;
     }
-    
-    private void UpdateDebuffTime(CastType castType)
-    {
-        if (_enemyModel.DebuffModels.Count <= 0)
-        {
-            return;
-        }
-        
-        foreach (var debuffModel in _enemyModel.DebuffModels)
-        {
-            debuffModel.Duration = castType switch
-            {
-                CastType.Fire when debuffModel.DebuffType == DebuffType.Burning => GlobalParams.DebuffTime,
-                CastType.Water when debuffModel.DebuffType == DebuffType.Wet => GlobalParams.DebuffTime,
-                CastType.Ice when debuffModel.DebuffType == DebuffType.Slow => GlobalParams.DebuffTime,
-                _ => debuffModel.Duration
-            };
-        }
-    }
-    
-    // TODO it needs to be recycled. should I put it in the interface?
+
     private void UpdateDebuffModels(CastType castType)
     {
-        if (_enemyModel.DebuffModels.Count <= 0)
+        if (_enemyModel.DebuffModels.Value.Count <= 0)
         {
-            DebuffModel debuffModel = new DebuffModel
-            {
-                Duration = GlobalParams.DebuffTime,
-                DebuffType = castType switch
-                {
-                    CastType.Fire => DebuffType.Burning,
-                    CastType.Water => DebuffType.Wet,
-                    CastType.Ice => DebuffType.Slow,
-                    _ => DebuffType.Burning
-                }
-            };
+            AddNewDebuff(castType);
+        }
+        else
+        {
+            UpdateDebuffModel(castType);
+        }
+    }
 
-            _enemyModel.DebuffModels.Add(debuffModel);
-            return;
+    private void AddNewDebuff(CastType castType)
+    {
+        DebuffModel debuffModel = new DebuffModel
+        {
+            Duration = GlobalParams.DebuffDuration,
+            DebuffType = castType switch
+            {
+                CastType.Fire => DebuffType.Burning,
+                CastType.Water => DebuffType.Wet,
+                CastType.Ice => DebuffType.Slow,
+                _ => DebuffType.Burning
+            }
+        };
+
+        _enemyModel.DebuffModels.Value.Add(debuffModel);
+    }
+
+    private void UpdateDebuffModel(CastType castType)
+    {
+        foreach (var debuffModel in _enemyModel.DebuffModels.Value)
+        {
+            var isRemoved = TryRemoveDebuff(debuffModel, castType);
+
+            if (isRemoved == true)
+            {
+                break;
+            }
+
+            var isReplaced = TryReplaceEffect(debuffModel, castType);
+            
+            if (isReplaced == true)
+            {
+                break;
+            }
+            
+            var isUpdate = TryUpdateDebuffDuration(debuffModel, castType);
+            
+            if (isUpdate == true)
+            {
+                break;
+            }
+        }
+    }
+
+    private bool TryRemoveDebuff(DebuffModel debuffModel, CastType castType)
+    {
+        bool isSuccess = false;
+
+        if (debuffModel.DebuffType == DebuffType.Burning && castType == CastType.Ice)
+        {
+            _enemyModel.DebuffModels.Value.Remove(debuffModel);
+            isSuccess = true;
+        }
+        else if (debuffModel.DebuffType == DebuffType.Burning && castType == CastType.Water)
+        {
+            _enemyModel.DebuffModels.Value.Remove(debuffModel);
+            isSuccess = true;
+        }
+        else if (debuffModel.DebuffType == DebuffType.Wet && castType == CastType.Fire)
+        {
+            _enemyModel.DebuffModels.Value.Remove(debuffModel);
+            isSuccess = true;
+        }
+        else if (debuffModel.DebuffType == DebuffType.Slow && castType == CastType.Fire)
+        {
+            _enemyModel.DebuffModels.Value.Remove(debuffModel);
+            isSuccess = true;
+        }
+        else if (debuffModel.DebuffType == DebuffType.Frozen && castType == CastType.Fire)
+        {
+            _enemyModel.DebuffModels.Value.Remove(debuffModel);
+            isSuccess = true;
         }
         
-        foreach (var debuffModel in _enemyModel.DebuffModels)
+        return isSuccess;
+    }
+    
+    private bool TryReplaceEffect(DebuffModel debuffModel, CastType castType)
+    {
+        bool isSuccess = false;
+        
+        if (debuffModel.DebuffType == DebuffType.Wet && castType == CastType.Ice)
         {
-            if (debuffModel.DebuffType == DebuffType.Burning && castType == CastType.Water)
+            AddNewDebuff(castType);
+            _enemyModel.DebuffModels.Value.Remove(debuffModel);
+            isSuccess = true;
+        }
+
+        return isSuccess;
+    }
+    
+    private bool TryUpdateDebuffDuration(DebuffModel debuffModel, CastType castType)
+    {
+        bool isSuccess = false;
+
+        if (debuffModel.DebuffType == DebuffType.Burning && castType == CastType.Fire)
+        {
+            debuffModel.Duration = GlobalParams.DebuffDuration;
+            isSuccess = true;
+        }
+        else if (debuffModel.DebuffType == DebuffType.Wet && castType == CastType.Water)
+        {
+            debuffModel.Duration = GlobalParams.DebuffDuration;
+            isSuccess = true;
+        }
+        else if (debuffModel.DebuffType == DebuffType.Slow && castType == CastType.Ice)
+        {
+            debuffModel.Duration = GlobalParams.DebuffDuration;
+            isSuccess = true;
+        }
+
+        return isSuccess;
+    }
+    
+    private void TakeEffect()
+    {
+        foreach (var debuffModel in _enemyModel.DebuffModels.Value)
+        {
+            if (debuffModel.DebuffType == DebuffType.Burning)
             {
-                _enemyModel.DebuffModels.Remove(debuffModel);
-                break;
+                _enemyModel.CurrentHealth -= GlobalParams.BurningDamage;
             }
-
-            if (debuffModel.DebuffType == DebuffType.Burning && castType == CastType.Ice)
+            else if (debuffModel.DebuffType == DebuffType.Slow)
             {
-                _enemyModel.DebuffModels.Remove(debuffModel);
-                break;
+                _enemyModel.CurrentMoveSpeed = _enemyModel.MoveSpeed - GlobalParams.IceSlow;
             }
-
-            if (debuffModel.DebuffType == DebuffType.Burning && castType == CastType.Ice)
+            else if (debuffModel.DebuffType == DebuffType.Frozen)
             {
-                _enemyModel.DebuffModels.Remove(debuffModel);
-                break;
-            }
-
-            if (debuffModel.DebuffType == DebuffType.Wet && castType == CastType.Fire)
-            {
-                _enemyModel.DebuffModels.Remove(debuffModel);
-                break;
-            }
-
-            if (debuffModel.DebuffType == DebuffType.Wet && castType == CastType.Ice)
-            {
-                DebuffModel newDebuffModel = new DebuffModel
-                {
-                    DebuffType = DebuffType.Frozen,
-                    Duration = GlobalParams.DebuffTime,
-                };
-
-                _enemyModel.DebuffModels.Add(newDebuffModel);
-                _enemyModel.DebuffModels.Remove(debuffModel);
-                break;
-            }
-
-            if (debuffModel.DebuffType == DebuffType.Slow && castType == CastType.Fire)
-            {
-                _enemyModel.DebuffModels.Remove(debuffModel);
-                break;
+                _enemyModel.CurrentMoveSpeed = 0;
             }
         }
     }

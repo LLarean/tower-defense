@@ -1,3 +1,4 @@
+using Infrastructure;
 using UnityEngine;
 
 public class DestroyPoint : MonoBehaviour
@@ -11,7 +12,7 @@ public class DestroyPoint : MonoBehaviour
             return;
         }
         
-        enemy.Finish();
+        EventBus.RaiseEvent<IEnemyHandler>(enemyHandler => enemyHandler.HandleFinish());
         Destroy(enemy.gameObject);
     }
 }
