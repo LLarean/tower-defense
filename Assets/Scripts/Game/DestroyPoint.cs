@@ -1,4 +1,5 @@
 using Infrastructure;
+using Units;
 using UnityEngine;
 
 public class DestroyPoint : MonoBehaviour
