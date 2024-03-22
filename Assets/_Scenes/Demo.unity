@@ -1554,8 +1554,10 @@ MonoBehaviour:
     SpawnPoint: {fileID: 840073322}
     DestroyPoint: {fileID: 2088998715}
     WayPoints:
+    - {fileID: 840073322}
     - {fileID: 1020171080}
     - {fileID: 2082748647}
+    - {fileID: 2088998711}
 --- !u!4 &611187000
 Transform:
   m_ObjectHideFlags: 0
@@ -2852,9 +2854,9 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 840073322}
-  - {fileID: 2088998711}
   - {fileID: 1020171080}
   - {fileID: 2082748647}
+  - {fileID: 2088998711}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}

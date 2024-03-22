@@ -1,101 +1,16 @@
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using DG.Tweening;
-using Infrastructure;
-using TMPro;
-using UnityEngine;
 
-public class Enemy : MonoBehaviour
+public class EffectTaker
 {
-    [SerializeField] private EnemyModel _enemyModel;
-    [SerializeField] private TMP_Text _statusBar;
-    [SerializeField] private UnitMover _unitMover;
+    private EnemyModel _enemyModel;
 
-    private PathModel _pathModel;
-
-    private int _currentPointIndex = 0;
-    private Tweener _tweener;
-    private Coroutine _coroutine;
-
-    public void Initialize(in PathModel pathModel)
+    public void Initialize(EnemyModel enemyModel)
     {
-        _pathModel = pathModel;
-        
-        _enemyModel.CurrentMoveSpeed = _enemyModel.MoveSpeed;
-        _enemyModel.CurrentHealth = _enemyModel.MaximumHealth;
-        
-        DisplayHealth();
-        
-        _unitMover.Initialize(_enemyModel.CurrentMoveSpeed, _pathModel.WayPoints);
-        _unitMover.MoveToNextPoint();
+        _enemyModel = enemyModel;
     }
     
-    public void TakeDamage(CastItemModel castItemModel)
-    {
-        var damage = GetCalculatedDamage(castItemModel);
-        _enemyModel.CurrentHealth -= damage;
-
-        if (_enemyModel.CurrentHealth <= 0)
-        {
-            EventBus.RaiseEvent<IEnemyHandler>(handler => handler.HandleDestroy());
-
-            // TODO add a gradual deletion logic
-            Destroy(gameObject);
-            return;
-        }
-
-        DisplayHealth();
-        TakeEffect(castItemModel.CastType);
-    }
-
-    public void Finish()
-    {
-        EventBus.RaiseEvent<IEnemyHandler>(enemyHandler => enemyHandler.HandleFinish());
-    }
-
-    private void TakeEffect(CastType castType)
-    {
-        if (_enemyModel.ResistType.ToString() == castType.ToString())
-        {
-            return;
-        }
-        
-        SetDebuff(castType);
-
-        if (_enemyModel.DebuffModels.Count == 0)
-        {
-            return;
-        }
-        
-        ShowDebuffs();
-
-        if (_coroutine != null)
-        {
-            StopCoroutine(_coroutine);
-        }
-        
-        _coroutine = StartCoroutine(TickState());
-    }
-
-    private void SetDebuff(CastType castType)
-    {
-        UpdateDebuffTime(castType);
-        UpdateDebuffModels(castType);
-    }
-
-    private IEnumerator TickState()
-    {
-        while (_enemyModel.DebuffModels.Count > 0)
-        {
-            yield return new WaitForSeconds(GlobalParams.TickTime);
-            UpdateBuffsStatus();
-        }
-        
-        _enemyModel.CurrentMoveSpeed = _enemyModel.MoveSpeed;
-    }
-
-    private void UpdateBuffsStatus()
+    public void UpdateBuffsStatus()
     {
         foreach (var debuffModel in _enemyModel.DebuffModels)
         {
@@ -114,26 +29,26 @@ public class Enemy : MonoBehaviour
             else if (debuffModel.DebuffType == DebuffType.Slow)
             {
                 _enemyModel.CurrentMoveSpeed = _enemyModel.MoveSpeed - GlobalParams.IceSlow;
-                _unitMover.ChangeSpeed(_enemyModel.CurrentMoveSpeed);
+                // _unitMover.ChangeSpeed(_enemyModel.CurrentMoveSpeed);
             }
             else if (debuffModel.DebuffType == DebuffType.Frozen)
             {
                 _enemyModel.CurrentMoveSpeed = 0;
-                _unitMover.ChangeSpeed(_enemyModel.CurrentMoveSpeed);
+                // _unitMover.ChangeSpeed(_enemyModel.CurrentMoveSpeed);
             }
         }
     }
 
     private void DisplayHealth()
     {
-        _statusBar.text = $"{_enemyModel.CurrentHealth.ToString()}/{_enemyModel.MaximumHealth.ToString()}";
+        // _statusBar.text = $"{_enemyModel.CurrentHealth.ToString()}/{_enemyModel.MaximumHealth.ToString()}";
     }
     
     private void ShowDebuffs()
     {
         foreach (var debuffModel in _enemyModel.DebuffModels)
         {
-            _statusBar.text = $"{_statusBar.text} ({debuffModel.DebuffType})";
+            // _statusBar.text = $"{_statusBar.text} ({debuffModel.DebuffType})";
         }
     }
 
@@ -169,7 +84,7 @@ public class Enemy : MonoBehaviour
     }
     
     // TODO it needs to be recycled. should I put it in the interface?
-     private void UpdateDebuffModels(CastType castType)
+    private void UpdateDebuffModels(CastType castType)
     {
         if (_enemyModel.DebuffModels.Count <= 0)
         {
@@ -234,10 +149,5 @@ public class Enemy : MonoBehaviour
                 break;
             }
         }
-    }
-
-    private void OnDestroy()
-    {
-        _tweener.Kill();
     }
 }

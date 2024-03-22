@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8569267945198883039}
   - component: {fileID: 7786142572879946961}
+  - component: {fileID: 7685353334182418745}
   - component: {fileID: 4957217461622791466}
   - component: {fileID: 5842891324794900716}
   - component: {fileID: 7734772003773703397}
@@ -55,8 +56,20 @@ MonoBehaviour:
     MaximumHealth: 100
     CurrentHealth: 0
     ResistType: 2
-    Debuffs: 0
   _statusBar: {fileID: 6839989417416660633}
+  _unitMover: {fileID: 7685353334182418745}
+--- !u!114 &7685353334182418745
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7384529123041770048}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 84a8030fbd3a4ffd9245b7fd83527513, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!33 &4957217461622791466
 MeshFilter:
   m_ObjectHideFlags: 0

@@ -1,6 +1,8 @@
 using System.Collections;
 using UnityEngine;
 
+
+// TODO the discrepancy between the name and responsibility
 public class EnemiesRouter : MonoBehaviour
 {
     [SerializeField] private PathModel _pathModel;
