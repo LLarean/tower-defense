@@ -575,7 +575,8 @@ MonoBehaviour:
   _pathModel:
     SpawnPoint: {fileID: 2010043946}
     DestroyPoint: {fileID: 1663361507}
-    WayPoints: []
+    WayPoints:
+    - {fileID: 1663361506}
 --- !u!1 &697045915
 GameObject:
   m_ObjectHideFlags: 0

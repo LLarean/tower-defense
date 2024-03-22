@@ -125,7 +125,7 @@ namespace Units
 
             if (debuffModel.DebuffType == DebuffType.Burning && castType == CastType.Ice)
             {
-                _enemyModel.DebuffModels.Value.Remove(debuffModel);
+                RemoveDebuff(debuffModel);
                 isSuccess = true;
             }
             else if (debuffModel.DebuffType == DebuffType.Burning && castType == CastType.Water)
@@ -151,7 +151,15 @@ namespace Units
         
             return isSuccess;
         }
-    
+
+        private void RemoveDebuff(DebuffModel debuffModel)
+        {
+            _enemyModel.DebuffModels.Value.Remove(debuffModel);
+
+            var debuffModels = new List<DebuffModel>(_enemyModel.DebuffModels.Value);
+            _enemyModel.DebuffModels.Value = debuffModels;
+        }
+
         private bool TryReplaceEffect(DebuffModel debuffModel, CastType castType)
         {
             bool isSuccess = false;

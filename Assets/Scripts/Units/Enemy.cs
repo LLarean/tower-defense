@@ -22,14 +22,14 @@ namespace Units
             _enemyModel.CurrentMoveSpeed = _enemyModel.MoveSpeed;
             _enemyModel.CurrentHealth = _enemyModel.MaximumHealth;
         
-            DisplayHealth(_enemyModel.CurrentHealth, _enemyModel.CurrentHealth);
+            DisplayHealth();
         
             _unitMover.Initialize(_enemyModel.CurrentMoveSpeed, _pathModel.WayPoints);
             _unitMover.MoveToNextPoint();
 
             _unitHealth = new UnitHealth(_enemyModel);
         
-            _enemyModel.CurrentHealth.ValueChanged += DisplayHealth;
+            _enemyModel.CurrentHealth.ValueChanged += ChangeHealth;
             _enemyModel.CurrentMoveSpeed.ValueChanged += ChangeMoveSpeed;
             _enemyModel.DebuffModels.ValueChanged += DisplayDebuffs;
         }
@@ -56,7 +56,17 @@ namespace Units
             }
         }
 
-        private void DisplayHealth(int current, int previous)
+        private void ChangeHealth(int current, int previous)
+        {
+            DisplayHealth();
+            
+            if (_enemyModel.DebuffModels.Value.Count != 0)
+            {
+                DisplayDebuffs(_enemyModel.DebuffModels, _enemyModel.DebuffModels);
+            }
+        }
+
+        private void DisplayHealth()
         {
             _statusBar.text = $"{_enemyModel.CurrentHealth}/{_enemyModel.MaximumHealth.ToString()}";
         }
@@ -70,7 +80,7 @@ namespace Units
         {
             if (_enemyModel.DebuffModels.Value.Count == 0)
             {
-                DisplayHealth(_enemyModel.CurrentHealth, _enemyModel.CurrentHealth);
+                DisplayHealth();
                 return;
             }
             
