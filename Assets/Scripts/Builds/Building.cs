@@ -6,6 +6,8 @@ namespace Builds
     {
         [SerializeField] private MouseFollower _mouseFollower;
 
+        public bool CanBuild => _mouseFollower.CanBuild;
+        
         public virtual void Initialize(Collider terrainCollider)
         {
             _mouseFollower.Initialize(terrainCollider);

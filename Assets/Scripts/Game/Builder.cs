@@ -30,6 +30,12 @@ public class Builder : MonoBehaviour, IInputHandler
         {
             return;
         }
+        
+        // TODO the need to add a check if the mouse is outside the desired limits
+        if (_currentBuilding.CanBuild == false)
+        {
+           return;
+        }
 
         if (_playerModel.Gold.Value >= _playerModel.CurrentBuilding.Value.Price)
         {
