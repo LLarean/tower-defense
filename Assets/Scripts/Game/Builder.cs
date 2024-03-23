@@ -76,7 +76,8 @@ public class Builder : MonoBehaviour, IInputHandler
     private void BuildTower(BuildModel current, BuildModel previous)
     {
         EnableConstructionMode();
-        
+        ClearFollowingBuilding();
+
         if (current.CastType == CastType.Fire)
         {
             InstantiateBuild(_buildings[0]);
@@ -87,18 +88,10 @@ public class Builder : MonoBehaviour, IInputHandler
         }
     }
 
-    private void GetBuildings()
-    {
-        
-    }
-
     private void InstantiateBuild(Building building)
     {
-        EnableConstructionMode();
-        ClearFollowingBuilding();
-        
         _currentBuilding = Instantiate(building, transform.position, Quaternion.identity);
-        _currentBuilding.Initialize(this, _terrainCollider);
+        _currentBuilding.Initialize(_terrainCollider);
     }
 
     private void EnableConstructionMode()

@@ -2,21 +2,24 @@ using UnityEngine;
 
 public class MouseFollower : MonoBehaviour
 {
-    private Builder _builder;
     private Collider _terrainCollider;
     private float _heightOffset = 0f; 
         
     private int _movingStep = 20;
     private Camera _mainCamera;
 
-    public void Init(Builder builder, Collider terrainCollider)
+    public void Initialize(Collider terrainCollider)
     {
-        _builder = builder;
         _terrainCollider = terrainCollider;
     }
 
     public void MousePositionChange(float positionX, float positionY)
     {
+        if (_terrainCollider == null || _mainCamera == null)
+        {
+            return;
+        }
+        
         positionX = Mathf.Round(positionX / _movingStep) * _movingStep;
         positionY = Mathf.Round(positionY / _movingStep) * _movingStep;
 

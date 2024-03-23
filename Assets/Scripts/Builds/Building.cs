@@ -6,9 +6,9 @@ namespace Builds
     {
         [SerializeField] private MouseFollower _mouseFollower;
 
-        public virtual void Initialize(Builder builder, Collider terrainCollider)
+        public virtual void Initialize(Collider terrainCollider)
         {
-            _mouseFollower.Init(builder, terrainCollider);
+            _mouseFollower.Initialize(terrainCollider);
             _mouseFollower.enabled = true;
         }
 
@@ -19,7 +19,10 @@ namespace Builds
 
         public void MousePositionChange(float positionX, float positionY)
         {
-            _mouseFollower.MousePositionChange(positionX, positionY);
+            if (_mouseFollower.isActiveAndEnabled == true)
+            {
+                _mouseFollower.MousePositionChange(positionX, positionY);
+            }
         }
     }
 }
