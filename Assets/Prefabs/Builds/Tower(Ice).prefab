@@ -49,7 +49,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   castItem: {fileID: 78987458301905268, guid: 7959e1b7da6ecf046a9b84aaacde7ac1, type: 3}
-  _attackSpeed: 4
+  _attackSpeed: 2
 --- !u!33 &4780967565265398207
 MeshFilter:
   m_ObjectHideFlags: 0

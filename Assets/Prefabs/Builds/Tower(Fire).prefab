@@ -5012,7 +5012,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   castItem: {fileID: 8522977891123354668, guid: c0b807c942807184285ecbe2b4dbfd88, type: 3}
-  _attackSpeed: 4
+  _attackSpeed: 2
 --- !u!33 &8718287554875576058
 MeshFilter:
   m_ObjectHideFlags: 0
