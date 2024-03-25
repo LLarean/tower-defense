@@ -1,6 +1,9 @@
-﻿public enum CastType
+﻿namespace Builds
 {
-    Fire,
-    Ice,
-    Water,
+    public enum CastType
+    {
+        Fire,
+        Ice,
+        Water,
+    }
 }

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Builds;
 
 namespace Units
 {
@@ -50,9 +51,12 @@ namespace Units
         {
             var damage = castItemModel.Damage;
 
-            if (_enemyModel.ResistType.ToString() == castItemModel.CastType.ToString())
+            switch (_enemyModel.ResistType)
             {
-                damage -= GlobalParams.DamageReduction;
+                case ResistType.Fire when castItemModel.CastType == CastType.Fire:
+                case ResistType.Ice when castItemModel.CastType == CastType.Ice:
+                    damage -= GlobalParams.DamageReduction;
+                    break;
             }
 
             return damage;
@@ -60,6 +64,13 @@ namespace Units
 
         private void UpdateDebuffModels(CastType castType)
         {
+            switch (_enemyModel.ResistType)
+            {
+                case ResistType.Fire when castType == CastType.Fire:
+                case ResistType.Ice when castType == CastType.Ice:
+                    return;
+            }
+                
             if (_enemyModel.DebuffModels.Value.Count <= 0)
             {
                 AddNewDebuff(castType);

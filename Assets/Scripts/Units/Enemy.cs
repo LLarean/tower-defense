@@ -1,5 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Builds;
+using Infrastructure;
 using TMPro;
 using UnityEngine;
 
@@ -68,7 +71,10 @@ namespace Units
 
         private void DisplayHealth()
         {
-            _statusBar.text = $"{_enemyModel.CurrentHealth}/{_enemyModel.MaximumHealth.ToString()}";
+            if (_enemyModel.CurrentHealth >= 0)
+            {
+                _statusBar.text = $"{_enemyModel.CurrentHealth}/{_enemyModel.MaximumHealth.ToString()}";
+            }
         }
     
         private void ChangeMoveSpeed(float current, float previous)
@@ -99,6 +105,12 @@ namespace Units
             }
         
             _enemyModel.CurrentMoveSpeed = _enemyModel.MoveSpeed;
+        }
+
+        private void OnDestroy()
+        {
+            // TODO rework
+            EventBus.RaiseEvent<IEnemyHandler>(enemyHandler => enemyHandler.HandleDestroy());
         }
     }
 }

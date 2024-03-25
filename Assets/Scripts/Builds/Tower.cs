@@ -9,6 +9,11 @@ namespace Builds
 
         private void OnTriggerEnter(Collider collision)
         {
+            if (IsBuilt == false)
+            {
+                return;
+            }
+            
             var isAvailable = collision.TryGetComponent(out Enemy enemy);
 
             if (isAvailable == false)
@@ -21,6 +26,11 @@ namespace Builds
 
         private void OnTriggerExit(Collider other)
         {
+            if (IsBuilt == false)
+            {
+                return;
+            }
+            
             _spellCaster.ResetTarget();
         }
     }

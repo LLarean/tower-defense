@@ -10,7 +10,7 @@ public static class GlobalParams
     [Space]
     public const int RewardMurder = 50;
     public const int DamagePlayer = 5;
-    public const int DamageReduction = 10;
+    public const int DamageReduction = 20;
     [Space]
     public const int MessageDisplayTime = 5;
     public const float DebuffDuration = 5;
@@ -18,4 +18,7 @@ public static class GlobalParams
     [Space]
     public const int BurningDamage  = 2;
     public const int IceSlow = 15;
+    [Space]
+    public const float HeightOffset = 0f;
+    public const int MovingStep = 20;
 }

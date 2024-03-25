@@ -1,22 +1,22 @@
+using System;
 using UnityEngine;
 
 namespace Infrastructure
 {
     public class InputHandler : MonoBehaviour
     {
-        private int _mousePositionX;
-        private int _mousePositionY;
-
+        private Vector2 _mousePosition;
+        
         // TODO add settings
         private int _buildButton = 0;
         private int _cancelButton = 1;
         private KeyCode _menuButton = KeyCode.Escape;
-    
+
         private void Update()
         {
             // EventBus.RaiseEvent<IUpdateHandler>(handler => handler.HandleUpdate());
             ChangeMousePosition();
-        
+
             if (Input.GetMouseButtonDown(_buildButton) == true)
             {
                 EventBus.RaiseEvent<IInputHandler>(handler => handler.HandleBuild());
@@ -30,7 +30,7 @@ namespace Infrastructure
             if (Input.GetMouseButtonDown(2) == true)
             {
             }
-        
+
             if (Input.GetKeyDown(_menuButton))
             {
                 EventBus.RaiseEvent<IInputHandler>(handler => handler.HandleMenu());
@@ -39,15 +39,21 @@ namespace Infrastructure
 
         private void ChangeMousePosition()
         {
-            var positionX = (int)Input.mousePosition.x;
-            var positionY = (int)Input.mousePosition.y;
-        
-            if (_mousePositionX != positionX || positionY != (int)Input.mousePosition.y)
+            var mousePosition = new Vector2
             {
-                _mousePositionX = positionX;
-                _mousePositionY = positionY;
+                x = Input.mousePosition.x,
+                y = Input.mousePosition.y
+            };
             
-                EventBus.RaiseEvent<IInputHandler>(handler => handler.HandleMousePosition(_mousePositionX, _mousePositionY));
+            var tolerance = 1;
+
+            if (Math.Abs(_mousePosition.x - mousePosition.x) > tolerance ||
+                Math.Abs(_mousePosition.y - Input.mousePosition.y) > tolerance)
+            {
+                _mousePosition = mousePosition;
+
+                EventBus.RaiseEvent<IInputHandler>(handler =>
+                    handler.HandleMousePosition(_mousePosition));
             }
         }
     }

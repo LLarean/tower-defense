@@ -32,14 +32,14 @@ public class Builder : MonoBehaviour, IInputHandler
         }
         
         // TODO the need to add a check if the mouse is outside the desired limits
-        if (_currentBuilding.CanBuild == false)
+        if (_currentBuilding.CanBuild == true)
         {
            return;
         }
 
         if (_playerModel.Gold.Value >= _playerModel.CurrentBuilding.Value.Price)
         {
-            _currentBuilding.DisableMouseFollower();
+            _currentBuilding.DisableConstructionMode();
             _constructedBuildings.SetNewBuilding(_currentBuilding);
             var temp = _currentBuilding;
             _currentBuilding = null;
@@ -49,9 +49,9 @@ public class Builder : MonoBehaviour, IInputHandler
         }
     }
     
-    public void HandleMousePosition(int positionX, int positionY)
+    public void HandleMousePosition(Vector2 mousePosition)
     {
-        MousePositionChange(positionX, positionY);
+        MousePositionChange(mousePosition);
     }
 
     public void HandleBuild()
@@ -96,7 +96,7 @@ public class Builder : MonoBehaviour, IInputHandler
 
     private void InstantiateBuild(Building building)
     {
-        _currentBuilding = Instantiate(building, transform.position, Quaternion.identity);
+        _currentBuilding = Instantiate(building, _terrainCollider.transform.position, Quaternion.identity);
         _currentBuilding.Initialize(_terrainCollider);
     }
 
@@ -123,11 +123,11 @@ public class Builder : MonoBehaviour, IInputHandler
         _hud.ClearInfo();
     }
     
-    private void MousePositionChange(int positionX, int positionY)
+    private void MousePositionChange(Vector2 mousePosition)
     {
         if (_currentBuilding != null)
         {
-            _currentBuilding.MousePositionChange(positionX, positionY);
+            _currentBuilding.MousePositionChange(mousePosition);
         }
     }
 

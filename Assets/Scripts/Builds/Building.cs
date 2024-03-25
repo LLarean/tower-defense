@@ -1,30 +1,32 @@
+using GameUtilities;
 using UnityEngine;
 
 namespace Builds
 {
     public class Building : MonoBehaviour
     {
-        [SerializeField] private MouseFollower _mouseFollower;
-
-        public bool CanBuild => _mouseFollower.CanBuild;
+        protected bool IsBuilt;
+        
+        private MouseFollower _mouseFollower;
+        private bool _canBuild;
+        
+        public bool CanBuild => _canBuild;
         
         public virtual void Initialize(Collider terrainCollider)
         {
-            _mouseFollower.Initialize(terrainCollider);
-            _mouseFollower.enabled = true;
+            _mouseFollower = new MouseFollower(terrainCollider);
         }
 
-        public void DisableMouseFollower()
+        public void MousePositionChange(Vector2 mousePosition)
         {
-            _mouseFollower.enabled = false;
-        }
+            _canBuild = _mouseFollower.TryGetBuildPosition(mousePosition, out Vector3 buildPosition);
 
-        public void MousePositionChange(float positionX, float positionY)
-        {
-            if (_mouseFollower.isActiveAndEnabled == true)
+            if (_canBuild == true)
             {
-                _mouseFollower.MousePositionChange(positionX, positionY);
+                transform.position = buildPosition;
             }
         }
+
+        public void DisableConstructionMode() => IsBuilt = true;
     }
 }

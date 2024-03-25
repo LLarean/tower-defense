@@ -1,8 +1,11 @@
 ﻿using System;
 
-[Serializable]
-public class CastItemModel
+namespace Builds
 {
-    public int Damage;
-    public CastType CastType;
+    [Serializable]
+    public class CastItemModel
+    {
+        public int Damage;
+        public CastType CastType;
+    }
 }
