@@ -30,11 +30,11 @@ public class Builder : MonoBehaviour, IInputHandler
         {
             return;
         }
-        
+
         // TODO the need to add a check if the mouse is outside the desired limits
-        if (_currentBuilding.CanBuild == true)
+        if (_currentBuilding.CanBuild == false)
         {
-           return;
+            return;
         }
 
         if (_playerModel.Gold.Value >= _playerModel.CurrentBuilding.Value.Price)
@@ -48,7 +48,7 @@ public class Builder : MonoBehaviour, IInputHandler
             InstantiateBuild(temp);
         }
     }
-    
+
     public void HandleMousePosition(Vector2 mousePosition)
     {
         MousePositionChange(mousePosition);
@@ -84,13 +84,15 @@ public class Builder : MonoBehaviour, IInputHandler
         EnableConstructionMode();
         ClearFollowingBuilding();
 
-        if (current.CastType == CastType.Fire)
+        var isSuccess = TryGetBuilding(current.CastType, out Building building);
+
+        if (isSuccess == true)
         {
-            InstantiateBuild(_buildings[0]);
+            InstantiateBuild(building);
         }
-        else if(current.CastType == CastType.Ice)
+        else
         {
-            InstantiateBuild(_buildings[1]);
+            Debug.LogError("Class: 'Builder', Method: 'BuildTower', Message: 'isSuccess != true'");
         }
     }
 
@@ -113,16 +115,16 @@ public class Builder : MonoBehaviour, IInputHandler
 #if !UNITY_EDITOR
         Cursor.visible = true;
 #endif
-        
+
         if (_currentBuilding != null)
         {
             Destroy(_currentBuilding.gameObject);
             _currentBuilding = null;
         }
-        
+
         _hud.ClearInfo();
     }
-    
+
     private void MousePositionChange(Vector2 mousePosition)
     {
         if (_currentBuilding != null)
@@ -138,5 +140,27 @@ public class Builder : MonoBehaviour, IInputHandler
             Destroy(_currentBuilding.gameObject);
             _currentBuilding = null;
         }
+    }
+
+    private bool TryGetBuilding(CastType castType, out Building newBuilding)
+    {
+        bool isSuccess = false;
+        newBuilding = new Building();
+
+        foreach (var building in _buildings)
+        {
+            if (building is not Tower tower)
+            {
+                continue;
+            }
+            
+            if (tower.CastItemModel.CastType == castType)
+            {
+                newBuilding = building;
+                isSuccess = true;
+            }
+        }
+        
+        return isSuccess;
     }
 }

@@ -5,10 +5,10 @@ namespace Builds
 {
     public class Building : MonoBehaviour
     {
-        protected bool IsBuilt;
+        [SerializeField] protected bool IsBuilt;
         
         private MouseFollower _mouseFollower;
-        private bool _canBuild;
+        private bool _canBuild = true;
         
         public bool CanBuild => _canBuild;
         
@@ -27,6 +27,10 @@ namespace Builds
             }
         }
 
-        public void DisableConstructionMode() => IsBuilt = true;
+        public void DisableConstructionMode()
+        {
+            IsBuilt = true;
+            _canBuild = false;
+        }
     }
 }

@@ -7,6 +7,8 @@ namespace Builds
     {
         [SerializeField] private SpellCaster _spellCaster;
 
+        public CastItemModel CastItemModel => _spellCaster.CastItemModel;
+
         private void OnTriggerEnter(Collider collision)
         {
             if (IsBuilt == false)

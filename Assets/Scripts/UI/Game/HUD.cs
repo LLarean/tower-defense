@@ -1,4 +1,3 @@
-using Builds;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Zenject;
@@ -36,20 +35,6 @@ namespace UI.Game
         
         public void ShowInfo(BuildModel buildModel) => _infoPanel.ShowInfo(buildModel);
 
-        private void ShowMessage(string current, string previous) => _notificationsPanel.ShowMessage(current);
-
-        private void ShowInfo(BuildModel current, BuildModel previous)
-        {
-            if (current != null)
-            {
-                ShowInfo(current);
-            }
-            else
-            {
-                ClearInfo();
-            }
-        }
-        
         public void ClearInfo() => _infoPanel.ClearInfo();
 
         public void ChangeHealthValue(int current, int previous)
@@ -68,6 +53,26 @@ namespace UI.Game
         {
             _topPanel.ShowGold(current);
         }
+        
+        public void BuildFireTower()
+        {
+            _playerModel.CurrentBuilding.Value = KeeperBuildingModels.GetFireTowerModel();
+        }
+
+        public void BuildAirTower()
+        {
+            _playerModel.CurrentBuilding.Value = KeeperBuildingModels.GetAirTowerModel();
+        }
+
+        public void BuildWaterTower()
+        {
+            _playerModel.CurrentBuilding.Value = KeeperBuildingModels.GetWaterTowerModel();
+        }
+
+        public void BuildIceTower()
+        {
+            _playerModel.CurrentBuilding.Value = KeeperBuildingModels.GetIceTowerModel();
+        }
 
         private void Start()
         {
@@ -76,35 +81,25 @@ namespace UI.Game
             _topPanel.OnMenuClicked += OpenMenu;
 
             _buildPanel.OnFireTowerClicked += BuildFireTower;
+            _buildPanel.OnAirTowerClicked += BuildAirTower;
+            _buildPanel.OnWaterTowerClicked += BuildWaterTower;
             _buildPanel.OnIceTowerClicked += BuildIceTower;
         
             _topPanel.ShowGold(_playerModel.Gold);
         }
 
-        public void BuildFireTower()
-        {
-            BuildModel buildModel = new BuildModel
-            {
-                Title = GlobalStrings.FireTower,
-                CastType = CastType.Fire,
-                Damage = GlobalParams.FireTowerDamage,
-                Price = GlobalParams.FireTowerPrice,
-            };
+        private void ShowMessage(string current, string previous) => _notificationsPanel.ShowMessage(current);
 
-            _playerModel.CurrentBuilding.Value = buildModel;
-        }
-
-        public void BuildIceTower()
+        private void ShowInfo(BuildModel current, BuildModel previous)
         {
-            BuildModel buildModel = new BuildModel
+            if (current != null)
             {
-                Title = GlobalStrings.IceTower,
-                CastType = CastType.Ice,
-                Damage = GlobalParams.IceTowerDamage,
-                Price = GlobalParams.IceTowerPrice,
-            };
-            
-            _playerModel.CurrentBuilding.Value = buildModel;
+                ShowInfo(current);
+            }
+            else
+            {
+                ClearInfo();
+            }
         }
 
         private void OpenMenu()

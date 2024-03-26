@@ -223,7 +223,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 0.11764707, g: 0.12941177, b: 0.60784316, a: 1}
+      maxColor: {r: 0.14509805, g: 0.68235296, b: 1, a: 1}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -4844,7 +4844,7 @@ GameObject:
   - component: {fileID: 152412382999848846}
   - component: {fileID: 3912454660232878138}
   m_Layer: 0
-  m_Name: CastItem(Ice)
+  m_Name: CastItem(Water)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4880,7 +4880,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _castItemModel:
     Damage: 30
-    CastType: 2
+    CastType: 3
 --- !u!33 &2586533906873639107
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -4909,7 +4909,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 4697f16ff3449ae4cb2c0307742a0abb, type: 2}
+  - {fileID: 2100000, guid: 0036fb309ad1b294687edc6f009c05a2, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

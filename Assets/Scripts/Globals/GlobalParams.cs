@@ -5,6 +5,12 @@ public static class GlobalParams
     public const int FireTowerDamage = 40;
     public const int FireTowerPrice = 50;
     [Space]
+    public const int AirTowerDamage = 40;
+    public const int AirTowerPrice = 50;
+    [Space]
+    public const int WaterTowerDamage = 40;
+    public const int WaterTowerPrice = 50;
+    [Space]
     public const int IceTowerDamage = 20;
     public const int IceTowerPrice = 50;
     [Space]

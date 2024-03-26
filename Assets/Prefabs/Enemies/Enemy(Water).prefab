@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 7734772003773703397}
   - component: {fileID: 8822734898651821768}
   m_Layer: 0
-  m_Name: Enemy(Ice)
+  m_Name: Enemy(Water)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -53,7 +53,7 @@ MonoBehaviour:
   _enemyModel:
     _maximumHealth: 100
     _moveSpeed: 20
-    _resistType: 2
+    _resistType: 3
   _statusBar: {fileID: 6839989417416660633}
   _unitMover: {fileID: 7685353334182418745}
 --- !u!114 &7685353334182418745
@@ -96,7 +96,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: de7f429a52ff0064ea01ae0796b0e633, type: 2}
+  - {fileID: 2100000, guid: bdaf6c89d75e8dc4eb5dba89c273451b, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

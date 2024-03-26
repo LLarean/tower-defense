@@ -3,6 +3,7 @@
     public enum CastType
     {
         Fire,
+        Air,
         Ice,
         Water,
     }

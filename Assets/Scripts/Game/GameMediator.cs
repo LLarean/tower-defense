@@ -13,6 +13,8 @@ public class GameMediator : MonoBehaviour
     [Button()] public void StopMatch() => _roundStarter.StopMatch();
     
     [Button()] public void BuildFireTower() => _hud.BuildFireTower();
+    [Button()] public void BuildAirTower() => _hud.BuildAirTower();
+    [Button()] public void BuildWaterTower() => _hud.BuildWaterTower();
     [Button()] public void BuildIceTower() => _hud.BuildIceTower();
     
     [Button()] public void StartClock() => _hud.StartClock();
