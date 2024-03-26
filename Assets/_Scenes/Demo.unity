@@ -406,7 +406,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &246855642
 Transform:
   m_ObjectHideFlags: 0
@@ -2444,10 +2444,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 8855026530289403228, guid: c64768c24bc18af4b815ca64105359aa, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 0}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c64768c24bc18af4b815ca64105359aa, type: 3}
 --- !u!1001 &956234803
 PrefabInstance:
@@ -2700,11 +2697,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _buildings:
   - {fileID: 14542763741655940, guid: 2567b88acd7c455468f88fdcdb8088fc, type: 3}
-  - {fileID: 14542763741655940, guid: 42cf6ce694e43944bb2e3744e171bbce, type: 3}
-  - {fileID: 14542763741655940, guid: 42cf6ce694e43944bb2e3744e171bbce, type: 3}
+  - {fileID: 14542763741655940, guid: 4fe04c97cc10fa74f97b377b48b5e495, type: 3}
+  - {fileID: 14542763741655940, guid: c2eaef2515829d54a809a2f969836e09, type: 3}
   - {fileID: 14542763741655940, guid: 42cf6ce694e43944bb2e3744e171bbce, type: 3}
   _terrainCollider: {fileID: 1810471482}
-  _constructedBuildings: {fileID: 1721927160}
 --- !u!1001 &1071535990
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3833,7 +3829,6 @@ Transform:
   - {fileID: 1579813883}
   - {fileID: 611187000}
   - {fileID: 1068499751}
-  - {fileID: 1721927161}
   - {fileID: 1762554873}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -4021,7 +4016,7 @@ MonoBehaviour:
     RoundSettings:
     - EnemySpawnDelay: 2
       NumberEnemies: 2
-      IsInfinite: 0
+      IsInfinite: 1
       Enemy: {fileID: 7786142572879946961, guid: c64768c24bc18af4b815ca64105359aa, type: 3}
     - EnemySpawnDelay: 2
       NumberEnemies: 2
@@ -4041,7 +4036,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1594349637}
   m_Layer: 5
-  m_Name: WonWindow
+  m_Name: ModalWindow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4145,51 +4140,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1646507007}
   m_CullTransparentMesh: 1
---- !u!1 &1721927159
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1721927161}
-  - component: {fileID: 1721927160}
-  m_Layer: 0
-  m_Name: ConstructedBuildings
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1721927160
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1721927159}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 94dd977aadec0ef45b53c6c021452522, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _buildings: []
---- !u!4 &1721927161
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1721927159}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1516672785}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1722807648
 GameObject:
   m_ObjectHideFlags: 0

@@ -39,6 +39,21 @@ public class RoundStarter : MonoBehaviour, IEnemyHandler
         _currentRoundIndex = Int32.MaxValue;
         _numberDestroyedEnemies = Int32.MaxValue;
     }
+    
+    public void HandleDestroy()
+    {
+        Debug.Log("The tower destroyed the enemy");
+        DestroyUnit();
+    }
+
+    public void HandleFinish()
+    {
+        Debug.Log("The enemy has reached the end");
+        _playerModel.Notification.Value = GlobalStrings.EnemyReached;
+        _playerModel.Health.Value -= GlobalParams.DamagePlayer;
+        
+        DestroyUnit();
+    }
 
     private void Start()
     {
@@ -99,20 +114,5 @@ public class RoundStarter : MonoBehaviour, IEnemyHandler
             Debug.Log("Don't start");
             _playerModel.Notification.Value = "End";
         }
-    }
-
-    public void HandleDestroy()
-    {
-        Debug.Log("The tower destroyed the enemy");
-        DestroyUnit();
-    }
-
-    public void HandleFinish()
-    {
-        Debug.Log("The enemy has reached the end");
-        _playerModel.Notification.Value = GlobalStrings.EnemyReached;
-        _playerModel.Health.Value -= GlobalParams.DamagePlayer;
-        
-        DestroyUnit();
     }
 }

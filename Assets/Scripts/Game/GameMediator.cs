@@ -1,3 +1,4 @@
+using Game;
 using NaughtyAttributes;
 using UI.Game;
 using UnityEngine;

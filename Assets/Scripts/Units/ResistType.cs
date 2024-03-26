@@ -4,6 +4,7 @@
     {
         None,
         Fire,
+        Air,
         Ice,
         Water,
     }

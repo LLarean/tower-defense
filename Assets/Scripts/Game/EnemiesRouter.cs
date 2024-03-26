@@ -2,7 +2,6 @@ using System.Collections;
 using Units;
 using UnityEngine;
 
-
 // TODO the discrepancy between the name and responsibility
 public class EnemiesRouter : MonoBehaviour
 {

@@ -19,6 +19,12 @@ namespace Builds
 
         public void MousePositionChange(Vector2 mousePosition)
         {
+            if (_mouseFollower == null)
+            {
+                Debug.LogError("Class: 'Building', Method: 'MousePositionChange', Message: '_mouseFollower == null'");
+                return;
+            }
+            
             _canBuild = _mouseFollower.TryGetBuildPosition(mousePosition, out Vector3 buildPosition);
 
             if (_canBuild == true)

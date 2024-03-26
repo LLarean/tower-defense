@@ -1,14 +1,16 @@
 using System.Collections.Generic;
 using Builds;
-using UnityEngine;
 
-public class ConstructedBuildings : MonoBehaviour
+namespace Game
 {
-    [SerializeField] private List<Building> _buildings;
-
-    public void SetNewBuilding(Building building)
+    public class ConstructedBuildings
     {
-        _buildings.Add(building);
-    }
+        private List<Building> _buildings;
 
+        public void SetNewBuilding(Building building)
+        {
+            _buildings.Add(building);
+        }
+
+    }
 }
