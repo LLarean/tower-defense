@@ -8,8 +8,15 @@ namespace Builds
         [SerializeField] private TowerModel _towerModel;
         [SerializeField] private SpellCaster _spellCaster;
 
+        public TowerModel TowerModel => _towerModel;
         public ElementalType ElementalType => _towerModel.ElementalType;
 
+        public void Initialize(Collider terrainCollider, TowerModel towerModel)
+        {
+            base.Initialize(terrainCollider);
+            _towerModel = towerModel;
+        }
+        
         private void Start() 
         {
             if (_spellCaster == null)

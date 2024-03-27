@@ -1,3 +1,4 @@
+using System;
 using GameUtilities;
 using UnityEngine;
 
@@ -12,7 +13,7 @@ namespace Builds
         
         public bool CanBuild => _canBuild;
         
-        public virtual void Initialize(Collider terrainCollider)
+        public void Initialize(Collider terrainCollider)
         {
             _mouseFollower = new MouseFollower(terrainCollider);
         }

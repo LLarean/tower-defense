@@ -12,7 +12,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04b605319bf94da469abf0fb6a104b21, type: 3}
   m_Name: TowerParams
   m_EditorClassIdentifier: 
-  TowerModels:
-  - CastItem: {fileID: 0}
-    AttackSpeed: 0
-    Damage: 0
+  _towerModels:
+  - Tower: {fileID: 14542763741655940, guid: 2567b88acd7c455468f88fdcdb8088fc, type: 3}
+    CastItem: {fileID: 8522977891123354668, guid: c0b807c942807184285ecbe2b4dbfd88, type: 3}
+    ElementalType: 0
+    AttackSpeed: 2
+    Damage: 25
+  - Tower: {fileID: 14542763741655940, guid: 4fe04c97cc10fa74f97b377b48b5e495, type: 3}
+    CastItem: {fileID: 78987458301905268, guid: 2907a1fe45368b2429cd5f44c593df42, type: 3}
+    ElementalType: 4
+    AttackSpeed: 2
+    Damage: 20
+  - Tower: {fileID: 14542763741655940, guid: c2eaef2515829d54a809a2f969836e09, type: 3}
+    CastItem: {fileID: 78987458301905268, guid: a790ccd117e52bb4185fbc316c7bdd05, type: 3}
+    ElementalType: 3
+    AttackSpeed: 2
+    Damage: 20
+  - Tower: {fileID: 14542763741655940, guid: 42cf6ce694e43944bb2e3744e171bbce, type: 3}
+    CastItem: {fileID: 78987458301905268, guid: 7959e1b7da6ecf046a9b84aaacde7ac1, type: 3}
+    ElementalType: 2
+    AttackSpeed: 2
+    Damage: 20
