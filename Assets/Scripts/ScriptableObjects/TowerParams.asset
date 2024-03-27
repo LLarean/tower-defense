@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04b605319bf94da469abf0fb6a104b21, type: 3}
   m_Name: TowerParams
   m_EditorClassIdentifier: 
-  FireTowerDamage: 40
-  FireTowerPrice: 50
-  IceTowerDamage: 20
-  IceTowerPrice: 50
+  TowerModels:
+  - CastItem: {fileID: 0}
+    AttackSpeed: 0
+    Damage: 0

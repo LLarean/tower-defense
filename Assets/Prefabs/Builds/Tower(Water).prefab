@@ -4986,6 +4986,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsBuilt: 0
+  _towerModel:
+    CastItem: {fileID: 78987458301905268, guid: a790ccd117e52bb4185fbc316c7bdd05, type: 3}
+    AttackSpeed: 0
+    Damage: 0
   _spellCaster: {fileID: 6959319197354414590}
 --- !u!114 &6959319197354414590
 MonoBehaviour:
@@ -5000,8 +5004,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _castSpawn: {fileID: 3645681994161239111}
-  _castItem: {fileID: 78987458301905268, guid: a790ccd117e52bb4185fbc316c7bdd05, type: 3}
-  _attackSpeed: 2
 --- !u!33 &5501280087677116555
 MeshFilter:
   m_ObjectHideFlags: 0

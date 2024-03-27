@@ -9,7 +9,7 @@ namespace UI.Game
             BuildModel buildModel = new BuildModel
             {
                 Title = GlobalStrings.FireTower,
-                CastType = CastType.Fire,
+                ElementalType = ElementalType.Fire,
                 Damage = GlobalParams.FireTowerDamage,
                 Price = GlobalParams.FireTowerPrice,
             };
@@ -17,14 +17,14 @@ namespace UI.Game
             return buildModel;
         }
 
-        public static BuildModel GetAirTowerModel()
+        public static BuildModel GetPoisonTowerModel()
         {
             BuildModel buildModel = new BuildModel
             {
-                Title = GlobalStrings.AirTower,
-                CastType = CastType.Air,
-                Damage = GlobalParams.AirTowerDamage,
-                Price = GlobalParams.AirTowerPrice,
+                Title = GlobalStrings.PoisonTower,
+                ElementalType = ElementalType.Poison,
+                Damage = GlobalParams.PoisonTowerDamage,
+                Price = GlobalParams.PoisonTowerPrice,
             };
 
             return buildModel;
@@ -35,7 +35,7 @@ namespace UI.Game
             BuildModel buildModel = new BuildModel
             {
                 Title = GlobalStrings.WaterTower,
-                CastType = CastType.Water,
+                ElementalType = ElementalType.Water,
                 Damage = GlobalParams.WaterTowerDamage,
                 Price = GlobalParams.WaterTowerPrice,
             };
@@ -48,7 +48,7 @@ namespace UI.Game
             BuildModel buildModel = new BuildModel
             {
                 Title = GlobalStrings.IceTower,
-                CastType = CastType.Ice,
+                ElementalType = ElementalType.Ice,
                 Damage = GlobalParams.IceTowerDamage,
                 Price = GlobalParams.IceTowerPrice,
             };

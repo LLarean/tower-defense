@@ -5,6 +5,9 @@ public static class GlobalParams
     public const int FireTowerDamage = 40;
     public const int FireTowerPrice = 50;
     [Space]
+    public const int PoisonTowerDamage = 40;
+    public const int PoisonTowerPrice = 50;
+    [Space]
     public const int AirTowerDamage = 40;
     public const int AirTowerPrice = 50;
     [Space]

@@ -7,8 +7,7 @@ namespace Builds
 {
     public class CastItem : MonoBehaviour
     {
-        [SerializeField] private CastItemModel _castItemModel;
-        
+        private CastItemModel _castItemModel;
         private Tweener _tween;
         private Transform _target;
         private Vector3 _targetLastPosition;
@@ -17,8 +16,21 @@ namespace Builds
 
         public CastItemModel CastItemModel => _castItemModel;
 
-        public void Initialize(Transform target)
+        public void Initialize(CastItemModel castItemModel, Transform target)
         {
+            if (castItemModel == null)
+            {
+                Debug.LogError("Class: 'CastItem', Method: 'Initialize', Message: 'castItemModel == null'");
+                return;
+            }
+
+            if (target == null)
+            {
+                Debug.LogError("Class: 'CastItem', Method: 'Initialize', Message: 'target == null'");
+                return;
+            }
+            
+            _castItemModel = castItemModel;
             _target = target;
 
             _tween = transform.DOMove(target.position, .2f).SetAutoKill(false);

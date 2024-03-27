@@ -23,7 +23,7 @@ namespace Units
                 return;
             }
 
-            UpdateDebuffModels(castItemModel.CastType);
+            UpdateDebuffModels(castItemModel.ElementalType);
         }
 
         public void UpdateDebuffsDuration()
@@ -51,46 +51,42 @@ namespace Units
         {
             var damage = castItemModel.Damage;
 
-            switch (_enemyModel.ResistType)
+            if (_enemyModel.ElementalResist == castItemModel.ElementalType)
             {
-                case ResistType.Fire when castItemModel.CastType == CastType.Fire:
-                case ResistType.Ice when castItemModel.CastType == CastType.Ice:
-                    damage -= GlobalParams.DamageReduction;
-                    break;
+                damage -= GlobalParams.DamageReduction;
             }
-
+            
             return damage;
         }
 
-        private void UpdateDebuffModels(CastType castType)
+        private void UpdateDebuffModels(ElementalType elementalType)
         {
-            switch (_enemyModel.ResistType)
+            if (_enemyModel.ElementalResist == elementalType)
             {
-                case ResistType.Fire when castType == CastType.Fire:
-                case ResistType.Ice when castType == CastType.Ice:
-                    return;
+                return;
             }
-                
+            
             if (_enemyModel.DebuffModels.Value.Count <= 0)
             {
-                AddNewDebuff(castType);
+                AddNewDebuff(elementalType);
             }
             else
             {
-                UpdateDebuffModel(castType);
+                UpdateDebuffModel(elementalType);
             }
         }
 
-        private void AddNewDebuff(CastType castType)
+        private void AddNewDebuff(ElementalType elementalType)
         {
             DebuffModel debuffModel = new DebuffModel
             {
                 Duration = GlobalParams.DebuffDuration,
-                DebuffType = castType switch
+                DebuffType = elementalType switch
                 {
-                    CastType.Fire => DebuffType.Burning,
-                    CastType.Water => DebuffType.Wet,
-                    CastType.Ice => DebuffType.Slow,
+                    ElementalType.Fire => DebuffType.Burning,
+                    ElementalType.Air => DebuffType.Oxygen,
+                    ElementalType.Water => DebuffType.Wet,
+                    ElementalType.Ice => DebuffType.Slow,
                     _ => DebuffType.Burning
                 }
             };
@@ -103,25 +99,25 @@ namespace Units
             _enemyModel.DebuffModels.Value = debuffModels;
         }
 
-        private void UpdateDebuffModel(CastType castType)
+        private void UpdateDebuffModel(ElementalType elementalType)
         {
             foreach (var debuffModel in _enemyModel.DebuffModels.Value)
             {
-                var isRemoved = TryRemoveDebuff(debuffModel, castType);
+                var isRemoved = TryRemoveDebuff(debuffModel, elementalType);
 
                 if (isRemoved == true)
                 {
                     break;
                 }
 
-                var isReplaced = TryReplaceEffect(debuffModel, castType);
+                var isReplaced = TryReplaceEffect(debuffModel, elementalType);
             
                 if (isReplaced == true)
                 {
                     break;
                 }
             
-                var isUpdate = TryUpdateDebuffDuration(debuffModel, castType);
+                var isUpdate = TryUpdateDebuffDuration(debuffModel, elementalType);
             
                 if (isUpdate == true)
                 {
@@ -130,31 +126,31 @@ namespace Units
             }
         }
 
-        private bool TryRemoveDebuff(DebuffModel debuffModel, CastType castType)
+        private bool TryRemoveDebuff(DebuffModel debuffModel, ElementalType elementalType)
         {
             bool isSuccess = false;
 
-            if (debuffModel.DebuffType == DebuffType.Burning && castType == CastType.Ice)
+            if (debuffModel.DebuffType == DebuffType.Burning && elementalType == ElementalType.Ice)
             {
                 RemoveDebuff(debuffModel);
                 isSuccess = true;
             }
-            else if (debuffModel.DebuffType == DebuffType.Burning && castType == CastType.Water)
+            else if (debuffModel.DebuffType == DebuffType.Burning && elementalType == ElementalType.Water)
             {
                 _enemyModel.DebuffModels.Value.Remove(debuffModel);
                 isSuccess = true;
             }
-            else if (debuffModel.DebuffType == DebuffType.Wet && castType == CastType.Fire)
+            else if (debuffModel.DebuffType == DebuffType.Wet && elementalType == ElementalType.Fire)
             {
                 _enemyModel.DebuffModels.Value.Remove(debuffModel);
                 isSuccess = true;
             }
-            else if (debuffModel.DebuffType == DebuffType.Slow && castType == CastType.Fire)
+            else if (debuffModel.DebuffType == DebuffType.Slow && elementalType == ElementalType.Fire)
             {
                 _enemyModel.DebuffModels.Value.Remove(debuffModel);
                 isSuccess = true;
             }
-            else if (debuffModel.DebuffType == DebuffType.Frozen && castType == CastType.Fire)
+            else if (debuffModel.DebuffType == DebuffType.Frozen && elementalType == ElementalType.Fire)
             {
                 _enemyModel.DebuffModels.Value.Remove(debuffModel);
                 isSuccess = true;
@@ -171,13 +167,13 @@ namespace Units
             _enemyModel.DebuffModels.Value = debuffModels;
         }
 
-        private bool TryReplaceEffect(DebuffModel debuffModel, CastType castType)
+        private bool TryReplaceEffect(DebuffModel debuffModel, ElementalType elementalType)
         {
             bool isSuccess = false;
         
-            if (debuffModel.DebuffType == DebuffType.Wet && castType == CastType.Ice)
+            if (debuffModel.DebuffType == DebuffType.Wet && elementalType == ElementalType.Ice)
             {
-                AddNewDebuff(castType);
+                AddNewDebuff(elementalType);
                 _enemyModel.DebuffModels.Value.Remove(debuffModel);
                 isSuccess = true;
             }
@@ -185,21 +181,21 @@ namespace Units
             return isSuccess;
         }
     
-        private bool TryUpdateDebuffDuration(DebuffModel debuffModel, CastType castType)
+        private bool TryUpdateDebuffDuration(DebuffModel debuffModel, ElementalType elementalType)
         {
             bool isSuccess = false;
 
-            if (debuffModel.DebuffType == DebuffType.Burning && castType == CastType.Fire)
+            if (debuffModel.DebuffType == DebuffType.Burning && elementalType == ElementalType.Fire)
             {
                 debuffModel.Duration = GlobalParams.DebuffDuration;
                 isSuccess = true;
             }
-            else if (debuffModel.DebuffType == DebuffType.Wet && castType == CastType.Water)
+            else if (debuffModel.DebuffType == DebuffType.Wet && elementalType == ElementalType.Water)
             {
                 debuffModel.Duration = GlobalParams.DebuffDuration;
                 isSuccess = true;
             }
-            else if (debuffModel.DebuffType == DebuffType.Slow && castType == CastType.Ice)
+            else if (debuffModel.DebuffType == DebuffType.Slow && elementalType == ElementalType.Ice)
             {
                 debuffModel.Duration = GlobalParams.DebuffDuration;
                 isSuccess = true;

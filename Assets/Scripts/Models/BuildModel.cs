@@ -5,7 +5,7 @@ public class BuildModel
 {
     public Sprite Portrait;
     public string Title;
-    public CastType CastType;
+    public ElementalType ElementalType;
     public int Damage;
     public int Price;
 }

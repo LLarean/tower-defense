@@ -87,7 +87,7 @@ namespace Game
             EnableConstructionMode();
             ClearFollowingBuilding();
 
-            var isSuccess = TryGetBuilding(current.CastType, out Building building);
+            var isSuccess = TryGetBuilding(current.ElementalType, out Building building);
 
             if (isSuccess == true)
             {
@@ -145,7 +145,7 @@ namespace Game
             }
         }
 
-        private bool TryGetBuilding(CastType castType, out Building newBuilding)
+        private bool TryGetBuilding(ElementalType elementalType, out Building newBuilding)
         {
             bool isSuccess = false;
             newBuilding = null;
@@ -157,7 +157,7 @@ namespace Game
                     continue;
                 }
             
-                if (tower.CastItemModel.CastType == castType)
+                if (tower.ElementalType == elementalType)
                 {
                     newBuilding = building;
                     isSuccess = true;

@@ -5,7 +5,7 @@ namespace Builds
     [Serializable]
     public class CastItemModel
     {
+        public ElementalType ElementalType;
         public int Damage;
-        public CastType CastType;
     }
 }

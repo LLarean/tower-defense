@@ -59,9 +59,9 @@ namespace UI.Game
             _playerModel.CurrentBuilding.Value = KeeperBuildingModels.GetFireTowerModel();
         }
 
-        public void BuildAirTower()
+        public void BuildPoisonTower()
         {
-            _playerModel.CurrentBuilding.Value = KeeperBuildingModels.GetAirTowerModel();
+            _playerModel.CurrentBuilding.Value = KeeperBuildingModels.GetPoisonTowerModel();
         }
 
         public void BuildWaterTower()
@@ -81,7 +81,7 @@ namespace UI.Game
             _topPanel.OnMenuClicked += OpenMenu;
 
             _buildPanel.OnFireTowerClicked += BuildFireTower;
-            _buildPanel.OnAirTowerClicked += BuildAirTower;
+            _buildPanel.OnPoisonTowerClicked += BuildPoisonTower;
             _buildPanel.OnWaterTowerClicked += BuildWaterTower;
             _buildPanel.OnIceTowerClicked += BuildIceTower;
         

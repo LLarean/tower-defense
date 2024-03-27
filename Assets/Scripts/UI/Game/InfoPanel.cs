@@ -14,7 +14,7 @@ public class InfoPanel : MonoBehaviour
     {
         _portrait.sprite = buildModel.Portrait;
         _title.text = buildModel.Title;
-        _castType.text = $"{GlobalStrings.DamageType}: {buildModel.CastType}";
+        _castType.text = $"{GlobalStrings.DamageType}: {buildModel.ElementalType}";
         _damage.text = $"{GlobalStrings.Damage}: {buildModel.Damage}";
         _price.text = $"{GlobalStrings.Price}: {buildModel.Price}";
     }

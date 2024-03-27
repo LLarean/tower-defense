@@ -6,16 +6,30 @@ namespace Builds
     public class SpellCaster : MonoBehaviour
     {
         [SerializeField] private Transform _castSpawn;
-        [SerializeField] private CastItem _castItem;
-        [SerializeField] [Range(0, 10)] private float _attackSpeed;
-
+        
+        private TowerModel _towerModel;
+        private Transform _target;
         private Coroutine _coroutine;
-        private GameObject _target;
         private bool _canCast;
+
+        public void Initialize(TowerModel towerModel)
+        {
+            if (_castSpawn == null)
+            {
+                Debug.LogError("Class: 'SpellCaster', Method: 'Initialize', Message: '_castSpawn == null'");
+                return;
+            }
+
+            if (towerModel == null)
+            {
+                Debug.LogError("Class: 'SpellCaster', Method: 'Initialize', Message: 'towerModel == null'");
+                return;
+            }
+
+            _towerModel = towerModel;
+        }
         
-        public CastItemModel CastItemModel => _castItem.CastItemModel;
-        
-        public void SetTarget(GameObject target)
+        public void SetTarget(Transform target)
         {
             if (_target == null)
             {
@@ -46,9 +60,16 @@ namespace Builds
             while (_canCast == true && _target != null)
             {
                 // TODO you need to use the object pool and add checks
-                var missile = Instantiate(_castItem, _castSpawn.position, Quaternion.identity);
-                missile.Initialize(_target.transform);
-                yield return new WaitForSeconds(_attackSpeed);
+                var missile = Instantiate(_towerModel.CastItem, _castSpawn.position, Quaternion.identity);
+
+                CastItemModel castItemModel = new CastItemModel
+                {
+                    ElementalType = _towerModel.ElementalType,
+                    Damage = _towerModel.Damage,
+                };
+                
+                missile.Initialize(castItemModel, _target);
+                yield return new WaitForSeconds(_towerModel.AttackSpeed);
             }
         }
     }

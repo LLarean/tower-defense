@@ -4,6 +4,7 @@ public static class GlobalStrings
     public const string Demo = "Demo";
     
     public const string FireTower = "Fire Tower";
+    public const string PoisonTower = "Poison Tower";
     public const string AirTower = "Air Tower";
     public const string WaterTower = "Water Tower";
     public const string IceTower = "Ice Tower";

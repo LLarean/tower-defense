@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Builds;
 using UnityEngine;
 
 namespace Units
@@ -9,7 +10,7 @@ namespace Units
     {
         [SerializeField] [Range(1, 1000)] private int _maximumHealth = 100;
         [SerializeField] [Range(0, 100)] private float _moveSpeed = 20f;
-        [SerializeField] private ResistType _resistType;
+        [SerializeField] private ElementalType elementalResist;
     
         [HideInInspector] public Observable<int> CurrentHealth;
         [HideInInspector] public Observable<float> CurrentMoveSpeed;
@@ -17,6 +18,6 @@ namespace Units
     
         public int MaximumHealth => _maximumHealth;
         public float MoveSpeed => _moveSpeed;
-        public ResistType ResistType => _resistType;
+        public ElementalType ElementalResist => elementalResist;
     }
 }

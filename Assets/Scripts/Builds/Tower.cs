@@ -5,9 +5,21 @@ namespace Builds
 {
     public class Tower : Building
     {
+        [SerializeField] private TowerModel _towerModel;
         [SerializeField] private SpellCaster _spellCaster;
 
-        public CastItemModel CastItemModel => _spellCaster.CastItemModel;
+        public ElementalType ElementalType => _towerModel.ElementalType;
+
+        private void Start() 
+        {
+            if (_spellCaster == null)
+            {
+                Debug.LogError("Class: 'Tower', Method: 'Start', Message: '_spellCaster == null'");
+                return;
+            }
+            
+            _spellCaster.Initialize(_towerModel);
+        }
 
         private void OnTriggerEnter(Collider collision)
         {
@@ -23,7 +35,7 @@ namespace Builds
                 return;
             }
 
-            _spellCaster.SetTarget(enemy.gameObject);
+            _spellCaster.SetTarget(enemy.gameObject.transform);
         }
 
         private void OnTriggerExit(Collider other)
