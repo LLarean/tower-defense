@@ -3,7 +3,7 @@
     public enum DebuffType
     {
         Burning,
-        Oxygen,
+        Intoxication,
         Wet,
         Slow,
         Frozen,

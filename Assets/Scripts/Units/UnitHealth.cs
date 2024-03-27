@@ -84,7 +84,7 @@ namespace Units
                 DebuffType = elementalType switch
                 {
                     ElementalType.Fire => DebuffType.Burning,
-                    ElementalType.Air => DebuffType.Oxygen,
+                    ElementalType.Poison => DebuffType.Intoxication,
                     ElementalType.Water => DebuffType.Wet,
                     ElementalType.Ice => DebuffType.Slow,
                     _ => DebuffType.Burning
@@ -140,6 +140,11 @@ namespace Units
                 _enemyModel.DebuffModels.Value.Remove(debuffModel);
                 isSuccess = true;
             }
+            else if (debuffModel.DebuffType == DebuffType.Intoxication && elementalType == ElementalType.Water)
+            {
+                _enemyModel.DebuffModels.Value.Remove(debuffModel);
+                isSuccess = true;
+            }
             else if (debuffModel.DebuffType == DebuffType.Wet && elementalType == ElementalType.Fire)
             {
                 _enemyModel.DebuffModels.Value.Remove(debuffModel);
@@ -155,6 +160,7 @@ namespace Units
                 _enemyModel.DebuffModels.Value.Remove(debuffModel);
                 isSuccess = true;
             }
+            
         
             return isSuccess;
         }
@@ -211,6 +217,10 @@ namespace Units
                 if (debuffModel.DebuffType == DebuffType.Burning)
                 {
                     _enemyModel.CurrentHealth.Value -= GlobalParams.BurningDamage;
+                }
+                else if (debuffModel.DebuffType == DebuffType.Intoxication)
+                {
+                    _enemyModel.CurrentHealth.Value -= GlobalParams.IntoxicationDamage;
                 }
                 else if (debuffModel.DebuffType == DebuffType.Slow)
                 {

@@ -40,7 +40,7 @@ namespace Units
         public void TakeDamage(CastItemModel castItemModel)
         {
             _unitHealth.TakeDamage(castItemModel);
-
+            
             if (_enemyModel.CurrentHealth <= 0)
             {
                 Destroy(gameObject);

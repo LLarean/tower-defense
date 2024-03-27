@@ -46,10 +46,11 @@ namespace Game
             {
                 _currentTower.DisableConstructionMode();
                 _constructedBuildings.SetNewBuilding(_currentTower);
+                
                 var temp = _currentTower;
                 _currentTower = null;
-                
                 _playerModel.Gold.Value -= _playerModel.CurrentBuilding.Value.Price;
+                
                 InstantiateTower(temp.TowerModel);
             }
         }

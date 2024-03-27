@@ -26,6 +26,7 @@ public static class GlobalParams
     public const float TickTime = .1f;
     [Space]
     public const int BurningDamage  = 2;
+    public const int IntoxicationDamage  = 1;
     public const int IceSlow = 15;
     [Space]
     public const float HeightOffset = 0f;
