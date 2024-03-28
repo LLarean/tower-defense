@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 7734772003773703397}
   - component: {fileID: 8822734898651821768}
   m_Layer: 0
-  m_Name: Enemy(Air)
+  m_Name: Enemy(Poison)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -53,7 +53,7 @@ MonoBehaviour:
   _enemyModel:
     _maximumHealth: 100
     _moveSpeed: 20
-    _resistType: 2
+    elementalResist: 5
   _statusBar: {fileID: 6839989417416660633}
   _unitMover: {fileID: 7685353334182418745}
 --- !u!114 &7685353334182418745

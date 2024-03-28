@@ -2,6 +2,7 @@
 {
     public enum ElementalType
     {
+        None,
         Fire,
         Oil,
         Ice,

@@ -53,7 +53,7 @@ MonoBehaviour:
   _enemyModel:
     _maximumHealth: 100
     _moveSpeed: 20
-    _resistType: 3
+    elementalResist: 4
   _statusBar: {fileID: 6839989417416660633}
   _unitMover: {fileID: 7685353334182418745}
 --- !u!114 &7685353334182418745

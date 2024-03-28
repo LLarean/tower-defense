@@ -49,7 +49,7 @@ namespace Game
             }
 
             // TODO the need to add a check if the mouse is outside the desired limits
-            if (_currentTower.CanBuild == false)
+            if (_canBuild == false)
             {
                 return;
             }
@@ -115,6 +115,7 @@ namespace Game
         private void InstantiateTower(TowerContainer towerContainer)
         {
             _towerContainer = towerContainer;
+            _canBuild = false;
             
             _currentTower = Instantiate(towerContainer.Tower, _terrainCollider.transform.position, Quaternion.identity);
             _currentTower.Initialize(towerContainer.TowerModel, towerContainer.CastItem);

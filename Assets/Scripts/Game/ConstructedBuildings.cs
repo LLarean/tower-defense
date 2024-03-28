@@ -5,11 +5,11 @@ namespace Game
 {
     public class ConstructedBuildings
     {
-        private List<Building> _buildings = new List<Building>();
+        private List<Tower> _towers = new List<Tower>();
 
-        public void SetNewBuilding(Building building)
+        public void SetNewBuilding(Tower tower)
         {
-            _buildings.Add(building);
+            _towers.Add(tower);
         }
 
     }

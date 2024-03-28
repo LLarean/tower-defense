@@ -3,14 +3,14 @@ using UnityEngine;
 
 namespace Builds
 {
-    public class Tower : Building
+    public class Tower : MonoBehaviour
     {
         [SerializeField] private SpellCaster _spellCaster;
         
         private TowerModel _towerModel;
+        private bool _isBuilt;
 
-        public TowerModel TowerModel => _towerModel;
-        public ElementalType ElementalType => _towerModel.ElementalType;
+        public bool IsBuilt => _isBuilt;
 
         public void Initialize(TowerModel towerModel, CastItem castItem)
         {
@@ -30,27 +30,12 @@ namespace Builds
             
             _spellCaster.Initialize(towerModel, castItem);
         }
-
-        public void SetCastItem(CastItem castItem)
-        {
-            if (castItem == null)
-            {
-                Debug.LogError("Class: 'Tower', Method: 'SetCastItem', Message: 'castItem == null'");
-                return;
-            }
-            
-            if (_spellCaster == null)
-            {
-                Debug.LogError("Class: 'Tower', Method: 'Start', Message: '_spellCaster == null'");
-                return;
-            }
-            
-
-        }
+        
+        public void DisableConstructionMode() => _isBuilt = true;
 
         private void OnTriggerEnter(Collider collision)
         {
-            if (IsBuilt == false)
+            if (_isBuilt == false)
             {
                 return;
             }
@@ -67,7 +52,7 @@ namespace Builds
 
         private void OnTriggerExit(Collider other)
         {
-            if (IsBuilt == false)
+            if (_isBuilt == false)
             {
                 return;
             }

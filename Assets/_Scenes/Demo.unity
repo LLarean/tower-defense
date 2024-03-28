@@ -2695,11 +2695,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31721e8642e85bf43ac9d4c4e1dbc53b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _buildings:
-  - {fileID: 14542763741655940, guid: 2567b88acd7c455468f88fdcdb8088fc, type: 3}
-  - {fileID: 14542763741655940, guid: 4fe04c97cc10fa74f97b377b48b5e495, type: 3}
-  - {fileID: 14542763741655940, guid: c2eaef2515829d54a809a2f969836e09, type: 3}
-  - {fileID: 14542763741655940, guid: 42cf6ce694e43944bb2e3744e171bbce, type: 3}
   _terrainCollider: {fileID: 1810471482}
 --- !u!1001 &1071535990
 PrefabInstance:
@@ -4017,7 +4012,7 @@ MonoBehaviour:
     - EnemySpawnDelay: 2
       NumberEnemies: 2
       IsInfinite: 1
-      Enemy: {fileID: 7786142572879946961, guid: c64768c24bc18af4b815ca64105359aa, type: 3}
+      Enemy: {fileID: 7786142572879946961, guid: 109b39f565642bd4daf97aabadf6ba00, type: 3}
     - EnemySpawnDelay: 2
       NumberEnemies: 2
       IsInfinite: 0
