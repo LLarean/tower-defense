@@ -5,18 +5,18 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Data", menuName = "ScriptableObjects/TowerParams", order = 1)]
 public class TowerParams : ScriptableObject
 {
-    [SerializeField] private List<TowerModel> _towerModels;
+    [SerializeField] private List<TowerContainer> _towerContainers;
 
-    public bool TryGetTowerModel(ElementalType elementalType, out TowerModel towerModel)
+    public bool TryGetTowerContainer(ElementalType elementalType, out TowerContainer towerContainer)
     {
         bool isSuccess = false;
-        towerModel = null;
+        towerContainer = null;
 
-        foreach (var model in _towerModels)
+        foreach (var model in _towerContainers)
         {
-            if (model.ElementalType == elementalType)
+            if (model.TowerModel.ElementalType == elementalType)
             {
-                towerModel = model;
+                towerContainer = model;
                 isSuccess = true;
                 return isSuccess;
             }

@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace GameUtilities
 {
@@ -10,16 +9,13 @@ namespace GameUtilities
 
         public MouseFollower(Collider terrainCollider)
         {
-            Type type = typeof(MouseFollower);
-            string className = type.Name;
-        
             if (terrainCollider != null)
             {
                 _terrainCollider = terrainCollider;
             }
             else
             {
-                Debug.LogError($"Class: '{className}', Method: 'ctor', Message: 'terrainCollider == null'");
+                Debug.LogError("Class: 'MouseFollower', Method: 'ctor', Message: 'terrainCollider == null'");
             }
         
             if (Camera.main != null)
@@ -28,9 +24,8 @@ namespace GameUtilities
             }
             else
             {
-                Debug.LogError($"Class: '{className}', Method: 'ctor', Message: 'Camera.main == null'");
+                Debug.LogError("Class: 'MouseFollower', Method: 'ctor', Message: 'Camera.main == null'");
             }
-        
         }
     
         public bool TryGetBuildPosition(Vector2 mousePosition, out Vector3 buildPosition)

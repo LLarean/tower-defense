@@ -8,11 +8,13 @@ namespace Builds
         [SerializeField] private Transform _castSpawn;
         
         private TowerModel _towerModel;
+        private CastItem _castItem;
+        
         private Transform _target;
         private Coroutine _coroutine;
         private bool _canCast;
 
-        public void Initialize(TowerModel towerModel)
+        public void Initialize(TowerModel towerModel, CastItem castItem)
         {
             if (_castSpawn == null)
             {
@@ -27,6 +29,14 @@ namespace Builds
             }
 
             _towerModel = towerModel;
+            
+            if (castItem == null)
+            {
+                Debug.LogError("Class: 'SpellCaster', Method: 'Initialize', Message: 'castItem == null'");
+                return;
+            }
+
+            _castItem = castItem;
         }
         
         public void SetTarget(Transform target)
@@ -60,7 +70,7 @@ namespace Builds
             while (_canCast == true && _target != null)
             {
                 // TODO you need to use the object pool and add checks
-                var missile = Instantiate(_towerModel.CastItem, _castSpawn.position, Quaternion.identity);
+                var missile = Instantiate(_castItem, _castSpawn.position, Quaternion.identity);
 
                 CastItemModel castItemModel = new CastItemModel
                 {

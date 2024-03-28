@@ -1,5 +1,5 @@
-using System.Collections.Generic;
 using Builds;
+using GameUtilities;
 using Infrastructure;
 using UI.Game;
 using UnityEngine;
@@ -9,14 +9,18 @@ namespace Game
 {
     public class Builder : MonoBehaviour, IInputHandler
     {
-        [SerializeField] private List<Building> _buildings;
         [SerializeField] private Collider _terrainCollider;
 
         private ConstructedBuildings _constructedBuildings;
+        private TowerContainer _towerContainer;
         private Tower _currentTower;
+        
         private HUD _hud;
         private PlayerModel _playerModel;
         private TowerParams _towerParams;
+        private MouseFollower _mouseFollower;
+        
+        private bool _canBuild;
 
         [Inject]
         public void Construct(HUD hud, PlayerModel playerModel, TowerParams towerParams)
@@ -27,6 +31,14 @@ namespace Game
             _constructedBuildings = new ConstructedBuildings();
 
             _playerModel.CurrentBuilding.ValueChanged += BuildTower;
+            
+            if (_terrainCollider == null)
+            {
+                Debug.LogError("Class: 'Building', Method: 'Initialize', Message: 'terrainCollider == null'");
+                return;
+            }
+            
+            _mouseFollower = new MouseFollower(_terrainCollider);
         }
 
         public void ConstructBuilding()
@@ -46,12 +58,10 @@ namespace Game
             {
                 _currentTower.DisableConstructionMode();
                 _constructedBuildings.SetNewBuilding(_currentTower);
-                
-                var temp = _currentTower;
-                _currentTower = null;
                 _playerModel.Gold.Value -= _playerModel.CurrentBuilding.Value.Price;
+                _currentTower = null;
                 
-                InstantiateTower(temp.TowerModel);
+                InstantiateTower(_towerContainer);
             }
         }
 
@@ -90,11 +100,11 @@ namespace Game
             EnableConstructionMode();
             ClearFollowingBuilding();
 
-            var isSuccess = _towerParams.TryGetTowerModel(current.ElementalType, out TowerModel towerModel);
+            var isSuccess = _towerParams.TryGetTowerContainer(current.ElementalType, out TowerContainer towerContainer);
 
             if (isSuccess == true)
             {
-                InstantiateTower(towerModel);
+                InstantiateTower(towerContainer);
             }
             else
             {
@@ -102,10 +112,12 @@ namespace Game
             }
         }
 
-        private void InstantiateTower(TowerModel towerModel)
+        private void InstantiateTower(TowerContainer towerContainer)
         {
-            _currentTower = Instantiate(towerModel.Tower, _terrainCollider.transform.position, Quaternion.identity);
-            _currentTower.Initialize(_terrainCollider, towerModel);
+            _towerContainer = towerContainer;
+            
+            _currentTower = Instantiate(towerContainer.Tower, _terrainCollider.transform.position, Quaternion.identity);
+            _currentTower.Initialize(towerContainer.TowerModel, towerContainer.CastItem);
         }
 
         private void EnableConstructionMode()
@@ -133,10 +145,19 @@ namespace Game
 
         private void MousePositionChange(Vector2 mousePosition)
         {
-            if (_currentTower != null)
+            if (_currentTower == null)
             {
-                _currentTower.MousePositionChange(mousePosition);
+                return;
             }
+            
+            _canBuild = _mouseFollower.TryGetBuildPosition(mousePosition, out Vector3 buildPosition);
+
+            if (_canBuild == false)
+            {
+                return;
+            }
+            
+            _currentTower.transform.position = buildPosition;
         }
 
         private void ClearFollowingBuilding()

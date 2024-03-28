@@ -5,27 +5,47 @@ namespace Builds
 {
     public class Tower : Building
     {
-        [SerializeField] private TowerModel _towerModel;
         [SerializeField] private SpellCaster _spellCaster;
+        
+        private TowerModel _towerModel;
 
         public TowerModel TowerModel => _towerModel;
         public ElementalType ElementalType => _towerModel.ElementalType;
 
-        public void Initialize(Collider terrainCollider, TowerModel towerModel)
+        public void Initialize(TowerModel towerModel, CastItem castItem)
         {
-            base.Initialize(terrainCollider);
+            if (towerModel == null)
+            {
+                Debug.LogError("Class: 'Tower', Method: 'Initialize', Message: 'towerModel == null'");
+                return;
+            }
+            
             _towerModel = towerModel;
+            
+            if (castItem == null)
+            {
+                Debug.LogError("Class: 'Tower', Method: 'Initialize', Message: 'castItem == null'");
+                return;
+            }
+            
+            _spellCaster.Initialize(towerModel, castItem);
         }
-        
-        private void Start() 
+
+        public void SetCastItem(CastItem castItem)
         {
+            if (castItem == null)
+            {
+                Debug.LogError("Class: 'Tower', Method: 'SetCastItem', Message: 'castItem == null'");
+                return;
+            }
+            
             if (_spellCaster == null)
             {
                 Debug.LogError("Class: 'Tower', Method: 'Start', Message: '_spellCaster == null'");
                 return;
             }
             
-            _spellCaster.Initialize(_towerModel);
+
         }
 
         private void OnTriggerEnter(Collider collision)
