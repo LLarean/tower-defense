@@ -4011,8 +4011,8 @@ MonoBehaviour:
     RoundSettings:
     - EnemySpawnDelay: 2
       NumberEnemies: 2
-      IsInfinite: 1
-      Enemy: {fileID: 7786142572879946961, guid: 109b39f565642bd4daf97aabadf6ba00, type: 3}
+      IsInfinite: 0
+      Enemy: {fileID: 7786142572879946961, guid: c64768c24bc18af4b815ca64105359aa, type: 3}
     - EnemySpawnDelay: 2
       NumberEnemies: 2
       IsInfinite: 0

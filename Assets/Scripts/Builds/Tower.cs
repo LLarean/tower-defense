@@ -6,9 +6,9 @@ namespace Builds
     public class Tower : MonoBehaviour
     {
         [SerializeField] private SpellCaster _spellCaster;
+        [SerializeField] private bool _isBuilt;
         
         private TowerModel _towerModel;
-        private bool _isBuilt;
 
         public bool IsBuilt => _isBuilt;
 
