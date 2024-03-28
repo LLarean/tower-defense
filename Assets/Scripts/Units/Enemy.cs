@@ -42,6 +42,7 @@ namespace Units
             
             if (_enemyModel.CurrentHealth <= 0)
             {
+                EventBus.RaiseEvent<IEnemyHandler>(enemyHandler => enemyHandler.HandleDestroy());
                 Destroy(gameObject);
                 return;
             }
@@ -104,12 +105,6 @@ namespace Units
             }
         
             _enemyModel.CurrentMoveSpeed = _enemyModel.MoveSpeed;
-        }
-
-        private void OnDestroy()
-        {
-            // TODO rework
-            EventBus.RaiseEvent<IEnemyHandler>(enemyHandler => enemyHandler.HandleDestroy());
         }
     }
 }

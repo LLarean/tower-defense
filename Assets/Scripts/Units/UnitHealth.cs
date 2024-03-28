@@ -179,8 +179,23 @@ namespace Units
         
             if (debuffModel.DebuffType == DebuffType.Wet && elementalType == ElementalType.Ice)
             {
-                AddNewDebuff(elementalType);
                 _enemyModel.DebuffModels.Value.Remove(debuffModel);
+                
+                DebuffModel newDebuff = new DebuffModel
+                {
+                    DebuffType = DebuffType.Frozen,
+                    Duration = GlobalParams.DebuffDuration,
+                };
+                
+                // _enemyModel.DebuffModels.Value.Add(newDebuff);
+                
+                var debuffModels = new List<DebuffModel>(_enemyModel.DebuffModels.Value)
+                {
+                    newDebuff
+                };
+            
+                _enemyModel.DebuffModels.Value = debuffModels;
+                
                 isSuccess = true;
             }
 
