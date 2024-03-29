@@ -9,6 +9,7 @@ public class GameMediator : MonoBehaviour
     [Inject] private RoundStarter _roundStarter;
     [Inject] private Builder _builder;
     [Inject] private HUD _hud;
+    [Inject] private ModalWindow _modalWindow;
 
     [Button()] public void StartMatch() => _roundStarter.StartMatch();
     [Button()] public void StopMatch() => _roundStarter.StopMatch();
@@ -22,4 +23,6 @@ public class GameMediator : MonoBehaviour
     [Button()] public void PauseClock() => _hud.PauseClock();
     [Button()] public void ResetClock() => _hud.ResetClock();
     [Button()] public void ClearInfo() => _hud.ClearInfo();
+    
+    [Button()] public void ShowModalWindow(ModalWindowModel modalWindowModel) => _modalWindow.Initialize(modalWindowModel);
 }

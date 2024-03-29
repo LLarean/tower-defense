@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Zenject;
@@ -86,6 +87,21 @@ namespace UI.Game
             _buildPanel.OnIceTowerClicked += BuildIceTower;
         
             _topPanel.ShowGold(_playerModel.Gold);
+        }
+
+        private void OnDestroy()
+        {
+            _topPanel.OnMenuClicked -= OpenMenu;
+
+            _buildPanel.OnFireTowerClicked -= BuildFireTower;
+            _buildPanel.OnPoisonTowerClicked -= BuildPoisonTower;
+            _buildPanel.OnWaterTowerClicked -= BuildWaterTower;
+            _buildPanel.OnIceTowerClicked -= BuildIceTower;
+            
+            _playerModel.Health.ValueChanged -= ChangeHealthValue;
+            _playerModel.Gold.ValueChanged -= ChangeGoldValue;
+            _playerModel.CurrentBuilding.ValueChanged -= ShowInfo;
+            _playerModel.Notification.ValueChanged -= ShowMessage;
         }
 
         private void ShowMessage(string current, string previous) => _notificationsPanel.ShowMessage(current);

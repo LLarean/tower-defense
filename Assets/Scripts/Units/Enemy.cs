@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Builds;
@@ -10,7 +11,8 @@ namespace Units
     public class Enemy : MonoBehaviour
     {
         [SerializeField] private EnemyModel _enemyModel;
-        [SerializeField] private TMP_Text _statusBar;
+        [SerializeField] private TMP_Text _health;
+        [SerializeField] private TMP_Text _status;
         [SerializeField] private UnitMover _unitMover;
 
         private UnitHealth _unitHealth;
@@ -25,6 +27,7 @@ namespace Units
             _enemyModel.CurrentHealth = _enemyModel.MaximumHealth;
         
             DisplayHealth();
+            DisplayDebuffs();
         
             _unitMover.Initialize(_enemyModel.CurrentMoveSpeed, _pathModel.WayPoints);
             _unitMover.MoveToNextPoint();
@@ -33,7 +36,7 @@ namespace Units
         
             _enemyModel.CurrentHealth.ValueChanged += ChangeHealth;
             _enemyModel.CurrentMoveSpeed.ValueChanged += ChangeMoveSpeed;
-            _enemyModel.DebuffModels.ValueChanged += DisplayDebuffs;
+            _enemyModel.DebuffModels.ValueChanged += ChangeDebuffs;
         }
     
         public void TakeDamage(CastItemModel castItemModel)
@@ -42,8 +45,7 @@ namespace Units
             
             if (_enemyModel.CurrentHealth <= 0)
             {
-                EventBus.RaiseEvent<IEnemyHandler>(enemyHandler => enemyHandler.HandleDestroy());
-                Destroy(gameObject);
+                DestroyEnemy();
                 return;
             }
         
@@ -62,18 +64,14 @@ namespace Units
         private void ChangeHealth(int current, int previous)
         {
             DisplayHealth();
-            
-            if (_enemyModel.DebuffModels.Value.Count != 0)
-            {
-                DisplayDebuffs(_enemyModel.DebuffModels, _enemyModel.DebuffModels);
-            }
+            DestroyEnemy();
         }
 
         private void DisplayHealth()
         {
             if (_enemyModel.CurrentHealth >= 0)
             {
-                _statusBar.text = $"{_enemyModel.CurrentHealth}/{_enemyModel.MaximumHealth.ToString()}";
+                _health.text = $"{_enemyModel.CurrentHealth}/{_enemyModel.MaximumHealth.ToString()}";
             }
         }
     
@@ -82,17 +80,23 @@ namespace Units
             _unitMover.ChangeSpeed(_enemyModel.CurrentMoveSpeed);
         }
 
-        private void DisplayDebuffs(List<DebuffModel> current, List<DebuffModel> previous)
+        private void ChangeDebuffs(List<DebuffModel> current, List<DebuffModel> previous)
         {
+            DisplayDebuffs();
+        }
+
+        private void DisplayDebuffs()
+        {
+            _status.text = String.Empty;
+
             if (_enemyModel.DebuffModels.Value.Count == 0)
             {
-                DisplayHealth();
                 return;
             }
-            
+
             foreach (var debuffModel in _enemyModel.DebuffModels.Value)
             {
-                _statusBar.text = $"{_statusBar.text} ({debuffModel.DebuffType})";
+                _status.text = $"{_status.text} ({debuffModel.DebuffType})";
             }
         }
 
@@ -105,6 +109,15 @@ namespace Units
             }
         
             _enemyModel.CurrentMoveSpeed = _enemyModel.MoveSpeed;
+        }
+        
+        private void DestroyEnemy()
+        {
+            if (_enemyModel.CurrentHealth <= 0)
+            {
+                EventBus.RaiseEvent<IEnemyHandler>(enemyHandler => enemyHandler.HandleDestroy());
+                Destroy(gameObject);
+            }
         }
     }
 }

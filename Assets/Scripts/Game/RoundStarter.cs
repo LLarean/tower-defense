@@ -8,10 +8,9 @@ public class RoundStarter : MonoBehaviour, IEnemyHandler
 {
     [SerializeField] private EnemiesRouter _enemiesRouter;
     [SerializeField] private MatchModel _matchModel;
-    
+
     private PlayerModel _playerModel;
-    
-    private int _currentRoundIndex;
+    private int _nextRoundIndex;
     private int _numberDestroyedEnemies;
     private Coroutine _coroutine;
 
@@ -35,14 +34,15 @@ public class RoundStarter : MonoBehaviour, IEnemyHandler
         {
             StopCoroutine(_coroutine);
         }
-        
-        _currentRoundIndex = Int32.MaxValue;
+
+        _nextRoundIndex = Int32.MaxValue;
         _numberDestroyedEnemies = Int32.MaxValue;
     }
-    
+
     public void HandleDestroy()
     {
         Debug.Log("The tower destroyed the enemy");
+        _playerModel.Gold.Value += GlobalParams.RewardMurder;
         DestroyUnit();
     }
 
@@ -51,8 +51,14 @@ public class RoundStarter : MonoBehaviour, IEnemyHandler
         Debug.Log("The enemy has reached the end");
         _playerModel.Notification.Value = GlobalStrings.EnemyReached;
         _playerModel.Health.Value -= GlobalParams.DamagePlayer;
-        
+
         DestroyUnit();
+    }
+
+    protected virtual void FinishMatch()
+    {
+        Debug.Log("Don't start");
+        _playerModel.Notification.Value = "End";
     }
 
     private void Start()
@@ -70,29 +76,26 @@ public class RoundStarter : MonoBehaviour, IEnemyHandler
     private void DestroyUnit()
     {
         _numberDestroyedEnemies++;
-        _playerModel.Gold.Value += GlobalParams.RewardMurder;
+        var currentRound = _nextRoundIndex - 1;
 
-        // TODO rename?
-        var index = _currentRoundIndex - 1;
-        
-        if (_numberDestroyedEnemies < _matchModel.RoundSettings[index].NumberEnemies)
+        if (_numberDestroyedEnemies < _matchModel.RoundSettings[currentRound].NumberEnemies)
         {
             return;
         }
-        
-        if (_matchModel.RoundSettings[index].IsInfinite == true)
+
+        if (_matchModel.RoundSettings[currentRound].IsInfinite == true)
         {
             return;
         }
 
         Debug.Log("The round is over");
         _playerModel.Notification.Value = GlobalStrings.RoundOver;
-        
         StartCoroutine(Waiting(_matchModel.RoundStartDelay));
     }
 
     private IEnumerator Waiting(float waitingTime)
     {
+        // TODO updating the seconds in the message
         _playerModel.Notification.Value = $"{GlobalStrings.RoundWillStart} {waitingTime} {GlobalStrings.Seconds}";
         yield return new WaitForSeconds(waitingTime);
         StartRound();
@@ -100,19 +103,23 @@ public class RoundStarter : MonoBehaviour, IEnemyHandler
 
     private void StartRound()
     {
-        if (_currentRoundIndex < _matchModel.RoundSettings.Count)
+        if (_nextRoundIndex < _matchModel.RoundSettings.Count)
         {
-            Debug.Log("The round is started");
-            _numberDestroyedEnemies = 0;
-            _playerModel.Notification.Value = GlobalStrings.RoundStart;
-
-            _enemiesRouter.StartRouting(_matchModel.RoundSettings[_currentRoundIndex]);
-            _currentRoundIndex++;
+            StartNewRound();
         }
         else
         {
-            Debug.Log("Don't start");
-            _playerModel.Notification.Value = "End";
+            FinishMatch();
         }
+    }
+
+    private void StartNewRound()
+    {
+        Debug.Log("The round is started");
+        _numberDestroyedEnemies = 0;
+        _playerModel.Notification.Value = GlobalStrings.RoundStart;
+
+        _enemiesRouter.StartRouting(_matchModel.RoundSettings[_nextRoundIndex]);
+        _nextRoundIndex++;
     }
 }

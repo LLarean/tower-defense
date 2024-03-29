@@ -976,6 +976,7 @@ MonoBehaviour:
   - {fileID: 1294038612}
   - {fileID: 963486254}
   - {fileID: 1339831160}
+  - {fileID: 1732808240}
   _installerPrefabs: []
   _autoRun: 1
   OnPreInstall:
@@ -1011,6 +1012,7 @@ Transform:
   - {fileID: 1294038611}
   - {fileID: 963486253}
   - {fileID: 1339831159}
+  - {fileID: 1732808239}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &409592707
@@ -4030,6 +4032,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1594349637}
+  - component: {fileID: 1594349638}
   m_Layer: 5
   m_Name: ModalWindow
   m_TagString: Untagged
@@ -4060,6 +4063,21 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1594349638
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1594349636}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13c0b9b5e844fc94183f4b410e7e139e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _message: {fileID: 2042948581}
+  _accept: {fileID: 745889858}
+  _label: {fileID: 1196533888}
 --- !u!1 &1646507007
 GameObject:
   m_ObjectHideFlags: 0
@@ -4344,6 +4362,51 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1729930587}
   m_CullTransparentMesh: 1
+--- !u!1 &1732808238
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1732808239}
+  - component: {fileID: 1732808240}
+  m_Layer: 0
+  m_Name: ModalWindowInstaller
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1732808239
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1732808238}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 368790856}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1732808240
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1732808238}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9af280971d59774986cada80586c3aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _modalWindow: {fileID: 1594349638}
 --- !u!1 &1762554872
 GameObject:
   m_ObjectHideFlags: 0

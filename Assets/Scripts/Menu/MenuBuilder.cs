@@ -16,7 +16,7 @@ namespace Menu
             _towers[0].Initialize(towerContainer.TowerModel, towerContainer.CastItem);
             towerParams.TryGetTowerContainer(ElementalType.Ice, out towerContainer);
             _towers[1].Initialize(towerContainer.TowerModel, towerContainer.CastItem);
-            towerParams.TryGetTowerContainer(ElementalType.Fire, out towerContainer);
+            towerParams.TryGetTowerContainer(ElementalType.Poison, out towerContainer);
             _towers[2].Initialize(towerContainer.TowerModel, towerContainer.CastItem);
         }
     }
