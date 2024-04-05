@@ -23,6 +23,7 @@ public static class GlobalParams
     [Space]
     public const int MessageDisplayTime = 5;
     public const float DebuffDuration = 5;
+    public const float EffectDuration = 5;
     public const float TickTime = .1f;
     [Space]
     public const int BurningDamage  = 2;

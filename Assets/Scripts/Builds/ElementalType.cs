@@ -4,10 +4,10 @@
     {
         None,
         Fire,
-        Oil,
-        Ice,
-        Water,
         Poison,
+        Water,
+        Ice,
+        Oil,
         Blood,
         Magic,
         Air,
