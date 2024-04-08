@@ -2,15 +2,18 @@ using Infrastructure;
 using UnityEngine;
 using Zenject;
 
-public class InputHandlerInstaller : MonoInstaller
+namespace Installers
 {
-    [SerializeField] private InputHandler _inputHandler;
-    
-    public override void InstallBindings()
+    public class InputHandlerInstaller : MonoInstaller
     {
-        Container
-            .Bind<InputHandler>()
-            .FromInstance(_inputHandler)
-            .AsSingle();
+        [SerializeField] private InputHandler _inputHandler;
+    
+        public override void InstallBindings()
+        {
+            Container
+                .Bind<InputHandler>()
+                .FromInstance(_inputHandler)
+                .AsSingle();
+        }
     }
 }

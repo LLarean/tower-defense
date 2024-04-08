@@ -1,15 +1,18 @@
 using UnityEngine;
 using Zenject;
 
-public class ModalWindowInstaller : MonoInstaller
+namespace Installers
 {
-    [SerializeField] private ModalWindow _modalWindow;
-    
-    public override void InstallBindings()
+    public class ModalWindowInstaller : MonoInstaller
     {
-        Container
-            .Bind<ModalWindow>()
-            .FromInstance(_modalWindow)
-            .AsSingle();
+        [SerializeField] private ModalWindow _modalWindow;
+    
+        public override void InstallBindings()
+        {
+            Container
+                .Bind<ModalWindow>()
+                .FromInstance(_modalWindow)
+                .AsSingle();
+        }
     }
 }

@@ -2,15 +2,18 @@ using Game;
 using UnityEngine;
 using Zenject;
 
-public class BuilderInstaller : MonoInstaller
+namespace Installers
 {
-    [SerializeField] private Builder _builder;
-    
-    public override void InstallBindings()
+    public class BuilderInstaller : MonoInstaller
     {
-        Container
-            .Bind<Builder>()
-            .FromInstance(_builder)
-            .AsSingle();
+        [SerializeField] private Builder _builder;
+    
+        public override void InstallBindings()
+        {
+            Container
+                .Bind<Builder>()
+                .FromInstance(_builder)
+                .AsSingle();
+        }
     }
 }

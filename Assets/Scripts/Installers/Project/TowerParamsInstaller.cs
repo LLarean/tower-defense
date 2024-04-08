@@ -1,15 +1,18 @@
 using UnityEngine;
 using Zenject;
 
-public class TowerParamsInstaller : MonoInstaller
+namespace Installers
 {
-    [SerializeField] private TowerParams _towerParams;
-    
-    public override void InstallBindings()
+    public class TowerParamsInstaller : MonoInstaller
     {
-        Container
-            .Bind<TowerParams>()
-            .FromInstance(_towerParams)
-            .AsSingle();
+        [SerializeField] private TowerParams _towerParams;
+    
+        public override void InstallBindings()
+        {
+            Container
+                .Bind<TowerParams>()
+                .FromInstance(_towerParams)
+                .AsSingle();
+        }
     }
 }

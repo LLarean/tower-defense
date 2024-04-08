@@ -2,15 +2,18 @@ using UI.Game;
 using UnityEngine;
 using Zenject;
 
-public class HUDInstaller : MonoInstaller
+namespace Installers
 {
-    [SerializeField] private HUD _hud;
-    
-    public override void InstallBindings()
+    public class HUDInstaller : MonoInstaller
     {
-        Container
-            .Bind<HUD>()
-            .FromInstance(_hud)
-            .AsSingle();
+        [SerializeField] private HUD _hud;
+    
+        public override void InstallBindings()
+        {
+            Container
+                .Bind<HUD>()
+                .FromInstance(_hud)
+                .AsSingle();
+        }
     }
 }

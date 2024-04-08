@@ -1,15 +1,18 @@
 using UnityEngine;
 using Zenject;
 
-public class GameMediatorInstaller : MonoInstaller
+namespace Installers
 {
-    [SerializeField] private GameMediator _gameMediator;
-    
-    public override void InstallBindings()
+    public class GameMediatorInstaller : MonoInstaller
     {
-        Container
-            .Bind<GameMediator>()
-            .FromInstance(_gameMediator)
-            .AsSingle();
+        [SerializeField] private GameMediator _gameMediator;
+    
+        public override void InstallBindings()
+        {
+            Container
+                .Bind<GameMediator>()
+                .FromInstance(_gameMediator)
+                .AsSingle();
+        }
     }
 }

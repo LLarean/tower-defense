@@ -1,3 +1,4 @@
+using System;
 using Builds;
 using NUnit.Framework;
 using Units;
@@ -243,6 +244,33 @@ namespace Test
         
             Assert.IsTrue(unitEffects.ActiveEffects.Count == 0);
             Assert.IsTrue(unitEffects.DebuffModels.Count == 0);
+        }
+        
+        [Test]
+        public void UpdateTimeWithoutDebuffs()
+        {
+            var unitEffects = new UnitEffects();
+            unitEffects.UpdateTime();
+        }
+
+        [Test]
+        public void UpdateDebuffsTime()
+        {
+            var unitEffects = new UnitEffects();
+            
+            var effect = ElementalType.Fire;
+            unitEffects.TakeEffect(effect);
+            
+            effect = ElementalType.Poison;
+            unitEffects.TakeEffect(effect);
+
+            Assert.IsTrue(unitEffects.DebuffModels[0].Duration == GlobalParams.DebuffDuration);
+            Assert.IsTrue(unitEffects.DebuffModels[1].Duration == GlobalParams.DebuffDuration);
+            unitEffects.UpdateTime();
+
+            var newDuration = GlobalParams.DebuffDuration - GlobalParams.TickTime;
+            Assert.IsTrue(unitEffects.DebuffModels[0].Duration == newDuration);
+            Assert.IsTrue(unitEffects.DebuffModels[1].Duration == newDuration);
         }
     }
 }
