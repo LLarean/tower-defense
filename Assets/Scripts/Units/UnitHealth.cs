@@ -1,127 +1,44 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using Builds;
+﻿using Builds;
 
 namespace Units
 {
     public class UnitHealth
     {
-        private readonly EnemyModel _enemyModel;
-        private readonly ElementalEffects _elementalEffects;
+        private int _currentValue;
+        private ElementalType _resistType;
+        
+        public int CurrentValue => _currentValue;
 
-        public UnitHealth(EnemyModel enemyModel)
+        public UnitHealth(int maximumHealth, ElementalType resistType)
         {
-            _enemyModel = enemyModel;
-            _elementalEffects = new ElementalEffects();
+            _currentValue = maximumHealth;
+            _resistType = resistType;
         }
-    
-        public void TakeDamage(CastItemModel castItemModel)
+        
+        public void TakeDamage(int damage, ElementalType attackType)
         {
-            var damage = GetCalculatedDamage(castItemModel);
-            _enemyModel.CurrentHealth.Value -= damage;
+            damage = GetCalculatedDamage(damage, attackType);
+            _currentValue -= damage;
 
-            if (_enemyModel.CurrentHealth <= 0)
+            if (_currentValue < 0)
             {
-                return;
+                _currentValue = 0;
             }
-
-            UpdateDebuffModels(castItemModel.ElementalType);
         }
 
-        public void UpdateDebuffsDuration()
+        private int GetCalculatedDamage(int damage, ElementalType attackType)
         {
-            _elementalEffects.UpdateDuration(GlobalParams.TickTime);
-
-            var debuffModels = _enemyModel.DebuffModels.Value;
-            // var isSuccess = _unitEffects.TryGetDebuffsExpiredTime(out debuffModels);
-
-            // if (isSuccess == true)
-            // {
-                // _enemyModel.DebuffModels.Value = debuffModels;
-            // }
-            
-            List<DebuffModel> removedDebuffModels = _elementalEffects.ActiveDebuffs.Where(item => item.Duration <= 0).ToList();
-
-            // List<DebuffModel> removedDebuffModels = _enemyModel.DebuffModels.Value.Where(item => item.Duration <= 0).ToList();
-            _enemyModel.DebuffModels.Value.RemoveAll(item => item.Duration <= 0);
-            
-            if (removedDebuffModels.Count != 0)
+            if (damage < 0)
             {
-                RemoveEffects(removedDebuffModels);
-                
-                // var debuffModels = new List<DebuffModel>(_enemyModel.DebuffModels.Value);
-                // _enemyModel.DebuffModels.Value = debuffModels;
+                damage = 0;
             }
             
-            TakeEffect();
-        }
-
-        private int GetCalculatedDamage(CastItemModel castItemModel)
-        {
-            var damage = castItemModel.Damage;
-
-            if (_enemyModel.ElementalResist == castItemModel.ElementalType)
+            if (_resistType != ElementalType.None && _resistType == attackType)
             {
                 damage -= GlobalParams.DamageReduction;
             }
             
             return damage;
-        }
-
-        private void UpdateDebuffModels(ElementalType elementalType)
-        {
-            if (_enemyModel.ElementalResist == elementalType)
-            {
-                return;
-            }
-            
-            _elementalEffects.TakeEffect(elementalType);
-        }
-        
-        private void RemoveDebuff(DebuffModel debuffModel)
-        {
-            _enemyModel.DebuffModels.Value.Remove(debuffModel);
-
-            var debuffModels = new List<DebuffModel>(_enemyModel.DebuffModels.Value);
-            _enemyModel.DebuffModels.Value = debuffModels;
-        }
-
-        private void TakeEffect()
-        {
-            foreach (var debuffModel in _enemyModel.DebuffModels.Value)
-            {
-                if (debuffModel.DebuffType == DebuffType.Burning)
-                {
-                    _enemyModel.CurrentHealth.Value -= GlobalParams.BurningDamage;
-                }
-                else if (debuffModel.DebuffType == DebuffType.Intoxication)
-                {
-                    _enemyModel.CurrentHealth.Value -= GlobalParams.IntoxicationDamage;
-                }
-                else if (debuffModel.DebuffType == DebuffType.Slow)
-                {
-                    _enemyModel.CurrentMoveSpeed.Value = _enemyModel.MoveSpeed - GlobalParams.IceSlow;
-                }
-                else if (debuffModel.DebuffType == DebuffType.Frozen)
-                {
-                    _enemyModel.CurrentMoveSpeed.Value = 0;
-                }
-            }
-        }
-        
-        private void RemoveEffects(List<DebuffModel> debuffModels)
-        {
-            foreach (var debuffModel in debuffModels)
-            {
-                if (debuffModel.DebuffType == DebuffType.Slow)
-                {
-                    _enemyModel.CurrentMoveSpeed.Value = _enemyModel.MoveSpeed;
-                }
-                else if (debuffModel.DebuffType == DebuffType.Frozen)
-                {
-                    _enemyModel.CurrentMoveSpeed.Value = _enemyModel.MoveSpeed;
-                }
-            }
         }
     }
 }

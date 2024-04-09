@@ -1,6 +1,5 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using Builds;
 using Infrastructure;
 using TMPro;
@@ -15,56 +14,59 @@ namespace Units
         [SerializeField] private TMP_Text _status;
         [SerializeField] private UnitMover _unitMover;
 
-        private UnitHealth _unitHealth;
         private PathModel _pathModel;
+        private UnitHealth _unitHealth;
+        private ElementalEffects _elementalEffects;
+        
         private Coroutine _coroutine;
 
         public void Initialize(in PathModel pathModel)
         {
             _pathModel = pathModel;
-        
+            _unitHealth = new UnitHealth(_enemyModel.MaximumHealth, _enemyModel.ElementalResist);
+            _elementalEffects = new ElementalEffects();
+
             _enemyModel.CurrentMoveSpeed = _enemyModel.MoveSpeed;
             _enemyModel.CurrentHealth = _enemyModel.MaximumHealth;
-        
-            DisplayHealth();
-            DisplayDebuffs();
-        
+
             _unitMover.Initialize(_enemyModel.CurrentMoveSpeed, _pathModel.WayPoints);
             _unitMover.MoveToNextPoint();
-
-            _unitHealth = new UnitHealth(_enemyModel);
-        
-            _enemyModel.CurrentHealth.ValueChanged += ChangeHealth;
-            _enemyModel.CurrentMoveSpeed.ValueChanged += ChangeMoveSpeed;
-            _enemyModel.DebuffModels.ValueChanged += ChangeDebuffs;
+            
+            DisplayHealth();
+            DisplayDebuffs();
         }
     
         public void TakeDamage(CastItemModel castItemModel)
         {
-            _unitHealth.TakeDamage(castItemModel);
+            _unitHealth.TakeDamage(castItemModel.Damage, castItemModel.ElementalType);
+            _elementalEffects.TakeEffect(castItemModel.ElementalType);
             
-            if (_enemyModel.CurrentHealth <= 0)
+            if (_unitHealth.CurrentValue <= 0)
             {
                 DestroyEnemy();
                 return;
             }
         
-            if (_coroutine != null)
-            {
-                StopCoroutine(_coroutine);
-                _coroutine = null;
-            }
+            StartEffectUpdates();
+            UpdateUnitModel();
+            DisplayHealth();
+            DisplayDebuffs();
+        }
 
-            if (_enemyModel.DebuffModels.Value.Count != 0)
+        private void StartEffectUpdates()
+        {
+            StopEffectUpdates();
+            
+            if (_elementalEffects.ActiveDebuffs.Count != 0)
             {
-                _coroutine = StartCoroutine(TickState());
+                _coroutine = StartCoroutine(TickTimeEffectUpdates());
             }
         }
 
-        private void ChangeHealth(int current, int previous)
+        private void UpdateUnitModel()
         {
-            DisplayHealth();
-            DestroyEnemy();
+            _enemyModel.CurrentHealth.Value = _unitHealth.CurrentValue;
+            _enemyModel.DebuffModels.Value = _elementalEffects.ActiveDebuffs;
         }
 
         private void DisplayHealth()
@@ -73,16 +75,6 @@ namespace Units
             {
                 _health.text = $"{_enemyModel.CurrentHealth}/{_enemyModel.MaximumHealth.ToString()}";
             }
-        }
-    
-        private void ChangeMoveSpeed(float current, float previous)
-        {
-            _unitMover.ChangeSpeed(_enemyModel.CurrentMoveSpeed);
-        }
-
-        private void ChangeDebuffs(List<DebuffModel> current, List<DebuffModel> previous)
-        {
-            DisplayDebuffs();
         }
 
         private void DisplayDebuffs()
@@ -100,12 +92,22 @@ namespace Units
             }
         }
 
-        private IEnumerator TickState()
+        private void StopEffectUpdates()
         {
-            while (_enemyModel.DebuffModels.Value.Count > 0)
+            if (_coroutine != null)
+            {
+                StopCoroutine(_coroutine);
+                _coroutine = null;
+            }
+        }
+
+        private IEnumerator TickTimeEffectUpdates()
+        {
+            while (_elementalEffects.ActiveDebuffs.Count > 0)
             {
                 yield return new WaitForSeconds(GlobalParams.TickTime);
-                _unitHealth.UpdateDebuffsDuration();
+                _elementalEffects.UpdateDuration(GlobalParams.TickTime);
+                TakeEffects();
             }
         
             _enemyModel.CurrentMoveSpeed = _enemyModel.MoveSpeed;
@@ -113,11 +115,53 @@ namespace Units
         
         private void DestroyEnemy()
         {
-            if (_enemyModel.CurrentHealth <= 0)
-            {
-                EventBus.RaiseEvent<IEnemyHandler>(enemyHandler => enemyHandler.HandleDestroy());
-                Destroy(gameObject);
-            }
+            StopEffectUpdates();
+            EventBus.RaiseEvent<IEnemyHandler>(enemyHandler => enemyHandler.HandleDestroy());
+            Destroy(gameObject);
         }
+        
+        private void TakeEffects()
+        {
+            foreach (var debuff in _elementalEffects.ActiveDebuffs)
+            {
+                if (debuff.DebuffType == DebuffType.Burning)
+                {
+                    _unitHealth.TakeDamage(GlobalParams.BurningDamage, ElementalType.Fire);
+                }
+                else if (debuff.DebuffType == DebuffType.Intoxication)
+                {
+                    _unitHealth.TakeDamage(GlobalParams.IntoxicationDamage, ElementalType.Poison);
+                }
+                else if (debuff.DebuffType == DebuffType.Slow)
+                {
+                    _enemyModel.CurrentMoveSpeed.Value = _enemyModel.MoveSpeed - GlobalParams.IceSlow;
+                    _unitHealth.TakeDamage(GlobalParams.BurningDamage, ElementalType.Ice);
+                }
+                else if (debuff.DebuffType == DebuffType.Frozen)
+                {
+                    _enemyModel.CurrentMoveSpeed.Value = 0;
+                    _unitHealth.TakeDamage(GlobalParams.BurningDamage, ElementalType.Ice);
+                }
+            }
+            
+            UpdateUnitModel();
+            DisplayHealth();
+            DisplayDebuffs();
+        }
+        
+        // private void RemoveEffects(List<DebuffModel> debuffModels)
+        // {
+        //     foreach (var debuffModel in debuffModels)
+        //     {
+        //         if (debuffModel.DebuffType == DebuffType.Slow)
+        //         {
+        //             _enemyModel.CurrentMoveSpeed.Value = _enemyModel.MoveSpeed;
+        //         }
+        //         else if (debuffModel.DebuffType == DebuffType.Frozen)
+        //         {
+        //             _enemyModel.CurrentMoveSpeed.Value = _enemyModel.MoveSpeed;
+        //         }
+        //     }
+        // }
     }
 }

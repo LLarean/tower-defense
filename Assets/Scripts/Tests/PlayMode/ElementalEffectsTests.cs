@@ -3,7 +3,7 @@ using Builds;
 using NUnit.Framework;
 using Units;
 
-namespace Test
+namespace Tests
 {
     public class ElementalEffectsTests
     {
