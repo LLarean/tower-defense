@@ -1,4 +1,5 @@
-﻿using GameUtilities;
+﻿using Game;
+using GameUtilities;
 using Infrastructure;
 using Zenject;
 

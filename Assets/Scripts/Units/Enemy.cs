@@ -16,7 +16,6 @@ namespace Units
         [SerializeField] private UnitMover _unitMover;
 
         private UnitHealth _unitHealth;
-        private UnitEffects _unitEffects;
         private PathModel _pathModel;
         private Coroutine _coroutine;
 
@@ -38,14 +37,11 @@ namespace Units
             _enemyModel.CurrentHealth.ValueChanged += ChangeHealth;
             _enemyModel.CurrentMoveSpeed.ValueChanged += ChangeMoveSpeed;
             _enemyModel.DebuffModels.ValueChanged += ChangeDebuffs;
-            
-            _unitEffects = new UnitEffects();
         }
     
         public void TakeDamage(CastItemModel castItemModel)
         {
             _unitHealth.TakeDamage(castItemModel);
-            _unitEffects.TakeEffect(castItemModel.ElementalType);
             
             if (_enemyModel.CurrentHealth <= 0)
             {

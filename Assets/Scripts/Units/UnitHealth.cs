@@ -7,10 +7,12 @@ namespace Units
     public class UnitHealth
     {
         private readonly EnemyModel _enemyModel;
-    
+        private readonly ElementalEffects _elementalEffects;
+
         public UnitHealth(EnemyModel enemyModel)
         {
             _enemyModel = enemyModel;
+            _elementalEffects = new ElementalEffects();
         }
     
         public void TakeDamage(CastItemModel castItemModel)
@@ -28,20 +30,27 @@ namespace Units
 
         public void UpdateDebuffsDuration()
         {
-            foreach (var debuffModel in _enemyModel.DebuffModels.Value)
-            {
-                debuffModel.Duration -= GlobalParams.TickTime;
-            }
-        
-            List<DebuffModel> removedDebuffModels = _enemyModel.DebuffModels.Value.Where(item => item.Duration <= 0).ToList();
+            _elementalEffects.UpdateDuration(GlobalParams.TickTime);
+
+            var debuffModels = _enemyModel.DebuffModels.Value;
+            // var isSuccess = _unitEffects.TryGetDebuffsExpiredTime(out debuffModels);
+
+            // if (isSuccess == true)
+            // {
+                // _enemyModel.DebuffModels.Value = debuffModels;
+            // }
+            
+            List<DebuffModel> removedDebuffModels = _elementalEffects.ActiveDebuffs.Where(item => item.Duration <= 0).ToList();
+
+            // List<DebuffModel> removedDebuffModels = _enemyModel.DebuffModels.Value.Where(item => item.Duration <= 0).ToList();
             _enemyModel.DebuffModels.Value.RemoveAll(item => item.Duration <= 0);
             
             if (removedDebuffModels.Count != 0)
             {
                 RemoveEffects(removedDebuffModels);
                 
-                var debuffModels = new List<DebuffModel>(_enemyModel.DebuffModels.Value);
-                _enemyModel.DebuffModels.Value = debuffModels;
+                // var debuffModels = new List<DebuffModel>(_enemyModel.DebuffModels.Value);
+                // _enemyModel.DebuffModels.Value = debuffModels;
             }
             
             TakeEffect();
@@ -66,105 +75,9 @@ namespace Units
                 return;
             }
             
-            if (_enemyModel.DebuffModels.Value.Count <= 0)
-            {
-                AddNewDebuff(elementalType);
-            }
-            else
-            {
-                UpdateDebuffModel(elementalType);
-            }
+            _elementalEffects.TakeEffect(elementalType);
         }
-
-        private void AddNewDebuff(ElementalType elementalType)
-        {
-            DebuffModel debuffModel = new DebuffModel
-            {
-                Duration = GlobalParams.DebuffDuration,
-                DebuffType = elementalType switch
-                {
-                    ElementalType.Fire => DebuffType.Burning,
-                    ElementalType.Poison => DebuffType.Intoxication,
-                    ElementalType.Water => DebuffType.Wet,
-                    ElementalType.Ice => DebuffType.Slow,
-                    _ => DebuffType.Burning
-                }
-            };
-
-            var debuffModels = new List<DebuffModel>(_enemyModel.DebuffModels.Value)
-            {
-                debuffModel
-            };
-            
-            _enemyModel.DebuffModels.Value = debuffModels;
-        }
-
-        private void UpdateDebuffModel(ElementalType elementalType)
-        {
-            foreach (var debuffModel in _enemyModel.DebuffModels.Value)
-            {
-                var isRemoved = TryRemoveDebuff(debuffModel, elementalType);
-
-                if (isRemoved == true)
-                {
-                    break;
-                }
-
-                var isReplaced = TryReplaceEffect(debuffModel, elementalType);
-            
-                if (isReplaced == true)
-                {
-                    break;
-                }
-            
-                var isUpdate = TryUpdateDebuffDuration(debuffModel, elementalType);
-            
-                if (isUpdate == true)
-                {
-                    break;
-                }
-            }
-        }
-
-        private bool TryRemoveDebuff(DebuffModel debuffModel, ElementalType elementalType)
-        {
-            bool isSuccess = false;
-
-            if (debuffModel.DebuffType == DebuffType.Burning && elementalType == ElementalType.Ice)
-            {
-                RemoveDebuff(debuffModel);
-                isSuccess = true;
-            }
-            else if (debuffModel.DebuffType == DebuffType.Burning && elementalType == ElementalType.Water)
-            {
-                _enemyModel.DebuffModels.Value.Remove(debuffModel);
-                isSuccess = true;
-            }
-            else if (debuffModel.DebuffType == DebuffType.Intoxication && elementalType == ElementalType.Water)
-            {
-                _enemyModel.DebuffModels.Value.Remove(debuffModel);
-                isSuccess = true;
-            }
-            else if (debuffModel.DebuffType == DebuffType.Wet && elementalType == ElementalType.Fire)
-            {
-                _enemyModel.DebuffModels.Value.Remove(debuffModel);
-                isSuccess = true;
-            }
-            else if (debuffModel.DebuffType == DebuffType.Slow && elementalType == ElementalType.Fire)
-            {
-                _enemyModel.DebuffModels.Value.Remove(debuffModel);
-                isSuccess = true;
-            }
-            else if (debuffModel.DebuffType == DebuffType.Frozen && elementalType == ElementalType.Fire)
-            {
-                _enemyModel.DebuffModels.Value.Remove(debuffModel);
-                isSuccess = true;
-            }
-            
         
-            return isSuccess;
-        }
-
         private void RemoveDebuff(DebuffModel debuffModel)
         {
             _enemyModel.DebuffModels.Value.Remove(debuffModel);
@@ -173,56 +86,6 @@ namespace Units
             _enemyModel.DebuffModels.Value = debuffModels;
         }
 
-        private bool TryReplaceEffect(DebuffModel debuffModel, ElementalType elementalType)
-        {
-            bool isSuccess = false;
-        
-            if (debuffModel.DebuffType == DebuffType.Wet && elementalType == ElementalType.Ice)
-            {
-                _enemyModel.DebuffModels.Value.Remove(debuffModel);
-                
-                var newDebuff = new DebuffModel
-                {
-                    DebuffType = DebuffType.Frozen,
-                    Duration = GlobalParams.DebuffDuration,
-                };
-                
-                var debuffModels = new List<DebuffModel>(_enemyModel.DebuffModels.Value)
-                {
-                    newDebuff
-                };
-            
-                _enemyModel.DebuffModels.Value = debuffModels;
-                
-                isSuccess = true;
-            }
-
-            return isSuccess;
-        }
-    
-        private bool TryUpdateDebuffDuration(DebuffModel debuffModel, ElementalType elementalType)
-        {
-            bool isSuccess = false;
-
-            if (debuffModel.DebuffType == DebuffType.Burning && elementalType == ElementalType.Fire)
-            {
-                debuffModel.Duration = GlobalParams.DebuffDuration;
-                isSuccess = true;
-            }
-            else if (debuffModel.DebuffType == DebuffType.Wet && elementalType == ElementalType.Water)
-            {
-                debuffModel.Duration = GlobalParams.DebuffDuration;
-                isSuccess = true;
-            }
-            else if (debuffModel.DebuffType == DebuffType.Slow && elementalType == ElementalType.Ice)
-            {
-                debuffModel.Duration = GlobalParams.DebuffDuration;
-                isSuccess = true;
-            }
-
-            return isSuccess;
-        }
-    
         private void TakeEffect()
         {
             foreach (var debuffModel in _enemyModel.DebuffModels.Value)
