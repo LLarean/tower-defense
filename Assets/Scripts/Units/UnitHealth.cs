@@ -4,6 +4,8 @@ namespace Units
 {
     public class UnitHealth
     {
+        private EnemyModel _enemyModel;
+
         private int _currentValue;
         private ElementalType _resistType;
         

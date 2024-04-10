@@ -6,6 +6,8 @@ namespace Units
 {
     public class ElementalEffects
     {
+        private readonly ElementalType _elementalResist;
+        
         private List<EffectModel> _currentEffects = new List<EffectModel>();
         private List<DebuffModel> _activeDebuffs = new List<DebuffModel>();
         private List<EffectModel> _removedEffects = new List<EffectModel>();
@@ -13,6 +15,11 @@ namespace Units
         public List<EffectModel> CurrentEffects => _currentEffects;
         public List<DebuffModel> ActiveDebuffs => _activeDebuffs;
 
+        public ElementalEffects(ElementalType elementalResist)
+        {
+            _elementalResist = elementalResist;
+        }
+        
         public void TakeEffect(ElementalType elementalType)
         {
             AddNewEffect(elementalType);
@@ -47,6 +54,11 @@ namespace Units
 
         private void AddNewEffect(ElementalType elementalType)
         {
+            if (_elementalResist == elementalType)
+            {
+                return;
+            }
+            
             var effectModel = new EffectModel(elementalType, GlobalParams.DebuffDuration);
             var isUpdated = TryUpdateEffectDuration(effectModel);
             var isRemoved = TryRemoveConflictingEffects(effectModel);

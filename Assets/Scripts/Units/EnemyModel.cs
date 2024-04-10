@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using Builds;
 using UnityEngine;
 
@@ -9,15 +8,11 @@ namespace Units
     public class EnemyModel
     {
         [SerializeField] [Range(1, 1000)] private int _maximumHealth = 100;
-        [SerializeField] [Range(0, 100)] private float _moveSpeed = 20f;
-        [SerializeField] private ElementalType elementalResist;
-    
-        [HideInInspector] public Observable<int> CurrentHealth;
-        [HideInInspector] public Observable<float> CurrentMoveSpeed;
-        [HideInInspector] public Observable<List<DebuffModel>> DebuffModels = new List<DebuffModel>();
+        [SerializeField] [Range(0, 100)] private float _baseMoveSpeed = 20f;
+        [SerializeField] private ElementalType _elementalResist = ElementalType.None;
     
         public int MaximumHealth => _maximumHealth;
-        public float MoveSpeed => _moveSpeed;
-        public ElementalType ElementalResist => elementalResist;
+        public float BaseMoveSpeed => _baseMoveSpeed;
+        public ElementalType ElementalResist => _elementalResist;
     }
 }

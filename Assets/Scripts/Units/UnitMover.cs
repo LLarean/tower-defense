@@ -8,8 +8,10 @@ namespace Units
     {
         private List<Transform> _wayPoints = new();
         private Tweener _tweener;
-        private  float _currentMoveSpeed;
+        private float _currentMoveSpeed;
         private int _currentPointIndex;
+        
+        public float CurrentMoveSpeed => _currentMoveSpeed;
 
         public void Initialize(float currentMoveSpeed, List<Transform> wayPoints)
         {

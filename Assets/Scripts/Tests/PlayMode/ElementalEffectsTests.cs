@@ -11,7 +11,7 @@ namespace Tests
         [Test]
         public void TakeEffect_AddingFireEffect_PresenceBurningDebuff()
         {
-            var unitEffects = new ElementalEffects();
+            var unitEffects = new ElementalEffects(ElementalType.None);
             var effect = ElementalType.Fire;
             unitEffects.TakeEffect(effect);
 
@@ -23,7 +23,7 @@ namespace Tests
         [Test]
         public void TakeEffect_AddingPoisonEffect_PresenceIntoxicationDebuff()
         {
-            var unitEffects = new ElementalEffects();
+            var unitEffects = new ElementalEffects(ElementalType.None);
             var effect = ElementalType.Poison;
             unitEffects.TakeEffect(effect);
 
@@ -35,7 +35,7 @@ namespace Tests
         [Test]
         public void TakeEffect_AddingWaterEffect_PresenceWetDebuff()
         {
-            var unitEffects = new ElementalEffects();
+            var unitEffects = new ElementalEffects(ElementalType.None);
 
             var effect = ElementalType.Water;
             unitEffects.TakeEffect(effect);
@@ -48,7 +48,7 @@ namespace Tests
         [Test]
         public void TakeEffect_AddingIceEffect_PresenceSlowDebuff()
         {
-            var unitEffects = new ElementalEffects();
+            var unitEffects = new ElementalEffects(ElementalType.None);
 
             var effect = ElementalType.Ice;
             unitEffects.TakeEffect(effect);
@@ -64,7 +64,7 @@ namespace Tests
         [Test]
         public void TakeEffect_AddingMultipleFireEffects_PresenceSingleBurningDebuff()
         {
-            var unitEffects = new ElementalEffects();
+            var unitEffects = new ElementalEffects(ElementalType.None);
 
             var effect = ElementalType.Fire;
             unitEffects.TakeEffect(effect);
@@ -79,7 +79,7 @@ namespace Tests
         [Test]
         public void TakeEffect_AddingFireAndPoisonEffect_PresenceBurningAndIntoxicationDebuffs()
         {
-            var unitEffects = new ElementalEffects();
+            var unitEffects = new ElementalEffects(ElementalType.None);
 
             var effect = ElementalType.Fire;
             unitEffects.TakeEffect(effect);
@@ -96,7 +96,7 @@ namespace Tests
         [Test]
         public void TakeEffect_AddingFireAndWaterEffect_NoDebuffs()
         {
-            var unitEffects = new ElementalEffects();
+            var unitEffects = new ElementalEffects(ElementalType.None);
 
             var effect = ElementalType.Fire;
             unitEffects.TakeEffect(effect);
@@ -111,7 +111,7 @@ namespace Tests
         [Test]
         public void TakeEffect_AddingFireAndIceEffect_NoDebuffs()
         {
-            var unitEffects = new ElementalEffects();
+            var unitEffects = new ElementalEffects(ElementalType.None);
 
             var effect = ElementalType.Fire;
             unitEffects.TakeEffect(effect);
@@ -126,7 +126,7 @@ namespace Tests
         [Test]
         public void TakeEffect_AddingFirePoisonFireEffects_PresenceBurningAndIntoxicationDebuffs()
         {
-            var unitEffects = new ElementalEffects();
+            var unitEffects = new ElementalEffects(ElementalType.None);
 
             var effect = ElementalType.Fire;
             unitEffects.TakeEffect(effect);
@@ -144,7 +144,7 @@ namespace Tests
         [Test]
         public void TakeEffect_AddingFireWaterFireEffects_PresenceSingleBurningDebuff()
         {
-            var unitEffects = new ElementalEffects();
+            var unitEffects = new ElementalEffects(ElementalType.None);
 
             var effect = ElementalType.Fire;
             unitEffects.TakeEffect(effect);
@@ -161,7 +161,7 @@ namespace Tests
         [Test]
         public void TakeEffect_AddingFireIceFireEffects_PresenceBurningDebuff()
         {
-            var unitEffects = new ElementalEffects();
+            var unitEffects = new ElementalEffects(ElementalType.None);
 
             var effect = ElementalType.Fire;
             unitEffects.TakeEffect(effect);
@@ -180,7 +180,7 @@ namespace Tests
         [Test]
         public void TakeEffect_AddingMultiplePoisonEffects_PresenceSingleIntoxicationDebuff()
         {
-            var unitEffects = new ElementalEffects();
+            var unitEffects = new ElementalEffects(ElementalType.None);
 
             var effect = ElementalType.Poison;
             unitEffects.TakeEffect(effect);
@@ -195,7 +195,7 @@ namespace Tests
         [Test]
         public void TakeEffect_AddingPoisonAndFireEffect_PresenceIntoxicationAndBurningDebuffs()
         {
-            var unitEffects = new ElementalEffects();
+            var unitEffects = new ElementalEffects(ElementalType.None);
 
             var effect = ElementalType.Poison;
             unitEffects.TakeEffect(effect);
@@ -212,7 +212,7 @@ namespace Tests
         [Test]
         public void TakeEffect_AddingPoisonAndWaterEffect_NoDebuffs()
         {
-            var unitEffects = new ElementalEffects();
+            var unitEffects = new ElementalEffects(ElementalType.None);
 
             var effect = ElementalType.Poison;
             unitEffects.TakeEffect(effect);
@@ -226,7 +226,7 @@ namespace Tests
         [Test]
         public void TakeEffect_AddingPoisonAndIceEffect_PresenceIntoxicationAndSlowDebuffs()
         {
-            var unitEffects = new ElementalEffects();
+            var unitEffects = new ElementalEffects(ElementalType.None);
 
             var effect = ElementalType.Poison;
             unitEffects.TakeEffect(effect);
@@ -245,7 +245,7 @@ namespace Tests
         [Test]
         public void TakeEffect_AddingMultipleWaterEffects_PresenceSingleWetDebuff()
         {
-            var unitEffects = new ElementalEffects();
+            var unitEffects = new ElementalEffects(ElementalType.None);
 
             var effect = ElementalType.Water;
             unitEffects.TakeEffect(effect);
@@ -260,7 +260,7 @@ namespace Tests
         [Test]
         public void TakeEffect_AddingWaterAndFireEffect_NoDebuffs()
         {
-            var unitEffects = new ElementalEffects();
+            var unitEffects = new ElementalEffects(ElementalType.None);
 
             var effect = ElementalType.Water;
             unitEffects.TakeEffect(effect);
@@ -274,7 +274,7 @@ namespace Tests
         [Test]
         public void TakeEffect_AddingWaterAndPoisonEffect_NoDebuffs()
         {
-            var unitEffects = new ElementalEffects();
+            var unitEffects = new ElementalEffects(ElementalType.None);
 
             var effect = ElementalType.Water;
             unitEffects.TakeEffect(effect);
@@ -288,7 +288,7 @@ namespace Tests
         [Test]
         public void TakeEffect_AddingWaterAndIceEffect_PresenceSingleFrozenDebuff()
         {
-            var unitEffects = new ElementalEffects();
+            var unitEffects = new ElementalEffects(ElementalType.None);
 
             var effect = ElementalType.Water;
             unitEffects.TakeEffect(effect);
@@ -305,7 +305,7 @@ namespace Tests
         [Test]
         public void TakeEffect_AddingMultipleIceEffects_PresenceSingleSlowDebuff()
         {
-            var unitEffects = new ElementalEffects();
+            var unitEffects = new ElementalEffects(ElementalType.None);
 
             var effect = ElementalType.Ice;
             unitEffects.TakeEffect(effect);
@@ -320,7 +320,7 @@ namespace Tests
         [Test]
         public void TakeEffect_AddingIceAndFireEffects_NoDebuffs()
         {
-            var unitEffects = new ElementalEffects();
+            var unitEffects = new ElementalEffects(ElementalType.None);
 
             var effect = ElementalType.Ice;
             unitEffects.TakeEffect(effect);
@@ -334,7 +334,7 @@ namespace Tests
         [Test]
         public void TakeEffect_AddingIceAndPoisonEffects_PresenceSlowAndIntoxicationDebuffs()
         {
-            var unitEffects = new ElementalEffects();
+            var unitEffects = new ElementalEffects(ElementalType.None);
 
             var effect = ElementalType.Ice;
             unitEffects.TakeEffect(effect);
@@ -350,7 +350,7 @@ namespace Tests
         [Test]
         public void TakeEffect_AddingIceAndWaterEffects_PresenceSingleFrozenDebuff()
         {
-            var unitEffects = new ElementalEffects();
+            var unitEffects = new ElementalEffects(ElementalType.None);
 
             var effect = ElementalType.Ice;
             unitEffects.TakeEffect(effect);
@@ -367,14 +367,14 @@ namespace Tests
         [Test]
         public void UpdateDuration_UpdateDurationWithoutEffects_NoErrors()
         {
-            var unitEffects = new ElementalEffects();
+            var unitEffects = new ElementalEffects(ElementalType.None);
             unitEffects.UpdateDuration(GlobalParams.TickTime);
         }
 
         [Test]
         public void UpdateDuration_AddOneTickTimeToDebuffs_DebuffTimeIsCorrect()
         {
-            var unitEffects = new ElementalEffects();
+            var unitEffects = new ElementalEffects(ElementalType.None);
 
             var effect = ElementalType.Fire;
             unitEffects.TakeEffect(effect);
@@ -394,7 +394,7 @@ namespace Tests
         [Test]
         public void UpdateDuration_AddTimeLongerThanDurationEffects_NoDebuffs()
         {
-            var unitEffects = new ElementalEffects();
+            var unitEffects = new ElementalEffects(ElementalType.None);
 
             var effect = ElementalType.Fire;
             unitEffects.TakeEffect(effect);
@@ -414,7 +414,7 @@ namespace Tests
         [Test]
         public void UpdateDuration_DebuffEndTime_NoDebuffs()
         {
-            var unitEffects = new ElementalEffects();
+            var unitEffects = new ElementalEffects(ElementalType.None);
 
             var effect = ElementalType.Fire;
             unitEffects.TakeEffect(effect);
