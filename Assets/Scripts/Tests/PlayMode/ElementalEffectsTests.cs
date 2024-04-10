@@ -7,7 +7,7 @@ namespace Tests
 {
     public class ElementalEffectsTests
     {
-        #region Adding a single effect
+        #region Adding a single effect. Without resistance to the elements
         [Test]
         public void TakeEffect_AddingFireEffect_PresenceBurningDebuff()
         {
@@ -57,7 +57,54 @@ namespace Tests
             Assert.IsTrue(unitEffects.ActiveDebuffs.Count == 1);
             Assert.IsTrue(unitEffects.ActiveDebuffs[0].DebuffType == DebuffType.Slow);
         }
+        #endregion
+        
+        #region Adding a single effect. With resistance to the elements
+        [Test]
+        public void TakeEffect_AddingFireEffectWithFireResistance_NoDebuffs()
+        {
+            var unitEffects = new ElementalEffects(ElementalType.Fire);
+            var effect = ElementalType.Fire;
+            unitEffects.TakeEffect(effect);
 
+            Assert.IsTrue(unitEffects.CurrentEffects.Count == 0);
+            Assert.IsTrue(unitEffects.ActiveDebuffs.Count == 0);
+        }
+
+        [Test]
+        public void TakeEffect_AddingPoisonEffectWithPoisonResistance_NoDebuffs()
+        {
+            var unitEffects = new ElementalEffects(ElementalType.Poison);
+            var effect = ElementalType.Poison;
+            unitEffects.TakeEffect(effect);
+
+            Assert.IsTrue(unitEffects.CurrentEffects.Count == 0);
+            Assert.IsTrue(unitEffects.ActiveDebuffs.Count == 0);
+        }
+
+        [Test]
+        public void TakeEffect_AddingWaterEffectWithWaterResistance_NoDebuffs()
+        {
+            var unitEffects = new ElementalEffects(ElementalType.Water);
+
+            var effect = ElementalType.Water;
+            unitEffects.TakeEffect(effect);
+
+            Assert.IsTrue(unitEffects.CurrentEffects.Count == 0);
+            Assert.IsTrue(unitEffects.ActiveDebuffs.Count == 0);
+        }
+
+        [Test]
+        public void TakeEffect_AddingIceEffectWithIceResistance_NoDebuffs()
+        {
+            var unitEffects = new ElementalEffects(ElementalType.Ice);
+
+            var effect = ElementalType.Ice;
+            unitEffects.TakeEffect(effect);
+
+            Assert.IsTrue(unitEffects.CurrentEffects.Count == 0);
+            Assert.IsTrue(unitEffects.ActiveDebuffs.Count == 0);
+        }
         #endregion
 
         #region Adding a fire effect and then others

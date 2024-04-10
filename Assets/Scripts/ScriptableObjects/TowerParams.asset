@@ -28,12 +28,12 @@ MonoBehaviour:
   - Tower: {fileID: 14542763741655940, guid: c2eaef2515829d54a809a2f969836e09, type: 3}
     CastItem: {fileID: 78987458301905268, guid: a790ccd117e52bb4185fbc316c7bdd05, type: 3}
     TowerModel:
-      ElementalType: 4
+      ElementalType: 3
       AttackSpeed: 2
       Damage: 20
   - Tower: {fileID: 14542763741655940, guid: 42cf6ce694e43944bb2e3744e171bbce, type: 3}
     CastItem: {fileID: 78987458301905268, guid: 7959e1b7da6ecf046a9b84aaacde7ac1, type: 3}
     TowerModel:
-      ElementalType: 3
+      ElementalType: 4
       AttackSpeed: 2
       Damage: 20
