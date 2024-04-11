@@ -1,0 +1,7 @@
+{
+    "name": "LoggerTests",
+    "optionalUnityReferences": [
+        "TestAssemblies"
+    ],
+    "references":[ "GUID:0d3c87d3a153a5545b39db75ba2af840" ]
+}
