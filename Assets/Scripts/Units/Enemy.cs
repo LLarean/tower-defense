@@ -125,12 +125,12 @@ namespace Units
                 else if (debuff.DebuffType == DebuffType.Slow)
                 {
                     var currentMoveSpeed = _enemyModel.BaseMoveSpeed - GlobalParams.IceSlow;
-                    _unitMover.ChangeSpeed(currentMoveSpeed);
+                    _unitMover.SetMoveSpeed(currentMoveSpeed);
                 }
                 else if (debuff.DebuffType == DebuffType.Frozen)
                 {
                     var currentMoveSpeed = 0;
-                    _unitMover.ChangeSpeed(currentMoveSpeed);
+                    _unitMover.SetMoveSpeed(currentMoveSpeed);
                 }
             }
 
@@ -157,7 +157,7 @@ namespace Units
 
             if (canResetMoveSpeed == true)
             {
-                _unitMover.ChangeSpeed(_enemyModel.BaseMoveSpeed);
+                _unitMover.SetMoveSpeed(_enemyModel.BaseMoveSpeed);
             }
         }
     }

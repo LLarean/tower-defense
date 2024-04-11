@@ -4,8 +4,6 @@ namespace Units
 {
     public class UnitHealth
     {
-        private EnemyModel _enemyModel;
-
         private int _currentValue;
         private ElementalType _resistType;
         
@@ -19,28 +17,40 @@ namespace Units
         
         public void TakeDamage(int damage, ElementalType attackType)
         {
-            damage = GetCalculatedDamage(damage, attackType);
-            _currentValue -= damage;
-
-            if (_currentValue < 0)
+            var calculatedDamage = GetCalculatedDamage(damage, attackType);
+            
+            if (calculatedDamage < 0)
             {
-                _currentValue = 0;
+                calculatedDamage = 0;
             }
+            
+            var calculatedHealth = _currentValue - calculatedDamage;
+            SetValue(calculatedHealth);
         }
 
         private int GetCalculatedDamage(int damage, ElementalType attackType)
         {
-            if (damage < 0)
+            if (_resistType == ElementalType.None)
             {
-                damage = 0;
+                return damage;
             }
             
-            if (_resistType != ElementalType.None && _resistType == attackType)
+            if (_resistType == attackType)
             {
                 damage -= GlobalParams.DamageReduction;
             }
             
             return damage;
+        }
+
+        private void SetValue(int value)
+        {
+            _currentValue = value;
+            
+            if (_currentValue < 0)
+            {
+                _currentValue = 0;
+            }
         }
     }
 }

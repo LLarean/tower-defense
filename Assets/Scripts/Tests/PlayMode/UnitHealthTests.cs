@@ -56,5 +56,17 @@ namespace Tests
             
             Assert.IsTrue(unitHealth.CurrentValue == healthValue);
         }
+        
+        [Test]
+        public void TakeDamage_TakeLessDamageThanDamageReduction_HealthNotChange()
+        {
+            var healthValue = 10;
+            var damageValue = 1;
+            var unitHealth = new UnitHealth(healthValue, ElementalType.Fire);
+           
+            unitHealth.TakeDamage(damageValue, ElementalType.Fire);
+            
+            Assert.IsTrue(unitHealth.CurrentValue == healthValue);
+        }
     }
 }

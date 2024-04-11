@@ -25,7 +25,7 @@ namespace Units
             StartTweener();
         }
 
-        public void ChangeSpeed(float currentMoveSpeed)
+        public void SetMoveSpeed(float currentMoveSpeed)
         {
             _tweener?.Kill();
         
