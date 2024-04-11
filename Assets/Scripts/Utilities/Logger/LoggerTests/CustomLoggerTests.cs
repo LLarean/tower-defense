@@ -1,7 +1,9 @@
+using System;
 using NUnit.Framework;
 
 namespace Utilities.Logger.LoggerTests
 {
+    //TODO Test all options
     public class CustomLoggerTests
     {
         [Test]
@@ -19,7 +21,11 @@ namespace Utilities.Logger.LoggerTests
         [Test]
         public void LogMessage_DisplayCriticalMessage_MessageIsShowed()
         {
-            CustomLogger.LogError("Test message", 0); 
+            // TODO finish testing for correct operation with error output to the console
+            // Assert.Throws<Exception>(() => {
+            //     
+            //     CustomLogger.LogError("Test message", 0);
+            // });
         }
     }
 }

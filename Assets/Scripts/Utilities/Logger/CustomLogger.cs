@@ -6,6 +6,7 @@ namespace Utilities
 {
     public static class CustomLogger
     {
+        // TODO Is it possible to display an object in the hierarchy of the scene?
         /// <summary>
         /// Indicates whether logs should be displayed at all
         /// </summary>
@@ -37,12 +38,12 @@ namespace Utilities
         {
             if (IsDevelop == true && MinimumDisplayLevel <= importanceLevel)
             {
-                Debug.Log($"{GetCallerData()}'<color=yellow>{message}</color>'");
+                Debug.LogWarning($"{GetCallerData()}'<color=yellow>{message}</color>'");
             }
         }
 
         /// <summary>
-        /// Output a critical message to the console
+        /// Output a critical message to the console, Note that this pauses the editor when 'ErrorPause' is enabled.
         /// </summary>
         /// <param name="message">Message to the console</param>
         /// <param name="importanceLevel">0 is the most unimportant, 1 is necessary to pay attention, 2 is critical</param>
@@ -50,7 +51,7 @@ namespace Utilities
         {
             if (IsDevelop == true && MinimumDisplayLevel <= importanceLevel)
             {
-                Debug.Log($"{GetCallerData()}'<color=red>{message}</color>'");
+                Debug.LogError($"{GetCallerData()}'<color=red>{message}</color>'");
             }
         }
         

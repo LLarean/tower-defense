@@ -3,6 +3,7 @@ using GameUtilities;
 using Infrastructure;
 using UI.Game;
 using UnityEngine;
+using Utilities;
 using Zenject;
 
 namespace Game
@@ -34,11 +35,14 @@ namespace Game
             
             if (_terrainCollider == null)
             {
-                Debug.LogError("Class: 'Building', Method: 'Initialize', Message: 'terrainCollider == null'");
+                CustomLogger.LogError("terrainCollider == null", 3);
                 return;
             }
             
             _mouseFollower = new MouseFollower(_terrainCollider);
+
+            // TODO Create the starting data for the game scene
+            playerModel.Gold = 150;
         }
 
         public void ConstructBuilding()
@@ -92,6 +96,7 @@ namespace Game
 
         private void OnDestroy()
         {
+            _playerModel.CurrentBuilding.ValueChanged -= BuildTower;
             EventBus.Unsubscribe(this);
         }
 
@@ -108,7 +113,7 @@ namespace Game
             }
             else
             {
-                Debug.LogError("Class: 'Builder', Method: 'BuildTower', Message: 'isSuccess != true'");
+                CustomLogger.LogError("isSuccess != true", 3);
             }
         }
 
