@@ -4879,12 +4879,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a83fd114e86203b4bb14989f6836a52c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  IsBuilt: 0
-  _towerModel:
-    CastItem: {fileID: 8522977891123354668, guid: c0b807c942807184285ecbe2b4dbfd88, type: 3}
-    AttackSpeed: 0
-    Damage: 0
   _spellCaster: {fileID: 3006681101750729951}
+  _isBuilt: 0
 --- !u!114 &3006681101750729951
 MonoBehaviour:
   m_ObjectHideFlags: 0
