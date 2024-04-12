@@ -121,7 +121,7 @@ namespace Game
         {
             _towerContainer = towerContainer;
             _canBuild = false;
-            
+
             _currentTower = Instantiate(towerContainer.Tower, _terrainCollider.transform.position, Quaternion.identity);
             _currentTower.Initialize(towerContainer.TowerModel, towerContainer.CastItem);
         }
