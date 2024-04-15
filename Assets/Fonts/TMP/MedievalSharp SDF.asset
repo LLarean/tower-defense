@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71c1514a6bd24e1e882cebbe1904ce04, type: 3}
   m_Name: MedievalSharp SDF
   m_EditorClassIdentifier: 
-  hashCode: 0
+  hashCode: -997733998
   material: {fileID: 9117150536732473543}
-  materialHashCode: 0
+  materialHashCode: -842283278
   m_Version: 1.1.0
   m_SourceFontFileGUID: dab90a45cedf47b4291bd9816c597551
   m_SourceFontFile_EditorRef: {fileID: 12800000, guid: dab90a45cedf47b4291bd9816c597551, type: 3}
@@ -2679,12 +2679,12 @@ Material:
     - _OutlineSoftness: 0
     - _OutlineUVSpeedX: 0
     - _OutlineUVSpeedY: 0
-    - _OutlineWidth: 0
+    - _OutlineWidth: 0.1
     - _PerspectiveFilter: 0.875
     - _Reflectivity: 10
-    - _ScaleRatioA: 1
-    - _ScaleRatioB: 1
-    - _ScaleRatioC: 1
+    - _ScaleRatioA: 0.8333333
+    - _ScaleRatioB: 0.6770833
+    - _ScaleRatioC: 0.6770833
     - _ScaleX: 1
     - _ScaleY: 1
     - _ShaderFlags: 0

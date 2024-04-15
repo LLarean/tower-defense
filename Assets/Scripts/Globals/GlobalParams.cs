@@ -30,4 +30,6 @@ public static class GlobalParams
 
     public const float HeightOffset = 0f;
     public const int MovingStep = 20;
+    
+    public const float DOScaleDuration = .2f;
 }
