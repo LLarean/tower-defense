@@ -17,7 +17,7 @@ namespace Menu
         [Button()] public void OpenSettings() { }
         [Button()] public void CloseGame() => Application.Quit();
         
-        [Button()] public void InitializeConfirmationWindow(ConfirmationWindowModel confirmationWindowModel) => _confirmationWindow.Initialize(confirmationWindowModel);
+        public void InitializeConfirmationWindow(ConfirmationWindowModel confirmationWindowModel) => _confirmationWindow.Initialize(confirmationWindowModel);
         [Button()] public void ShowConfirmationWindow() => _confirmationWindow.Show();
         [Button()] public void HideConfirmationWindow() => _confirmationWindow.Hide();
     }

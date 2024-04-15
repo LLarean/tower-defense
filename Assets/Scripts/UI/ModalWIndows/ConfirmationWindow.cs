@@ -1,14 +1,11 @@
-using DG.Tweening;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace ModalWindows
 {
-    public class ConfirmationWindow : MonoBehaviour
+    public class ConfirmationWindow : ModalWindow
     {
-        [SerializeField] private Image _blackout;
-        [SerializeField] private Transform _modalWindow;
         [Space]
         [SerializeField] private TMP_Text _title;
         [SerializeField] private TMP_Text _message;
@@ -35,20 +32,6 @@ namespace ModalWindows
             _cancelLabel.text = confirmationWindowModel.CancelLabel;
 
             Show();
-        }
-
-        public void Show()
-        {
-            _blackout.gameObject.SetActive(true);
-            _modalWindow.gameObject.SetActive(true);
-            _modalWindow.DOScale(0, 0);
-            _modalWindow.DOScale(1, GlobalParams.DOScaleDuration);
-        }
-
-        public void Hide()
-        {
-            _blackout.gameObject.SetActive(false);
-            _modalWindow.gameObject.SetActive(false);
         }
 
         private void Accept() => _confirmationWindowModel.Accept();

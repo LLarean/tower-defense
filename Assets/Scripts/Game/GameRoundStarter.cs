@@ -1,6 +1,7 @@
 ﻿using Game;
 using GameUtilities;
 using Infrastructure;
+using ModalWindows;
 using Zenject;
 
 public class GameRoundStarter : RoundStarter, IEnemyHandler
@@ -15,12 +16,19 @@ public class GameRoundStarter : RoundStarter, IEnemyHandler
     
     protected virtual void FinishMatch()
     {
-        var modalWindowModel = new ModalWindowModel
+
+        base.FinishMatch();
+        ConfirmDelegate confirmDelegate = () => { _gameMediator.LoadMainMenu(); };
+    
+        var modalWindowModel = new NotificationWindowModel
         {
+            Title = "The end",
             Message = "The game is over",
-            Label = "To the menu",
+            ConfirmLabel = "To Menu",
+            ConfirmDelegate = confirmDelegate
         };
         
-        _gameMediator.ShowModalWindow(modalWindowModel);
+        _gameMediator.InitializeNotificationWindow(modalWindowModel);
+        _gameMediator.ShowNotificationWindow();
     }
 }

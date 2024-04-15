@@ -21,14 +21,8 @@
             CancelLabel = string.Empty;
         }
 
-        public void Accept()
-        {
-            AcceptDelegate?.Invoke();
-        }
+        public void Accept() => AcceptDelegate?.Invoke();
         
-        public void Cancel()
-        {
-            CancelDelegate?.Invoke();
-        }
+        public void Cancel() => CancelDelegate?.Invoke();
     }
 }

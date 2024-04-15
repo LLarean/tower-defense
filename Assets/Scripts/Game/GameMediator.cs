@@ -1,7 +1,9 @@
 using GameUtilities;
+using ModalWindows;
 using NaughtyAttributes;
 using UI.Game;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using Zenject;
 
 namespace Game
@@ -11,8 +13,11 @@ namespace Game
         [Inject] private RoundStarter _roundStarter;
         [Inject] private Builder _builder;
         [Inject] private HUD _hud;
-        [Inject] private ModalWindow _modalWindow;
+        [Inject] private ConfirmationWindow _confirmationWindow;
+        [Inject] private NotificationWindow _notificationWindow;
 
+        [Button()] public void LoadMainMenu() => SceneManager.LoadScene(GlobalStrings.Menu);
+        
         [Button()] public void StartMatch() => _roundStarter.StartMatch();
         [Button()] public void StopMatch() => _roundStarter.StopMatch();
     
@@ -26,6 +31,12 @@ namespace Game
         [Button()] public void ResetClock() => _hud.ResetClock();
         [Button()] public void ClearInfo() => _hud.ClearInfo();
     
-        public void ShowModalWindow(ModalWindowModel modalWindowModel) => _modalWindow.Initialize(modalWindowModel);
+        public void InitializeConfirmationWindow(ConfirmationWindowModel confirmationWindowModel) => _confirmationWindow.Initialize(confirmationWindowModel);
+        [Button()] public void ShowConfirmationWindow() => _confirmationWindow.Show();
+        [Button()] public void HideConfirmationWindow() => _confirmationWindow.Hide();
+        
+        public void InitializeNotificationWindow(NotificationWindowModel notificationWindowModel) => _notificationWindow.Initialize(notificationWindowModel);
+        [Button()] public void ShowNotificationWindow() => _notificationWindow.Show();
+        [Button()] public void HideNotificationWindow() => _notificationWindow.Hide();
     }
 }

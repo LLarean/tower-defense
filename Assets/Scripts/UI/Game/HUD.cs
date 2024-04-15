@@ -1,7 +1,6 @@
-using System;
 using Game;
+using ModalWindows;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using Zenject;
 
 namespace UI.Game
@@ -121,7 +120,21 @@ namespace UI.Game
 
         private void OpenMenu()
         {
-            SceneManager.LoadScene(GlobalStrings.Menu);
+            AcceptDelegate acceptDelegate = () => { _gameMediator.LoadMainMenu(); };
+            CancelDelegate cancelDelegate = () => { _gameMediator.HideConfirmationWindow(); };
+            
+            ConfirmationWindowModel confirmationWindowModel = new ConfirmationWindowModel
+            {
+                Title = "To menu",
+                Message = "Do you want to go to the menu?",
+                AcceptLabel = "Yes",
+                CancelLabel = "No",
+                AcceptDelegate = acceptDelegate,
+                CancelDelegate = cancelDelegate,
+            };
+            
+            _gameMediator.InitializeConfirmationWindow(confirmationWindowModel);
+            _gameMediator.ShowConfirmationWindow();
         }
     }
 }

@@ -1,5 +1,6 @@
 using System.Diagnostics;
 using System.Reflection;
+using Utilities.Logger;
 using Debug = UnityEngine.Debug;
 
 namespace Utilities
@@ -7,10 +8,12 @@ namespace Utilities
     public static class CustomLogger
     {
         // TODO Is it possible to display an object in the hierarchy of the scene?
+        // TODO Is it possible to configure the logger?
         /// <summary>
         /// Indicates whether logs should be displayed at all
         /// </summary>
         private const bool IsDevelop = true;
+
         /// <summary>
         /// The minimum level of importance of the logs displayed, 0 all logs, 1 only important and critical, 2 only critical
         /// </summary>
