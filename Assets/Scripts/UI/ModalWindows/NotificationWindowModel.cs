@@ -1,4 +1,6 @@
-﻿namespace ModalWindows
+﻿using Utilities;
+
+namespace ModalWindows
 {
     public delegate void ConfirmDelegate();
 
@@ -10,14 +12,15 @@
     
         public ConfirmDelegate ConfirmDelegate;
 
-        public NotificationWindowModel()
+        public void Confirm()
         {
-            Title = string.Empty;
-            Message = string.Empty;
-            ConfirmLabel = string.Empty;
+            if (ConfirmDelegate == null)
+            {
+                CustomLogger.LogWarning("ConfirmDelegate == null");
+                return;
+            }
+            
+            ConfirmDelegate?.Invoke();
         }
-        
-        public void Confirm() => ConfirmDelegate?.Invoke();
-
     }
 }

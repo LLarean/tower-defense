@@ -1306,6 +1306,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a06cc1d3ec513b449a704a6d4316bac1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _menuPanel: {fileID: 590648660}
   _singleplayer: {fileID: 1366745212}
   _multiplayer: {fileID: 674185598}
   _settings: {fileID: 1986103534}
@@ -2104,15 +2105,15 @@ MonoBehaviour:
       m_Calls: []
   m_text: Version.0.0.1.1
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 9d37d538c84c91f42b73d8c5cbee4c6d, type: 2}
+  m_sharedMaterial: {fileID: 9117150536732473543, guid: 9d37d538c84c91f42b73d8c5cbee4c6d, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 452984831
+  m_fontColor: {r: 1, g: 1, b: 1, a: 0.101960786}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:

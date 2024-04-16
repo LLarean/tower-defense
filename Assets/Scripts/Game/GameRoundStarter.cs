@@ -13,10 +13,9 @@ public class GameRoundStarter : RoundStarter, IEnemyHandler
     {
         _gameMediator = gameMediator;
     }
-    
+
     protected virtual void FinishMatch()
     {
-
         base.FinishMatch();
         ConfirmDelegate confirmDelegate = () => { _gameMediator.LoadMainMenu(); };
     

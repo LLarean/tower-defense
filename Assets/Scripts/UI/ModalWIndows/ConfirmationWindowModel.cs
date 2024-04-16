@@ -1,4 +1,6 @@
-﻿namespace ModalWindows
+﻿using Utilities;
+
+namespace ModalWindows
 {
     public delegate void AcceptDelegate();
     public delegate void CancelDelegate();
@@ -13,16 +15,26 @@
         public AcceptDelegate AcceptDelegate;
         public CancelDelegate CancelDelegate;
 
-        public ConfirmationWindowModel()
+        public void Accept()
         {
-            Title = string.Empty;
-            Message = string.Empty;
-            AcceptLabel = string.Empty;
-            CancelLabel = string.Empty;
+            if (AcceptDelegate == null)
+            {
+                CustomLogger.LogWarning("AcceptDelegate == null");
+                return;
+            }
+            
+            AcceptDelegate.Invoke();
         }
 
-        public void Accept() => AcceptDelegate?.Invoke();
-        
-        public void Cancel() => CancelDelegate?.Invoke();
+        public void Cancel()
+        {
+            if (CancelDelegate == null)
+            {
+                CustomLogger.LogWarning("CancelDelegate == null");
+                return;
+            }
+            
+            CancelDelegate.Invoke();
+        }
     }
 }

@@ -35,7 +35,7 @@ namespace Game
             
             if (_terrainCollider == null)
             {
-                CustomLogger.LogError("terrainCollider == null", 3);
+                CustomLogger.LogError("terrainCollider == null");
                 return;
             }
             
@@ -113,7 +113,7 @@ namespace Game
             }
             else
             {
-                CustomLogger.LogError("isSuccess != true", 3);
+                CustomLogger.LogError("isSuccess != true");
             }
         }
 

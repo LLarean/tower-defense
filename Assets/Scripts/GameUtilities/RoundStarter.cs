@@ -17,6 +17,8 @@ namespace GameUtilities
         private int _numberDestroyedEnemies;
         private Coroutine _coroutine;
 
+        public event Action MatchIsFinished;
+
         [Inject]
         public void Construction(PlayerModel playerModel)
         {
@@ -25,14 +27,14 @@ namespace GameUtilities
 
         public void StartMatch()
         {
-            CustomLogger.LogMessage("The match is started", 0);
+            CustomLogger.LogMessage("The match is started", 3);
 
             _coroutine = StartCoroutine(Waiting(_matchModel.RoundStartDelay));
         }
 
         public void StopMatch()
         {
-            CustomLogger.LogMessage("The match is stopped", 0);
+            CustomLogger.LogMessage("The match is stopped", 3);
 
             if (_coroutine != null)
             {
@@ -45,7 +47,7 @@ namespace GameUtilities
 
         public void HandleDestroy()
         {
-            CustomLogger.LogMessage("The tower destroyed the enemy", 0);
+            CustomLogger.LogMessage("The tower destroyed the enemy", 3);
 
             _playerModel.Gold.Value += GlobalParams.RewardMurder;
             DestroyUnit();
@@ -53,7 +55,7 @@ namespace GameUtilities
 
         public void HandleFinish()
         {
-            CustomLogger.LogMessage("The enemy has reached the end", 0);
+            CustomLogger.LogMessage("The enemy has reached the end", 3);
 
             _playerModel.Notification.Value = GlobalStrings.EnemyReached;
             _playerModel.Health.Value -= GlobalParams.DamagePlayer;
@@ -63,8 +65,9 @@ namespace GameUtilities
 
         protected virtual void FinishMatch()
         {
-            CustomLogger.LogMessage("Don't start", 0);
+            CustomLogger.LogMessage("Don't start", 3);
             _playerModel.Notification.Value = "End";
+            MatchIsFinished?.Invoke();
         }
 
         private void Start()
@@ -94,7 +97,7 @@ namespace GameUtilities
                 return;
             }
 
-            CustomLogger.LogMessage("The round is over", 0);
+            CustomLogger.LogMessage("The round is over", 3);
 
             _playerModel.Notification.Value = GlobalStrings.RoundOver;
             StartCoroutine(Waiting(_matchModel.RoundStartDelay));
@@ -108,7 +111,7 @@ namespace GameUtilities
             StartRound();
         }
 
-        private void StartRound()
+        protected virtual void StartRound()
         {
             if (_nextRoundIndex < _matchModel.RoundSettings.Count)
             {
@@ -122,7 +125,7 @@ namespace GameUtilities
 
         private void StartNewRound()
         {
-            CustomLogger.LogMessage("The round is started", 0);
+            CustomLogger.LogMessage("The round is started", 3);
             _numberDestroyedEnemies = 0;
             _playerModel.Notification.Value = GlobalStrings.RoundStart;
 

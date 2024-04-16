@@ -9,13 +9,13 @@ namespace Utilities.Logger.LoggerTests
         [Test]
         public void LogMessage_DisplayMessage_MessageIsShowed()
         {
-            CustomLogger.LogMessage("Test message", 0); 
+            CustomLogger.LogMessage("Test message", 1); 
         }
         
         [Test]
         public void LogMessage_DisplayWarningTestMessage_MessageIsShowed()
         {
-            CustomLogger.LogWarning("Test message", 0); 
+            CustomLogger.LogWarning("Test message"); 
         }
         
         [Test]

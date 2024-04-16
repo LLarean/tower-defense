@@ -1,3 +1,4 @@
+using DG.Tweening;
 using Menu;
 using ModalWindows;
 using TMPro;
@@ -9,6 +10,8 @@ namespace UI.Menu
 {
     public class MainScreen : MonoBehaviour
     {
+        [SerializeField] private Transform _menuPanel;
+        [Space]
         [SerializeField] private Button _singleplayer;
         [SerializeField] private Button _multiplayer;
         [SerializeField] private Button _settings;
@@ -30,6 +33,8 @@ namespace UI.Menu
             _settings.onClick.AddListener(OpenSettings);
             _exit.onClick.AddListener(CloseGame);
             _version.text = Application.version;
+
+            ShowPanel();
         }
 
         private void LoadSingleplayerGame() => _menuMediator.LoadSingleplayerGame();
@@ -55,6 +60,13 @@ namespace UI.Menu
             
             _menuMediator.InitializeConfirmationWindow(confirmationWindowModel);
             _menuMediator.ShowConfirmationWindow();
+        }
+
+        private void ShowPanel()
+        {
+            var startPositionY = _menuPanel.position.y;
+            _menuPanel.DOMoveY(startPositionY + 2000, 0);
+            _menuPanel.DOMoveY(startPositionY, .7f);
         }
     }
 }
