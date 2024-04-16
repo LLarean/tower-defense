@@ -24,7 +24,7 @@ MonoBehaviour:
     TowerModel:
       ElementalType: 2
       AttackSpeed: 2
-      Damage: 20
+      Damage: 25
   - Tower: {fileID: 4194542213234158995, guid: 5499340a86243144c8c2f5caf21d61de, type: 3}
     CastItem: {fileID: 78987458301905268, guid: a790ccd117e52bb4185fbc316c7bdd05, type: 3}
     TowerModel:
