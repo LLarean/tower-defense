@@ -11,6 +11,7 @@ namespace Menu
     {
         [Inject] private RoundStarter _roundStarter;
         [Inject] private ConfirmationWindow _confirmationWindow;
+        [Inject] private AudioPlayer _audioPlayer;
         
         [Button()] public void LoadSingleplayerGame() => SceneManager.LoadScene(GlobalStrings.Demo);
         [Button()] public void LoadMultiplayerGame() => SceneManager.LoadScene(GlobalStrings.Demo);
@@ -20,5 +21,7 @@ namespace Menu
         public void InitializeConfirmationWindow(ConfirmationWindowModel confirmationWindowModel) => _confirmationWindow.Initialize(confirmationWindowModel);
         [Button()] public void ShowConfirmationWindow() => _confirmationWindow.Show();
         [Button()] public void HideConfirmationWindow() => _confirmationWindow.Hide();
+        
+        [Button()] public void PlayMenuMusic() => _audioPlayer.PlayMenuMusic();
     }
 }

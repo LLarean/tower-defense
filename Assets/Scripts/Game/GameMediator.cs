@@ -15,6 +15,7 @@ namespace Game
         [Inject] private HUD _hud;
         [Inject] private ConfirmationWindow _confirmationWindow;
         [Inject] private NotificationWindow _notificationWindow;
+        [Inject] private AudioPlayer _audioPlayer;
 
         [Button()] public void LoadMainMenu() => SceneManager.LoadScene(GlobalStrings.Menu);
         
@@ -38,5 +39,7 @@ namespace Game
         public void InitializeNotificationWindow(NotificationWindowModel notificationWindowModel) => _notificationWindow.Initialize(notificationWindowModel);
         [Button()] public void ShowNotificationWindow() => _notificationWindow.Show();
         [Button()] public void HideNotificationWindow() => _notificationWindow.Hide();
+        
+        [Button()] public void PlayBattleMusic() => _audioPlayer.PlayBattleMusic();
     }
 }
