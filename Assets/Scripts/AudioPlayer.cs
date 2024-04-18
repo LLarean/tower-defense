@@ -1,34 +1,38 @@
 using Infrastructure;
+using ScriptableObjects;
 using UnityEngine;
+using Zenject;
 
 public class AudioPlayer : MonoBehaviour, ISoundHandler
 {
     [Header("AudioSources")]
     [SerializeField] private AudioSource _music;
     [SerializeField] private AudioSource _sounds;
-    [Header("Music")]
-    [SerializeField] private AudioClip _menu;
-    [SerializeField] private AudioClip _battle;
-    [Header("Sounds")]
-    [SerializeField] private AudioClip _click;
-    [SerializeField] private AudioClip _fireball;
 
-    public void HandleClick() => _sounds.PlayOneShot(_click);
+    private AudioClips _audioClips;
+
+    [Inject]
+    public void Construct(AudioClips audioClips)
+    {
+        _audioClips = audioClips;
+    }
     
-    public void HandleCast() => _sounds.PlayOneShot(_fireball);
-
     public void HandleLoadMenu()
     {
-        _music.clip = _menu;
+        _music.clip = _audioClips.MenuMusic;
         _music.Play();
     }
 
     public void HandleLoadGame()
     {
-        _music.clip = _battle;
+        _music.clip = _audioClips.BattleMusic;
         _music.Play();
     }
+
+    public void HandleClick() => _sounds.PlayOneShot(_audioClips.ClickSound);
     
+    public void HandleCast() => _sounds.PlayOneShot(_audioClips.FireballSound);
+
     private void Awake() => DontDestroyOnLoad(gameObject);
     
     private void Start() => EventBus.Subscribe(this);

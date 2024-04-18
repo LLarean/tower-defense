@@ -2,26 +2,29 @@ using System.Collections.Generic;
 using Builds;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Data", menuName = "ScriptableObjects/TowerParams", order = 1)]
-public class TowerParams : ScriptableObject
+namespace ScriptableObjects
 {
-    [SerializeField] private List<TowerContainer> _towerContainers;
-
-    public bool TryGetTowerContainer(ElementalType elementalType, out TowerContainer towerContainer)
+    [CreateAssetMenu(fileName = "Data", menuName = "ScriptableObjects/TowerParams", order = 1)]
+    public class TowerParams : ScriptableObject
     {
-        bool isSuccess = false;
-        towerContainer = null;
+        [SerializeField] private List<TowerContainer> _towerContainers;
 
-        foreach (var model in _towerContainers)
+        public bool TryGetTowerContainer(ElementalType elementalType, out TowerContainer towerContainer)
         {
-            if (model.TowerModel.ElementalType == elementalType)
+            bool isSuccess = false;
+            towerContainer = null;
+
+            foreach (var model in _towerContainers)
             {
-                towerContainer = model;
-                isSuccess = true;
-                return isSuccess;
+                if (model.TowerModel.ElementalType == elementalType)
+                {
+                    towerContainer = model;
+                    isSuccess = true;
+                    return isSuccess;
+                }
             }
-        }
         
-        return isSuccess;
+            return isSuccess;
+        }
     }
 }
