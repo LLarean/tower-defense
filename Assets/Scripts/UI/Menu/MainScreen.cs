@@ -1,4 +1,5 @@
 using DG.Tweening;
+using Infrastructure;
 using Menu;
 using ModalWindows;
 using TMPro;
@@ -37,14 +38,27 @@ namespace UI.Menu
             ShowPanel();
         }
 
-        private void LoadSingleplayerGame() => _menuMediator.LoadSingleplayerGame();
-        
-        private void LoadMultiplayerGame() => _menuMediator.LoadMultiplayerGame();
-        
-        private void OpenSettings() => _menuMediator.OpenSettings();
+        private void LoadSingleplayerGame()
+        {
+            EventBus.RaiseEvent<ISoundHandler>(soundHandler => soundHandler.HandleClick());
+            _menuMediator.LoadSingleplayerGame();
+        }
+
+        private void LoadMultiplayerGame()
+        {
+            EventBus.RaiseEvent<ISoundHandler>(soundHandler => soundHandler.HandleClick());
+        }
+
+        private void OpenSettings()
+        {
+            EventBus.RaiseEvent<ISoundHandler>(soundHandler => soundHandler.HandleClick());
+            _menuMediator.OpenSettings();
+        }
 
         private void CloseGame()
         {
+            EventBus.RaiseEvent<ISoundHandler>(soundHandler => soundHandler.HandleClick());
+
             AcceptDelegate acceptDelegate = () => { _menuMediator.CloseGame(); };
             CancelDelegate cancelDelegate = () => { _menuMediator.HideConfirmationWindow(); };
             

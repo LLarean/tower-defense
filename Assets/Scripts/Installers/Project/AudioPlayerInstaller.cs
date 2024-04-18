@@ -11,6 +11,7 @@ public class AudioPlayerInstaller : MonoInstaller
         Container
             .Bind<AudioPlayer>()
             .FromComponentInNewPrefab(_audioPlayer)
-            .AsSingle();
+            .AsSingle()
+            .NonLazy();
     }
 }
