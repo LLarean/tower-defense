@@ -1,4 +1,5 @@
 using System.Collections;
+using Infrastructure;
 using UnityEngine;
 
 namespace Builds
@@ -79,6 +80,7 @@ namespace Builds
                 };
                 
                 missile.Initialize(castItemModel, _target);
+                EventBus.RaiseEvent<ISoundHandler>(soundHandler => soundHandler.HandleCast());
                 yield return new WaitForSeconds(_towerModel.AttackSpeed);
             }
         }

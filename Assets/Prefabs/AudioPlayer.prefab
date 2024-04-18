@@ -307,3 +307,4 @@ MonoBehaviour:
   _menu: {fileID: 8300000, guid: ee55f25599268ee40841df8b1d686b69, type: 3}
   _battle: {fileID: 8300000, guid: aee959bd918dac54b8110b18612c1ff3, type: 3}
   _click: {fileID: 8300000, guid: a5a4887cdf804764a8d76f168b1bdc0c, type: 3}
+  _fireball: {fileID: 8300000, guid: 94b9144b8f6080a47b1b92bb5ee0f304, type: 3}
