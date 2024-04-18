@@ -52,7 +52,7 @@ namespace UI.Menu
         private void OpenSettings()
         {
             EventBus.RaiseEvent<ISoundHandler>(soundHandler => soundHandler.HandleClick());
-            _menuMediator.OpenSettings();
+            _menuMediator.ShowSettingsWindow();
         }
 
         private void CloseGame()

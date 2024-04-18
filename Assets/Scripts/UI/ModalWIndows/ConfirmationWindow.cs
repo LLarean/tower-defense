@@ -1,3 +1,4 @@
+using Infrastructure;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -34,8 +35,16 @@ namespace ModalWindows
             Show();
         }
 
-        private void Accept() => _confirmationWindowModel.Accept();
+        private void Accept()
+        {
+            EventBus.RaiseEvent<ISoundHandler>(soundHandler => soundHandler.HandleClick());
+            _confirmationWindowModel.Accept();
+        }
 
-        private void Cancel() => _confirmationWindowModel.Cancel();
+        private void Cancel()
+        {
+            EventBus.RaiseEvent<ISoundHandler>(soundHandler => soundHandler.HandleClick());
+            _confirmationWindowModel.Cancel();
+        }
     }
 }

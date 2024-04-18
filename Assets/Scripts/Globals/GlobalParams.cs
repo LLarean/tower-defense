@@ -28,4 +28,7 @@ public static class GlobalParams
     public const int MovingStep = 20;
     
     public const float DOScaleDuration = .2f;
+
+    public const float DefaultMusicVolume = .3f;
+    public const float DefaultSoundVolume = .3f;
 }

@@ -20,4 +20,7 @@ public static class GlobalStrings
     public const string RoundStart = "The round is started";
     public const string RoundOver = "The round is over";
     public const string EnemyReached = "The enemy has reached";
+
+    public const string SoundValue = "Soundvalue";
+    public const string MusicValue = "MusicValue";
 }
