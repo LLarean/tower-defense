@@ -304,5 +304,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _music: {fileID: 2809377913758574016}
   _sounds: {fileID: 8735038620139694495}
-  _menu: {fileID: 8300000, guid: 40ac39dff6e2f354f81de00e760e72fd, type: 3}
-  _battle: {fileID: 8300000, guid: 3f9d2a49059160546818cd858b1adc43, type: 3}
+  _menu: {fileID: 8300000, guid: ee55f25599268ee40841df8b1d686b69, type: 3}
+  _battle: {fileID: 8300000, guid: aee959bd918dac54b8110b18612c1ff3, type: 3}
