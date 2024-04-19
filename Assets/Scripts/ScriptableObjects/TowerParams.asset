@@ -13,25 +13,25 @@ MonoBehaviour:
   m_Name: TowerParams
   m_EditorClassIdentifier: 
   _towerContainers:
-  - Tower: {fileID: 8571614575033275793, guid: 5df787b182f3c3d4d8e7f3ead4c24b00, type: 3}
+  - Tower: {fileID: 4804402615150392535, guid: 5df787b182f3c3d4d8e7f3ead4c24b00, type: 3}
     CastItem: {fileID: 8522977891123354668, guid: c0b807c942807184285ecbe2b4dbfd88, type: 3}
     TowerModel:
       ElementalType: 1
       AttackSpeed: 2
       Damage: 20
-  - Tower: {fileID: 5377236187004128972, guid: 4ed3beda683a8da4ebe8aab1771550f9, type: 3}
+  - Tower: {fileID: 9135291678999293834, guid: 4ed3beda683a8da4ebe8aab1771550f9, type: 3}
     CastItem: {fileID: 78987458301905268, guid: 2907a1fe45368b2429cd5f44c593df42, type: 3}
     TowerModel:
       ElementalType: 2
       AttackSpeed: 2
       Damage: 25
-  - Tower: {fileID: 4194542213234158995, guid: 5499340a86243144c8c2f5caf21d61de, type: 3}
+  - Tower: {fileID: 1040003141101653205, guid: 5499340a86243144c8c2f5caf21d61de, type: 3}
     CastItem: {fileID: 78987458301905268, guid: a790ccd117e52bb4185fbc316c7bdd05, type: 3}
     TowerModel:
       ElementalType: 3
       AttackSpeed: 2
       Damage: 30
-  - Tower: {fileID: 412085178272614725, guid: b695ba4470ddf2c4283a116deefa1fdd, type: 3}
+  - Tower: {fileID: 3594103377093519363, guid: b695ba4470ddf2c4283a116deefa1fdd, type: 3}
     CastItem: {fileID: 78987458301905268, guid: 7959e1b7da6ecf046a9b84aaacde7ac1, type: 3}
     TowerModel:
       ElementalType: 4

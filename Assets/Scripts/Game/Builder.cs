@@ -54,7 +54,7 @@ namespace Game
             }
 
             // TODO the need to add a check if the mouse is outside the desired limits
-            if (_canBuild == false)
+            if (_canBuild == false || _currentTower.CanBuilt == false)
             {
                 return;
             }
@@ -65,6 +65,8 @@ namespace Game
                 _constructedBuildings.SetNewBuilding(_currentTower);
                 _playerModel.Gold.Value -= _playerModel.CurrentBuilding.Value.Price;
                 _currentTower = null;
+                
+                EventBus.RaiseEvent<ISoundHandler>(soundHandler => soundHandler.HandleConstruction());
                 
                 InstantiateTower(_towerContainer);
             }

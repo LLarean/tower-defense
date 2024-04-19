@@ -6,11 +6,17 @@ namespace Builds
     public class Tower : MonoBehaviour
     {
         [SerializeField] private SpellCaster _spellCaster;
+        [SerializeField] private BuildArea _buildArea;
+        [SerializeField] private CastArea _castArea;
+        [SerializeField] private TowerPainter _towerPainter;
+        [Space]
         [SerializeField] private bool _isBuilt;
         
-        private TowerModel _towerModel;
-
+        private TowerConstructor _towerConstructor;
+        private bool _canBuilt = true;
+        
         public bool IsBuilt => _isBuilt;
+        public bool CanBuilt => _canBuilt;
 
         public void Initialize(TowerModel towerModel, CastItem castItem)
         {
@@ -20,8 +26,6 @@ namespace Builds
                 return;
             }
             
-            _towerModel = towerModel;
-            
             if (castItem == null)
             {
                 Debug.LogError("Class: 'Tower', Method: 'Initialize', Message: 'castItem == null'");
@@ -29,28 +33,56 @@ namespace Builds
             }
             
             _spellCaster.Initialize(towerModel, castItem);
+
+            _buildArea.TriggerEnter += BuildTriggerEnter;
+            _buildArea.TriggerExit += BuildTriggerExit;
+            
+            _castArea.TriggerEnter += CastTriggerEnter;
+            _castArea.TriggerExit += CastTriggerExit;
         }
         
         public void DisableConstructionMode() => _isBuilt = true;
 
-        private void OnTriggerEnter(Collider collision)
+        private void BuildTriggerEnter(Collider collider)
+        {
+            if (_isBuilt == true)
+            {
+                return;
+            }
+            
+            _canBuilt = false;
+            _towerPainter.SetRedColor();
+        }
+
+        private void BuildTriggerExit(Collider collider)
+        {
+            if (_isBuilt == true)
+            {
+                return;
+            }
+            
+            _canBuilt = true;
+            _towerPainter.SetWhiteColor();
+        }
+
+        private void CastTriggerEnter(Collider collider)
         {
             if (_isBuilt == false)
             {
                 return;
             }
             
-            var isAvailable = collision.TryGetComponent(out Enemy enemy);
-
+            var isAvailable = collider.TryGetComponent(out Enemy enemy);
+            
             if (isAvailable == false)
             {
                 return;
             }
-
+            
             _spellCaster.SetTarget(enemy.gameObject.transform);
         }
 
-        private void OnTriggerExit(Collider other)
+        private void CastTriggerExit(Collider collider)
         {
             if (_isBuilt == false)
             {

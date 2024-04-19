@@ -42,7 +42,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: ee55f25599268ee40841df8b1d686b69, type: 3}
+  m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 0.2
   m_Pitch: 1
@@ -304,7 +304,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _music: {fileID: 2809377913758574016}
   _sounds: {fileID: 8735038620139694495}
-  _menu: {fileID: 8300000, guid: ee55f25599268ee40841df8b1d686b69, type: 3}
-  _battle: {fileID: 8300000, guid: aee959bd918dac54b8110b18612c1ff3, type: 3}
-  _click: {fileID: 8300000, guid: a5a4887cdf804764a8d76f168b1bdc0c, type: 3}
-  _fireball: {fileID: 8300000, guid: 94b9144b8f6080a47b1b92bb5ee0f304, type: 3}
+  _audioClips: {fileID: 11400000, guid: dc42afb9bb13a1a479810255b53a0bbc, type: 2}

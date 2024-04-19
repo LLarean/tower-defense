@@ -10,11 +10,13 @@ namespace ScriptableObjects
         [SerializeField] private AudioClip _battle;
         [Header("Sounds")]
         [SerializeField] private AudioClip _click;
+        [SerializeField] private AudioClip _construction;
         [SerializeField] private AudioClip _fireball;
 
         public AudioClip MenuMusic => _menu;
         public AudioClip BattleMusic => _battle;
         public AudioClip ClickSound => _click;
+        public AudioClip СonstructionSound => _construction;
         public AudioClip FireballSound => _fireball;
     }
 }

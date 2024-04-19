@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using Infrastructure;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using Utilities;
 using Zenject;
 
@@ -17,8 +18,6 @@ namespace GameUtilities
         private int _numberDestroyedEnemies;
         private Coroutine _coroutine;
 
-        public event Action MatchIsFinished;
-
         [Inject]
         public void Construction(PlayerModel playerModel)
         {
@@ -28,7 +27,6 @@ namespace GameUtilities
         public void StartMatch()
         {
             CustomLogger.LogMessage("The match is started", 3);
-
             _coroutine = StartCoroutine(Waiting(_matchModel.RoundStartDelay));
         }
 
@@ -67,13 +65,13 @@ namespace GameUtilities
         {
             CustomLogger.LogMessage("Don't start", 3);
             _playerModel.Notification.Value = "End";
-            MatchIsFinished?.Invoke();
         }
 
         private void Start()
         {
             EventBus.Subscribe(this);
             StartMatch();
+            PlayMusic();
         }
 
         private void OnDestroy()
@@ -131,6 +129,20 @@ namespace GameUtilities
 
             _enemiesRouter.StartRouting(_matchModel.RoundSettings[_nextRoundIndex]);
             _nextRoundIndex++;
+        }
+
+        private void PlayMusic()
+        {
+            Scene scene = SceneManager.GetActiveScene();
+
+            if (scene.name == GlobalStrings.Menu)
+            {
+                EventBus.RaiseEvent<ISoundHandler>(soundHandler => soundHandler.HandleLoadMenu());
+            }
+            else
+            {
+                EventBus.RaiseEvent<ISoundHandler>(soundHandler => soundHandler.HandleLoadGame());
+            }
         }
     }
 }

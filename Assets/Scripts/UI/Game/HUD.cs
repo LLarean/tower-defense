@@ -1,4 +1,5 @@
 using Game;
+using Infrastructure;
 using ModalWindows;
 using UnityEngine;
 using Zenject;
@@ -57,21 +58,25 @@ namespace UI.Game
         
         public void BuildFireTower()
         {
+            EventBus.RaiseEvent<ISoundHandler>(soundHandler => soundHandler.HandleClick());
             _playerModel.CurrentBuilding.Value = KeeperBuildingModels.GetFireTowerModel();
         }
 
         public void BuildPoisonTower()
         {
+            EventBus.RaiseEvent<ISoundHandler>(soundHandler => soundHandler.HandleClick());
             _playerModel.CurrentBuilding.Value = KeeperBuildingModels.GetPoisonTowerModel();
         }
 
         public void BuildWaterTower()
         {
+            EventBus.RaiseEvent<ISoundHandler>(soundHandler => soundHandler.HandleClick());
             _playerModel.CurrentBuilding.Value = KeeperBuildingModels.GetWaterTowerModel();
         }
 
         public void BuildIceTower()
         {
+            EventBus.RaiseEvent<ISoundHandler>(soundHandler => soundHandler.HandleClick());
             _playerModel.CurrentBuilding.Value = KeeperBuildingModels.GetIceTowerModel();
         }
 
