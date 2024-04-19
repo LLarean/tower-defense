@@ -45,13 +45,21 @@ namespace Builds
 
         private void BuildTriggerEnter(Collider collider)
         {
+            Debug.Log(collider.name);
+            // TODO Refactor this code
             if (_isBuilt == true)
             {
                 return;
             }
             
-            _canBuilt = false;
-            _towerPainter.SetRedColor();
+            var isEnemy = collider.TryGetComponent(out Enemy enemy);
+            var isTower = collider.TryGetComponent(out BuildArea buildArea);
+            
+            if (isEnemy == true || isTower == true)
+            {
+                _canBuilt = false;
+                _towerPainter.SetRedColor();
+            }
         }
 
         private void BuildTriggerExit(Collider collider)
@@ -60,7 +68,7 @@ namespace Builds
             {
                 return;
             }
-            
+
             _canBuilt = true;
             _towerPainter.SetWhiteColor();
         }
