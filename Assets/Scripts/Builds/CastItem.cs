@@ -2,6 +2,7 @@
 using DG.Tweening;
 using Units;
 using UnityEngine;
+using Utilities;
 
 namespace Builds
 {
@@ -16,32 +17,36 @@ namespace Builds
 
         public CastItemModel CastItemModel => _castItemModel;
 
-        public void Initialize(CastItemModel castItemModel, Transform target)
+        public void Initialize(CastItemModel castItemModel)
         {
             if (castItemModel == null)
             {
-                Debug.LogError("Class: 'CastItem', Method: 'Initialize', Message: 'castItemModel == null'");
-                return;
-            }
-
-            if (target == null)
-            {
-                Debug.LogError("Class: 'CastItem', Method: 'Initialize', Message: 'target == null'");
+                CustomLogger.LogError("castItemModel == null");
                 return;
             }
             
             _castItemModel = castItemModel;
-            _target = target;
+            _isInit = true;
+        }
 
+        public void SetTarget(Transform target)
+        {
+            if (target == null)
+            {
+                CustomLogger.LogError("target == null");
+                return;
+            }
+            
+            _target = target;
             _tween = transform.DOMove(target.position, .2f).SetAutoKill(false);
             _targetLastPosition = target.position;
             
             StartCoroutine(DelayDestroy());
-            _isInit = true;
         }
 
         private void Update()
         {
+            // TODO redesign the goal pursuit system
             if (_isInit == false)
             {
                 return;
@@ -66,6 +71,11 @@ namespace Builds
             Destroy(gameObject);
         }
 
+        private void OnDestroy()
+        {
+            _tween.Kill();
+        }
+
         private void OnTriggerEnter(Collider collision)
         {
             var isAvailable = collision.TryGetComponent<Enemy>(out Enemy enemy);
@@ -75,7 +85,7 @@ namespace Builds
                 return;
             }
             
-            enemy.TakeDamage(CastItemModel);
+            enemy.TakeDamage(_castItemModel);
             _tween.Kill();
             Destroy(gameObject);
         }

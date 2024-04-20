@@ -1,5 +1,6 @@
 using Units;
 using UnityEngine;
+using Utilities;
 
 namespace Builds
 {
@@ -10,29 +11,39 @@ namespace Builds
         [SerializeField] private CastArea _castArea;
         [SerializeField] private TowerPainter _towerPainter;
         [Space]
+        [SerializeField] private ElementalType _elementalType;
+        [SerializeField] private CastItem _castItem;
         [SerializeField] private bool _isBuilt;
         
         private TowerConstructor _towerConstructor;
         private bool _canBuilt = true;
         
-        public bool IsBuilt => _isBuilt;
+        public ElementalType ElementalType => _elementalType;
+        // public bool IsBuilt => _isBuilt;
         public bool CanBuilt => _canBuilt;
 
-        public void Initialize(TowerModel towerModel, CastItem castItem)
+        public void Initialize(TowerModel towerModel)
         {
             if (towerModel == null)
             {
-                Debug.LogError("Class: 'Tower', Method: 'Initialize', Message: 'towerModel == null'");
+                CustomLogger.LogError("towerModel == null");
                 return;
             }
             
-            if (castItem == null)
+            if (_castItem == null)
             {
-                Debug.LogError("Class: 'Tower', Method: 'Initialize', Message: 'castItem == null'");
+                CustomLogger.LogError("_castItem == null");
                 return;
             }
+
+            CastItemModel castItemModel = new CastItemModel
+            {
+                ElementalType = towerModel.ElementalType,
+                Damage = towerModel.Damage,
+            };
             
-            _spellCaster.Initialize(towerModel, castItem);
+            _castItem.Initialize(castItemModel);
+            _spellCaster.Initialize(_castItem, towerModel.AttackSpeed);
 
             _buildArea.TriggerEnter += BuildTriggerEnter;
             _buildArea.TriggerExit += BuildTriggerExit;
@@ -45,13 +56,12 @@ namespace Builds
 
         private void BuildTriggerEnter(Collider collider)
         {
-            Debug.Log(collider.name);
-            // TODO Refactor this code
             if (_isBuilt == true)
             {
                 return;
             }
             
+            // TODO Refactor this code
             var isEnemy = collider.TryGetComponent(out Enemy enemy);
             var isTower = collider.TryGetComponent(out BuildArea buildArea);
             

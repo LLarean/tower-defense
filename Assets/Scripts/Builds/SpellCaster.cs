@@ -1,43 +1,30 @@
 using System.Collections;
 using Infrastructure;
 using UnityEngine;
+using Utilities;
 
 namespace Builds
 {
     public class SpellCaster : MonoBehaviour
     {
-        [SerializeField] private Transform _castSpawn;
-        
-        private TowerModel _towerModel;
         private CastItem _castItem;
+        private float _attackSpeed;
         
-        private Transform _target;
-        private Coroutine _coroutine;
         private bool _canCast;
+        private Transform _target;
+        
+        private Coroutine _coroutine;
 
-        public void Initialize(TowerModel towerModel, CastItem castItem)
+        public void Initialize(CastItem castItem, float attackSpeed)
         {
-            if (_castSpawn == null)
-            {
-                Debug.LogError("Class: 'SpellCaster', Method: 'Initialize', Message: '_castSpawn == null'");
-                return;
-            }
-
-            if (towerModel == null)
-            {
-                Debug.LogError("Class: 'SpellCaster', Method: 'Initialize', Message: 'towerModel == null'");
-                return;
-            }
-
-            _towerModel = towerModel;
-            
             if (castItem == null)
             {
-                Debug.LogError("Class: 'SpellCaster', Method: 'Initialize', Message: 'castItem == null'");
+                CustomLogger.LogError("_castItem == null");
                 return;
             }
 
             _castItem = castItem;
+            _attackSpeed = attackSpeed;
         }
         
         public void SetTarget(Transform target)
@@ -62,26 +49,17 @@ namespace Builds
             }
         }
 
-        public void StartCasting() => _canCast = true;
-
-        public void PauseCasting() => _canCast = false;
-
         private IEnumerator Casting()
         {
             while (_canCast == true && _target != null)
             {
-                // TODO you need to use the object pool and add checks
-                var missile = Instantiate(_castItem, _castSpawn.position, Quaternion.identity);
+                // TODO need to use the object pool and add checks
+                var castItem = Instantiate(_castItem, transform.position, Quaternion.identity);
+                castItem.Initialize(_castItem.CastItemModel);
+                castItem.SetTarget(_target);
                 
-                CastItemModel castItemModel = new CastItemModel
-                {
-                    ElementalType = _towerModel.ElementalType,
-                    Damage = _towerModel.Damage,
-                };
-                
-                missile.Initialize(castItemModel, _target);
                 EventBus.RaiseEvent<ISoundHandler>(soundHandler => soundHandler.HandleCast());
-                yield return new WaitForSeconds(_towerModel.AttackSpeed);
+                yield return new WaitForSeconds(_attackSpeed);
             }
         }
     }

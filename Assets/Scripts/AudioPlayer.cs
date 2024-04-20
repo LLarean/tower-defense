@@ -14,7 +14,7 @@ public class AudioPlayer : MonoBehaviour, ISoundHandler
 
     public void HandleSoundVolume(float value) => _sounds.volume = value;
 
-    public void HandleLoadMenu() =>  PlayMusic(_audioClips.MenuMusic);
+    public void HandleLoadMenuScene() =>  PlayMusic(_audioClips.MenuMusic);
 
     public void HandleLoadGame() => PlayMusic(_audioClips.BattleMusic);
 

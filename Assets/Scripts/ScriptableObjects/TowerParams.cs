@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace ScriptableObjects
 {
-    [CreateAssetMenu(fileName = "Data", menuName = "ScriptableObjects/TowerParams", order = 1)]
+    [CreateAssetMenu(fileName = "TowerParams", menuName = "ScriptableObjects/TowerParams", order = 1)]
     public class TowerParams : ScriptableObject
     {
         [SerializeField] private List<TowerContainer> _towerContainers;

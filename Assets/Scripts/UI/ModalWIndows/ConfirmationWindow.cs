@@ -2,6 +2,7 @@ using Infrastructure;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using Zenject;
 
 namespace ModalWindows
 {
@@ -17,22 +18,30 @@ namespace ModalWindows
 
         private ConfirmationWindowModel _confirmationWindowModel;
 
-        public void Initialize(ConfirmationWindowModel confirmationWindowModel)
+        [Inject]
+        public void Construction(ConfirmationWindowModel confirmationWindowModel)
         {
             _confirmationWindowModel = confirmationWindowModel;
-            
-            _title.text = confirmationWindowModel.Title;
-            _message.text = confirmationWindowModel.Message;
+        }
+
+        public override void Show()
+        {
+            UpdateWindow();
+            base.Show();
+        }
+
+        private void UpdateWindow()
+        {
+            _title.text = _confirmationWindowModel.Title;
+            _message.text = _confirmationWindowModel.Message;
             
             _accept.onClick.RemoveAllListeners();
             _accept.onClick.AddListener(Accept);
-            _acceptLabel.text = confirmationWindowModel.AcceptLabel;
+            _acceptLabel.text = _confirmationWindowModel.AcceptLabel;
             
             _cancel.onClick.RemoveAllListeners();
             _cancel.onClick.AddListener(Cancel);
-            _cancelLabel.text = confirmationWindowModel.CancelLabel;
-
-            Show();
+            _cancelLabel.text = _confirmationWindowModel.CancelLabel;
         }
 
         private void Accept()

@@ -1,5 +1,4 @@
 ﻿using System;
-using UnityEngine;
 
 namespace Builds
 {
@@ -7,7 +6,6 @@ namespace Builds
     public class TowerContainer
     {
         public Tower Tower;
-        public CastItem CastItem;
         public TowerModel TowerModel;
     }
 }

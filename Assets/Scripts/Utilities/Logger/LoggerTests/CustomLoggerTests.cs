@@ -9,7 +9,7 @@ namespace Utilities.Logger.LoggerTests
         [Test]
         public void LogMessage_DisplayMessage_MessageIsShowed()
         {
-            CustomLogger.LogMessage("Test message", 1); 
+            CustomLogger.Log("Test message", 1); 
         }
         
         [Test]

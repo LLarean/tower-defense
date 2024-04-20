@@ -20,11 +20,13 @@ namespace UI.Menu
         [SerializeField] private TMP_Text _version;
 
         private MenuMediator _menuMediator;
+        private ConfirmationWindowModel _confirmationWindowModel;
 
         [Inject]
-        public void Construct(MenuMediator menuMediator)
+        public void Construct(MenuMediator menuMediator, ConfirmationWindowModel confirmationWindowModel)
         {
             _menuMediator = menuMediator;
+            _confirmationWindowModel = confirmationWindowModel;
         }
         
         private void Start()
@@ -59,21 +61,22 @@ namespace UI.Menu
         {
             EventBus.RaiseEvent<ISoundHandler>(soundHandler => soundHandler.HandleClick());
 
+            SetConfirmationWindowModel();
+
+            _menuMediator.ShowConfirmationWindow();
+        }
+
+        private void SetConfirmationWindowModel()
+        {
             AcceptDelegate acceptDelegate = () => { _menuMediator.CloseGame(); };
             CancelDelegate cancelDelegate = () => { _menuMediator.HideConfirmationWindow(); };
-            
-            ConfirmationWindowModel confirmationWindowModel = new ConfirmationWindowModel
-            {
-                Title = "Exit",
-                Message = "Are you sure you want to get out?",
-                AcceptLabel = "Yes",
-                CancelLabel = "No",
-                AcceptDelegate = acceptDelegate,
-                CancelDelegate = cancelDelegate,
-            };
-            
-            _menuMediator.InitializeConfirmationWindow(confirmationWindowModel);
-            _menuMediator.ShowConfirmationWindow();
+
+            _confirmationWindowModel.Title = "Exit";
+            _confirmationWindowModel.Message = "Are you sure you want to get out?";
+            _confirmationWindowModel.AcceptLabel = "Yes";
+            _confirmationWindowModel.CancelLabel = "No";
+            _confirmationWindowModel.AcceptDelegate = acceptDelegate;
+            _confirmationWindowModel.CancelDelegate = cancelDelegate;
         }
 
         private void ShowPanel()

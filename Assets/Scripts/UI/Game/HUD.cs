@@ -16,12 +16,14 @@ namespace UI.Game
 
         private GameMediator _gameMediator;
         private PlayerModel _playerModel;
+        private ConfirmationWindowModel _confirmationWindowModel;
 
         [Inject]
-        public void Construction(GameMediator gameMediator, PlayerModel playerModel)
+        public void Construction(GameMediator gameMediator, PlayerModel playerModel, ConfirmationWindowModel confirmationWindowModel)
         {
             _gameMediator = gameMediator;
             _playerModel = playerModel;
+            _confirmationWindowModel = confirmationWindowModel;
 
             _playerModel.Health.ValueChanged += ChangeHealthValue;
             _playerModel.Gold.ValueChanged += ChangeGoldValue;
@@ -128,7 +130,7 @@ namespace UI.Game
             AcceptDelegate acceptDelegate = () => { _gameMediator.LoadMainMenu(); };
             CancelDelegate cancelDelegate = () => { _gameMediator.HideConfirmationWindow(); };
             
-            ConfirmationWindowModel confirmationWindowModel = new ConfirmationWindowModel
+            _confirmationWindowModel = new ConfirmationWindowModel
             {
                 Title = "To menu",
                 Message = "Do you want to go to the menu?",
@@ -138,7 +140,6 @@ namespace UI.Game
                 CancelDelegate = cancelDelegate,
             };
             
-            _gameMediator.InitializeConfirmationWindow(confirmationWindowModel);
             _gameMediator.ShowConfirmationWindow();
         }
     }

@@ -7,7 +7,7 @@ namespace Infrastructure
         void HandleCast();
         void HandleMusicVolume(float value);
         void HandleSoundVolume(float value);
-        void HandleLoadMenu();
+        void HandleLoadMenuScene();
         void HandleLoadGame();
     }
 }

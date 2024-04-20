@@ -1,6 +1,7 @@
 ﻿using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
+using Zenject;
 
 namespace ModalWindows
 {
@@ -8,8 +9,8 @@ namespace ModalWindows
     {
         [SerializeField] private Image _blackout;
         [SerializeField] private Transform _modalWindow;
-        
-        public void Show()
+
+        public virtual void Show()
         {
             _blackout.gameObject.SetActive(true);
             _modalWindow.gameObject.SetActive(true);

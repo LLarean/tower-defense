@@ -31,7 +31,6 @@ namespace Game
         [Button()] public void ResetClock() => _hud.ResetClock();
         [Button()] public void ClearInfo() => _hud.ClearInfo();
     
-        public void InitializeConfirmationWindow(ConfirmationWindowModel confirmationWindowModel) => _confirmationWindow.Initialize(confirmationWindowModel);
         [Button()] public void ShowConfirmationWindow() => _confirmationWindow.Show();
         [Button()] public void HideConfirmationWindow() => _confirmationWindow.Hide();
         

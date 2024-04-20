@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using Infrastructure;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using Utilities;
 using Zenject;
 
@@ -24,15 +23,22 @@ namespace GameUtilities
             _playerModel = playerModel;
         }
 
-        public void StartMatch()
+        public virtual void StartMatch()
         {
-            CustomLogger.LogMessage("The match is started", 3);
+            CustomLogger.Log("The match is started", 3);
+
+            if (_matchModel == null)
+            {
+                CustomLogger.LogError("_matchModel == null");
+                return;
+            }
+            
             _coroutine = StartCoroutine(Waiting(_matchModel.RoundStartDelay));
         }
 
         public void StopMatch()
         {
-            CustomLogger.LogMessage("The match is stopped", 3);
+            CustomLogger.Log("The match is stopped", 3);
 
             if (_coroutine != null)
             {
@@ -45,7 +51,7 @@ namespace GameUtilities
 
         public void HandleDestroy()
         {
-            CustomLogger.LogMessage("The tower destroyed the enemy", 3);
+            CustomLogger.Log("The tower destroyed the enemy", 3);
 
             _playerModel.Gold.Value += GlobalParams.RewardMurder;
             DestroyUnit();
@@ -53,7 +59,7 @@ namespace GameUtilities
 
         public void HandleFinish()
         {
-            CustomLogger.LogMessage("The enemy has reached the end", 3);
+            CustomLogger.Log("The enemy has reached the end", 3);
 
             _playerModel.Notification.Value = GlobalStrings.EnemyReached;
             _playerModel.Health.Value -= GlobalParams.DamagePlayer;
@@ -63,15 +69,13 @@ namespace GameUtilities
 
         protected virtual void FinishMatch()
         {
-            CustomLogger.LogMessage("Don't start", 3);
+            CustomLogger.Log("Don't start", 3);
             _playerModel.Notification.Value = "End";
         }
 
         private void Start()
         {
             EventBus.Subscribe(this);
-            StartMatch();
-            PlayMusic();
         }
 
         private void OnDestroy()
@@ -95,7 +99,7 @@ namespace GameUtilities
                 return;
             }
 
-            CustomLogger.LogMessage("The round is over", 3);
+            CustomLogger.Log("The round is over", 3);
 
             _playerModel.Notification.Value = GlobalStrings.RoundOver;
             StartCoroutine(Waiting(_matchModel.RoundStartDelay));
@@ -123,26 +127,12 @@ namespace GameUtilities
 
         private void StartNewRound()
         {
-            CustomLogger.LogMessage("The round is started", 3);
+            CustomLogger.Log("The round is started", 3);
             _numberDestroyedEnemies = 0;
             _playerModel.Notification.Value = GlobalStrings.RoundStart;
 
             _enemiesRouter.StartRouting(_matchModel.RoundSettings[_nextRoundIndex]);
             _nextRoundIndex++;
-        }
-
-        private void PlayMusic()
-        {
-            Scene scene = SceneManager.GetActiveScene();
-
-            if (scene.name == GlobalStrings.Menu)
-            {
-                EventBus.RaiseEvent<ISoundHandler>(soundHandler => soundHandler.HandleLoadMenu());
-            }
-            else
-            {
-                EventBus.RaiseEvent<ISoundHandler>(soundHandler => soundHandler.HandleLoadGame());
-            }
         }
     }
 }

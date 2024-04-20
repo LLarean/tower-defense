@@ -14,13 +14,16 @@ namespace Menu
         [Inject] private ConfirmationWindow _confirmationWindow;
         [Inject] private SettingsWindow _settingsWindow;
         
+        [Button()] public void StartMatch() => _roundStarter.StartMatch();
+
         [Button()] public void LoadSingleplayerGame() => SceneManager.LoadScene(GlobalStrings.Demo);
         [Button()] public void LoadMultiplayerGame() => SceneManager.LoadScene(GlobalStrings.Demo);
         [Button()] public void ShowSettingsWindow() => _settingsWindow.Show();
-        [Button()] public void CloseGame() => Application.Quit();
+        [Button()] public void HideSettingsWindow() => _settingsWindow.Hide();
+        public void CloseGame() => Application.Quit();
 
-        public void InitializeConfirmationWindow(ConfirmationWindowModel confirmationWindowModel) => _confirmationWindow.Initialize(confirmationWindowModel);
         [Button()] public void ShowConfirmationWindow() => _confirmationWindow.Show();
         [Button()] public void HideConfirmationWindow() => _confirmationWindow.Hide();
+
     }
 }

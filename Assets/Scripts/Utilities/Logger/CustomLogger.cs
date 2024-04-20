@@ -23,7 +23,7 @@ namespace Utilities
         /// </summary>
         /// <param name="message">Message to the console</param>
         /// <param name="importanceLevel">0 is critical, 1 is necessary to pay attention, 2 is the most unimportant</param>
-        public static void LogMessage(string message, int  importanceLevel)
+        public static void Log(string message, int  importanceLevel)
         {
             if (IsDevelop == true && LogDisplayLevel >= importanceLevel)
             {

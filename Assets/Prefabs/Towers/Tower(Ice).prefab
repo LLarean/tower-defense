@@ -9701,6 +9701,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1040003141101653205, guid: 5499340a86243144c8c2f5caf21d61de, type: 3}
+      propertyPath: _castItem
+      value: 
+      objectReference: {fileID: 78987458301905268, guid: 7959e1b7da6ecf046a9b84aaacde7ac1, type: 3}
+    - target: {fileID: 1040003141101653205, guid: 5499340a86243144c8c2f5caf21d61de, type: 3}
+      propertyPath: _elementalType
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 6470663285452829661, guid: 5499340a86243144c8c2f5caf21d61de, type: 3}
       propertyPath: m_Name
       value: Tower(Ice)
