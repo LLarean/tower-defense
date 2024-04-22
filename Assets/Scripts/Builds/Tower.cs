@@ -6,52 +6,38 @@ namespace Builds
 {
     public class Tower : MonoBehaviour
     {
+        [SerializeField] private ElementalType _elementalType;
+        [SerializeField] private bool _isBuilt;
+        [Space]
         [SerializeField] private SpellCaster _spellCaster;
         [SerializeField] private BuildArea _buildArea;
         [SerializeField] private CastArea _castArea;
         [SerializeField] private TowerPainter _towerPainter;
-        [Space]
-        [SerializeField] private ElementalType _elementalType;
-        [SerializeField] private CastItem _castItem;
-        [SerializeField] private bool _isBuilt;
         
         private TowerConstructor _towerConstructor;
         private bool _canBuilt = true;
         
         public ElementalType ElementalType => _elementalType;
-        // public bool IsBuilt => _isBuilt;
         public bool CanBuilt => _canBuilt;
 
         public void Initialize(TowerModel towerModel)
         {
+            _buildArea.TriggerEnter += BuildTriggerEnter;
+            _buildArea.TriggerExit += BuildTriggerExit;
+            
+            _castArea.TriggerEnter += CastTriggerEnter;
+            _castArea.TriggerExit += CastTriggerExit;
+            
             if (towerModel == null)
             {
                 CustomLogger.LogError("towerModel == null");
                 return;
             }
             
-            if (_castItem == null)
-            {
-                CustomLogger.LogError("_castItem == null");
-                return;
-            }
-
-            CastItemModel castItemModel = new CastItemModel
-            {
-                ElementalType = towerModel.ElementalType,
-                Damage = towerModel.Damage,
-            };
-            
-            _castItem.Initialize(castItemModel);
-            _spellCaster.Initialize(_castItem, towerModel.AttackSpeed);
-
-            _buildArea.TriggerEnter += BuildTriggerEnter;
-            _buildArea.TriggerExit += BuildTriggerExit;
-            
-            _castArea.TriggerEnter += CastTriggerEnter;
-            _castArea.TriggerExit += CastTriggerExit;
+            var castItemModel = GetCastItemModel(towerModel);
+            _spellCaster.Initialize(towerModel.AttackSpeed, castItemModel);
         }
-        
+
         public void DisableConstructionMode() => _isBuilt = true;
 
         private void BuildTriggerEnter(Collider collider)
@@ -108,6 +94,17 @@ namespace Builds
             }
             
             _spellCaster.ResetTarget();
+        }
+
+        private CastItemModel GetCastItemModel(TowerModel towerModel)
+        {
+            CastItemModel castItemModel = new CastItemModel
+            {
+                ElementalType = towerModel.ElementalType,
+                Damage = towerModel.Damage,
+            };
+            
+            return castItemModel;
         }
     }
 }

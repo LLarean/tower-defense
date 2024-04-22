@@ -1,15 +1,6 @@
-using System;
-using UnityEngine;
-
 namespace Builds
 {
-    public class CastArea : MonoBehaviour
+    public class CastArea : TriggerArea
     {
-        public event Action<Collider> TriggerEnter;
-        public event Action<Collider> TriggerExit;
-
-        private void OnTriggerEnter(Collider collider) => TriggerEnter?.Invoke(collider);
-
-        private void OnTriggerExit(Collider collider) => TriggerExit?.Invoke(collider);        
     }
 }

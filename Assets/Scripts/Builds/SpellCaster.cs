@@ -7,24 +7,25 @@ namespace Builds
 {
     public class SpellCaster : MonoBehaviour
     {
-        private CastItem _castItem;
-        private float _attackSpeed;
+        [SerializeField] private CastItem _castItem;
         
+        private float _attackSpeed;
         private bool _canCast;
         private Transform _target;
         
         private Coroutine _coroutine;
 
-        public void Initialize(CastItem castItem, float attackSpeed)
+        public void Initialize(float attackSpeed, CastItemModel castItemModel)
         {
-            if (castItem == null)
+            _attackSpeed = attackSpeed;
+            
+            if (_castItem == null)
             {
                 CustomLogger.LogError("_castItem == null");
                 return;
             }
 
-            _castItem = castItem;
-            _attackSpeed = attackSpeed;
+            _castItem.Initialize(castItemModel);
         }
         
         public void SetTarget(Transform target)

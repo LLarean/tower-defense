@@ -14487,6 +14487,10 @@ PrefabInstance:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: b65c3516237fe2c4d9df0bedcbc9db9f, type: 2}
+    - target: {fileID: 3303634596837178742, guid: 77a599bd67f72e24999e1d5d60f433d0, type: 3}
+      propertyPath: _castItem
+      value: 
+      objectReference: {fileID: 8522977891123354668, guid: c0b807c942807184285ecbe2b4dbfd88, type: 3}
     - target: {fileID: 6314817027743064326, guid: 77a599bd67f72e24999e1d5d60f433d0, type: 3}
       propertyPath: _castItem
       value: 
