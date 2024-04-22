@@ -9,6 +9,7 @@ namespace Installers
         {
             BindPlayerModel();
             BindConfirmationWindowModel();
+            BindNotificationWindowModel();
         }
 
         private void BindPlayerModel()
@@ -29,6 +30,16 @@ namespace Installers
             Container
                 .Bind<ConfirmationWindowModel>()
                 .FromInstance(confirmationWindowModel)
+                .AsSingle();
+        }
+        
+        private void BindNotificationWindowModel()
+        {
+            NotificationWindowModel notificationWindowModel = new NotificationWindowModel();
+
+            Container
+                .Bind<NotificationWindowModel>()
+                .FromInstance(notificationWindowModel)
                 .AsSingle();
         }
     }

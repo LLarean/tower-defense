@@ -23,7 +23,7 @@ namespace GameUtilities
             _playerModel = playerModel;
         }
 
-        public virtual void StartMatch()
+        public void StartMatch()
         {
             CustomLogger.Log("The match is started", 2);
 
@@ -49,28 +49,22 @@ namespace GameUtilities
             _numberDestroyedEnemies = Int32.MaxValue;
         }
 
-        public void HandleDestroy()
+        public void HandleEnemyDestroy()
         {
             CustomLogger.Log("The tower destroyed the enemy", 2);
 
-            _playerModel.Gold.Value += GlobalParams.RewardMurder;
+            // _playerModel.Gold.Value += GlobalParams.RewardMurder;
             DestroyUnit();
         }
 
-        public void HandleFinish()
+        public void HandleFinishRoute()
         {
             CustomLogger.Log("The enemy has reached the end", 2);
 
             _playerModel.Notification.Value = GlobalStrings.EnemyReached;
-            _playerModel.Health.Value -= GlobalParams.DamagePlayer;
+            // _playerModel.Health.Value -= GlobalParams.DamagePlayer;
 
             DestroyUnit();
-        }
-
-        protected virtual void FinishMatch()
-        {
-            CustomLogger.Log("Don't start", 3);
-            _playerModel.Notification.Value = "End";
         }
 
         private void Start()
@@ -113,7 +107,16 @@ namespace GameUtilities
             StartRound();
         }
 
-        protected virtual void StartRound()
+        private void FinishMatch()
+        {
+            CustomLogger.Log("FinishMatch", 3);
+            
+            EventBus.RaiseEvent<IGameHandler>(gameHandler => gameHandler.HandleFinishMatch());
+
+            _playerModel.Notification.Value = "End";
+        }
+
+        private void StartRound()
         {
             if (_nextRoundIndex < _matchModel.RoundSettings.Count)
             {

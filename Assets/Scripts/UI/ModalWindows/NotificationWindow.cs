@@ -1,6 +1,8 @@
+using Infrastructure;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using Zenject;
 
 namespace ModalWindows
 {
@@ -14,20 +16,32 @@ namespace ModalWindows
         
         private NotificationWindowModel _notificationWindowModel;
 
-        public void Initialize(NotificationWindowModel notificationWindowModel)
+        [Inject]
+        public void Construction(NotificationWindowModel notificationWindowModel)
         {
             _notificationWindowModel = notificationWindowModel;
-            
-            _title.text = notificationWindowModel.Title;
-            _message.text = notificationWindowModel.Message;
+        }
+        
+        public override void Show()
+        {
+            UpdateWindow();
+            base.Show();
+        }
+
+        private void UpdateWindow()
+        {
+            _title.text = _notificationWindowModel.Title;
+            _message.text = _notificationWindowModel.Message;
             
             _confirm.onClick.RemoveAllListeners();
             _confirm.onClick.AddListener(Confirm);
-            _confirmLabel.text = notificationWindowModel.ConfirmLabel;
-            
-            Show();
+            _confirmLabel.text = _notificationWindowModel.ConfirmLabel;
         }
-        
-        private void Confirm() => _notificationWindowModel.ConfirmDelegate();
+
+        private void Confirm()
+        {
+            EventBus.RaiseEvent<ISoundHandler>(soundHandler => soundHandler.HandleClick());
+            _notificationWindowModel.Confirm();
+        }
     }
 }

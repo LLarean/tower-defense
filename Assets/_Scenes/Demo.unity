@@ -262,70 +262,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6470663285453056599, guid: 5499340a86243144c8c2f5caf21d61de, type: 3}
   m_PrefabInstance: {fileID: 4268696661335630006}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &86246425
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 86246426}
-  - component: {fileID: 86246427}
-  m_Layer: 0
-  m_Name: GameRoundStarter
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!4 &86246426
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 86246425}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1516672785}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &86246427
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 86246425}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: adac8776ff4148ffada680c074864778, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _enemiesRouter: {fileID: 611186999}
-  _matchModel:
-    RoundStartDelay: 5
-    RoundSettings:
-    - EnemySpawnDelay: 2
-      NumberEnemies: 2
-      IsInfinite: 0
-      Enemy: {fileID: 7786142572879946961, guid: 10893b3a34612b6408784825b8c994d9, type: 3}
-    - EnemySpawnDelay: 2
-      NumberEnemies: 2
-      IsInfinite: 0
-      Enemy: {fileID: 7786142572879946961, guid: ad002a04f7bf3584fa1cee5a1bda1a4c, type: 3}
-    - EnemySpawnDelay: 2
-      NumberEnemies: 2
-      IsInfinite: 0
-      Enemy: {fileID: 7786142572879946961, guid: e6011177961bccc49be2cc908952a0ca, type: 3}
-    - EnemySpawnDelay: 2
-      NumberEnemies: 2
-      IsInfinite: 0
-      Enemy: {fileID: 7786142572879946961, guid: 109b39f565642bd4daf97aabadf6ba00, type: 3}
 --- !u!1 &89273637
 GameObject:
   m_ObjectHideFlags: 0
@@ -2143,6 +2079,50 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &886349153
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 886349154}
+  - component: {fileID: 886349155}
+  m_Layer: 0
+  m_Name: Referee
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &886349154
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 886349153}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1516672785}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &886349155
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 886349153}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5864b6d1d2908f947a6999a790d3ce20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &928482725
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3572,11 +3552,11 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 86246426}
   - {fileID: 1579813883}
   - {fileID: 611187000}
   - {fileID: 1068499751}
   - {fileID: 1762554873}
+  - {fileID: 886349154}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1578482622

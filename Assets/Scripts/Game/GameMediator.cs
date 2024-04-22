@@ -34,7 +34,6 @@ namespace Game
         [Button()] public void ShowConfirmationWindow() => _confirmationWindow.Show();
         [Button()] public void HideConfirmationWindow() => _confirmationWindow.Hide();
         
-        public void InitializeNotificationWindow(NotificationWindowModel notificationWindowModel) => _notificationWindow.Initialize(notificationWindowModel);
         [Button()] public void ShowNotificationWindow() => _notificationWindow.Show();
         [Button()] public void HideNotificationWindow() => _notificationWindow.Hide();
     }

@@ -2,7 +2,7 @@ namespace Infrastructure
 {
     public interface IEnemyHandler : IGlobalSubscriber
     {
-        void HandleDestroy();
-        void HandleFinish();
+        void HandleEnemyDestroy();
+        void HandleFinishRoute();
     }
 }

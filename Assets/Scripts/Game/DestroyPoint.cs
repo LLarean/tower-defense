@@ -13,7 +13,7 @@ public class DestroyPoint : MonoBehaviour
             return;
         }
         
-        EventBus.RaiseEvent<IEnemyHandler>(enemyHandler => enemyHandler.HandleFinish());
+        EventBus.RaiseEvent<IEnemyHandler>(enemyHandler => enemyHandler.HandleFinishRoute());
         Destroy(enemy.gameObject);
     }
 }
