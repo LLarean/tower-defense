@@ -25,7 +25,7 @@ namespace GameUtilities
 
         public virtual void StartMatch()
         {
-            CustomLogger.Log("The match is started", 3);
+            CustomLogger.Log("The match is started", 2);
 
             if (_matchModel == null)
             {
@@ -38,7 +38,7 @@ namespace GameUtilities
 
         public void StopMatch()
         {
-            CustomLogger.Log("The match is stopped", 3);
+            CustomLogger.Log("The match is stopped", 2);
 
             if (_coroutine != null)
             {
@@ -51,7 +51,7 @@ namespace GameUtilities
 
         public void HandleDestroy()
         {
-            CustomLogger.Log("The tower destroyed the enemy", 3);
+            CustomLogger.Log("The tower destroyed the enemy", 2);
 
             _playerModel.Gold.Value += GlobalParams.RewardMurder;
             DestroyUnit();
@@ -59,7 +59,7 @@ namespace GameUtilities
 
         public void HandleFinish()
         {
-            CustomLogger.Log("The enemy has reached the end", 3);
+            CustomLogger.Log("The enemy has reached the end", 2);
 
             _playerModel.Notification.Value = GlobalStrings.EnemyReached;
             _playerModel.Health.Value -= GlobalParams.DamagePlayer;
@@ -99,7 +99,7 @@ namespace GameUtilities
                 return;
             }
 
-            CustomLogger.Log("The round is over", 3);
+            CustomLogger.Log("The round is over", 2);
 
             _playerModel.Notification.Value = GlobalStrings.RoundOver;
             StartCoroutine(Waiting(_matchModel.RoundStartDelay));
@@ -127,7 +127,7 @@ namespace GameUtilities
 
         private void StartNewRound()
         {
-            CustomLogger.Log("The round is started", 3);
+            CustomLogger.Log("The round is started", 2);
             _numberDestroyedEnemies = 0;
             _playerModel.Notification.Value = GlobalStrings.RoundStart;
 

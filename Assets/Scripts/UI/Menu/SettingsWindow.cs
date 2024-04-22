@@ -29,11 +29,13 @@ namespace UI
 
         private void ChangeMusicVolume(float value)
         {
+            PlayerPrefs.SetFloat(GlobalStrings.MusicValue, value);
             EventBus.RaiseEvent<ISoundHandler>(soundHandler => soundHandler.HandleMusicVolume(value));
         }
 
         private void ChangeSoundVolume(float value)
         {
+            PlayerPrefs.SetFloat(GlobalStrings.SoundValue, value);
             EventBus.RaiseEvent<ISoundHandler>(soundHandler => soundHandler.HandleSoundVolume(value));
         }
 

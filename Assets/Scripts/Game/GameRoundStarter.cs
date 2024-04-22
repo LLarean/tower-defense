@@ -12,7 +12,7 @@ public class GameRoundStarter : RoundStarter, IEnemyHandler
     public void Construct(GameMediator gameMediator)
     {
         _gameMediator = gameMediator;
-        EventBus.RaiseEvent<ISoundHandler>(soundHandler => soundHandler.HandleLoadGame());
+        EventBus.RaiseEvent<ISoundHandler>(soundHandler => soundHandler.HandleLoadGameScene());
     }
     
     protected virtual void FinishMatch()

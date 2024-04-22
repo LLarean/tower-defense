@@ -127,20 +127,22 @@ namespace UI.Game
 
         private void OpenMenu()
         {
-            AcceptDelegate acceptDelegate = () => { _gameMediator.LoadMainMenu(); };
-            CancelDelegate cancelDelegate = () => { _gameMediator.HideConfirmationWindow(); };
-            
-            _confirmationWindowModel = new ConfirmationWindowModel
-            {
-                Title = "To menu",
-                Message = "Do you want to go to the menu?",
-                AcceptLabel = "Yes",
-                CancelLabel = "No",
-                AcceptDelegate = acceptDelegate,
-                CancelDelegate = cancelDelegate,
-            };
-            
+            SetConfirmationWindowModel();
             _gameMediator.ShowConfirmationWindow();
+        }
+        
+        private void AcceptDelegate() { _gameMediator.LoadMainMenu(); }
+
+        private void CancelDelegate() { _gameMediator.HideConfirmationWindow(); }
+
+        private void SetConfirmationWindowModel()
+        {
+            _confirmationWindowModel.Title = "To menu";
+            _confirmationWindowModel.Message = "Do you want to go to the menu?";
+            _confirmationWindowModel.AcceptLabel = "Yes";
+            _confirmationWindowModel.CancelLabel = "No";
+            _confirmationWindowModel.AcceptDelegate = AcceptDelegate;
+            _confirmationWindowModel.CancelDelegate = CancelDelegate;
         }
     }
 }

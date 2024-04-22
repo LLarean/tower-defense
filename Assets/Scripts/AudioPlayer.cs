@@ -16,7 +16,7 @@ public class AudioPlayer : MonoBehaviour, ISoundHandler
 
     public void HandleLoadMenuScene() =>  PlayMusic(_audioClips.MenuMusic);
 
-    public void HandleLoadGame() => PlayMusic(_audioClips.BattleMusic);
+    public void HandleLoadGameScene() => PlayMusic(_audioClips.BattleMusic);
 
     public void HandleClick() => _sounds.PlayOneShot(_audioClips.ClickSound);
     

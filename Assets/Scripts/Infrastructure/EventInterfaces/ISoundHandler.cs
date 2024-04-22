@@ -8,6 +8,6 @@ namespace Infrastructure
         void HandleMusicVolume(float value);
         void HandleSoundVolume(float value);
         void HandleLoadMenuScene();
-        void HandleLoadGame();
+        void HandleLoadGameScene();
     }
 }

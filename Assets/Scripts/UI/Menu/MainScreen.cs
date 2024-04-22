@@ -66,24 +66,25 @@ namespace UI.Menu
             _menuMediator.ShowConfirmationWindow();
         }
 
-        private void SetConfirmationWindowModel()
-        {
-            AcceptDelegate acceptDelegate = () => { _menuMediator.CloseGame(); };
-            CancelDelegate cancelDelegate = () => { _menuMediator.HideConfirmationWindow(); };
-
-            _confirmationWindowModel.Title = "Exit";
-            _confirmationWindowModel.Message = "Are you sure you want to get out?";
-            _confirmationWindowModel.AcceptLabel = "Yes";
-            _confirmationWindowModel.CancelLabel = "No";
-            _confirmationWindowModel.AcceptDelegate = acceptDelegate;
-            _confirmationWindowModel.CancelDelegate = cancelDelegate;
-        }
-
         private void ShowPanel()
         {
             var startPositionY = _menuPanel.position.y;
             _menuPanel.DOMoveY(startPositionY + 2000, 0);
             _menuPanel.DOMoveY(startPositionY, .7f);
+        }
+
+        private void AcceptDelegate() { _menuMediator.CloseGame(); }
+
+        private void CancelDelegate() { _menuMediator.HideConfirmationWindow(); }
+
+        private void SetConfirmationWindowModel()
+        {
+            _confirmationWindowModel.Title = "Exit";
+            _confirmationWindowModel.Message = "Are you sure you want to get out?";
+            _confirmationWindowModel.AcceptLabel = "Yes";
+            _confirmationWindowModel.CancelLabel = "No";
+            _confirmationWindowModel.AcceptDelegate = AcceptDelegate;
+            _confirmationWindowModel.CancelDelegate = CancelDelegate;
         }
     }
 }
