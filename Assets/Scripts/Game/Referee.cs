@@ -18,7 +18,23 @@ namespace Game
             _playerModel = playerModel;
             _notificationWindowModel = notificationWindowModel;
         }
-        
+
+        public void HandleStartRound()
+        {
+            _playerModel.Notification.Value = GlobalStrings.RoundStart;
+        }
+
+        public void HandleFinishRound()
+        {
+            _playerModel.Notification.Value = GlobalStrings.RoundOver;
+        }
+
+        public void HandleFinishMatch()
+        {
+            _playerModel.Notification.Value = "End";
+            FinishMatch();
+        }
+
         public void HandleEnemyDestroy()
         {
             _playerModel.Gold.Value += GlobalParams.RewardMurder;
@@ -28,11 +44,6 @@ namespace Game
         {
             _playerModel.Notification.Value = GlobalStrings.EnemyReached;
             _playerModel.Health.Value -= GlobalParams.DamagePlayer;
-        }
-
-        public void HandleFinishMatch()
-        {
-            FinishMatch();
         }
 
         private void Start()

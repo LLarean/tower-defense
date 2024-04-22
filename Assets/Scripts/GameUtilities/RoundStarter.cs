@@ -25,26 +25,24 @@ namespace GameUtilities
 
         public void StartMatch()
         {
-            CustomLogger.Log("The match is started", 2);
-
             if (_matchModel == null)
             {
                 CustomLogger.LogError("_matchModel == null");
                 return;
             }
             
+            CustomLogger.Log("The match is started", 2);
             _coroutine = StartCoroutine(Waiting(_matchModel.RoundStartDelay));
         }
 
         public void StopMatch()
         {
-            CustomLogger.Log("The match is stopped", 2);
-
             if (_coroutine != null)
             {
                 StopCoroutine(_coroutine);
             }
 
+            CustomLogger.Log("The match is stopped", 2);
             _nextRoundIndex = Int32.MaxValue;
             _numberDestroyedEnemies = Int32.MaxValue;
         }
@@ -52,18 +50,13 @@ namespace GameUtilities
         public void HandleEnemyDestroy()
         {
             CustomLogger.Log("The tower destroyed the enemy", 2);
-
-            // _playerModel.Gold.Value += GlobalParams.RewardMurder;
             DestroyUnit();
         }
 
         public void HandleFinishRoute()
         {
             CustomLogger.Log("The enemy has reached the end", 2);
-
-            _playerModel.Notification.Value = GlobalStrings.EnemyReached;
-            // _playerModel.Health.Value -= GlobalParams.DamagePlayer;
-
+            // _playerModel.Notification.Value = GlobalStrings.EnemyReached;
             DestroyUnit();
         }
 
@@ -94,8 +87,7 @@ namespace GameUtilities
             }
 
             CustomLogger.Log("The round is over", 2);
-
-            _playerModel.Notification.Value = GlobalStrings.RoundOver;
+            EventBus.RaiseEvent<IGameHandler>(gameHandler => gameHandler.HandleFinishRound());
             StartCoroutine(Waiting(_matchModel.RoundStartDelay));
         }
 
@@ -110,10 +102,7 @@ namespace GameUtilities
         private void FinishMatch()
         {
             CustomLogger.Log("FinishMatch", 3);
-            
             EventBus.RaiseEvent<IGameHandler>(gameHandler => gameHandler.HandleFinishMatch());
-
-            _playerModel.Notification.Value = "End";
         }
 
         private void StartRound()
@@ -131,9 +120,9 @@ namespace GameUtilities
         private void StartNewRound()
         {
             CustomLogger.Log("The round is started", 2);
+            EventBus.RaiseEvent<IGameHandler>(gameHandler => gameHandler.HandleStartRound());
+            
             _numberDestroyedEnemies = 0;
-            _playerModel.Notification.Value = GlobalStrings.RoundStart;
-
             _enemiesRouter.StartRouting(_matchModel.RoundSettings[_nextRoundIndex]);
             _nextRoundIndex++;
         }
