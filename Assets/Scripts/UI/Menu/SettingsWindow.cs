@@ -9,14 +9,14 @@ namespace UI
     {
         [Space]
         [SerializeField] private Button _close;
-        [SerializeField] private Slider _music;
-        [SerializeField] private Slider _sounds;
+        [SerializeField] private Slider _musicVolume;
+        [SerializeField] private Slider _soundsVolume;
 
         private void Start()
         {
             _close.onClick.AddListener(CloseWindow);
-            _music.onValueChanged.AddListener(ChangeMusicVolume);
-            _sounds.onValueChanged.AddListener(ChangeSoundVolume);
+            _musicVolume.onValueChanged.AddListener(ChangeMusicVolume);
+            _soundsVolume.onValueChanged.AddListener(ChangeSoundVolume);
 
             SetSlidersValue();
         }
@@ -42,10 +42,10 @@ namespace UI
         private void SetSlidersValue()
         {
             var musicVolume = PlayerPrefs.GetFloat(GlobalStrings.MusicValue, GlobalParams.DefaultMusicVolume);
-            _music.value = musicVolume;
+            _musicVolume.value = musicVolume;
 
             var soundValue = PlayerPrefs.GetFloat(GlobalStrings.SoundValue, GlobalParams.DefaultSoundVolume);
-            _sounds.value = soundValue;
+            _soundsVolume.value = soundValue;
         }
     }
 }

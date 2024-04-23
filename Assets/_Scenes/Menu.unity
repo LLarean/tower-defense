@@ -1134,8 +1134,8 @@ MonoBehaviour:
   _blackout: {fileID: 510216152}
   _modalWindow: {fileID: 1248557551}
   _close: {fileID: 413020629}
-  _music: {fileID: 1623739991}
-  _sounds: {fileID: 5637159579087785625}
+  _musicVolume: {fileID: 1623739991}
+  _soundsVolume: {fileID: 5637159579087785625}
 --- !u!1 &674185596
 GameObject:
   m_ObjectHideFlags: 0

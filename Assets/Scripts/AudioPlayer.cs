@@ -29,12 +29,12 @@ public class AudioPlayer : MonoBehaviour, ISoundHandler
     private void Start()
     {
         EventBus.Subscribe(this);
-        SetSlidersValue();
+        SetVolume();
     }
 
     private void OnDestroy() => EventBus.Unsubscribe(this);
 
-    private void SetSlidersValue()
+    private void SetVolume()
     {
         var musicVolume = PlayerPrefs.GetFloat(GlobalStrings.MusicValue, GlobalParams.DefaultMusicVolume);
         _music.volume = musicVolume;

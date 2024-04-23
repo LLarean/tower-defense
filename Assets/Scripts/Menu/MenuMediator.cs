@@ -19,7 +19,6 @@ namespace Menu
         [Button()] public void LoadSingleplayerGame() => SceneManager.LoadScene(GlobalStrings.Demo);
         [Button()] public void LoadMultiplayerGame() => SceneManager.LoadScene(GlobalStrings.Demo);
         [Button()] public void ShowSettingsWindow() => _settingsWindow.Show();
-        [Button()] public void HideSettingsWindow() => _settingsWindow.Hide();
         public void CloseGame() => Application.Quit();
 
         [Button()] public void ShowConfirmationWindow() => _confirmationWindow.Show();
