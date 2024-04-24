@@ -43,7 +43,22 @@ namespace Game
         public void HandleFinishRoute()
         {
             _playerModel.Notification.Value = GlobalStrings.EnemyReached;
-            _playerModel.Health.Value -= GlobalParams.DamagePlayer;
+            
+            var healthValue = _playerModel.Health.Value - GlobalParams.DamagePlayer;
+
+            if (healthValue >= 0)
+            {
+                _playerModel.Health.Value -= GlobalParams.DamagePlayer;
+            }
+            else
+            {
+                _playerModel.Health.Value = 0;
+            }
+
+            if (_playerModel.Health.Value == 0)
+            {
+                EventBus.RaiseEvent<IGameHandler>(gameHandler => gameHandler.HandleFinishMatch());
+            }
         }
 
         private void Start()

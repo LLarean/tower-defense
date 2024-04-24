@@ -25,17 +25,17 @@ namespace GameUtilities
         
         public void StartRound()
         {
-            if (_currentRoundIndex < _matchModel.RoundSettings.Count)
-            {
+            // if (_currentRoundIndex < _matchModel.RoundSettings.Count)
+            // {
                 CustomLogger.Log("The round is started", 2);
                 EventBus.RaiseEvent<IGameHandler>(gameHandler => gameHandler.HandleStartRound());
                 _coroutine = StartCoroutine(DelayingRoutingEnemies());
-            }
-            else
-            {
-                CustomLogger.Log("The match is finished", 2);
-                EventBus.RaiseEvent<IGameHandler>(gameHandler => gameHandler.HandleFinishMatch());
-            }
+            // }
+            // else
+            // {
+            //     CustomLogger.Log("The match is finished", 2);
+            //     EventBus.RaiseEvent<IGameHandler>(gameHandler => gameHandler.HandleFinishMatch());
+            // }
         }
 
         public void StopMatch()
@@ -55,8 +55,14 @@ namespace GameUtilities
             CustomLogger.Log("The tower destroyed the enemy", 2);
             _numberEnemiesDestroyed++;
             
-            if (_matchModel.RoundSettings[_currentRoundIndex - 1].IsInfinite == true)
+            if (_matchModel.RoundSettings[^1].IsInfinite == true)
             {
+                return;
+            }
+
+            if (_currentRoundIndex >= _matchModel.RoundSettings.Count)
+            {
+                EventBus.RaiseEvent<IGameHandler>(gameHandler => gameHandler.HandleFinishMatch());
                 return;
             }
             
@@ -71,8 +77,14 @@ namespace GameUtilities
             CustomLogger.Log("The enemy has reached the end", 2);
             _numberEnemiesDestroyed++;
             
-            if (_matchModel.RoundSettings[_currentRoundIndex - 1].IsInfinite == true)
+            if (_matchModel.RoundSettings[^1].IsInfinite == true)
             {
+                return;
+            }
+
+            if (_currentRoundIndex >= _matchModel.RoundSettings.Count)
+            {
+                EventBus.RaiseEvent<IGameHandler>(gameHandler => gameHandler.HandleFinishMatch());
                 return;
             }
 
