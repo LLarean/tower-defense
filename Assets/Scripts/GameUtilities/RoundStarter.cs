@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using Infrastructure;
 using UnityEngine;
@@ -13,26 +12,30 @@ namespace GameUtilities
         [SerializeField] private MatchModel _matchModel;
 
         private PlayerModel _playerModel;
-        private int _nextRoundIndex;
-        private int _numberDestroyedEnemies;
         private Coroutine _coroutine;
+        
+        private int _currentRoundIndex;
+        private int _numberEnemiesDestroyed;
 
         [Inject]
         public void Construction(PlayerModel playerModel)
         {
             _playerModel = playerModel;
         }
-
-        public void StartMatch()
+        
+        public void StartRound()
         {
-            if (_matchModel == null)
+            if (_currentRoundIndex < _matchModel.RoundSettings.Count)
             {
-                CustomLogger.LogError("_matchModel == null");
-                return;
+                CustomLogger.Log("The round is started", 2);
+                EventBus.RaiseEvent<IGameHandler>(gameHandler => gameHandler.HandleStartRound());
+                _coroutine = StartCoroutine(DelayingRoutingEnemies());
             }
-            
-            CustomLogger.Log("The match is started", 2);
-            _coroutine = StartCoroutine(Waiting(_matchModel.RoundStartDelay));
+            else
+            {
+                CustomLogger.Log("The match is finished", 2);
+                EventBus.RaiseEvent<IGameHandler>(gameHandler => gameHandler.HandleFinishMatch());
+            }
         }
 
         public void StopMatch()
@@ -41,23 +44,42 @@ namespace GameUtilities
             {
                 StopCoroutine(_coroutine);
             }
-
+            
+            _currentRoundIndex = 0;
+            _numberEnemiesDestroyed = 0;
             CustomLogger.Log("The match is stopped", 2);
-            _nextRoundIndex = Int32.MaxValue;
-            _numberDestroyedEnemies = Int32.MaxValue;
         }
 
         public void HandleEnemyDestroy()
         {
             CustomLogger.Log("The tower destroyed the enemy", 2);
-            DestroyUnit();
+            _numberEnemiesDestroyed++;
+            
+            if (_matchModel.RoundSettings[_currentRoundIndex - 1].IsInfinite == true)
+            {
+                return;
+            }
+            
+            if (_numberEnemiesDestroyed >= _matchModel.RoundSettings[_currentRoundIndex].NumberEnemies)
+            {
+                StartRound();
+            }
         }
 
         public void HandleFinishRoute()
         {
             CustomLogger.Log("The enemy has reached the end", 2);
-            // _playerModel.Notification.Value = GlobalStrings.EnemyReached;
-            DestroyUnit();
+            _numberEnemiesDestroyed++;
+            
+            if (_matchModel.RoundSettings[_currentRoundIndex - 1].IsInfinite == true)
+            {
+                return;
+            }
+
+            if (_numberEnemiesDestroyed >= _matchModel.RoundSettings[_currentRoundIndex].NumberEnemies)
+            {
+                StartRound();
+            }
         }
 
         private void Start()
@@ -71,60 +93,16 @@ namespace GameUtilities
             StopMatch();
         }
 
-        private void DestroyUnit()
+        private IEnumerator DelayingRoutingEnemies()
         {
-            _numberDestroyedEnemies++;
-            var currentRound = _nextRoundIndex - 1;
+            _numberEnemiesDestroyed = 0;
 
-            if (_numberDestroyedEnemies < _matchModel.RoundSettings[currentRound].NumberEnemies)
-            {
-                return;
-            }
-
-            if (_matchModel.RoundSettings[currentRound].IsInfinite == true)
-            {
-                return;
-            }
-
-            CustomLogger.Log("The round is over", 2);
-            EventBus.RaiseEvent<IGameHandler>(gameHandler => gameHandler.HandleFinishRound());
-            StartCoroutine(Waiting(_matchModel.RoundStartDelay));
-        }
-
-        private IEnumerator Waiting(float waitingTime)
-        {
             // TODO updating the seconds in the message
-            _playerModel.Notification.Value = $"{GlobalStrings.RoundWillStart} {waitingTime} {GlobalStrings.Seconds}";
-            yield return new WaitForSeconds(waitingTime);
-            StartRound();
-        }
-
-        private void FinishMatch()
-        {
-            CustomLogger.Log("FinishMatch", 3);
-            EventBus.RaiseEvent<IGameHandler>(gameHandler => gameHandler.HandleFinishMatch());
-        }
-
-        private void StartRound()
-        {
-            if (_nextRoundIndex < _matchModel.RoundSettings.Count)
-            {
-                StartNewRound();
-            }
-            else
-            {
-                FinishMatch();
-            }
-        }
-
-        private void StartNewRound()
-        {
-            CustomLogger.Log("The round is started", 2);
-            EventBus.RaiseEvent<IGameHandler>(gameHandler => gameHandler.HandleStartRound());
+            _playerModel.Notification.Value = $"{GlobalStrings.RoundWillStart} {_matchModel.RoundStartDelay} {GlobalStrings.Seconds}";
+            yield return new WaitForSeconds(_matchModel.RoundStartDelay);
             
-            _numberDestroyedEnemies = 0;
-            _enemiesRouter.StartRouting(_matchModel.RoundSettings[_nextRoundIndex]);
-            _nextRoundIndex++;
+            _enemiesRouter.StartRouting(_matchModel.RoundSettings[_currentRoundIndex]);
+            _currentRoundIndex++;
         }
     }
 }

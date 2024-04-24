@@ -14,7 +14,7 @@ namespace Menu
         [Inject] private ConfirmationWindow _confirmationWindow;
         [Inject] private SettingsWindow _settingsWindow;
         
-        [Button()] public void StartMatch() => _roundStarter.StartMatch();
+        [Button()] public void StartMatch() => _roundStarter.StartRound();
 
         [Button()] public void LoadSingleplayerGame() => SceneManager.LoadScene(GlobalStrings.Demo);
         [Button()] public void LoadMultiplayerGame() => SceneManager.LoadScene(GlobalStrings.Demo);

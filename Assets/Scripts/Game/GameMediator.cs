@@ -18,7 +18,7 @@ namespace Game
 
         [Button()] public void LoadMainMenu() => SceneManager.LoadScene(GlobalStrings.Menu);
         
-        [Button()] public void StartMatch() => _roundStarter.StartMatch();
+        [Button()] public void StartMatch() => _roundStarter.StartRound();
         [Button()] public void StopMatch() => _roundStarter.StopMatch();
     
         [Button()] public void BuildFireTower() => _hud.BuildFireTower();

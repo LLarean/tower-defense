@@ -40,7 +40,13 @@ namespace Infrastructure
                 return;
             }
             
-            SubscribersList<IGlobalSubscriber> subscribers = _subscribers[typeof(TSubscriber)];
+            SubscribersList<IGlobalSubscriber> subscribers = _subscribers.GetValueOrDefault(typeof(TSubscriber));
+
+            if (subscribers == null)
+            {
+                return;
+            }
+            
             subscribers.Executing = true;
             
             foreach (IGlobalSubscriber subscriber in subscribers.TSubscribers)

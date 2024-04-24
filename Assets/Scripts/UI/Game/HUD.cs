@@ -127,6 +127,7 @@ namespace UI.Game
 
         private void OpenMenu()
         {
+            EventBus.RaiseEvent<ISoundHandler>(soundHandler => soundHandler.HandleClick());
             SetConfirmationWindowModel();
             _gameMediator.ShowConfirmationWindow();
         }
