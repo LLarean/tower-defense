@@ -61,6 +61,11 @@ namespace Game
             }
         }
 
+        public void HandleNavigationPointVisit()
+        {
+            throw new System.NotImplementedException();
+        }
+
         private void Start()
         {
             EventBus.Subscribe(this);

@@ -15,7 +15,7 @@ namespace Menu
             
             EventBus.RaiseEvent<ISoundHandler>(soundHandler => soundHandler.HandleLoadMenuScene());
             
-            _menuMediator.StartMatch();
+            _menuMediator.StartRound();
         }
     }
 }

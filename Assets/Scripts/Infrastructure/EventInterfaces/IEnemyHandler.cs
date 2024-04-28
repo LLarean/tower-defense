@@ -4,5 +4,6 @@ namespace Infrastructure
     {
         void HandleEnemyDestroy();
         void HandleFinishRoute();
+        void HandleNavigationPointVisit();
     }
 }

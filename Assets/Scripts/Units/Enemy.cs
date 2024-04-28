@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Linq;
 using Builds;
+using GameLogic.Navigation;
 using Infrastructure;
 using TMPro;
 using UnityEngine;
@@ -34,6 +35,9 @@ namespace Units
             DisplayHealth();
             DisplayDebuffs();
         }
+
+        public void SetWayPoint(Vector3 nextWayPoint) => _unitMover.SetWayPoint(nextWayPoint);
+
 
         public void TakeDamage(CastItemModel castItemModel)
         {

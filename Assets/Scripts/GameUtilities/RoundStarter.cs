@@ -1,4 +1,5 @@
 using System.Collections;
+using GameLogic.Navigation;
 using Infrastructure;
 using UnityEngine;
 using Utilities;
@@ -25,17 +26,11 @@ namespace GameUtilities
         
         public void StartRound()
         {
-            // if (_currentRoundIndex < _matchModel.RoundSettings.Count)
-            // {
-                CustomLogger.Log("The round is started", 2);
-                EventBus.RaiseEvent<IGameHandler>(gameHandler => gameHandler.HandleStartRound());
-                _coroutine = StartCoroutine(DelayingRoutingEnemies());
-            // }
-            // else
-            // {
-            //     CustomLogger.Log("The match is finished", 2);
-            //     EventBus.RaiseEvent<IGameHandler>(gameHandler => gameHandler.HandleFinishMatch());
-            // }
+            CustomLogger.Log("The round is started", 2);
+            
+            EventBus.RaiseEvent<IGameHandler>(gameHandler => gameHandler.HandleStartRound());
+            
+            _coroutine = StartCoroutine(DelayingRoutingEnemies());
         }
 
         public void StopMatch()
@@ -48,6 +43,11 @@ namespace GameUtilities
             _currentRoundIndex = 0;
             _numberEnemiesDestroyed = 0;
             CustomLogger.Log("The match is stopped", 2);
+        }
+
+        public void HandleNavigationPointVisit()
+        {
+            throw new System.NotImplementedException();
         }
 
         public void HandleEnemyDestroy()

@@ -18,6 +18,11 @@ namespace Units
             _currentMoveSpeed = currentMoveSpeed;
             _wayPoints = wayPoints;
         }
+        
+        public void SetWayPoint(Vector3 nextWayPoint)
+        {
+            throw new System.NotImplementedException();
+        }
 
         public void MoveToNextPoint()
         {
