@@ -2,8 +2,9 @@
 {
     public interface IGameHandler : IGlobalSubscriber
     {
+        void HandlePrepareRound();
         void HandleStartRound();
-        void HandleFinishRound();
+        void HandleStopRound();
         void HandleFinishMatch();
     }
 }

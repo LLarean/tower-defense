@@ -10,6 +10,7 @@ namespace Game
 {
     public class GameMediator : MonoBehaviour
     {
+        [Inject] private Referee _referee;
         [Inject] private RoundStarter _roundStarter;
         [Inject] private Builder _builder;
         [Inject] private HUD _hud;
@@ -18,9 +19,10 @@ namespace Game
 
         [Button()] public void LoadMainMenu() => SceneManager.LoadScene(GlobalStrings.Menu);
         
-        [Button()] public void StartMatch() => _roundStarter.StartRound();
+        [Button()] public void StartMatch() => _referee.StartMatch();
         [Button()] public void StopMatch() => _roundStarter.StopMatch();
-    
+        // [Button()] public void StartRound() => _roundStarter.StartRound();
+        
         [Button()] public void BuildFireTower() => _hud.BuildFireTower();
         [Button()] public void BuildAirTower() => _hud.BuildPoisonTower();
         [Button()] public void BuildWaterTower() => _hud.BuildWaterTower();

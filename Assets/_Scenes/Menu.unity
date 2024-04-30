@@ -1073,14 +1073,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 641649437}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cb57fe1a9fa743441922337d7302a32d, type: 3}
+  m_Script: {fileID: 11500000, guid: ca0cd2aa399520e46a40f8e42085ad01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _pathModel:
-    SpawnPoint: {fileID: 2010043946}
-    DestroyPoint: {fileID: 1663361507}
-    WayPoints:
-    - {fileID: 1663361506}
+    WayPoints: []
+    SpawnPoint: {fileID: 0}
+    DestroyPoint: {fileID: 0}
 --- !u!1 &655199848
 GameObject:
   m_ObjectHideFlags: 0
@@ -3049,17 +3048,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2633740816431561199, guid: d752495adefa5e6458b63f7370bceacb, type: 3}
   m_PrefabInstance: {fileID: 1663361505}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1663361507 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 120252904179205430, guid: d752495adefa5e6458b63f7370bceacb, type: 3}
-  m_PrefabInstance: {fileID: 1663361505}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4313958f7b8e70b4c9756eaedc0c940e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &1772804409
 PrefabInstance:
   m_ObjectHideFlags: 0

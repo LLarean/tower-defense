@@ -1,56 +1,66 @@
 using System.Collections;
-using GameLogic.Navigation;
+using System.Collections.Generic;
+using GameLogic.EnemyNavigation;
+using Infrastructure;
 using Units;
 using UnityEngine;
 
-namespace GameUtilities
+namespace GameLogic.Navigation
 {
     public class EnemiesRouter : MonoBehaviour
     {
-        [SerializeField] private PathModel _pathModel;
+        [SerializeField] private List<WayPoint> _wayPoints;
     
-        private int _numberEnemiesCreated;
+        private List<Enemy> _enemies;
+        private int _routingDelaySeconds;
         private Coroutine _coroutine;
-
-        public void StartRouting(RoundModel roundModel)
+        
+        public void StartRouting(List<Enemy> enemies, int routingDelaySeconds)
         {
-            if (roundModel == null)
-            {
-                Debug.LogError("Class: 'EnemiesRouter', Method: 'StartRoute', Message: 'roundModel == null'");
-                return;
-            }
-        
-            if (roundModel.Enemy == null)
-            {
-                Debug.LogError("Class: 'EnemiesRouter', Method: 'StartRoute', Message: 'roundModel.Enemy == null'");
-                return;
-            }
-        
-            _coroutine = StartCoroutine(CreatingEnemies(roundModel));
+            _enemies = enemies;
+            _routingDelaySeconds = routingDelaySeconds;
+            
+            StartCoroutine(RoutingEnemies());
         }
 
-        private IEnumerator CreatingEnemies(RoundModel roundModel)
+        private IEnumerator RoutingEnemies()
         {
-            if (_pathModel == null)
+            foreach (var enemy in _enemies)
             {
-                Debug.LogError("Class: 'EnemiesRouter', Method: 'CreatingEnemies', Message: '_pathModel == null'");
-                yield break;
-            }
-        
-            _numberEnemiesCreated = 0;
-        
-            while (roundModel.IsInfinite == true || _numberEnemiesCreated < roundModel.NumberEnemies)
-            {
-                CreateEnemy(roundModel);
-                yield return new WaitForSeconds(roundModel.EnemySpawnDelay);
+                SetStartingState(enemy);
+                enemy.SetWayPoint(_wayPoints[1].transform.position);
+                yield return new WaitForSeconds(_routingDelaySeconds);
             }
         }
 
-        private void CreateEnemy(RoundModel roundModel)
+        private void SetStartingState(Enemy enemy)
         {
-            Enemy enemy = Instantiate(roundModel.Enemy, _pathModel.SpawnPoint.position, Quaternion.identity);
-            enemy.Initialize(_pathModel);
-            _numberEnemiesCreated++;
+            var startPosition = _wayPoints[0].transform.position;
+            enemy.transform.position = startPosition;
+            enemy.gameObject.SetActive(true);
+        }
+
+        private void SetNewWayPoint(Enemy enemy, int wayPointIndex)
+        {
+            if (wayPointIndex < _wayPoints.Count - 1)
+            {
+                var newWayPoint = _wayPoints[wayPointIndex + 1];
+                enemy.SetWayPoint(newWayPoint.transform.position);
+            }
+            else
+            {
+                enemy.gameObject.SetActive(false);
+                EventBus.RaiseEvent<IEnemyHandler>(enemyHandler => enemyHandler.HandleFinishRoute());
+            }
+        }
+
+        private void Start()
+        {
+            for (int i = 0; i < _wayPoints.Count; i++)
+            {
+                var wayPointIndex = i;
+                _wayPoints[i].OnVisited += delegate(Enemy enemy) { SetNewWayPoint(enemy, wayPointIndex); };
+            }
         }
 
         private void OnDestroy()
@@ -58,6 +68,13 @@ namespace GameUtilities
             if (_coroutine != null)
             {
                 StopCoroutine(_coroutine);
+            }
+            
+            // TODO recycle subscriptions
+            for (int i = 0; i < _wayPoints.Count; i++)
+            {
+                var wayPointIndex = i;
+                _wayPoints[i].OnVisited -= delegate(Enemy enemy) { SetNewWayPoint(enemy, wayPointIndex); };
             }
         }
     }

@@ -17,28 +17,24 @@ namespace Units
         [SerializeField] private TMP_Text _status;
         [SerializeField] private UnitMover _unitMover;
 
-        private PathModel _pathModel;
         private UnitHealth _unitHealth;
         private ElementalEffects _elementalEffects;
 
         private Coroutine _coroutine;
 
-        public void Initialize(in PathModel pathModel)
+        public void Initialize()
         {
-            _pathModel = pathModel;
             _unitHealth = new UnitHealth(_enemyModel.MaximumHealth, _enemyModel.ElementalResist);
             _elementalEffects = new ElementalEffects(_enemyModel.ElementalResist);
 
-            _unitMover.Initialize(_enemyModel.BaseMoveSpeed, _pathModel.WayPoints);
-            _unitMover.MoveToNextPoint();
+            _unitMover.Initialize(_enemyModel.BaseMoveSpeed);
 
             DisplayHealth();
             DisplayDebuffs();
         }
 
         public void SetWayPoint(Vector3 nextWayPoint) => _unitMover.SetWayPoint(nextWayPoint);
-
-
+        
         public void TakeDamage(CastItemModel castItemModel)
         {
             _unitHealth.TakeDamage(castItemModel.Damage, castItemModel.ElementalType);
@@ -110,7 +106,7 @@ namespace Units
         private void DestroyEnemy()
         {
             StopEffectUpdates();
-            EventBus.RaiseEvent<IEnemyHandler>(enemyHandler => enemyHandler.HandleEnemyDestroy());
+            EventBus.RaiseEvent<IEnemyHandler>(enemyHandler => enemyHandler.HandleDestroy());
             Destroy(gameObject);
         }
 

@@ -1,60 +1,44 @@
-﻿using System.Collections.Generic;
-using DG.Tweening;
+﻿using DG.Tweening;
 using UnityEngine;
 
 namespace Units
 {
     public class UnitMover : MonoBehaviour
     {
-        private List<Transform> _wayPoints = new();
+        private Vector3 _wayPoint;
         private Tweener _tweener;
         private float _currentMoveSpeed;
-        private int _currentPointIndex;
         
-        public float CurrentMoveSpeed => _currentMoveSpeed;
-
-        public void Initialize(float currentMoveSpeed, List<Transform> wayPoints)
+        public void Initialize(float currentMoveSpeed)
         {
             _currentMoveSpeed = currentMoveSpeed;
-            _wayPoints = wayPoints;
         }
         
         public void SetWayPoint(Vector3 nextWayPoint)
         {
-            throw new System.NotImplementedException();
-        }
-
-        public void MoveToNextPoint()
-        {
-            _tweener?.Kill();
-            StartTweener();
+            _wayPoint = nextWayPoint;
+            MoveToNextPoint();
         }
 
         public void SetMoveSpeed(float currentMoveSpeed)
         {
             _tweener?.Kill();
-        
             _currentMoveSpeed = currentMoveSpeed;
-            _currentPointIndex--;
-        
+            StartTweener();
+        }
+
+        private void MoveToNextPoint()
+        {
+            _tweener?.Kill();
             StartTweener();
         }
 
         private void StartTweener()
         {
-            if (_currentPointIndex < 0 || _currentPointIndex >= _wayPoints.Count)
-            {
-                return;
-            }
-        
-            float distance = Vector3.Distance(_wayPoints[_currentPointIndex].position, gameObject.transform.position);
+            float distance = Vector3.Distance(_wayPoint, gameObject.transform.position);
             var duration = distance / _currentMoveSpeed;
 
-            _tweener = gameObject.transform
-                .DOMove(_wayPoints[_currentPointIndex].position, duration)
-                .OnComplete(MoveToNextPoint);
-
-            _currentPointIndex++;
+            _tweener = gameObject.transform.DOMove(_wayPoint, duration);
         }
         
         private void OnDestroy()

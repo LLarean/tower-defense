@@ -1,36 +1,42 @@
 using System.Collections;
+using Game;
 using GameLogic.Navigation;
 using Infrastructure;
 using UnityEngine;
-using Utilities;
-using Zenject;
 
 namespace GameUtilities
 {
-    public class RoundStarter : MonoBehaviour, IEnemyHandler
+    public class RoundStarter : MonoBehaviour
     {
+        [SerializeField] private EnemiesCreator _enemiesCreator;
         [SerializeField] private EnemiesRouter _enemiesRouter;
-        [SerializeField] private MatchModel _matchModel;
+        [SerializeField] private MatchSettings _matchSettings;
 
-        private PlayerModel _playerModel;
+        private RoundModel _roundModel;
         private Coroutine _coroutine;
-        
-        private int _currentRoundIndex;
-        private int _numberEnemiesDestroyed;
 
-        [Inject]
-        public void Construction(PlayerModel playerModel)
-        {
-            _playerModel = playerModel;
-        }
-        
         public void StartRound()
         {
-            CustomLogger.Log("The round is started", 2);
             
-            EventBus.RaiseEvent<IGameHandler>(gameHandler => gameHandler.HandleStartRound());
+        }
+
+        public bool TryStartRound()
+        {
+            var isStarted = false;
+
+            bool isReceived = _matchSettings.TryGetNextRoundModel(out RoundModel roundModel);
+
+            if (isReceived == false)
+            {
+                return isStarted;
+            }
+
+            _roundModel = roundModel;
+            CreateEnemies();
+            _coroutine = StartCoroutine(PreparingForRound());
+            isStarted = true;
             
-            _coroutine = StartCoroutine(DelayingRoutingEnemies());
+            return isStarted;
         }
 
         public void StopMatch()
@@ -40,81 +46,34 @@ namespace GameUtilities
                 StopCoroutine(_coroutine);
             }
             
-            _currentRoundIndex = 0;
-            _numberEnemiesDestroyed = 0;
-            CustomLogger.Log("The match is stopped", 2);
-        }
-
-        public void HandleNavigationPointVisit()
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public void HandleEnemyDestroy()
-        {
-            CustomLogger.Log("The tower destroyed the enemy", 2);
-            _numberEnemiesDestroyed++;
-            
-            if (_matchModel.RoundSettings[^1].IsInfinite == true)
-            {
-                return;
-            }
-
-            if (_currentRoundIndex >= _matchModel.RoundSettings.Count)
-            {
-                EventBus.RaiseEvent<IGameHandler>(gameHandler => gameHandler.HandleFinishMatch());
-                return;
-            }
-            
-            if (_numberEnemiesDestroyed >= _matchModel.RoundSettings[_currentRoundIndex].NumberEnemies)
-            {
-                StartRound();
-            }
-        }
-
-        public void HandleFinishRoute()
-        {
-            CustomLogger.Log("The enemy has reached the end", 2);
-            _numberEnemiesDestroyed++;
-            
-            if (_matchModel.RoundSettings[^1].IsInfinite == true)
-            {
-                return;
-            }
-
-            if (_currentRoundIndex >= _matchModel.RoundSettings.Count)
-            {
-                EventBus.RaiseEvent<IGameHandler>(gameHandler => gameHandler.HandleFinishMatch());
-                return;
-            }
-
-            if (_numberEnemiesDestroyed >= _matchModel.RoundSettings[_currentRoundIndex].NumberEnemies)
-            {
-                StartRound();
-            }
-        }
-
-        private void Start()
-        {
-            EventBus.Subscribe(this);
+            EventBus.RaiseEvent<IGameHandler>(gameHandler => gameHandler.HandleStopRound());
         }
 
         private void OnDestroy()
         {
-            EventBus.Unsubscribe(this);
             StopMatch();
         }
 
-        private IEnumerator DelayingRoutingEnemies()
+        private IEnumerator PreparingForRound()
         {
-            _numberEnemiesDestroyed = 0;
-
-            // TODO updating the seconds in the message
-            _playerModel.Notification.Value = $"{GlobalStrings.RoundWillStart} {_matchModel.RoundStartDelay} {GlobalStrings.Seconds}";
-            yield return new WaitForSeconds(_matchModel.RoundStartDelay);
+            EventBus.RaiseEvent<IGameHandler>(gameHandler => gameHandler.HandlePrepareRound());
             
-            _enemiesRouter.StartRouting(_matchModel.RoundSettings[_currentRoundIndex]);
-            _currentRoundIndex++;
+            yield return new WaitForSeconds(_matchSettings.RoundStartDelay);
+            StartEnemiesRouting();
+            EventBus.RaiseEvent<IGameHandler>(gameHandler => gameHandler.HandleStartRound());
+        }
+
+        private void CreateEnemies()
+        {
+            var enemy = _roundModel.Enemy;
+            var numberEnemies = _roundModel.NumberEnemies;
+
+            _enemiesCreator.Create(enemy, numberEnemies);
+        }
+
+        private void StartEnemiesRouting()
+        {
+            _enemiesRouter.StartRouting(_enemiesCreator.Enemies, _roundModel.EnemySpawnDelay);
         }
     }
 }
