@@ -15,11 +15,11 @@ namespace GameUtilities
         private RoundModel _roundModel;
         private Coroutine _coroutine;
 
-        public void StartRound()
+        public void RestartRound()
         {
-            
+            _coroutine = StartCoroutine(PreparingForRound());
         }
-
+        
         public bool TryStartRound()
         {
             var isStarted = false;

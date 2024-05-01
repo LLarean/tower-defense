@@ -101,6 +101,11 @@ namespace Game
                 return;
             }
 
+            if (roundModel.IsInfinite == true)
+            {
+                _roundStarter.RestartRound();
+            }
+
             if (_enemiesCompletedPath >= roundModel.NumberEnemies)
             {
                 StartRound();

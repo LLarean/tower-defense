@@ -1,3 +1,4 @@
+using Game;
 using GameUtilities;
 using ModalWindows;
 using NaughtyAttributes;
@@ -14,7 +15,8 @@ namespace Menu
         [Inject] private ConfirmationWindow _confirmationWindow;
         [Inject] private SettingsWindow _settingsWindow;
         
-        [Button()] public void StartRound() => _roundStarter.StartRound();
+        // [Button()] public void StartRound() => _referee.StartMatch();
+        [Button()] public void StartRound() => _roundStarter.TryStartRound();
 
         [Button()] public void LoadSingleplayerGame() => SceneManager.LoadScene(GlobalStrings.Demo);
         [Button()] public void LoadMultiplayerGame() => SceneManager.LoadScene(GlobalStrings.Demo);
