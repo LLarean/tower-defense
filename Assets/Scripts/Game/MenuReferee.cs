@@ -1,4 +1,3 @@
-using GameUtilities;
 using Infrastructure;
 using Menu;
 using UnityEngine;
@@ -9,16 +8,8 @@ namespace Game
 {
     public class MenuReferee : MonoBehaviour, IEnemyHandler
     {
-        [SerializeField] private RoundStarter _roundStarter;
-        [SerializeField] private MatchSettings _matchSettings;
-
-        private MenuMediator _menuMediator;
-
-        [Inject]
-        public void Construction(MenuMediator menuMediator)
-        {
-            _menuMediator = menuMediator;
-        }
+        [Inject] private MenuMediator _menuMediator;
+        [Inject] private MatchSettings _matchSettings;
 
         public void StartMatch()
         {
@@ -50,7 +41,7 @@ namespace Game
             if (roundModel.IsInfinite == true)
             {
                 CustomLogger.Log("The round has been restarted", 2);
-                _roundStarter.RestartRound();
+                _menuMediator.RestartRound();
             }
         }
 

@@ -3,14 +3,15 @@ using Game;
 using GameLogic.Navigation;
 using Infrastructure;
 using UnityEngine;
+using Zenject;
 
 namespace GameUtilities
 {
     public class RoundStarter : MonoBehaviour
     {
-        [SerializeField] private EnemiesCreator _enemiesCreator;
-        [SerializeField] private EnemiesRouter _enemiesRouter;
-        [SerializeField] private MatchSettings _matchSettings;
+        [Inject] private EnemiesCreator _enemiesCreator;
+        [Inject] private EnemiesRouter _enemiesRouter;
+        [Inject] private MatchSettings _matchSettings;
 
         private RoundModel _roundModel;
         private Coroutine _coroutine;
@@ -74,7 +75,10 @@ namespace GameUtilities
         
         private void StartEnemiesRouting()
         {
-            _enemiesRouter.StartRouting(_enemiesCreator.Enemies, _roundModel.EnemySpawnDelay);
+            var enemies = _enemiesCreator.Enemies;
+            var routingDelaySeconds = _roundModel.EnemySpawnDelay;
+            
+            _enemiesRouter.StartRouting(enemies, routingDelaySeconds);
         }
     }
 }

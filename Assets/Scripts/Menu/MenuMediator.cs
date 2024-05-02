@@ -18,13 +18,18 @@ namespace Menu
         
         [Button()] public void StartMatch() => _menuReferee.StartMatch();
         [Button()] public void StartRound() => _roundStarter.TryStartRound();
+        [Button()] public void RestartRound() => _roundStarter.RestartRound();
 
         [Button()] public void LoadSingleplayerGame() => SceneManager.LoadScene(GlobalStrings.Demo);
+
         [Button()] public void LoadMultiplayerGame() => SceneManager.LoadScene(GlobalStrings.Demo);
+
         [Button()] public void ShowSettingsWindow() => _settingsWindow.Show();
+
         public void CloseGame() => Application.Quit();
 
         [Button()] public void ShowConfirmationWindow() => _confirmationWindow.Show();
+
         [Button()] public void HideConfirmationWindow() => _confirmationWindow.Hide();
     }
 }
