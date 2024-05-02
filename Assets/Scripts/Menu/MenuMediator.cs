@@ -11,11 +11,12 @@ namespace Menu
 {
     public class MenuMediator : MonoBehaviour
     {
+        [Inject] private MenuReferee _menuReferee;
         [Inject] private RoundStarter _roundStarter;
         [Inject] private ConfirmationWindow _confirmationWindow;
         [Inject] private SettingsWindow _settingsWindow;
         
-        // [Button()] public void StartRound() => _referee.StartMatch();
+        [Button()] public void StartMatch() => _menuReferee.StartMatch();
         [Button()] public void StartRound() => _roundStarter.TryStartRound();
 
         [Button()] public void LoadSingleplayerGame() => SceneManager.LoadScene(GlobalStrings.Demo);

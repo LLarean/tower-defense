@@ -107,7 +107,6 @@ namespace Units
         {
             StopEffectUpdates();
             EventBus.RaiseEvent<IEnemyHandler>(enemyHandler => enemyHandler.HandleDestroy());
-            Destroy(gameObject);
         }
 
         private void UpdateEffects()

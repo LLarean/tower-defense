@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Units;
 using UnityEngine;
 using Utilities;
@@ -21,6 +22,14 @@ namespace GameUtilities
             }
             
             CustomLogger.Log($"{_enemies.Count} opponents have been created", 2);
+        }
+
+        public void Reset()
+        {
+            foreach (var enemy in _enemies)
+            {
+                enemy.Initialize();
+            }
         }
 
         private void ClearEnemies()

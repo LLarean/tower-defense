@@ -17,6 +17,7 @@ namespace GameUtilities
 
         public void RestartRound()
         {
+            _enemiesCreator.Reset();
             _coroutine = StartCoroutine(PreparingForRound());
         }
         
@@ -70,7 +71,7 @@ namespace GameUtilities
 
             _enemiesCreator.Create(enemy, numberEnemies);
         }
-
+        
         private void StartEnemiesRouting()
         {
             _enemiesRouter.StartRouting(_enemiesCreator.Enemies, _roundModel.EnemySpawnDelay);
