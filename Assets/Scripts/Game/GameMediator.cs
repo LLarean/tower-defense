@@ -12,6 +12,7 @@ namespace Game
     {
         [Inject] private Referee _referee;
         [Inject] private RoundStarter _roundStarter;
+        [Inject] private MatchSettings _matchSettings;
         [Inject] private Builder _builder;
         [Inject] private HUD _hud;
         [Inject] private ConfirmationWindow _confirmationWindow;
@@ -21,6 +22,8 @@ namespace Game
         
         [Button()] public void StartMatch() => _referee.StartMatch();
         [Button()] public void StopMatch() => _roundStarter.StopMatch();
+        [Button()] public void RestartRound() => _roundStarter.RestartRound();
+        public bool TryStartRound() => _roundStarter.TryStartRound();
         
         [Button()] public void BuildFireTower() => _hud.BuildFireTower();
         [Button()] public void BuildAirTower() => _hud.BuildPoisonTower();
@@ -37,5 +40,7 @@ namespace Game
         
         [Button()] public void ShowNotificationWindow() => _notificationWindow.Show();
         [Button()] public void HideNotificationWindow() => _notificationWindow.Hide();
+
+        public bool TryGetCurrentRoundModel(out RoundModel roundModel) => _matchSettings.TryGetCurrentRoundModel(out roundModel);
     }
 }

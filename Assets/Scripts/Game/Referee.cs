@@ -10,8 +10,6 @@ namespace Game
     public class Referee : MonoBehaviour, IEnemyHandler, IGameHandler
     {
         [Inject] private GameMediator _gameMediator;
-        [Inject] private RoundStarter _roundStarter;
-        [Inject] private MatchSettings _matchSettings;
         [Inject] private PlayerModel _playerModel;
         [Inject] private NotificationWindowModel _notificationWindowModel;
 
@@ -80,7 +78,7 @@ namespace Game
                 ShowModalWindow();
             }
 
-            bool isSuccess = _matchSettings.TryGetCurrentRoundModel(out RoundModel roundModel);
+            bool isSuccess = _gameMediator.TryGetCurrentRoundModel(out RoundModel roundModel);
             
             if (isSuccess == false)
             {
@@ -89,7 +87,7 @@ namespace Game
 
             if (roundModel.IsInfinite == true)
             {
-                _roundStarter.RestartRound();
+                _gameMediator.RestartRound();
             }
 
             if (_enemiesCompletedPath >= roundModel.NumberEnemies)
@@ -100,7 +98,7 @@ namespace Game
         
         private void StartRound()
         {
-            bool isStarted = _roundStarter.TryStartRound();
+            bool isStarted = _gameMediator.TryStartRound();
 
             if (isStarted == false)
             {
@@ -113,7 +111,7 @@ namespace Game
             EventBus.Subscribe(this);
         }
 
-        private void OnDestroy()    
+        private void OnDestroy()
         {
             EventBus.Unsubscribe(this);
         }
