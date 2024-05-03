@@ -9,23 +9,14 @@ namespace Game
 {
     public class Referee : MonoBehaviour, IEnemyHandler, IGameHandler
     {
-        [SerializeField] private RoundStarter _roundStarter;
-        [SerializeField] private MatchSettings _matchSettings;
-
-        private GameMediator _gameMediator;
-        private PlayerModel _playerModel;
-        private NotificationWindowModel _notificationWindowModel;
+        [Inject] private GameMediator _gameMediator;
+        [Inject] private RoundStarter _roundStarter;
+        [Inject] private MatchSettings _matchSettings;
+        [Inject] private PlayerModel _playerModel;
+        [Inject] private NotificationWindowModel _notificationWindowModel;
 
         private int _enemiesCompletedPath;
         
-        [Inject]
-        public void Construction(GameMediator gameMediator, PlayerModel playerModel, NotificationWindowModel notificationWindowModel)
-        {
-            _gameMediator = gameMediator;
-            _playerModel = playerModel;
-            _notificationWindowModel = notificationWindowModel;
-        }
-
         public void StartMatch()
         {
             _enemiesCompletedPath = 0;
@@ -36,32 +27,26 @@ namespace Game
         public void HandlePrepareRound()
         {
             CustomLogger.Log("Preparing for the match", 2);
-            // TODO Display the preparation time
         }
 
         public void HandleStartRound()
         {
             CustomLogger.Log("The round is started", 2);
             _playerModel.Notification.Value = GlobalStrings.RoundStart;
+            _enemiesCompletedPath = 0;
         }
 
         public void HandleStopRound()
         {
             CustomLogger.Log("The round is stopped", 2);
-
             _playerModel.Notification.Value = GlobalStrings.RoundOver;
-        }
-
-        public void HandleFinishMatch()
-        {
-            _playerModel.Notification.Value = "End";
-            ShowModalWindow();
         }
 
         public void HandleDestroy()
         {
             _enemiesCompletedPath++;
             _playerModel.Gold.Value += GlobalParams.RewardMurder;
+            FinishRound();
         }
 
         public void HandleFinishRoute()
@@ -91,7 +76,8 @@ namespace Game
         {
             if (_playerModel.Health.Value <= 0)
             {
-                EventBus.RaiseEvent<IGameHandler>(gameHandler => gameHandler.HandleFinishMatch());
+                _playerModel.Notification.Value = "End";
+                ShowModalWindow();
             }
 
             bool isSuccess = _matchSettings.TryGetCurrentRoundModel(out RoundModel roundModel);
@@ -127,7 +113,7 @@ namespace Game
             EventBus.Subscribe(this);
         }
 
-        private void OnDestroy()
+        private void OnDestroy()    
         {
             EventBus.Unsubscribe(this);
         }

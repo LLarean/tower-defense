@@ -17,6 +17,7 @@ namespace Menu
         [Inject] private SettingsWindow _settingsWindow;
         
         [Button()] public void StartMatch() => _menuReferee.StartMatch();
+        
         [Button()] public void StartRound() => _roundStarter.TryStartRound();
         [Button()] public void RestartRound() => _roundStarter.RestartRound();
 

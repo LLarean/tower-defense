@@ -3,6 +3,7 @@ using GameLogic.Navigation;
 using GameUtilities;
 using ModalWindows;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Zenject;
 
 namespace Installers
@@ -11,7 +12,7 @@ namespace Installers
     {
         [SerializeField] private RoundStarter _roundStarter;
         [SerializeField] private EnemiesRouter _enemiesRouter;
-        [SerializeField] private EnemiesCreator _enemiesCreator;
+        [FormerlySerializedAs("_enemiesCreator")] [SerializeField] private CreatorEnemies creatorEnemies;
         [SerializeField] private MatchSettings _matchSettings;
         [SerializeField] private NotificationWindow _notificationWindow;
         [SerializeField] private ConfirmationWindow _confirmationWindow;
@@ -45,8 +46,8 @@ namespace Installers
         private void BindEnemiesCreator()
         {
             Container
-                .Bind<EnemiesCreator>()
-                .FromInstance(_enemiesCreator)
+                .Bind<CreatorEnemies>()
+                .FromInstance(creatorEnemies)
                 .AsSingle();
         }
 

@@ -5,6 +5,5 @@
         void HandlePrepareRound();
         void HandleStartRound();
         void HandleStopRound();
-        void HandleFinishMatch();
     }
 }

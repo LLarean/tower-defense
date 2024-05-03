@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Units;
 using UnityEngine;
 using Utilities;
 
 namespace GameUtilities
 {
-    public class EnemiesCreator : MonoBehaviour
+    public class CreatorEnemies : MonoBehaviour
     {
         private List<Enemy> _enemies = new();
         
@@ -14,7 +13,7 @@ namespace GameUtilities
 
         public void Create(Enemy enemy, int numberEnemies)
         {
-            ClearEnemies();
+            ClearList();
             
             for (int i = 0; i < numberEnemies; i++)
             {
@@ -32,7 +31,7 @@ namespace GameUtilities
             }
         }
 
-        private void ClearEnemies()
+        private void ClearList()
         {
             foreach (var enemy in _enemies)
             {

@@ -21,7 +21,6 @@ namespace Game
         
         [Button()] public void StartMatch() => _referee.StartMatch();
         [Button()] public void StopMatch() => _roundStarter.StopMatch();
-        // [Button()] public void StartRound() => _roundStarter.StartRound();
         
         [Button()] public void BuildFireTower() => _hud.BuildFireTower();
         [Button()] public void BuildAirTower() => _hud.BuildPoisonTower();

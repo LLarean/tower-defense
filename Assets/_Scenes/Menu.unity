@@ -392,7 +392,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _roundStarter: {fileID: 1064619062}
   _enemiesRouter: {fileID: 641649439}
-  _enemiesCreator: {fileID: 63361257}
+  creatorEnemies: {fileID: 63361257}
   _matchSettings: {fileID: 1382967611}
   _notificationWindow: {fileID: 1772804410}
   _confirmationWindow: {fileID: 1863023571}

@@ -9,7 +9,7 @@ namespace GameUtilities
 {
     public class RoundStarter : MonoBehaviour
     {
-        [Inject] private EnemiesCreator _enemiesCreator;
+        [Inject] private CreatorEnemies _creatorEnemies;
         [Inject] private EnemiesRouter _enemiesRouter;
         [Inject] private MatchSettings _matchSettings;
 
@@ -18,7 +18,7 @@ namespace GameUtilities
 
         public void RestartRound()
         {
-            _enemiesCreator.Reset();
+            _creatorEnemies.Reset();
             _coroutine = StartCoroutine(PreparingForRound());
         }
         
@@ -70,12 +70,12 @@ namespace GameUtilities
             var enemy = _roundModel.Enemy;
             var numberEnemies = _roundModel.NumberEnemies;
 
-            _enemiesCreator.Create(enemy, numberEnemies);
+            _creatorEnemies.Create(enemy, numberEnemies);
         }
         
         private void StartEnemiesRouting()
         {
-            var enemies = _enemiesCreator.Enemies;
+            var enemies = _creatorEnemies.Enemies;
             var routingDelaySeconds = _roundModel.EnemySpawnDelay;
             
             _enemiesRouter.StartRouting(enemies, routingDelaySeconds);
