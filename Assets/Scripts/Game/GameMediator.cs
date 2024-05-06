@@ -1,4 +1,5 @@
 using GameUtilities;
+using Globals;
 using ModalWindows;
 using NaughtyAttributes;
 using UI.Game;

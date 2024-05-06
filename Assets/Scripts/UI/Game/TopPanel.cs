@@ -1,5 +1,6 @@
 using System;
 using Game;
+using Globals;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;

@@ -1,4 +1,5 @@
 ﻿using DG.Tweening;
+using Globals;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;

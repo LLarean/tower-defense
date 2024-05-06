@@ -1,4 +1,5 @@
-﻿using Towers;
+﻿using Globals;
+using Towers;
 
 namespace Units
 {

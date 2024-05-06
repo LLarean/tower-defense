@@ -1,3 +1,4 @@
+using Globals;
 using Infrastructure;
 using ScriptableObjects;
 using UnityEngine;
