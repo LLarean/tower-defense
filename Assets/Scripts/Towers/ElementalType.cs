@@ -1,4 +1,4 @@
-﻿namespace Builds
+﻿namespace Towers
 {
     public enum ElementalType
     {

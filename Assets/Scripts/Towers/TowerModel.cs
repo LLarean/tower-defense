@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace Builds
+namespace Towers
 {
     [Serializable]
     public class TowerModel

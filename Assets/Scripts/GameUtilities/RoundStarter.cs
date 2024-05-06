@@ -16,12 +16,6 @@ namespace GameUtilities
         private RoundModel _roundModel;
         private Coroutine _coroutine;
 
-        public void RestartRound()
-        {
-            _creatorEnemies.Reset();
-            _coroutine = StartCoroutine(PreparingForRound());
-        }
-        
         public bool TryStartRound()
         {
             var isStarted = false;
@@ -35,10 +29,17 @@ namespace GameUtilities
 
             _roundModel = roundModel;
             CreateEnemies();
+            
             _coroutine = StartCoroutine(PreparingForRound());
             isStarted = true;
             
             return isStarted;
+        }
+
+        public void RestartRound()
+        {
+            _creatorEnemies.Reset();
+            _coroutine = StartCoroutine(PreparingForRound());
         }
 
         public void StopMatch()

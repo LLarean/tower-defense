@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Builds
+namespace Towers
 {
     [Serializable]
     public class CastItemModel

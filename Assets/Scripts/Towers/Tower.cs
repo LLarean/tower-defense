@@ -2,7 +2,7 @@ using Units;
 using UnityEngine;
 using Utilities;
 
-namespace Builds
+namespace Towers
 {
     public class Tower : MonoBehaviour
     {
@@ -10,11 +10,10 @@ namespace Builds
         [SerializeField] private bool _isBuilt;
         [Space]
         [SerializeField] private SpellCaster _spellCaster;
-        [SerializeField] private BuildArea _buildArea;
-        [SerializeField] private CastArea _castArea;
+        [SerializeField] private ConstructionCollider constructionCollider;
+        [SerializeField] private CastCollider castCollider;
         [SerializeField] private TowerPainter _towerPainter;
         
-        private TowerConstructor _towerConstructor;
         private bool _canBuilt = true;
         
         public ElementalType ElementalType => _elementalType;
@@ -22,11 +21,11 @@ namespace Builds
 
         public void Initialize(TowerModel towerModel)
         {
-            _buildArea.TriggerEnter += BuildTriggerEnter;
-            _buildArea.TriggerExit += BuildTriggerExit;
+            constructionCollider.TriggerEnter += BuildTriggerEnter;
+            constructionCollider.TriggerExit += BuildTriggerExit;
             
-            _castArea.TriggerEnter += CastTriggerEnter;
-            _castArea.TriggerExit += CastTriggerExit;
+            castCollider.TriggerEnter += CastTriggerEnter;
+            castCollider.TriggerExit += CastTriggerExit;
             
             if (towerModel == null)
             {
@@ -49,7 +48,7 @@ namespace Builds
             
             // TODO Refactor this code
             var isEnemy = collider.TryGetComponent(out Enemy enemy);
-            var isTower = collider.TryGetComponent(out BuildArea buildArea);
+            var isTower = collider.TryGetComponent(out ConstructionCollider buildArea);
             
             if (isEnemy == true || isTower == true)
             {

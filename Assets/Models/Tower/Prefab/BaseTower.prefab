@@ -531,8 +531,8 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1277420775889043443}
-  - {fileID: 4493861545321782510}
   - {fileID: 3095636110482774299}
+  - {fileID: 4493861545321782510}
   - {fileID: 409546}
   - {fileID: 458352}
   - {fileID: 440698}
@@ -553,12 +553,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a83fd114e86203b4bb14989f6836a52c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _spellCaster: {fileID: 3303634596837178742}
-  _buildArea: {fileID: 812956942026921260}
-  _castArea: {fileID: 8511999093651280791}
-  _towerPainter: {fileID: 6816449343926713092}
   _elementalType: 0
   _isBuilt: 0
+  _spellCaster: {fileID: 3303634596837178742}
+  constructionCollider: {fileID: 812956942026921260}
+  castCollider: {fileID: 8511999093651280791}
+  _towerPainter: {fileID: 6816449343926713092}
 --- !u!114 &6816449343926713092
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -607,7 +607,7 @@ GameObject:
   - component: {fileID: 7291343900211951767}
   - component: {fileID: 773407500254659162}
   m_Layer: 0
-  m_Name: BuildArea
+  m_Name: ConstructionCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -700,7 +700,7 @@ GameObject:
   - component: {fileID: 8511999093651280791}
   - component: {fileID: 1671536386782879954}
   m_Layer: 0
-  m_Name: CastArea
+  m_Name: CastCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -798,5 +798,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6aff7e21f096489c83cf64a2c65717bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _castSpawn: {fileID: 1277420775889043443}
   _castItem: {fileID: 0}

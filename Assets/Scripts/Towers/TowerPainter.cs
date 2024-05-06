@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Builds
+namespace Towers
 {
     public class TowerPainter : MonoBehaviour
     {

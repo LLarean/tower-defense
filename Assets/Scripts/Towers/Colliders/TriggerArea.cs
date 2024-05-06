@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace Builds
+namespace Towers
 {
     public class TriggerArea : MonoBehaviour
     {

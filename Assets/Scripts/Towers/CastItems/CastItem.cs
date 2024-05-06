@@ -4,7 +4,7 @@ using Units;
 using UnityEngine;
 using Utilities;
 
-namespace Builds
+namespace Towers
 {
     public class CastItem : MonoBehaviour
     {

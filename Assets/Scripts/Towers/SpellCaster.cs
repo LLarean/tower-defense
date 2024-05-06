@@ -3,7 +3,7 @@ using Infrastructure;
 using UnityEngine;
 using Utilities;
 
-namespace Builds
+namespace Towers
 {
     public class SpellCaster : MonoBehaviour
     {
