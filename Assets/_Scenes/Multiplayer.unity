@@ -2862,6 +2862,103 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _terrainCollider: {fileID: 1810471482}
+--- !u!1 &1102686920
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1102686921}
+  - component: {fileID: 1102686923}
+  - component: {fileID: 1102686922}
+  m_Layer: 0
+  m_Name: NetworkManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1102686921
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1102686920}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1102686922
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1102686920}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6960e84d07fb87f47956e7a81d71c4e6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ProtocolType: 0
+  m_MaxPacketQueueSize: 128
+  m_MaxPayloadSize: 6144
+  m_HeartbeatTimeoutMS: 500
+  m_ConnectTimeoutMS: 1000
+  m_MaxConnectAttempts: 60
+  m_DisconnectTimeoutMS: 30000
+  ConnectionData:
+    Address: 127.0.0.1
+    Port: 7777
+    ServerListenAddress: 127.0.0.1
+  DebugSimulator:
+    PacketDelayMS: 0
+    PacketJitterMS: 0
+    PacketDropRate: 0
+--- !u!114 &1102686923
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1102686920}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 593a2fe42fa9d37498c96f9a383b6521, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  NetworkConfig:
+    ProtocolVersion: 0
+    NetworkTransport: {fileID: 1102686922}
+    PlayerPrefab: {fileID: 0}
+    Prefabs:
+      NetworkPrefabsLists:
+      - {fileID: 11400000, guid: a3776c3d62847b040a1815efa43291d1, type: 2}
+    TickRate: 30
+    ClientConnectionBufferTimeout: 10
+    ConnectionApproval: 0
+    ConnectionData: 
+    EnableTimeResync: 0
+    TimeResyncInterval: 30
+    EnsureNetworkVariableLengthSafety: 0
+    EnableSceneManagement: 1
+    ForceSamePrefabs: 1
+    RecycleNetworkIds: 1
+    NetworkIdRecycleDelay: 120
+    RpcHashSize: 0
+    LoadSceneTimeOut: 120
+    SpawnTimeout: 10
+    EnableNetworkLogs: 1
+    OldPrefabList: []
+  RunInBackground: 1
+  LogLevel: 1
 --- !u!1 &1111528132
 GameObject:
   m_ObjectHideFlags: 0
@@ -4606,6 +4703,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 246855642}
     m_Modifications:
+    - target: {fileID: 5038637540882642758, guid: 5499340a86243144c8c2f5caf21d61de, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 2241037648
+      objectReference: {fileID: 0}
     - target: {fileID: 6470663285452829661, guid: 5499340a86243144c8c2f5caf21d61de, type: 3}
       propertyPath: m_Name
       value: Tower(Water)
@@ -4650,6 +4751,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7578013985076616684, guid: 5499340a86243144c8c2f5caf21d61de, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 3043546337
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4663,6 +4768,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 246855642}
     m_Modifications:
+    - target: {fileID: 1838389664707067571, guid: 4ed3beda683a8da4ebe8aab1771550f9, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 3116616167
+      objectReference: {fileID: 0}
     - target: {fileID: 2982983570431266946, guid: 4ed3beda683a8da4ebe8aab1771550f9, type: 3}
       propertyPath: m_Name
       value: Tower(Poison)
@@ -4706,6 +4815,10 @@ PrefabInstance:
     - target: {fileID: 2982983570431494408, guid: 4ed3beda683a8da4ebe8aab1771550f9, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3838491973618226201, guid: 4ed3beda683a8da4ebe8aab1771550f9, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 630426112
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -4826,6 +4939,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 246855642}
     m_Modifications:
+    - target: {fileID: 6243263640187205946, guid: b695ba4470ddf2c4283a116deefa1fdd, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 2309117164
+      objectReference: {fileID: 0}
     - target: {fileID: 7368572180180766337, guid: b695ba4470ddf2c4283a116deefa1fdd, type: 3}
       propertyPath: m_LocalPosition.x
       value: -35.293304
@@ -4870,6 +4987,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tower(Ice)
       objectReference: {fileID: 0}
+    - target: {fileID: 8818842501152936848, guid: b695ba4470ddf2c4283a116deefa1fdd, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 1269551020
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4883,6 +5004,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 246855642}
     m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: GlobalObjectIdHash
+      value: 3308567422
+      objectReference: {fileID: 0}
     - target: {fileID: 1517174418446175199, guid: 5df787b182f3c3d4d8e7f3ead4c24b00, type: 3}
       propertyPath: m_Name
       value: Tower(Fire)
@@ -4927,6 +5052,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2731710732977022446, guid: 5df787b182f3c3d4d8e7f3ead4c24b00, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 276915243
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4946,3 +5075,4 @@ SceneRoots:
   - {fileID: 705507995}
   - {fileID: 867474700}
   - {fileID: 246855642}
+  - {fileID: 1102686921}

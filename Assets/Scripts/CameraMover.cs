@@ -3,10 +3,10 @@ using UnityEngine;
 public class CameraMover : MonoBehaviour
 {
     private Vector3 _position;
-    
+
     private float _speedMovement = 40f;
     private float _borderThickness = 10f;
-    
+
     private float _minimumZoom = 40f;
     private float _maximumZoom = 70f;
 
@@ -40,7 +40,7 @@ public class CameraMover : MonoBehaviour
         {
             _position.z += _speedMovement * Time.deltaTime;
         }
-        
+
         transform.position = _position;
     }
 
