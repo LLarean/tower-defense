@@ -1,5 +1,6 @@
 using Game;
 using Menu;
+using NaughtyAttributes;
 using UI;
 using UI.Menu;
 using UnityEngine;
@@ -29,7 +30,7 @@ namespace Installers
                 .FromInstance(_menuMediator)
                 .AsSingle();
         }
-        
+
         private void BindMenuReferee()
         {
             Container
@@ -37,7 +38,7 @@ namespace Installers
                 .FromInstance(_menuReferee)
                 .AsSingle();
         }
-        
+
         private void BindMainScreen()
         {
             Container
@@ -45,13 +46,45 @@ namespace Installers
                 .FromInstance(_mainScreen)
                 .AsSingle();
         }
-        
+
         private void BindSettingsWindow()
         {
             Container
                 .Bind<SettingsWindow>()
                 .FromInstance(_settingsWindow)
                 .AsSingle();
+        }
+
+        [Button]
+        private void SetReferences()
+        {
+            var menuMediators = FindObjectsOfType<MenuMediator>();
+
+            if (menuMediators != null)
+            {
+                _menuMediator = menuMediators[0];
+            }
+
+            var menuReferees = FindObjectsOfType<MenuReferee>();
+
+            if (menuReferees != null)
+            {
+                _menuReferee = menuReferees[0];
+            }
+            
+            var mainScreens = FindObjectsOfType<MainScreen>();
+
+            if (mainScreens != null)
+            {
+                _mainScreen = mainScreens[0];
+            }
+            
+            var settingsWindows = FindObjectsOfType<SettingsWindow>();
+
+            if (settingsWindows != null)
+            {
+                _settingsWindow = settingsWindows[0];
+            }
         }
     }
 }

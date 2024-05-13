@@ -252,6 +252,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1572216553}
     m_Modifications:
+    - target: {fileID: 1838389664707067571, guid: 4ed3beda683a8da4ebe8aab1771550f9, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 2058925012
+      objectReference: {fileID: 0}
     - target: {fileID: 2982983570429078644, guid: 4ed3beda683a8da4ebe8aab1771550f9, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -392,7 +396,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _roundStarter: {fileID: 1064619062}
   _enemiesRouter: {fileID: 641649439}
-  creatorEnemies: {fileID: 63361257}
+  _creatorEnemies: {fileID: 63361257}
   _matchSettings: {fileID: 1382967611}
   _notificationWindow: {fileID: 1772804410}
   _confirmationWindow: {fileID: 1863023571}
@@ -426,6 +430,10 @@ PrefabInstance:
     - target: {fileID: 3594103377093519363, guid: b695ba4470ddf2c4283a116deefa1fdd, type: 3}
       propertyPath: _isBuilt
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6243263640187205946, guid: b695ba4470ddf2c4283a116deefa1fdd, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 2458467253
       objectReference: {fileID: 0}
     - target: {fileID: 7368572180180766337, guid: b695ba4470ddf2c4283a116deefa1fdd, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1680,6 +1688,10 @@ PrefabInstance:
     - target: {fileID: 1517174418446471765, guid: 5df787b182f3c3d4d8e7f3ead4c24b00, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2731710732977022446, guid: 5df787b182f3c3d4d8e7f3ead4c24b00, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 1604892735
       objectReference: {fileID: 0}
     - target: {fileID: 4804402615150392535, guid: 5df787b182f3c3d4d8e7f3ead4c24b00, type: 3}
       propertyPath: _isBuilt

@@ -1,4 +1,5 @@
 using Game;
+using NaughtyAttributes;
 using UI.Game;
 using UnityEngine;
 using Zenject;
@@ -50,6 +51,38 @@ namespace Installers
                 .Bind<HUD>()
                 .FromInstance(_hud)
                 .AsSingle();
+        }
+        
+        [Button]
+        private void SetReferences()
+        {
+            var gameMediators = FindObjectsOfType<GameMediator>();
+
+            if (gameMediators != null)
+            {
+                _gameMediator = gameMediators[0];
+            }
+
+            var referees = FindObjectsOfType<Referee>();
+
+            if (referees != null)
+            {
+                _referee = referees[0];
+            }
+            
+            var builders = FindObjectsOfType<Builder>();
+
+            if (builders != null)
+            {
+                _builder = builders[0];
+            }
+            
+            var huds = FindObjectsOfType<HUD>();
+
+            if (huds != null)
+            {
+                _hud = huds[0];
+            }
         }
     }
 }
