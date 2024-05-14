@@ -3299,23 +3299,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2841317842769253465, guid: 9e1b6db44daf61543ad9e4b3defb2bd6, type: 3}
       propertyPath: m_SizeDelta.x
-      value: -2560
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2841317842769253465, guid: 9e1b6db44daf61543ad9e4b3defb2bd6, type: 3}
       propertyPath: m_SizeDelta.y
-      value: -1440
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2841317842769253465, guid: 9e1b6db44daf61543ad9e4b3defb2bd6, type: 3}
       propertyPath: m_LocalScale.x
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2841317842769253465, guid: 9e1b6db44daf61543ad9e4b3defb2bd6, type: 3}
       propertyPath: m_LocalScale.y
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2841317842769253465, guid: 9e1b6db44daf61543ad9e4b3defb2bd6, type: 3}
       propertyPath: m_LocalScale.z
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2841317842769253465, guid: 9e1b6db44daf61543ad9e4b3defb2bd6, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3347,11 +3347,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2841317842769253465, guid: 9e1b6db44daf61543ad9e4b3defb2bd6, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -1280
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2841317842769253465, guid: 9e1b6db44daf61543ad9e4b3defb2bd6, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -720
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2841317842769253465, guid: 9e1b6db44daf61543ad9e4b3defb2bd6, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -3368,6 +3368,14 @@ PrefabInstance:
     - target: {fileID: 5927083283769195652, guid: 9e1b6db44daf61543ad9e4b3defb2bd6, type: 3}
       propertyPath: m_Name
       value: NotificationWindow
+      objectReference: {fileID: 0}
+    - target: {fileID: 7372079980766998023, guid: 9e1b6db44daf61543ad9e4b3defb2bd6, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7766636868788256105, guid: 9e1b6db44daf61543ad9e4b3defb2bd6, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

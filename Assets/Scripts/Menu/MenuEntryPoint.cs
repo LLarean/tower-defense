@@ -11,7 +11,7 @@ namespace Menu
 
         private void Start()
         {
-            CustomLogger.Log("The menu scene is loaded", 2);
+            CustomLogger.Log("The menu scene is loaded", LogImportance.Low);
             
             EventBus.RaiseEvent<ISoundHandler>(soundHandler => soundHandler.HandleLoadMenuScene());
             

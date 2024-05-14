@@ -63,6 +63,11 @@ namespace GameLogic.Navigation
             }
         }
 
+        private void Test(Enemy obj, int index)
+        {
+            throw new System.NotImplementedException();
+        }
+
         private void OnDestroy()
         {
             if (_coroutine != null)

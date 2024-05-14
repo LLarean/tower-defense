@@ -6,26 +6,41 @@ using Zenject;
 
 namespace Game
 {
-    public class MenuReferee : MonoBehaviour, IEnemyHandler
+    public class MenuReferee : MonoBehaviour, IGameHandler, IEnemyHandler
     {
         [Inject] private MenuMediator _menuMediator;
         [Inject] private MatchSettings _matchSettings;
 
         public void StartMatch()
         {
-            CustomLogger.Log("The match is started", 2);
+            CustomLogger.Log("We are trying to start the match", LogImportance.Low);
             _menuMediator.StartRound();
+        }
+        
+        public void HandlePrepareRound()
+        {
+            CustomLogger.Log("Preparations are underway to launch the round", LogImportance.Low);
+        }
+
+        public void HandleStartRound()
+        {
+            CustomLogger.Log("The round has started", LogImportance.Low);
+        }
+
+        public void HandleStopRound()
+        {
+            CustomLogger.Log("The round has stopped", LogImportance.Low);
         }
 
         public void HandleDestroy()
         {
-            CustomLogger.Log("The enemy is destroyed", 2);
+            CustomLogger.Log("The enemy is destroyed", LogImportance.Low);
             FinishRound();
         }
 
         public void HandleFinishRoute()
         {
-            CustomLogger.Log("The enemy has completed his route", 2);
+            CustomLogger.Log("The enemy has completed his route", LogImportance.Low);
             FinishRound();
         }
 
@@ -40,7 +55,7 @@ namespace Game
 
             if (roundModel.IsInfinite == true)
             {
-                CustomLogger.Log("The round has been restarted", 2);
+                CustomLogger.Log("The round has been restarted", LogImportance.Low);
                 _menuMediator.RestartRound();
             }
         }

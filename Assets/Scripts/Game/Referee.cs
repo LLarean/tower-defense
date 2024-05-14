@@ -25,19 +25,19 @@ namespace Game
 
         public void HandlePrepareRound()
         {
-            CustomLogger.Log("Preparing for the match", 2);
+            CustomLogger.Log("Preparing for the match", LogImportance.Low);
         }
 
         public void HandleStartRound()
         {
-            CustomLogger.Log("The round is started", 2);
+            CustomLogger.Log("The round is started", LogImportance.Low);
             _playerModel.Notification.Value = GlobalStrings.RoundStart;
             _enemiesCompletedPath = 0;
         }
 
         public void HandleStopRound()
         {
-            CustomLogger.Log("The round is stopped", 2);
+            CustomLogger.Log("The round is stopped", LogImportance.Low);
             _playerModel.Notification.Value = GlobalStrings.RoundOver;
         }
 
