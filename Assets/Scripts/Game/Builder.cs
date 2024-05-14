@@ -46,6 +46,16 @@ namespace Game
             playerModel.Gold = 150;
         }
 
+        public void DestroyAllBuildings()
+        {
+            foreach (var tower in _constructedBuildings.Towers)
+            {
+                Destroy(tower.gameObject);
+            }
+            
+            _constructedBuildings.Reset();
+        }
+
         public void ConstructBuilding()
         {
             if (_currentTower == null)

@@ -39,5 +39,7 @@ namespace Game
 
             return isSuccess;
         }
+
+        public void ResetCurrentRoundIndex() => _currentRoundIndex = -1;
     }
 }

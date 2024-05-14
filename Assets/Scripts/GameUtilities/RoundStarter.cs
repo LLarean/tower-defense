@@ -54,6 +54,12 @@ namespace GameUtilities
             EventBus.RaiseEvent<IGameHandler>(gameHandler => gameHandler.HandleStopRound());
         }
 
+        public void ResetMatch()
+        {
+            _creatorEnemies.DestroyAll();
+            _matchSettings.ResetCurrentRoundIndex();
+        }
+
         private void OnDestroy()
         {
             StopMatch();

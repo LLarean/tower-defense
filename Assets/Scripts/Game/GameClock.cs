@@ -12,11 +12,12 @@ namespace Game
         private float _currentTime;
         
         private float _duration = 1f;
+        private Coroutine _coroutine;
 
         public void StartCounting()
         {
             _isCounting = true;
-            StartCoroutine(Counting());
+            _coroutine = StartCoroutine(Counting());
         }
 
         public void PauseCounting()
@@ -26,6 +27,11 @@ namespace Game
 
         public void ResetCounting()
         {
+            if (_coroutine != null)
+            {
+                StopCoroutine(_coroutine);
+            }
+            
             _isCounting = false;
             _currentTime = 0;
             UpdateTimerDisplay();

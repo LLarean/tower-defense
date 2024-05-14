@@ -7,10 +7,10 @@ namespace Game
     {
         private List<Tower> _towers = new List<Tower>();
 
-        public void SetNewBuilding(Tower tower)
-        {
-            _towers.Add(tower);
-        }
+        public List<Tower> Towers => _towers;
+        
+        public void SetNewBuilding(Tower tower) => _towers.Add(tower);
 
+        public void Reset() => _towers.Clear();
     }
 }

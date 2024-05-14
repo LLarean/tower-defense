@@ -145,5 +145,12 @@ namespace UI.Game
             _confirmationWindowModel.AcceptDelegate = AcceptDelegate;
             _confirmationWindowModel.CancelDelegate = CancelDelegate;
         }
+
+        public void Reset()
+        {
+            ResetClock();
+            StartClock();
+            ClearInfo();
+        }
     }
 }

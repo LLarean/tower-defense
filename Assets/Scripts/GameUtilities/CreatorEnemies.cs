@@ -31,6 +31,16 @@ namespace GameUtilities
             }
         }
 
+        public void DestroyAll()
+        {
+            foreach (var enemy in _enemies)
+            {
+                Destroy(enemy.gameObject);
+            }
+            
+            _enemies.Clear();
+        }
+
         private void ClearList()
         {
             foreach (var enemy in _enemies)

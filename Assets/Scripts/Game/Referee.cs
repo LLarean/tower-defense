@@ -21,6 +21,17 @@ namespace Game
 
             StartRound();
         }
+        
+        public void ResetMatch()
+        {
+            CustomLogger.Log("The match will be restarted", LogPriority.Low);
+            
+            // TODO It needs to be reworked
+            _enemiesCompletedPath = 0;
+            _playerModel.Gold.Value = 150;
+            _playerModel.Health.Value = 100;
+        }
+
 
         public void HandlePrepareRound()
         {
