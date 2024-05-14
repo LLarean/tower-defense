@@ -3,6 +3,7 @@ namespace Globals
     public static class GlobalStrings
     {
         public const string Menu = "Menu";
+        public const string Multiplayer = "Multiplayer";
         public const string Demo = "Demo";
     
         public const string FireTower = "Fire Tower";

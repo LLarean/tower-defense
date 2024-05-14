@@ -395,7 +395,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _enemyModel:
     _maximumHealth: 100
-    _baseMoveSpeed: 20
+    _baseMoveSpeed: 10
     _elementalResist: 1
   _health: {fileID: 4551619567667411643}
   _status: {fileID: 3856695165193554091}

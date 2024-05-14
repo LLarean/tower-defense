@@ -20,7 +20,7 @@ namespace GameUtilities
                 CreateEnemy(enemy);
             }
             
-            CustomLogger.Log($"{_enemies.Count} opponents have been created", LogImportance.Low);
+            CustomLogger.Log($"{_enemies.Count} opponents have been created", LogPriority.Low);
         }
 
         public void Reset()

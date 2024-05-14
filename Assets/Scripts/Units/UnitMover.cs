@@ -38,7 +38,7 @@ namespace Units
             float distance = Vector3.Distance(_wayPoint, gameObject.transform.position);
             var duration = distance / _currentMoveSpeed;
 
-            _tweener = gameObject.transform.DOMove(_wayPoint, duration);
+            _tweener = gameObject.transform.DOMove(_wayPoint, duration).SetEase(Ease.Linear);;
         }
         
         private void OnDestroy()

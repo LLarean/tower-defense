@@ -49,6 +49,7 @@ namespace UI.Menu
         private void LoadMultiplayerGame()
         {
             EventBus.RaiseEvent<ISoundHandler>(soundHandler => soundHandler.HandleClick());
+            _menuMediator.LoadMultiplayerGame();
         }
 
         private void OpenSettings()

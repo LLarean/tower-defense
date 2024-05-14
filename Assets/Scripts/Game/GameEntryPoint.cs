@@ -10,7 +10,7 @@ public class GameEntryPoint : MonoBehaviour
 
     private void Start()
     {
-        CustomLogger.Log("The game scene is loaded", LogImportance.Low);
+        CustomLogger.Log("The game scene is loaded", LogPriority.Low);
         
         EventBus.RaiseEvent<ISoundHandler>(soundHandler => soundHandler.HandleLoadGameScene());
         

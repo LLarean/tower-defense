@@ -24,7 +24,7 @@ namespace Menu
 
         [Button()] public void LoadSingleplayerGame() => SceneManager.LoadScene(GlobalStrings.Demo);
 
-        [Button()] public void LoadMultiplayerGame() => SceneManager.LoadScene(GlobalStrings.Demo);
+        [Button()] public void LoadMultiplayerGame() => SceneManager.LoadScene(GlobalStrings.Multiplayer);
 
         [Button()] public void ShowSettingsWindow() => _settingsWindow.Show();
 

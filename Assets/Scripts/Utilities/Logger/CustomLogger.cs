@@ -19,18 +19,18 @@ namespace Utilities
         private const int LogDisplayLevel = 2;
         
         /// <summary>
-        /// The minimum level of importance of the logs displayed, High - only critical, Medium - only important and critical, Low - all logs
+        /// The minimum level of priority of the logs displayed, High - only critical, Medium - only important and critical, Low - all logs
         /// </summary>
-        private const LogImportance LevelImportanceLogsDisplayed = LogImportance.Low;
+        private const LogPriority LevelPriorityLogsDisplayed = LogPriority.Low;
 
         /// <summary>
         /// Output a regular message to the console
         /// </summary>
         /// <param name="message">Message to the console</param>
-        /// <param name="logImportance">High - only critical, Medium - only important and critical, Low - all logs</param>
-        public static void Log(string message, LogImportance logImportance)
+        /// <param name="logPriority">High - only critical, Medium - only important and critical, Low - all logs</param>
+        public static void Log(string message, LogPriority logPriority)
         {
-            if (IsDevelop == true && LevelImportanceLogsDisplayed >= logImportance)
+            if (IsDevelop == true && LevelPriorityLogsDisplayed >= logPriority)
             {
                 Debug.Log($"{GetCallerData()}'{message}'");
             }

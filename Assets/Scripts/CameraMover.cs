@@ -17,7 +17,9 @@ public class CameraMover : MonoBehaviour
 
     private void Update()
     {
+#if !UNITY_EDITOR
         ScrollCamera();
+#endif
         ZoomCamera();
     }
 

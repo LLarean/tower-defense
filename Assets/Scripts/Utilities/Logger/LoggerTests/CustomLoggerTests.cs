@@ -9,7 +9,7 @@ namespace Utilities.Logger.LoggerTests
         [Test]
         public void LogMessage_DisplayMessage_MessageIsShowed()
         {
-            CustomLogger.Log("Test message", LogImportance.Medium); 
+            CustomLogger.Log("Test message", LogPriority.Medium); 
         }
         
         [Test]

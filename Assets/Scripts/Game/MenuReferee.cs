@@ -13,34 +13,34 @@ namespace Game
 
         public void StartMatch()
         {
-            CustomLogger.Log("We are trying to start the match", LogImportance.Low);
+            CustomLogger.Log("We are trying to start the match", LogPriority.Low);
             _menuMediator.StartRound();
         }
         
         public void HandlePrepareRound()
         {
-            CustomLogger.Log("Preparations are underway to launch the round", LogImportance.Low);
+            CustomLogger.Log("Preparations are underway to launch the round", LogPriority.Low);
         }
 
         public void HandleStartRound()
         {
-            CustomLogger.Log("The round has started", LogImportance.Low);
+            CustomLogger.Log("The round has started", LogPriority.Low);
         }
 
         public void HandleStopRound()
         {
-            CustomLogger.Log("The round has stopped", LogImportance.Low);
+            CustomLogger.Log("The round has stopped", LogPriority.Low);
         }
 
         public void HandleDestroy()
         {
-            CustomLogger.Log("The enemy is destroyed", LogImportance.Low);
+            CustomLogger.Log("The enemy is destroyed", LogPriority.Low);
             FinishRound();
         }
 
         public void HandleFinishRoute()
         {
-            CustomLogger.Log("The enemy has completed his route", LogImportance.Low);
+            CustomLogger.Log("The enemy has completed his route", LogPriority.Low);
             FinishRound();
         }
 
@@ -55,7 +55,7 @@ namespace Game
 
             if (roundModel.IsInfinite == true)
             {
-                CustomLogger.Log("The round has been restarted", LogImportance.Low);
+                CustomLogger.Log("We are trying to restart the round", LogPriority.Low);
                 _menuMediator.RestartRound();
             }
         }

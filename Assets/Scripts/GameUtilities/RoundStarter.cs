@@ -3,6 +3,7 @@ using Game;
 using GameLogic.Navigation;
 using Infrastructure;
 using UnityEngine;
+using Utilities;
 using Zenject;
 
 namespace GameUtilities
@@ -24,6 +25,7 @@ namespace GameUtilities
 
             if (isReceived == false)
             {
+                CustomLogger.Log("Failed to get the round model", LogPriority.High);
                 return isStarted;
             }
 

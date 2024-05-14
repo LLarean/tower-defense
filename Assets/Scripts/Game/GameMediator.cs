@@ -22,6 +22,7 @@ namespace Game
         [Button()] public void LoadMainMenu() => SceneManager.LoadScene(GlobalStrings.Menu);
         
         [Button()] public void StartMatch() => _referee.StartMatch();
+        [Button()] public void RestartMatch() => _referee.StartMatch();
         [Button()] public void StopMatch() => _roundStarter.StopMatch();
         [Button()] public void RestartRound() => _roundStarter.RestartRound();
         public bool TryStartRound() => _roundStarter.TryStartRound();

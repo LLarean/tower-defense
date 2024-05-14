@@ -1,4 +1,3 @@
-using GameUtilities;
 using Globals;
 using Infrastructure;
 using ModalWindows;
@@ -12,7 +11,7 @@ namespace Game
     {
         [Inject] private GameMediator _gameMediator;
         [Inject] private PlayerModel _playerModel;
-        [Inject] private NotificationWindowModel _notificationWindowModel;
+        [Inject] private ConfirmationWindowModel _confirmationWindowModel;
 
         private int _enemiesCompletedPath;
         
@@ -25,19 +24,19 @@ namespace Game
 
         public void HandlePrepareRound()
         {
-            CustomLogger.Log("Preparing for the match", LogImportance.Low);
+            CustomLogger.Log("Preparing for the match", LogPriority.Low);
         }
 
         public void HandleStartRound()
         {
-            CustomLogger.Log("The round is started", LogImportance.Low);
+            CustomLogger.Log("The round is started", LogPriority.Low);
             _playerModel.Notification.Value = GlobalStrings.RoundStart;
             _enemiesCompletedPath = 0;
         }
 
         public void HandleStopRound()
         {
-            CustomLogger.Log("The round is stopped", LogImportance.Low);
+            CustomLogger.Log("The round is stopped", LogPriority.Low);
             _playerModel.Notification.Value = GlobalStrings.RoundOver;
         }
 
@@ -119,18 +118,22 @@ namespace Game
 
         private void ShowModalWindow()
         {
-            SetNotificationWindowModel();
-            _gameMediator.ShowNotificationWindow();
+            SetСonfirmationWindowModel();
+            
+            _gameMediator.ShowConfirmationWindow();
         }
 
-        private void SetNotificationWindowModel()
+        private void SetСonfirmationWindowModel()
         {
-            _notificationWindowModel.Title = "The end";
-            _notificationWindowModel.Message = "The game is over";
-            _notificationWindowModel.ConfirmLabel = "To Menu";
-            _notificationWindowModel.ConfirmDelegate = ConfirmDelegate;
+            _confirmationWindowModel.Title = "The end";
+            _confirmationWindowModel.Message = "Restart the match?";
+            _confirmationWindowModel.AcceptLabel = "Restart";
+            _confirmationWindowModel.CancelLabel = "To Menu";
+            _confirmationWindowModel.AcceptDelegate = AcceptDelegate;
+            _confirmationWindowModel.CancelDelegate = CancelDelegate;
         }
-        
-        private void ConfirmDelegate() => _gameMediator.LoadMainMenu();
+
+        private void AcceptDelegate() => _gameMediator.RestartMatch();
+        private void CancelDelegate() => _gameMediator.LoadMainMenu();
     }
 }
