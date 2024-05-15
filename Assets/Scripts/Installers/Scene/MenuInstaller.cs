@@ -13,6 +13,7 @@ namespace Installers
         [SerializeField] private MenuMediator _menuMediator;
         [SerializeField] private MenuReferee _menuReferee;
         [SerializeField] private MainScreen _mainScreen;
+        [SerializeField] private NetworkWindow _networkWindow;
         [SerializeField] private SettingsWindow _settingsWindow;
 
         public override void InstallBindings()
@@ -20,6 +21,7 @@ namespace Installers
             BindMenuMediator();
             BindMenuReferee();
             BindMainScreen();
+            BindNetworkWindow();
             BindSettingsWindow();
         }
 
@@ -44,6 +46,14 @@ namespace Installers
             Container
                 .Bind<MainScreen>()
                 .FromInstance(_mainScreen)
+                .AsSingle();
+        }
+        
+        private void BindNetworkWindow()
+        {
+            Container
+                .Bind<NetworkWindow>()
+                .FromInstance(_networkWindow)
                 .AsSingle();
         }
 
@@ -77,6 +87,13 @@ namespace Installers
             if (mainScreens != null)
             {
                 _mainScreen = mainScreens[0];
+            }
+            
+            var networkWindows = FindObjectsOfType<NetworkWindow>();
+
+            if (networkWindows != null)
+            {
+                _networkWindow = networkWindows[0];
             }
             
             var settingsWindows = FindObjectsOfType<SettingsWindow>();

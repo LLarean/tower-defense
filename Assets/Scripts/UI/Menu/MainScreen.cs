@@ -49,7 +49,7 @@ namespace UI.Menu
         private void LoadMultiplayerGame()
         {
             EventBus.RaiseEvent<ISoundHandler>(soundHandler => soundHandler.HandleClick());
-            _menuMediator.LoadMultiplayerGame();
+            _menuMediator.ShowNetworkWindow();
         }
 
         private void OpenSettings()
