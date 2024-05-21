@@ -4,6 +4,7 @@ using NaughtyAttributes;
 using UI;
 using UI.Menu;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Zenject;
 
 namespace Installers
@@ -13,7 +14,7 @@ namespace Installers
         [SerializeField] private MenuMediator _menuMediator;
         [SerializeField] private MenuReferee _menuReferee;
         [SerializeField] private MainScreen _mainScreen;
-        [SerializeField] private NetworkWindow _networkWindow;
+        [FormerlySerializedAs("_networkWindow")] [SerializeField] private NetworkWindowTemp networkWindowTemp;
         [SerializeField] private SettingsWindow _settingsWindow;
 
         public override void InstallBindings()
@@ -52,8 +53,8 @@ namespace Installers
         private void BindNetworkWindow()
         {
             Container
-                .Bind<NetworkWindow>()
-                .FromInstance(_networkWindow)
+                .Bind<NetworkWindowTemp>()
+                .FromInstance(networkWindowTemp)
                 .AsSingle();
         }
 
@@ -89,11 +90,11 @@ namespace Installers
                 _mainScreen = mainScreens[0];
             }
             
-            var networkWindows = FindObjectsOfType<NetworkWindow>();
+            var networkWindows = FindObjectsOfType<NetworkWindowTemp>();
 
             if (networkWindows != null)
             {
-                _networkWindow = networkWindows[0];
+                networkWindowTemp = networkWindows[0];
             }
             
             var settingsWindows = FindObjectsOfType<SettingsWindow>();

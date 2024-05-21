@@ -1,11 +1,10 @@
 using ModalWindows;
-// using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace UI.Menu
 {
-    public class NetworkWindow : ModalWindow
+    public class NetworkWindowTemp : ModalWindow
     {
         [SerializeField] private Button _server;
         [SerializeField] private Button _host;
@@ -27,12 +26,10 @@ namespace UI.Menu
 
         private void StartHost()
         {
-            // NetworkManager.Singleton.StartHost();
         }
 
         private void StartClient()
         {
-            // NetworkManager.Singleton.StartClient();
         }
         
         private void BackToMainMenu()

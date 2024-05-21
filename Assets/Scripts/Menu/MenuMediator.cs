@@ -16,7 +16,7 @@ namespace Menu
         [Inject] private MenuReferee _menuReferee;
         [Inject] private RoundStarter _roundStarter;
         [Inject] private ConfirmationWindow _confirmationWindow;
-        [Inject] private NetworkWindow _networkWindow;
+        [Inject] private NetworkWindowTemp _networkWindowTemp;
         [Inject] private SettingsWindow _settingsWindow;
         
         [Button()] public void StartMatch() => _menuReferee.StartMatch();
@@ -28,7 +28,7 @@ namespace Menu
 
         [Button()] public void LoadMultiplayerGame() => SceneManager.LoadScene(GlobalStrings.Multiplayer);
 
-        [Button()] public void ShowNetworkWindow() => _networkWindow.Show();
+        [Button()] public void ShowNetworkWindow() => _networkWindowTemp.Show();
         
         [Button()] public void ShowSettingsWindow() => _settingsWindow.Show();
 

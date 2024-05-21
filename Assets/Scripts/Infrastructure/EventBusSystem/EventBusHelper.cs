@@ -6,8 +6,7 @@ namespace Infrastructure
 {
     internal static class EventBusHelper
     {
-        private static Dictionary<Type, List<Type>> _cashedSubscriberTypes =
-            new Dictionary<Type, List<Type>>();
+        private static Dictionary<Type, List<Type>> _cashedSubscriberTypes = new();
 
         public static List<Type> GetSubscriberTypes(IGlobalSubscriber globalSubscriber)
         {

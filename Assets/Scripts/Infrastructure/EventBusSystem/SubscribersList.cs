@@ -4,12 +4,10 @@ namespace Infrastructure
 {
     internal class SubscribersList<TSubscriber> where TSubscriber : class
     {
-        private bool _needsCleanUp = false;
-
-        public bool Executing;
-
         public readonly List<TSubscriber> TSubscribers = new List<TSubscriber>();
-
+        public bool Executing;
+        private bool _needsCleanUp = false;
+        
         public void Add(TSubscriber subscriber)
         {
             TSubscribers.Add(subscriber);

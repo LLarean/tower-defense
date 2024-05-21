@@ -6,8 +6,7 @@ namespace Infrastructure
 {
     public static class EventBus
     {
-        private static Dictionary<Type, SubscribersList<IGlobalSubscriber>> _subscribers
-            = new Dictionary<Type, SubscribersList<IGlobalSubscriber>>();
+        private static Dictionary<Type, SubscribersList<IGlobalSubscriber>> _subscribers = new();
         
         public static void Subscribe(IGlobalSubscriber subscriber)
         {
