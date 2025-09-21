@@ -1,5 +1,7 @@
 ### Another game in the Tower Defense genre
 
+![Status](https://img.shields.io/badge/Development-Paused-orange)
+
 The goal of the project is to develop interesting mechanics of the interaction of the elements and the practice of using design patterns.
 
 ![MainMenu](https://github.com/LLarean/tower-defense/blob/develop/Assets/Images/Sources/MainMenu.jpg?raw=true)
