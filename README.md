@@ -10,9 +10,9 @@ Water a crowd and shock it, freeze a column and shatter it, poison a pack and se
 
 | Input | Action |
 |---|---|
-| `1`…`6` or the bottom bar | Pick a tower to build |
-| Left click | Build the picked tower or select a built one |
-| Right click, `Esc` | Cancel |
+| `1`…`7` or the bottom bar | Pick a tower to build (hover for details) |
+| Left click | Build the picked tower, select a tower or a monster |
+| Right click, `Esc` | Cancel; `Esc` again opens the pause menu |
 | `U`, `X` | Upgrade or sell the selected tower |
 | `Space` | Start the battle or call the next wave early |
 | `WASD`, screen edges, wheel | Move and zoom the camera |
@@ -22,7 +22,7 @@ Every player has their own gold, the base lives are shared, and the bounty for e
 
 ## Elements
 
-Six elements put a status on a monster; a second element on the same monster triggers a reaction.
+Seven elements put a status on a monster; a second element on the same monster triggers a reaction.
 The full table lives in [docs/DESIGN.md](docs/DESIGN.md), the numbers are tuned in `Assets/Game/Config/Chemistry.asset`.
 
 ## Project
@@ -38,7 +38,7 @@ The full table lives in [docs/DESIGN.md](docs/DESIGN.md), the numbers are tuned 
 Multiplayer is deterministic lockstep: every peer runs the same simulation and only player orders travel over the network.
 The host stamps orders with a tick, guests never run past the confirmed tick, and checksums catch any divergence.
 
-Rules for the code are in [docs/CODESTYLE.md](docs/CODESTYLE.md).
+Rules for the code are in [docs/CODESTYLE.md](docs/CODESTYLE.md), the current state and plan in [docs/STATUS.md](docs/STATUS.md).
 
 ## Developing
 
