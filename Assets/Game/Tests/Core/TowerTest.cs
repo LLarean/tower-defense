@@ -72,6 +72,19 @@ namespace Game.Core.Tests
         }
 
         [Test]
+        public void RecoversReadinessDuringCooldown()
+        {
+            var field = new Field();
+            field.Spawn(10f);
+            var tower = new Tower(0, Spec(Element.Fire), new Vector3(10f, 0f, 1f), 0);
+            var volley = new Volley();
+            tower.Tick(0.1f, field.Arena, volley);
+            Assert.That(tower.Readiness, Is.EqualTo(0f));
+            tower.Tick(0.5f, field.Arena, volley);
+            Assert.That(tower.Readiness, Is.EqualTo(0.5f).Within(0.001f));
+        }
+
+        [Test]
         public void GrowsStrongerAfterUpgrade()
         {
             var tower = new Tower(0, Spec(Element.Fire), Vector3.Zero, 0);

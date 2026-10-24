@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Numerics;
 using Game.Core.Arenas;
@@ -51,6 +52,8 @@ namespace Game.Core.Towers
         }
 
         public int Refund => Worth * RefundPercent / 100;
+
+        public float Readiness => Math.Clamp(1f - _cooldown / Grade.Cooldown, 0f, 1f);
 
         public void Upgrade() => Level++;
 
