@@ -1,0 +1,32 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements">
+    <Style src="Menu.uss" />
+    <ui:VisualElement class="menu">
+        <ui:VisualElement class="card">
+            <ui:Label class="title" text="Battle of the Elements" />
+            <ui:VisualElement name="doors" class="doors">
+                <ui:Button name="solo" class="choice" text="Play solo" />
+                <ui:Label class="caption" text="Online co-op" />
+                <ui:VisualElement class="row">
+                    <ui:Button name="host-online" class="choice" text="Host" />
+                    <ui:TextField name="code" class="field" />
+                    <ui:Button name="join-online" class="choice" text="Join by code" />
+                </ui:VisualElement>
+                <ui:Label class="caption" text="Local network" />
+                <ui:VisualElement class="row">
+                    <ui:Button name="host-lan" class="choice" text="Host" />
+                    <ui:TextField name="ip" class="field" value="127.0.0.1" />
+                    <ui:Button name="join-lan" class="choice" text="Join by IP" />
+                </ui:VisualElement>
+                <ui:Button name="quit" class="choice quit" text="Quit" />
+            </ui:VisualElement>
+            <ui:VisualElement name="hall" class="hall">
+                <ui:Label name="roster" class="roster" />
+                <ui:VisualElement class="row">
+                    <ui:Button name="begin" class="choice primary" text="Start" />
+                    <ui:Button name="leave" class="choice" text="Leave" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+            <ui:Label name="status" class="status" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>
