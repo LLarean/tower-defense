@@ -8,5 +8,6 @@ namespace Game.Core.Elements
         Lightning,
         Poison,
         Earth,
+        Oil,
     }
 }

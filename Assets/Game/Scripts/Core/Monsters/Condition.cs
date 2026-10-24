@@ -11,5 +11,6 @@ namespace Game.Core.Monsters
         Frozen,
         Corroded,
         Mired,
+        Oiled,
     }
 }

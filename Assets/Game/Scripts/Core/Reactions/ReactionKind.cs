@@ -14,5 +14,8 @@ namespace Game.Core.Reactions
         Magma,
         Superconduct,
         Corrosion,
+        Blaze,
+        Slick,
+        Tar,
     }
 }

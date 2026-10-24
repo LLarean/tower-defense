@@ -17,6 +17,7 @@ namespace Game.Core.Monsters
             Condition.Charged,
             Condition.Poisoned,
             Condition.Sundered,
+            Condition.Oiled,
         };
 
         private readonly float[] _remaining = new float[Conditions.Length];
@@ -35,7 +36,7 @@ namespace Game.Core.Monsters
                 {
                     return 0f;
                 }
-                var slow = Math.Min(1f, Potency(Condition.Chilled) + Potency(Condition.Mired));
+                var slow = Math.Min(1f, Potency(Condition.Chilled) + Potency(Condition.Mired) + Potency(Condition.Oiled));
                 return Math.Max(SlowestPace, 1f - slow);
             }
         }
