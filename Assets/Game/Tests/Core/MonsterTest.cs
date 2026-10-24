@@ -56,6 +56,15 @@ namespace Game.Core.Tests
         }
 
         [Test]
+        public void ReportsZeroPaceWhenFrozen()
+        {
+            var field = new Field();
+            var monster = field.Spawn();
+            monster.Inflict(Condition.Frozen, 1f, 2f);
+            Assert.That(monster.Pace, Is.EqualTo(0f));
+        }
+
+        [Test]
         public void TakesExtraDamageWhenSundered()
         {
             var field = new Field();

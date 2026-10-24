@@ -34,6 +34,8 @@ namespace Game.Core.Monsters
 
         public bool Escaped => _distance >= _route.Length;
 
+        public float Pace => _statuses.Pace;
+
         public bool Has(Condition condition) => _statuses.Has(condition);
 
         public void Take(Hit hit, Arena arena)
