@@ -12,8 +12,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Include="../../Assets/Game/Scripts/Core/**/*.cs" />
     <Compile Include="../../Assets/Game/Tests/Core/**/*.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="../Core/Core.csproj" />
   </ItemGroup>
 
   <ItemGroup>
