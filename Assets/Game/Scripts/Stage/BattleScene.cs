@@ -40,6 +40,7 @@ namespace Game.Stage
 
         private Battle _battle;
         private IPace _pace;
+        private Match _match;
         private Throng _throng;
         private Barrage _barrage;
         private Spectacle _show;
@@ -53,6 +54,11 @@ namespace Game.Stage
             var bestiary = new Bestiary(transform);
             var armory = new Armory(_level.Arsenal);
             var online = TryMatch(out var match);
+            _match = match;
+            if (online && !match.Hosting)
+            {
+                match.Manager.OnClientStopped += Abandoned;
+            }
             var players = online ? match.Players : _players;
             var me = online ? match.Me : 0;
             var treasury = new Treasury(players, _level.Gold);
@@ -101,7 +107,16 @@ namespace Game.Stage
             }
         }
 
-        private void OnDestroy() => _pace?.Dispose();
+        private void OnDestroy()
+        {
+            _pace?.Dispose();
+            if (_match != null)
+            {
+                _match.Manager.OnClientStopped -= Abandoned;
+            }
+        }
+
+        private void Abandoned(bool host) => SceneManager.LoadScene(Menu);
 
         private static bool TryMatch(out Match match)
         {
