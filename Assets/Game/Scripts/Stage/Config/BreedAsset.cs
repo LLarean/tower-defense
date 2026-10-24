@@ -1,5 +1,6 @@
 using Game.Core.Elements;
 using Game.Core.Monsters;
+using Game.Stage.Crowd;
 using UnityEngine;
 
 namespace Game.Stage.Config
@@ -13,9 +14,9 @@ namespace Game.Stage.Config
         [SerializeField] private int _bounty = 5;
         [SerializeField] private int _harm = 1;
         [SerializeField] private Element[] _immunities = new Element[0];
-        [SerializeField] private Transform _model;
+        [SerializeField] private Body _model;
 
-        public Transform Model => _model;
+        public Body Model => _model;
 
         public Breed Breed() => new Breed(name, _health, _armor, _speed, _bounty, _harm, _immunities);
     }

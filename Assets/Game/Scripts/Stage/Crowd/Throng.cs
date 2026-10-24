@@ -6,16 +6,26 @@ namespace Game.Stage.Crowd
 {
     public sealed class Throng
     {
-        private readonly IReadOnlyDictionary<Breed, Stock<Transform>> _stocks;
+        private readonly IReadOnlyDictionary<Breed, Stock<Body>> _stocks;
         private readonly Terrain _terrain;
+        private readonly Palette _palette;
         private readonly Dictionary<Monster, Puppet> _puppets = new Dictionary<Monster, Puppet>();
         private readonly List<Monster> _gone = new List<Monster>();
         private int _frame;
 
-        public Throng(IReadOnlyDictionary<Breed, Stock<Transform>> stocks, Terrain terrain)
+        public Throng(IReadOnlyDictionary<Breed, Stock<Body>> stocks, Terrain terrain, Palette palette)
         {
             _stocks = stocks;
             _terrain = terrain;
+            _palette = palette;
+        }
+
+        public void Flash(Monster monster)
+        {
+            if (_puppets.TryGetValue(monster, out var puppet))
+            {
+                puppet.Body.Flash();
+            }
         }
 
         public void Sync(IReadOnlyList<Monster> monsters, float seconds)
@@ -28,9 +38,11 @@ namespace Game.Stage.Crowd
                 {
                     var stock = _stocks[monster.Breed];
                     puppet = new Puppet(stock.Take(position, Quaternion.identity), stock);
+                    puppet.Body.Restart();
                     _puppets.Add(monster, puppet);
                 }
                 puppet.Seen = _frame;
+                puppet.Body.Tint(_palette.Of(monster));
                 puppet.Follow(position, seconds);
             }
             Sweep();

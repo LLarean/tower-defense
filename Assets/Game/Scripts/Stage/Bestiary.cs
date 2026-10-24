@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Game.Core.Monsters;
 using Game.Stage.Config;
+using Game.Stage.Crowd;
 using UnityEngine;
 
 namespace Game.Stage
@@ -9,14 +10,14 @@ namespace Game.Stage
     {
         private readonly Transform _root;
         private readonly Dictionary<BreedAsset, Breed> _breeds = new Dictionary<BreedAsset, Breed>();
-        private readonly Dictionary<Breed, Stock<Transform>> _stocks = new Dictionary<Breed, Stock<Transform>>();
+        private readonly Dictionary<Breed, Stock<Body>> _stocks = new Dictionary<Breed, Stock<Body>>();
 
         public Bestiary(Transform root)
         {
             _root = root;
         }
 
-        public IReadOnlyDictionary<Breed, Stock<Transform>> Stocks => _stocks;
+        public IReadOnlyDictionary<Breed, Stock<Body>> Stocks => _stocks;
 
         public Breed Breed(BreedAsset asset)
         {
@@ -24,7 +25,7 @@ namespace Game.Stage
             {
                 breed = asset.Breed();
                 _breeds.Add(asset, breed);
-                _stocks.Add(breed, new Stock<Transform>(asset.Model, _root));
+                _stocks.Add(breed, new Stock<Body>(asset.Model, _root));
             }
             return breed;
         }

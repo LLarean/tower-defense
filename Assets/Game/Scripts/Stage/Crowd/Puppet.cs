@@ -8,15 +8,16 @@ namespace Game.Stage.Crowd
 
         private readonly Transform _body;
 
-        public Puppet(Transform body, Stock<Transform> stock)
+        public Puppet(Body body, Stock<Body> stock)
         {
-            _body = body;
+            _body = body.transform;
+            Body = body;
             Stock = stock;
         }
 
-        public Transform Body => _body;
+        public Body Body { get; }
 
-        public Stock<Transform> Stock { get; }
+        public Stock<Body> Stock { get; }
 
         public int Seen { get; set; }
 
@@ -30,6 +31,7 @@ namespace Game.Stage.Crowd
                 rotation = Quaternion.Slerp(rotation, Quaternion.LookRotation(heading), Turn * seconds);
             }
             _body.SetPositionAndRotation(position, rotation);
+            Body.Tick(seconds);
         }
     }
 }

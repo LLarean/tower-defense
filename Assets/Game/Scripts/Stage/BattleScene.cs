@@ -7,6 +7,7 @@ using Game.Core.Waves;
 using Game.Stage.Config;
 using Game.Stage.Controls;
 using Game.Stage.Crowd;
+using Game.Stage.Effects;
 using Game.Stage.Hud;
 using Game.Stage.Map;
 using Game.Stage.Orders;
@@ -25,6 +26,8 @@ namespace Game.Stage
 
         [SerializeField] private LevelAsset _level;
         [SerializeField] private ChemistryAsset _chemistry;
+        [SerializeField] private SpectacleAsset _spectacle;
+        [SerializeField] private Tremor _tremor;
         [SerializeField] private RoutePath[] _routes = new RoutePath[0];
         [SerializeField] private PlotGrid _plots;
         [SerializeField] private Terrain _terrain;
@@ -37,6 +40,7 @@ namespace Game.Stage
         private Battle _battle;
         private Throng _throng;
         private Barrage _barrage;
+        private Spectacle _show;
         private Hand _hand;
         private Hotkeys _hotkeys;
         private IWidget[] _widgets;
@@ -49,12 +53,13 @@ namespace Game.Stage
             var armory = new Armory(_level.Arsenal);
             var treasury = new Treasury(_players, _level.Gold);
             var lives = new Lives(_level.Lives);
-            var arena = new Arena(_chemistry.Chemistry(), new Horde(Cell), new Feedbacks(new Ledger(treasury, lives)));
+            _throng = new Throng(bestiary.Stocks, _terrain, new Palette(_spectacle));
+            _show = new Spectacle(_spectacle, _throng, _tremor, transform);
+            var arena = new Arena(_chemistry.Chemistry(), new Horde(Cell), new Feedbacks(new Ledger(treasury, lives), _show));
             var invasion = new Invasion(routes, _level.Rest, Waves(bestiary));
             var plots = _plots.Plots(routes);
             var garrison = new Garrison(plots, treasury, new Bastion(armory, transform));
             _battle = new Battle(arena, invasion, garrison, lives);
-            _throng = new Throng(bestiary.Stocks, _terrain);
             _barrage = new Barrage(armory, transform);
             var orders = new LocalOrders(_battle, Player);
             var root = _document.rootVisualElement;
@@ -86,6 +91,7 @@ namespace Game.Stage
             }
             _throng.Sync(_battle.Arena.Horde.Monsters, Time.deltaTime);
             _barrage.Sync(_battle.Volley.Missiles);
+            _show.Tick(Time.deltaTime);
             foreach (var widget in _widgets)
             {
                 widget.Refresh();

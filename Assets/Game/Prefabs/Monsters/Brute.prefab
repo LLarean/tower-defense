@@ -99,6 +99,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3207272273881582366}
+  - component: {fileID: 4659334959236747153}
   m_Layer: 0
   m_Name: Brute
   m_TagString: Untagged
@@ -122,3 +123,18 @@ Transform:
   - {fileID: 1122080079830692916}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4659334959236747153
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8164625958613999982}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aac1883eb06f85c51891bcbdfb137e8a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Game.Stage::Game.Stage.Crowd.Body
+  _renderers:
+  - {fileID: 8351107764523067928}
+  _glow: 1.5
