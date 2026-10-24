@@ -17,9 +17,14 @@ namespace Game.Core.Tests
         }
 
         public Field(Chemistry chemistry)
+            : this(chemistry, new Feedbacks())
+        {
+        }
+
+        public Field(Chemistry chemistry, IFeedback listener)
         {
             Feedback = new FakeFeedback();
-            Arena = new Arena(chemistry, new Horde(4f), Feedback);
+            Arena = new Arena(chemistry, new Horde(4f), new Feedbacks(Feedback, listener));
         }
 
         public Arena Arena { get; }
