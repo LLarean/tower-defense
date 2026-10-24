@@ -81,7 +81,7 @@ namespace Game.Stage
             _pace = !online ? new SoloPace(timeline) : match.Hosting ? new HostPace(timeline, match.Manager) : (IPace)new GuestPace(timeline, match.Manager);
             var orders = new Courier(_pace.Post, armory.Specs, me);
             var root = _document.rootVisualElement;
-            var pick = new Pick(garrison, _selection, _plots.Cell);
+            var pick = new Pick(garrison, arena.Horde, _selection, _plots.Cell);
             _hand = new Hand(_camera, new Overlay(root), new Blueprint(plots, armory, orders, _ghost, _plots.Cell), pick);
             _hotkeys = new Hotkeys(armory, orders, _hand, pick);
             var wallet = treasury.Wallet(me);
