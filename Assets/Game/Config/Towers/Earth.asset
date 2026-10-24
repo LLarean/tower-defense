@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d580e3e3615f1fb94e6d6f80c6a2b7a, type: 3}
+  m_Name: Earth
+  m_EditorClassIdentifier: Game.Stage::Game.Stage.Config.TowerAsset
+  _title: Earth
+  _icon: {fileID: 0}
+  _elements: 05000000
+  _missileSpeed: 18
+  _grades:
+  - _damage: 30
+    _potency: 0.2
+    _duration: 4
+    _range: 8
+    _cooldown: 1.6
+    _cost: 70
+  - _damage: 50
+    _potency: 0.3
+    _duration: 4
+    _range: 9
+    _cooldown: 1.6
+    _cost: 100
+  - _damage: 80
+    _potency: 0.4
+    _duration: 4
+    _range: 10
+    _cooldown: 1.6
+    _cost: 150
+  _model: {fileID: 2592732098795562826, guid: 7ad5a75b299ef3e49b9cc3417507e7fd, type: 3}
+  _missile: {fileID: 8503655525963279392, guid: e7d6849c5abf799498c54d0b2364ebda, type: 3}

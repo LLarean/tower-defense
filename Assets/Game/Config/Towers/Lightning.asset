@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d580e3e3615f1fb94e6d6f80c6a2b7a, type: 3}
+  m_Name: Lightning
+  m_EditorClassIdentifier: Game.Stage::Game.Stage.Config.TowerAsset
+  _title: Lightning
+  _icon: {fileID: 0}
+  _elements: 03000000
+  _missileSpeed: 45
+  _grades:
+  - _damage: 18
+    _potency: 0.15
+    _duration: 3
+    _range: 11
+    _cooldown: 1.2
+    _cost: 80
+  - _damage: 30
+    _potency: 0.2
+    _duration: 3
+    _range: 12
+    _cooldown: 1.2
+    _cost: 110
+  - _damage: 48
+    _potency: 0.3
+    _duration: 3
+    _range: 13
+    _cooldown: 1.2
+    _cost: 160
+  _model: {fileID: 1621858894159139751, guid: 482c804212a4c824a9b6d4d23d601c86, type: 3}
+  _missile: {fileID: 6098547543803266081, guid: 167a165cf80812d44a29449301e14c33, type: 3}

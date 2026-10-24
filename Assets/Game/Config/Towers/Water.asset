@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d580e3e3615f1fb94e6d6f80c6a2b7a, type: 3}
+  m_Name: Water
+  m_EditorClassIdentifier: Game.Stage::Game.Stage.Config.TowerAsset
+  _title: Water
+  _icon: {fileID: 0}
+  _elements: 01000000
+  _missileSpeed: 25
+  _grades:
+  - _damage: 6
+    _potency: 1
+    _duration: 4
+    _range: 10
+    _cooldown: 0.7
+    _cost: 50
+  - _damage: 10
+    _potency: 1
+    _duration: 5
+    _range: 11
+    _cooldown: 0.7
+    _cost: 70
+  - _damage: 16
+    _potency: 1
+    _duration: 6
+    _range: 12
+    _cooldown: 0.7
+    _cost: 100
+  _model: {fileID: 890254990564041690, guid: 619db8f183a71ea4cbdde833c73e9cec, type: 3}
+  _missile: {fileID: 6505793398748882661, guid: afb5b922f29e97747ad2d87c19e8c7c5, type: 3}

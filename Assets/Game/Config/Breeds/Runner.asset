@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b4dcbbbf4872433ab34e8b8dcf47da43, type: 3}
+  m_Name: Runner
+  m_EditorClassIdentifier: Game.Stage::Game.Stage.Config.BreedAsset
+  _health: 40
+  _armor: 0
+  _speed: 5
+  _bounty: 3
+  _harm: 1
+  _immunities: 
+  _model: {fileID: 3319738782798026545, guid: 67ba1261e7725e3458a83df5358038db, type: 3}

@@ -1,0 +1,120 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a995e588fe915d8ed94b6061d0b279ca, type: 3}
+  m_Name: Meadow
+  m_EditorClassIdentifier: Game.Stage::Game.Stage.Config.LevelAsset
+  _gold: 250
+  _lives: 20
+  _rest: 12
+  _arsenal:
+  - {fileID: 11400000, guid: 190d36a7ef7a52d458a49b1a75586b55, type: 2}
+  - {fileID: 11400000, guid: 1f0deeb18359aa04abd8b3cebc871359, type: 2}
+  - {fileID: 11400000, guid: d6962f2e2b103434b97903ff5ebf00b9, type: 2}
+  - {fileID: 11400000, guid: 795ba880e9a7e4949bb5fc6a3090c651, type: 2}
+  - {fileID: 11400000, guid: 924d5855ac1a390479448b11d6918b96, type: 2}
+  - {fileID: 11400000, guid: d04631060064cfd42b26a91c5d58671c, type: 2}
+  _waves:
+  - _squads:
+    - _breed: {fileID: 11400000, guid: 356fc2d905277484f82b30ba8b719755, type: 2}
+      _count: 8
+      _interval: 1.2
+      _delay: 0
+      _route: 0
+  - _squads:
+    - _breed: {fileID: 11400000, guid: cc8acf6fd47926f4bb1a24895d8e3f3d, type: 2}
+      _count: 12
+      _interval: 0.6
+      _delay: 0
+      _route: 0
+  - _squads:
+    - _breed: {fileID: 11400000, guid: 356fc2d905277484f82b30ba8b719755, type: 2}
+      _count: 10
+      _interval: 1
+      _delay: 0
+      _route: 0
+    - _breed: {fileID: 11400000, guid: cc8acf6fd47926f4bb1a24895d8e3f3d, type: 2}
+      _count: 8
+      _interval: 0.6
+      _delay: 6
+      _route: 0
+  - _squads:
+    - _breed: {fileID: 11400000, guid: 6a73b548b876cc14085c5835c140831a, type: 2}
+      _count: 3
+      _interval: 3
+      _delay: 0
+      _route: 0
+    - _breed: {fileID: 11400000, guid: 356fc2d905277484f82b30ba8b719755, type: 2}
+      _count: 10
+      _interval: 0.8
+      _delay: 2
+      _route: 0
+  - _squads:
+    - _breed: {fileID: 11400000, guid: cc8acf6fd47926f4bb1a24895d8e3f3d, type: 2}
+      _count: 25
+      _interval: 0.4
+      _delay: 0
+      _route: 0
+  - _squads:
+    - _breed: {fileID: 11400000, guid: 356fc2d905277484f82b30ba8b719755, type: 2}
+      _count: 20
+      _interval: 0.6
+      _delay: 0
+      _route: 0
+    - _breed: {fileID: 11400000, guid: 6a73b548b876cc14085c5835c140831a, type: 2}
+      _count: 4
+      _interval: 2
+      _delay: 8
+      _route: 0
+  - _squads:
+    - _breed: {fileID: 11400000, guid: cc8acf6fd47926f4bb1a24895d8e3f3d, type: 2}
+      _count: 30
+      _interval: 0.3
+      _delay: 0
+      _route: 0
+    - _breed: {fileID: 11400000, guid: 356fc2d905277484f82b30ba8b719755, type: 2}
+      _count: 15
+      _interval: 0.6
+      _delay: 4
+      _route: 0
+  - _squads:
+    - _breed: {fileID: 11400000, guid: 6a73b548b876cc14085c5835c140831a, type: 2}
+      _count: 10
+      _interval: 1.5
+      _delay: 0
+      _route: 0
+  - _squads:
+    - _breed: {fileID: 11400000, guid: 356fc2d905277484f82b30ba8b719755, type: 2}
+      _count: 30
+      _interval: 0.4
+      _delay: 0
+      _route: 0
+    - _breed: {fileID: 11400000, guid: cc8acf6fd47926f4bb1a24895d8e3f3d, type: 2}
+      _count: 30
+      _interval: 0.3
+      _delay: 5
+      _route: 0
+  - _squads:
+    - _breed: {fileID: 11400000, guid: 6a73b548b876cc14085c5835c140831a, type: 2}
+      _count: 15
+      _interval: 1
+      _delay: 0
+      _route: 0
+    - _breed: {fileID: 11400000, guid: 356fc2d905277484f82b30ba8b719755, type: 2}
+      _count: 30
+      _interval: 0.4
+      _delay: 3
+      _route: 0
+    - _breed: {fileID: 11400000, guid: cc8acf6fd47926f4bb1a24895d8e3f3d, type: 2}
+      _count: 40
+      _interval: 0.25
+      _delay: 8
+      _route: 0

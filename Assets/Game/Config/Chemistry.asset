@@ -1,0 +1,45 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33709ca2ecaf03d7495afaa2ac284912, type: 3}
+  m_Name: Chemistry
+  m_EditorClassIdentifier: Game.Stage::Game.Stage.Config.ChemistryAsset
+  _electrocuteRadius: 5
+  _electrocuteMultiplier: 1.5
+  _freezeSeconds: 2
+  _shatterRadius: 3
+  _shatterMultiplier: 4
+  _shatterSplash: 0.5
+  _steamRadius: 3.5
+  _steamSeconds: 4
+  _steamDamage: 8
+  _steamSlow: 0.3
+  _thermalMultiplier: 3
+  _gasRadius: 4
+  _gasMultiplier: 2
+  _gasSeconds: 3
+  _overloadRadius: 3
+  _overloadMultiplier: 1.5
+  _overloadPush: 3
+  _puddleRadius: 3
+  _puddleSeconds: 5
+  _puddlePoison: 3
+  _mudRadius: 3.5
+  _mudSeconds: 6
+  _mudSlow: 0.5
+  _magmaRadius: 3
+  _magmaSeconds: 5
+  _magmaBurn: 6
+  _superconductRadius: 4
+  _superconductShred: 0.4
+  _superconductSeconds: 5
+  _corrosionShred: 0.7
+  _corrosionSeconds: 6
