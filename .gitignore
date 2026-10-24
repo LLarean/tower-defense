@@ -76,3 +76,7 @@ crashlytics-build.properties
 
 *.slnx
 .vscode/
+
+!/tools/**/*.csproj
+/tools/**/bin/
+/tools/**/obj/
