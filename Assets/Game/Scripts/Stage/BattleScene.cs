@@ -10,18 +10,20 @@ using Game.Stage.Crowd;
 using Game.Stage.Effects;
 using Game.Stage.Hud;
 using Game.Stage.Map;
+using Game.Stage.Net;
 using Game.Stage.Orders;
 using Game.Stage.Towers;
+using Unity.Netcode;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 
 namespace Game.Stage
 {
     public sealed class BattleScene : MonoBehaviour
     {
-        private const int MaxSteps = 5;
         private const float Cell = 4f;
-        private const int Player = 0;
+        private const string Menu = "Menu";
 
         [SerializeField] private LevelAsset _level;
         [SerializeField] private ChemistryAsset _chemistry;
@@ -37,21 +39,23 @@ namespace Game.Stage
         [SerializeField] private int _players = 1;
 
         private Battle _battle;
-        private Timeline _timeline;
+        private IPace _pace;
         private Throng _throng;
         private Barrage _barrage;
         private Spectacle _show;
         private Hand _hand;
         private Hotkeys _hotkeys;
         private IWidget[] _widgets;
-        private float _pending;
 
         private void Awake()
         {
             var routes = Array.ConvertAll(_routes, path => path.Route());
             var bestiary = new Bestiary(transform);
             var armory = new Armory(_level.Arsenal);
-            var treasury = new Treasury(_players, _level.Gold);
+            var online = TryMatch(out var match);
+            var players = online ? match.Players : _players;
+            var me = online ? match.Me : 0;
+            var treasury = new Treasury(players, _level.Gold);
             var lives = new Lives(_level.Lives);
             _throng = new Throng(bestiary.Stocks, _terrain, new Palette(_spectacle));
             _show = new Spectacle(_spectacle, _throng, _tremor, transform);
@@ -61,20 +65,23 @@ namespace Game.Stage
             var garrison = new Garrison(plots, treasury, new Bastion(armory, transform));
             _battle = new Battle(arena, invasion, garrison, lives);
             _barrage = new Barrage(armory, transform);
-            _timeline = new Timeline(_battle, armory.Specs, treasury);
-            var orders = new Courier(new LocalPost(_timeline), armory.Specs, Player);
+            var timeline = new Timeline(_battle, armory.Specs, treasury);
+            _pace = !online ? new SoloPace(timeline) : match.Hosting ? new HostPace(timeline, match.Manager) : (IPace)new GuestPace(timeline, match.Manager);
+            var orders = new Courier(_pace.Post, armory.Specs, me);
             var root = _document.rootVisualElement;
             var pick = new Pick(garrison, _selection, _plots.Cell);
             _hand = new Hand(_camera, new Overlay(root), new Blueprint(plots, armory, orders, _ghost, _plots.Cell), pick);
             _hotkeys = new Hotkeys(armory, orders, _hand, pick);
-            var wallet = treasury.Wallet(Player);
+            var wallet = treasury.Wallet(me);
             _widgets = new IWidget[]
             {
                 new Purse(root, wallet, lives),
-                new Herald(root, _battle, orders),
+                new Herald(root, _battle, orders, _pace),
                 new Arsenal(root, armory, wallet, _hand),
                 new Inspector(root, pick, armory, orders),
-                new Verdict(root, _battle),
+                online
+                    ? new Verdict(root, _battle, "Leave", () => Leave(match))
+                    : new Verdict(root, _battle, "Play again", () => SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex)),
             };
             _ghost.Hide();
             _selection.Hide();
@@ -84,11 +91,7 @@ namespace Game.Stage
         {
             _hotkeys.Tick();
             _hand.Tick();
-            _pending = Math.Min(_pending + Time.deltaTime, Timeline.Step * MaxSteps);
-            while (_pending >= Timeline.Step && _timeline.TryStep())
-            {
-                _pending -= Timeline.Step;
-            }
+            _pace.Advance(Time.deltaTime);
             _throng.Sync(_battle.Arena.Horde.Monsters, Time.deltaTime);
             _barrage.Sync(_battle.Volley.Missiles);
             _show.Tick(Time.deltaTime);
@@ -96,6 +99,21 @@ namespace Game.Stage
             {
                 widget.Refresh();
             }
+        }
+
+        private void OnDestroy() => _pace?.Dispose();
+
+        private static bool TryMatch(out Match match)
+        {
+            var manager = NetworkManager.Singleton;
+            match = null;
+            return manager != null && manager.IsListening && manager.TryGetComponent(out match);
+        }
+
+        private static void Leave(Match match)
+        {
+            match.Close();
+            SceneManager.LoadScene(Menu);
         }
 
         private Wave[] Waves(Bestiary bestiary)

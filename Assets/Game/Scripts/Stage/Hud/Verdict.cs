@@ -1,5 +1,4 @@
 using Game.Core.Battles;
-using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 
 namespace Game.Stage.Hud
@@ -11,12 +10,14 @@ namespace Game.Stage.Hud
         private readonly Label _outcome;
         private Outcome _shown = Outcome.Ongoing;
 
-        public Verdict(VisualElement root, Battle battle)
+        public Verdict(VisualElement root, Battle battle, string action, System.Action act)
         {
             _battle = battle;
             _screen = root.Q("verdict");
             _outcome = root.Q<Label>("outcome");
-            root.Q<Button>("again").clicked += () => SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            var again = root.Q<Button>("again");
+            again.text = action;
+            again.clicked += act;
             _screen.AddToClassList("hidden");
         }
 

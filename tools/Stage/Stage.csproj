@@ -26,6 +26,11 @@
     <Reference Include="$(ScriptAssemblies)/Unity.RenderPipelines.Core.Runtime.dll" Private="false" />
     <Reference Include="$(ScriptAssemblies)/Unity.RenderPipelines.Universal.Runtime.dll" Private="false" />
     <Reference Include="$(ScriptAssemblies)/Unity.Netcode.Runtime.dll" Private="false" />
+    <Reference Include="$(ScriptAssemblies)/Unity.Collections.dll" Private="false" />
+    <Reference Include="$(ScriptAssemblies)/Unity.Networking.Transport.dll" Private="false" />
+    <Reference Include="$(ScriptAssemblies)/Unity.Services.Core.dll" Private="false" />
+    <Reference Include="$(ScriptAssemblies)/Unity.Services.Authentication.dll" Private="false" />
+    <Reference Include="$(ScriptAssemblies)/Unity.Services.Multiplayer.dll" Private="false" />
   </ItemGroup>
 
 </Project>

@@ -3,7 +3,13 @@
   "rootNamespace": "Game.Stage",
   "references": [
     "Game.Core",
-    "Unity.InputSystem"
+    "Unity.InputSystem",
+    "Unity.Netcode.Runtime",
+    "Unity.Collections",
+    "Unity.Networking.Transport",
+    "Unity.Services.Core",
+    "Unity.Services.Authentication",
+    "Unity.Services.Multiplayer"
   ],
   "includePlatforms": [],
   "excludePlatforms": [],
