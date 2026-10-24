@@ -19,7 +19,6 @@ namespace Game.Stage
 {
     public sealed class BattleScene : MonoBehaviour
     {
-        private const float Step = 1f / 30f;
         private const int MaxSteps = 5;
         private const float Cell = 4f;
         private const int Player = 0;
@@ -38,6 +37,7 @@ namespace Game.Stage
         [SerializeField] private int _players = 1;
 
         private Battle _battle;
+        private Timeline _timeline;
         private Throng _throng;
         private Barrage _barrage;
         private Spectacle _show;
@@ -61,7 +61,8 @@ namespace Game.Stage
             var garrison = new Garrison(plots, treasury, new Bastion(armory, transform));
             _battle = new Battle(arena, invasion, garrison, lives);
             _barrage = new Barrage(armory, transform);
-            var orders = new LocalOrders(_battle, Player);
+            _timeline = new Timeline(_battle, armory.Specs, treasury);
+            var orders = new Courier(new LocalPost(_timeline), armory.Specs, Player);
             var root = _document.rootVisualElement;
             var pick = new Pick(garrison, _selection, _plots.Cell);
             _hand = new Hand(_camera, new Overlay(root), new Blueprint(plots, armory, orders, _ghost, _plots.Cell), pick);
@@ -83,11 +84,10 @@ namespace Game.Stage
         {
             _hotkeys.Tick();
             _hand.Tick();
-            _pending = Math.Min(_pending + Time.deltaTime, Step * MaxSteps);
-            while (_pending >= Step)
+            _pending = Math.Min(_pending + Time.deltaTime, Timeline.Step * MaxSteps);
+            while (_pending >= Timeline.Step && _timeline.TryStep())
             {
-                _battle.Tick(Step);
-                _pending -= Step;
+                _pending -= Timeline.Step;
             }
             _throng.Sync(_battle.Arena.Horde.Monsters, Time.deltaTime);
             _barrage.Sync(_battle.Volley.Missiles);
