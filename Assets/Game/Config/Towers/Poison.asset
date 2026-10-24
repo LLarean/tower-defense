@@ -36,4 +36,4 @@ MonoBehaviour:
     _cooldown: 0.6
     _cost: 120
   _model: {fileID: 8729334917384138024, guid: 2d958622e304eec4c9f616aa63179564, type: 3}
-  _missile: {fileID: 3035497740109368166, guid: 6984908782582a149a7fd750fe3da47c, type: 3}
+  _missile: {fileID: 8302289309732919591, guid: 6984908782582a149a7fd750fe3da47c, type: 3}

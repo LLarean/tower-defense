@@ -6,13 +6,13 @@ namespace Game.Stage.Crowd
 {
     public sealed class Throng
     {
-        private readonly IReadOnlyDictionary<Breed, Stock> _stocks;
+        private readonly IReadOnlyDictionary<Breed, Stock<Transform>> _stocks;
         private readonly Terrain _terrain;
         private readonly Dictionary<Monster, Puppet> _puppets = new Dictionary<Monster, Puppet>();
         private readonly List<Monster> _gone = new List<Monster>();
         private int _frame;
 
-        public Throng(IReadOnlyDictionary<Breed, Stock> stocks, Terrain terrain)
+        public Throng(IReadOnlyDictionary<Breed, Stock<Transform>> stocks, Terrain terrain)
         {
             _stocks = stocks;
             _terrain = terrain;

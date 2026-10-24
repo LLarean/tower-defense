@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6289984629590199797}
   - component: {fileID: 8987871331695559263}
   - component: {fileID: 4572800078145609935}
+  - component: {fileID: 2899037545564888569}
   m_Layer: 0
   m_Name: LightningMissile
   m_TagString: Untagged
@@ -210,3 +211,16 @@ TrailRenderer:
   m_Autodestruct: 0
   m_Emitting: 1
   m_ApplyActiveColorSpace: 1
+--- !u!114 &2899037545564888569
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6098547543803266081}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 082b7d6c0a5f12bce49f911aa05349dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Game.Stage::Game.Stage.Towers.Streak
+  _trail: {fileID: 4572800078145609935}

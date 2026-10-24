@@ -18,4 +18,4 @@ MonoBehaviour:
   _bounty: 15
   _harm: 3
   _immunities: 
-  _model: {fileID: 8164625958613999982, guid: 15424c42d33255a49b226a951e949b95, type: 3}
+  _model: {fileID: 3207272273881582366, guid: 15424c42d33255a49b226a951e949b95, type: 3}

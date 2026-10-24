@@ -8,16 +8,15 @@ namespace Game.Stage.Crowd
 
         private readonly Transform _body;
 
-        public Puppet(GameObject body, Stock stock)
+        public Puppet(Transform body, Stock<Transform> stock)
         {
-            _body = body.transform;
-            Body = body;
+            _body = body;
             Stock = stock;
         }
 
-        public GameObject Body { get; }
+        public Transform Body => _body;
 
-        public Stock Stock { get; }
+        public Stock<Transform> Stock { get; }
 
         public int Seen { get; set; }
 

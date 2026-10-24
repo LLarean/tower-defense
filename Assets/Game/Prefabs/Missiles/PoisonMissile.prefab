@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1262430515265771504}
   - component: {fileID: 3079710477513121112}
   - component: {fileID: 497019417089113021}
+  - component: {fileID: 8302289309732919591}
   m_Layer: 0
   m_Name: PoisonMissile
   m_TagString: Untagged
@@ -210,3 +211,16 @@ TrailRenderer:
   m_Autodestruct: 0
   m_Emitting: 1
   m_ApplyActiveColorSpace: 1
+--- !u!114 &8302289309732919591
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3035497740109368166}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 082b7d6c0a5f12bce49f911aa05349dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Game.Stage::Game.Stage.Towers.Streak
+  _trail: {fileID: 497019417089113021}

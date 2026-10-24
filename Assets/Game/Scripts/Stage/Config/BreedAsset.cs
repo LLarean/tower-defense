@@ -13,9 +13,9 @@ namespace Game.Stage.Config
         [SerializeField] private int _bounty = 5;
         [SerializeField] private int _harm = 1;
         [SerializeField] private Element[] _immunities = new Element[0];
-        [SerializeField] private GameObject _model;
+        [SerializeField] private Transform _model;
 
-        public GameObject Model => _model;
+        public Transform Model => _model;
 
         public Breed Breed() => new Breed(name, _health, _armor, _speed, _bounty, _harm, _immunities);
     }

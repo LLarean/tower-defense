@@ -1,6 +1,7 @@
 using System;
 using Game.Core.Elements;
 using Game.Core.Towers;
+using Game.Stage.Towers;
 using UnityEngine;
 
 namespace Game.Stage.Config
@@ -14,7 +15,7 @@ namespace Game.Stage.Config
         [SerializeField] private float _missileSpeed = 25f;
         [SerializeField] private GradeData[] _grades = new GradeData[0];
         [SerializeField] private GameObject _model;
-        [SerializeField] private GameObject _missile;
+        [SerializeField] private Streak _missile;
 
         public string Title => _title;
 
@@ -22,7 +23,7 @@ namespace Game.Stage.Config
 
         public GameObject Model => _model;
 
-        public GameObject Missile => _missile;
+        public Streak Missile => _missile;
 
         public TowerSpec Spec() => new TowerSpec(_title, _missileSpeed, _elements, Array.ConvertAll(_grades, grade => grade.Grade()));
     }

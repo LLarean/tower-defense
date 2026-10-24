@@ -3,19 +3,19 @@ using UnityEngine;
 
 namespace Game.Stage
 {
-    public sealed class Stock
+    public sealed class Stock<T> where T : Component
     {
-        private readonly GameObject _prefab;
+        private readonly T _prefab;
         private readonly Transform _root;
-        private readonly Stack<GameObject> _idle = new Stack<GameObject>();
+        private readonly Stack<T> _idle = new Stack<T>();
 
-        public Stock(GameObject prefab, Transform root)
+        public Stock(T prefab, Transform root)
         {
             _prefab = prefab;
             _root = root;
         }
 
-        public GameObject Take(Vector3 position, Quaternion rotation)
+        public T Take(Vector3 position, Quaternion rotation)
         {
             if (_idle.Count == 0)
             {
@@ -23,13 +23,13 @@ namespace Game.Stage
             }
             var item = _idle.Pop();
             item.transform.SetPositionAndRotation(position, rotation);
-            item.SetActive(true);
+            item.gameObject.SetActive(true);
             return item;
         }
 
-        public void Give(GameObject item)
+        public void Give(T item)
         {
-            item.SetActive(false);
+            item.gameObject.SetActive(false);
             _idle.Push(item);
         }
     }
