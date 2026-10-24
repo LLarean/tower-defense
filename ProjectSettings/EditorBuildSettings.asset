@@ -14,4 +14,8 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/_Scenes/Multiplayer.unity
     guid: 16d3542f3bbcf2440895a51eafda558c
+  - enabled: 1
+    path: Assets/Game/Scenes/Meadow.unity
+    guid: 25b7af8eb3ff7cd48aca75aaf27ebf59
   m_configObjects: {}
+  m_UseUCBPForAssetBundles: 0
