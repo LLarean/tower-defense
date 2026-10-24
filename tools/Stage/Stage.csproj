@@ -1,0 +1,31 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <LangVersion>9.0</LangVersion>
+    <Nullable>disable</Nullable>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <AssemblyName>Game.Stage</AssemblyName>
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
+    <NoWarn>$(NoWarn);CS0649</NoWarn>
+    <UnityEditor Condition="'$(UnityEditor)' == ''">C:/Program Files/Unity/Hub/Editor/6000.3.12f1-x86_64/Editor</UnityEditor>
+    <ScriptAssemblies>../../Library/ScriptAssemblies</ScriptAssemblies>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="../../Assets/Game/Scripts/Stage/**/*.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="../Core/Core.csproj" />
+    <Reference Include="$(UnityEditor)/Data/Managed/UnityEngine/UnityEngine*.dll" Exclude="$(UnityEditor)/Data/Managed/UnityEngine/UnityEditor*.dll" Private="false" />
+    <Reference Include="$(ScriptAssemblies)/Unity.InputSystem.dll" Condition="Exists('$(ScriptAssemblies)/Unity.InputSystem.dll')" Private="false" />
+    <Reference Include="$(ScriptAssemblies)/Unity.TextMeshPro.dll" Condition="Exists('$(ScriptAssemblies)/Unity.TextMeshPro.dll')" Private="false" />
+    <Reference Include="$(ScriptAssemblies)/Unity.RenderPipelines.Core.Runtime.dll" Private="false" />
+    <Reference Include="$(ScriptAssemblies)/Unity.RenderPipelines.Universal.Runtime.dll" Private="false" />
+    <Reference Include="$(ScriptAssemblies)/Unity.Netcode.Runtime.dll" Private="false" />
+  </ItemGroup>
+
+</Project>
