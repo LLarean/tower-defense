@@ -9,6 +9,7 @@ namespace Game.Stage.Crowd
         private static readonly int Emission = Shader.PropertyToID("_EmissionColor");
 
         [SerializeField] private Renderer[] _renderers = new Renderer[0];
+        [SerializeField] private Animator _animator;
         [SerializeField] private float _glow = 1.5f;
 
         private MaterialPropertyBlock _block;
@@ -19,6 +20,14 @@ namespace Game.Stage.Crowd
         public void Tint(Color tint) => _tint = tint;
 
         public void Flash() => _flash = 1f;
+
+        public void Pace(float pace)
+        {
+            if (_animator != null && !Mathf.Approximately(_animator.speed, pace))
+            {
+                _animator.speed = pace;
+            }
+        }
 
         public void Restart()
         {

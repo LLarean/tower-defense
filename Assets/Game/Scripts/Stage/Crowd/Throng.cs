@@ -43,6 +43,7 @@ namespace Game.Stage.Crowd
                 }
                 puppet.Seen = _frame;
                 puppet.Body.Tint(_palette.Of(monster));
+                puppet.Body.Pace(monster.Pace);
                 puppet.Follow(position, seconds);
             }
             Sweep();
