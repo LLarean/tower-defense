@@ -21,6 +21,8 @@ namespace Game.Core.Reactions
             _seconds = seconds;
         }
 
+        public ReactionKind Kind => _kind;
+
         public void Trigger(Monster target, Hit hit, Arena arena)
         {
             var origin = target.Position;

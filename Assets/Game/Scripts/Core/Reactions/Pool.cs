@@ -20,6 +20,8 @@ namespace Game.Core.Reactions
             _effect = effect;
         }
 
+        public ReactionKind Kind => _kind;
+
         public void Trigger(Monster target, Hit hit, Arena arena)
         {
             var area = new Circle(target.Position, _radius);

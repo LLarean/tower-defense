@@ -19,6 +19,8 @@ namespace Game.Core.Reactions
             _splash = splash;
         }
 
+        public ReactionKind Kind => ReactionKind.Shatter;
+
         public void Trigger(Monster target, Hit hit, Arena arena)
         {
             var damage = hit.Damage * _multiplier;
@@ -32,7 +34,7 @@ namespace Game.Core.Reactions
                     monster.Wound(damage * _splash, Element.Earth, arena);
                 }
             }
-            arena.Feedback.Reacted(ReactionKind.Shatter, origin, _radius);
+            arena.Feedback.Reacted(Kind, origin, _radius);
         }
     }
 }

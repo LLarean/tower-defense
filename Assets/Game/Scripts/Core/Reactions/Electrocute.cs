@@ -17,6 +17,8 @@ namespace Game.Core.Reactions
             _multiplier = multiplier;
         }
 
+        public ReactionKind Kind => ReactionKind.Electrocute;
+
         public void Trigger(Monster target, Hit hit, Arena arena)
         {
             var damage = hit.Damage * _multiplier;
@@ -33,7 +35,7 @@ namespace Game.Core.Reactions
                 monster.Wound(damage, Element.Lightning, arena);
                 arena.Feedback.Chained(origin, monster.Position);
             }
-            arena.Feedback.Reacted(ReactionKind.Electrocute, origin, _radius);
+            arena.Feedback.Reacted(Kind, origin, _radius);
         }
     }
 }

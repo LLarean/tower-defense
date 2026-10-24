@@ -13,10 +13,12 @@ namespace Game.Core.Reactions
             _multiplier = multiplier;
         }
 
+        public ReactionKind Kind => ReactionKind.ThermalShock;
+
         public void Trigger(Monster target, Hit hit, Arena arena)
         {
             target.Wound(hit.Damage * _multiplier, Element.Fire, arena);
-            arena.Feedback.Reacted(ReactionKind.ThermalShock, target.Position, 0f);
+            arena.Feedback.Reacted(Kind, target.Position, 0f);
         }
     }
 }

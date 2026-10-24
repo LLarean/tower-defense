@@ -9,6 +9,17 @@ namespace Game.Core.Tests
     public sealed class ReactionTest
     {
         [Test]
+        public void ListsBothOrdersOfAnElementPair()
+        {
+            var chemistry = new Chemistry().With(Element.Water, Element.Ice, new Freeze(2f));
+            Assert.That(chemistry.Entries, Is.EquivalentTo(new[]
+            {
+                (Condition.Wet, Element.Ice, ReactionKind.Freeze),
+                (Condition.Chilled, Element.Water, ReactionKind.Freeze),
+            }));
+        }
+
+        [Test]
         public void FreezesWetMonsterHitByIce()
         {
             var field = new Field(new Chemistry().With(Element.Water, Element.Ice, new Freeze(2f)));

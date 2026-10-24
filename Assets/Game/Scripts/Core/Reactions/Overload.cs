@@ -19,6 +19,8 @@ namespace Game.Core.Reactions
             _push = push;
         }
 
+        public ReactionKind Kind => ReactionKind.Overload;
+
         public void Trigger(Monster target, Hit hit, Arena arena)
         {
             var origin = target.Position;
@@ -28,7 +30,7 @@ namespace Game.Core.Reactions
                 monster.Wound(hit.Damage * _multiplier, Element.Lightning, arena);
                 monster.Push(_push);
             }
-            arena.Feedback.Reacted(ReactionKind.Overload, origin, _radius);
+            arena.Feedback.Reacted(Kind, origin, _radius);
         }
     }
 }

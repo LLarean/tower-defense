@@ -13,10 +13,12 @@ namespace Game.Core.Reactions
             _seconds = seconds;
         }
 
+        public ReactionKind Kind => ReactionKind.Freeze;
+
         public void Trigger(Monster target, Hit hit, Arena arena)
         {
             target.Inflict(Condition.Frozen, 1f, _seconds);
-            arena.Feedback.Reacted(ReactionKind.Freeze, target.Position, 0f);
+            arena.Feedback.Reacted(Kind, target.Position, 0f);
         }
     }
 }
