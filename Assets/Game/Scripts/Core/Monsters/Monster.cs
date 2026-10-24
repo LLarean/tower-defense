@@ -28,7 +28,9 @@ namespace Game.Core.Monsters
 
         public float Distance => _distance;
 
-        public float Vitality => _health / _breed.Health;
+        public float Health => Math.Max(0f, _health);
+
+        public float Vitality => Health / _breed.Health;
 
         public bool Alive => _health > 0f;
 
@@ -37,6 +39,8 @@ namespace Game.Core.Monsters
         public float Pace => _statuses.Pace;
 
         public bool Has(Condition condition) => _statuses.Has(condition);
+
+        public float Remaining(Condition condition) => _statuses.Remaining(condition);
 
         public void Take(Hit hit, Arena arena)
         {

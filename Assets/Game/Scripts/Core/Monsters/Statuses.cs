@@ -44,6 +44,8 @@ namespace Game.Core.Monsters
 
         public float Potency(Condition condition) => Has(condition) ? _potency[(int)condition] : 0f;
 
+        public float Remaining(Condition condition) => _remaining[(int)condition];
+
         public void Inflict(Condition condition, float potency, float duration)
         {
             var index = (int)condition;

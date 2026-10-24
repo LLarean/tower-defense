@@ -56,6 +56,16 @@ namespace Game.Core.Tests
         }
 
         [Test]
+        public void TellsHowLongConditionLasts()
+        {
+            var field = new Field();
+            var monster = field.Spawn();
+            monster.Take(new Hit(Element.Water, 0f, 1f, 3f), field.Arena);
+            field.Tick(1f);
+            Assert.That(monster.Remaining(Condition.Wet), Is.EqualTo(2f).Within(0.001f));
+        }
+
+        [Test]
         public void ReportsZeroPaceWhenFrozen()
         {
             var field = new Field();
