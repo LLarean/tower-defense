@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <LangVersion>9.0</LangVersion>
+    <Nullable>disable</Nullable>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <AssemblyName>Game.Editor</AssemblyName>
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
+    <NoWarn>$(NoWarn);CS0649</NoWarn>
+    <UnityEditor Condition="'$(UnityEditor)' == ''">C:/Program Files/Unity/Hub/Editor/6000.3.12f1-x86_64/Editor</UnityEditor>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="../../Assets/Game/Scripts/Editor/**/*.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="../Stage/Stage.csproj" />
+    <Reference Include="$(UnityEditor)/Data/Managed/UnityEngine/*.dll" Exclude="$(UnityEditor)/Data/Managed/UnityEngine/Unity.*.dll" Private="false" />
+  </ItemGroup>
+
+</Project>
