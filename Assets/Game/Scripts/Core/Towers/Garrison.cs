@@ -11,6 +11,7 @@ namespace Game.Core.Towers
         private readonly Treasury _treasury;
         private readonly IGarrisonFeedback _feedback;
         private readonly List<Tower> _towers = new List<Tower>();
+        private int _next;
 
         public Garrison(Plots plots, Treasury treasury)
             : this(plots, treasury, new SilentGarrison())
@@ -28,15 +29,30 @@ namespace Game.Core.Towers
 
         public bool TryBuild(int player, TowerSpec spec, Vector3 point, out Tower tower)
         {
-            tower = new Tower(spec, _plots.Snap(point), player);
+            tower = new Tower(_next, spec, _plots.Snap(point), player);
             if (!_plots.Free(point) || !_treasury.Wallet(player).TrySpend(spec.Price))
             {
                 return false;
             }
+            _next++;
             _plots.TryClaim(point, out _);
             _towers.Add(tower);
             _feedback.Built(tower);
             return true;
+        }
+
+        public bool TryFind(int id, out Tower tower)
+        {
+            foreach (var standing in _towers)
+            {
+                if (standing.Id == id)
+                {
+                    tower = standing;
+                    return true;
+                }
+            }
+            tower = null;
+            return false;
         }
 
         public bool TryUpgrade(int player, Tower tower)

@@ -13,12 +13,15 @@ namespace Game.Core.Towers
         private readonly List<Monster> _near = new List<Monster>();
         private float _cooldown;
 
-        public Tower(TowerSpec spec, Vector3 position, int owner)
+        public Tower(int id, TowerSpec spec, Vector3 position, int owner)
         {
+            Id = id;
             _spec = spec;
             Position = position;
             Owner = owner;
         }
+
+        public int Id { get; }
 
         public TowerSpec Spec => _spec;
 

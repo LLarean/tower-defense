@@ -7,14 +7,12 @@ namespace Game.Core.Battles
 {
     public sealed class Battle
     {
-        private readonly Lives _lives;
-
         public Battle(Arena arena, Invasion invasion, Garrison garrison, Lives lives)
         {
             Arena = arena;
             Invasion = invasion;
             Garrison = garrison;
-            _lives = lives;
+            Lives = lives;
             Volley = new Volley();
         }
 
@@ -26,13 +24,15 @@ namespace Game.Core.Battles
 
         public Volley Volley { get; }
 
+        public Lives Lives { get; }
+
         public bool Started { get; private set; }
 
         public Outcome Outcome
         {
             get
             {
-                if (_lives.Lost)
+                if (Lives.Lost)
                 {
                     return Outcome.Lost;
                 }

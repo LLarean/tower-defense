@@ -17,7 +17,7 @@ namespace Game.Core.Tests
         {
             var field = new Field();
             var monster = field.Spawn(10f);
-            var tower = new Tower(Spec(Element.Fire), new Vector3(10f, 0f, 3f), 0);
+            var tower = new Tower(0, Spec(Element.Fire), new Vector3(10f, 0f, 3f), 0);
             var volley = new Volley();
             Battle(field, tower, volley, 2f);
             Assert.That(monster.Vitality, Is.LessThan(1f));
@@ -29,7 +29,7 @@ namespace Game.Core.Tests
         {
             var field = new Field();
             var monster = field.Spawn(10f);
-            var tower = new Tower(Spec(Element.Fire), new Vector3(40f, 0f, 0f), 0);
+            var tower = new Tower(0, Spec(Element.Fire), new Vector3(40f, 0f, 0f), 0);
             var volley = new Volley();
             Battle(field, tower, volley, 2f);
             Assert.That(monster.Vitality, Is.EqualTo(1f));
@@ -41,7 +41,7 @@ namespace Game.Core.Tests
             var field = new Field();
             var behind = field.Spawn(9f);
             var ahead = field.Spawn(12f);
-            var tower = new Tower(Spec(Element.Water), new Vector3(10f, 0f, 2f), 0);
+            var tower = new Tower(0, Spec(Element.Water), new Vector3(10f, 0f, 2f), 0);
             var volley = new Volley();
             Battle(field, tower, volley, 0.5f);
             Assert.That(ahead.Has(Condition.Wet), Is.True);
@@ -53,7 +53,7 @@ namespace Game.Core.Tests
         {
             var field = new Field();
             field.Spawn(10f);
-            var tower = new Tower(Spec(Element.Fire), new Vector3(10f, 0f, 1f), 0);
+            var tower = new Tower(0, Spec(Element.Fire), new Vector3(10f, 0f, 1f), 0);
             var volley = new Volley();
             tower.Tick(0.1f, field.Arena, volley);
             tower.Tick(0.1f, field.Arena, volley);
@@ -65,7 +65,7 @@ namespace Game.Core.Tests
         {
             var field = new Field(new Chemistry().With(Element.Water, Element.Lightning, new Electrocute(3f, 1f)));
             field.Spawn(10f);
-            var tower = new Tower(Spec(Element.Water, Element.Lightning), new Vector3(10f, 0f, 1f), 0);
+            var tower = new Tower(0, Spec(Element.Water, Element.Lightning), new Vector3(10f, 0f, 1f), 0);
             var volley = new Volley();
             Battle(field, tower, volley, 1f);
             Assert.That(field.Feedback.Reactions, Does.Contain(ReactionKind.Electrocute));
@@ -74,7 +74,7 @@ namespace Game.Core.Tests
         [Test]
         public void GrowsStrongerAfterUpgrade()
         {
-            var tower = new Tower(Spec(Element.Fire), Vector3.Zero, 0);
+            var tower = new Tower(0, Spec(Element.Fire), Vector3.Zero, 0);
             tower.Upgrade();
             Assert.That(tower.Grade.Damage, Is.EqualTo(25f));
             Assert.That(tower.Upgradable, Is.False);
@@ -83,7 +83,7 @@ namespace Game.Core.Tests
         [Test]
         public void ReportsCostOfNextGrade()
         {
-            var tower = new Tower(Spec(Element.Fire), Vector3.Zero, 0);
+            var tower = new Tower(0, Spec(Element.Fire), Vector3.Zero, 0);
             Assert.That(tower.UpgradeCost, Is.EqualTo(80));
         }
 
@@ -93,7 +93,7 @@ namespace Game.Core.Tests
             var field = new Field();
             var monster = field.Spawn(10f);
             var other = field.Spawn(10.5f);
-            var tower = new Tower(Spec(Element.Fire), new Vector3(10f, 0f, 4f), 0);
+            var tower = new Tower(0, Spec(Element.Fire), new Vector3(10f, 0f, 4f), 0);
             var volley = new Volley();
             tower.Tick(0.1f, field.Arena, volley);
             other.Wound(1000f, Element.Earth, field.Arena);
