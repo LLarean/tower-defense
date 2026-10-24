@@ -58,7 +58,7 @@ namespace Game.Stage.Config
                 .With(Element.Water, Element.Lightning, new Electrocute(_electrocuteRadius, _electrocuteMultiplier))
                 .With(Element.Water, Element.Ice, new Freeze(_freezeSeconds))
                 .With(Condition.Frozen, Element.Earth, new Shatter(_shatterRadius, _shatterMultiplier, _shatterSplash))
-                .With(Element.Fire, Element.Water, new Pool(ReactionKind.Steam, _steamRadius, _steamSeconds, new Effects(new Scald(Element.Fire, _steamDamage), new Affliction(Condition.Mired, _steamSlow))))
+                .With(Element.Fire, Element.Water, new Pool(ReactionKind.Steam, _steamRadius, _steamSeconds, new Mixture(new Scald(Element.Fire, _steamDamage), new Affliction(Condition.Mired, _steamSlow))))
                 .With(Element.Fire, Element.Ice, new ThermalShock(_thermalMultiplier))
                 .With(Element.Fire, Element.Poison, new GasExplosion(_gasRadius, _gasMultiplier, _gasSeconds))
                 .With(Element.Fire, Element.Lightning, new Overload(_overloadRadius, _overloadMultiplier, _overloadPush))

@@ -3,11 +3,11 @@ using Game.Core.Monsters;
 
 namespace Game.Core.Zones
 {
-    public sealed class Effects : IZoneEffect
+    public sealed class Mixture : IZoneEffect
     {
         private readonly IZoneEffect[] _effects;
 
-        public Effects(params IZoneEffect[] effects)
+        public Mixture(params IZoneEffect[] effects)
         {
             _effects = effects;
         }
