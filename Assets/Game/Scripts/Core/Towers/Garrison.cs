@@ -7,7 +7,7 @@ namespace Game.Core.Towers
 {
     public sealed class Garrison
     {
-        private const float Refund = 0.7f;
+        private const int RefundPercent = 70;
 
         private readonly Plots _plots;
         private readonly Treasury _treasury;
@@ -59,7 +59,7 @@ namespace Game.Core.Towers
                 return false;
             }
             _plots.Release(tower.Position);
-            _treasury.Wallet(player).Earn((int)(tower.Worth * Refund));
+            _treasury.Wallet(player).Earn(tower.Worth * RefundPercent / 100);
             _feedback.Sold(tower);
             return true;
         }
