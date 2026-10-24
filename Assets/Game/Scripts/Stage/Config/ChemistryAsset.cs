@@ -60,7 +60,7 @@ namespace Game.Stage.Config
                 .With(Condition.Frozen, Element.Earth, new Shatter(_shatterRadius, _shatterMultiplier, _shatterSplash))
                 .With(Element.Fire, Element.Water, new Pool(ReactionKind.Steam, _steamRadius, _steamSeconds, new Mixture(new Scald(Element.Fire, _steamDamage), new Affliction(Condition.Mired, _steamSlow))))
                 .With(Element.Fire, Element.Ice, new ThermalShock(_thermalMultiplier))
-                .With(Element.Fire, Element.Poison, new GasExplosion(_gasRadius, _gasMultiplier, _gasSeconds))
+                .With(Element.Fire, Element.Poison, new Ignition(ReactionKind.GasExplosion, _gasRadius, _gasMultiplier, _gasSeconds))
                 .With(Element.Fire, Element.Lightning, new Overload(_overloadRadius, _overloadMultiplier, _overloadPush))
                 .With(Element.Poison, Element.Water, new Pool(ReactionKind.ToxicPuddle, _puddleRadius, _puddleSeconds, new Affliction(Condition.Poisoned, _puddlePoison)))
                 .With(Element.Earth, Element.Water, new Pool(ReactionKind.Mud, _mudRadius, _mudSeconds, new Affliction(Condition.Mired, _mudSlow)))

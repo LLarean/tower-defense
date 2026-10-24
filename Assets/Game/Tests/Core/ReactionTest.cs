@@ -90,7 +90,7 @@ namespace Game.Core.Tests
         [Test]
         public void IgnitesNeighborsInGasExplosion()
         {
-            var field = new Field(new Chemistry().With(Element.Fire, Element.Poison, new GasExplosion(3f, 1f, 3f)));
+            var field = new Field(new Chemistry().With(Element.Fire, Element.Poison, new Ignition(ReactionKind.GasExplosion, 3f, 1f, 3f)));
             var target = field.Spawn(10f);
             var neighbor = field.Spawn(12f);
             target.Take(new Hit(Element.Poison, 0f, 1f, 3f), field.Arena);
