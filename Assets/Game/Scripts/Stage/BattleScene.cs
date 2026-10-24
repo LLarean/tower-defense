@@ -36,6 +36,8 @@ namespace Game.Stage
         [SerializeField] private Ghost _ghost;
         [SerializeField] private Ring _selection;
         [SerializeField] private UIDocument _document;
+        [SerializeField] private Mesh _bar;
+        [SerializeField] private Material _gauge;
         [SerializeField] private int _players = 1;
 
         private Battle _battle;
@@ -44,6 +46,8 @@ namespace Game.Stage
         private Throng _throng;
         private Barrage _barrage;
         private Spectacle _show;
+        private Gauges _gauges;
+        private Bastion _bastion;
         private Hand _hand;
         private Hotkeys _hotkeys;
         private IWidget[] _widgets;
@@ -63,12 +67,14 @@ namespace Game.Stage
             var me = online ? match.Me : 0;
             var treasury = new Treasury(players, _level.Gold);
             var lives = new Lives(_level.Lives);
-            _throng = new Throng(bestiary.Stocks, _terrain, new Palette(_spectacle));
+            _gauges = new Gauges(_bar, _gauge);
+            _throng = new Throng(bestiary.Stocks, _terrain, new Palette(_spectacle), _gauges);
             _show = new Spectacle(_spectacle, _throng, _tremor, transform);
             var arena = new Arena(_chemistry.Chemistry(), new Horde(Cell), new Feedbacks(new Ledger(treasury, lives), _show));
             var invasion = new Invasion(routes, _level.Rest, Waves(bestiary));
             var plots = _plots.Plots(routes);
-            var garrison = new Garrison(plots, treasury, new Bastion(armory, transform));
+            _bastion = new Bastion(armory, transform);
+            var garrison = new Garrison(plots, treasury, _bastion);
             _battle = new Battle(arena, invasion, garrison, lives);
             _barrage = new Barrage(armory, transform);
             var timeline = new Timeline(_battle, armory.Specs, treasury);
@@ -98,7 +104,10 @@ namespace Game.Stage
             _hotkeys.Tick();
             _hand.Tick();
             _pace.Advance(Time.deltaTime);
+            _gauges.Face(_camera);
             _throng.Sync(_battle.Arena.Horde.Monsters, Time.deltaTime);
+            _bastion.Mark(_gauges, _camera);
+            _gauges.Draw();
             _barrage.Sync(_battle.Volley.Missiles);
             _show.Tick(Time.deltaTime);
             foreach (var widget in _widgets)

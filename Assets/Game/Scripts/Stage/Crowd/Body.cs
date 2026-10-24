@@ -11,11 +11,14 @@ namespace Game.Stage.Crowd
         [SerializeField] private Renderer[] _renderers = new Renderer[0];
         [SerializeField] private Animator _animator;
         [SerializeField] private float _glow = 1.5f;
+        [SerializeField] private float _crown = 2.2f;
 
         private MaterialPropertyBlock _block;
         private Color _tint = Color.black;
         private Color _shown = Color.clear;
         private float _flash;
+
+        public float Crown => _crown;
 
         public void Tint(Color tint) => _tint = tint;
 

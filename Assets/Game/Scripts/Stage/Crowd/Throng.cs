@@ -9,15 +9,19 @@ namespace Game.Stage.Crowd
         private readonly IReadOnlyDictionary<Breed, Stock<Body>> _stocks;
         private readonly Terrain _terrain;
         private readonly Palette _palette;
+        private readonly Gauges _gauges;
         private readonly Dictionary<Monster, Puppet> _puppets = new Dictionary<Monster, Puppet>();
         private readonly List<Monster> _gone = new List<Monster>();
         private int _frame;
 
-        public Throng(IReadOnlyDictionary<Breed, Stock<Body>> stocks, Terrain terrain, Palette palette)
+        private static readonly Vector2 Bar = new Vector2(1.4f, 0.16f);
+
+        public Throng(IReadOnlyDictionary<Breed, Stock<Body>> stocks, Terrain terrain, Palette palette, Gauges gauges)
         {
             _stocks = stocks;
             _terrain = terrain;
             _palette = palette;
+            _gauges = gauges;
         }
 
         public void Flash(Monster monster)
@@ -44,6 +48,11 @@ namespace Game.Stage.Crowd
                 puppet.Seen = _frame;
                 puppet.Body.Tint(_palette.Of(monster));
                 puppet.Body.Pace(monster.Pace);
+                if (monster.Vitality < 1f)
+                {
+                    var vitality = monster.Vitality;
+                    _gauges.Add(position + Vector3.up * puppet.Body.Crown, Bar, vitality, Color.Lerp(Color.red, Color.green, vitality));
+                }
                 puppet.Follow(position, seconds);
             }
             Sweep();

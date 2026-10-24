@@ -49,6 +49,7 @@ MonoBehaviour:
   - {fileID: 7704587470771202312}
   _animator: {fileID: 4008381567965096996}
   _glow: 1.5
+  _crown: 2.4
 --- !u!1001 &2235018750992755713
 PrefabInstance:
   m_ObjectHideFlags: 0

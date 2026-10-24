@@ -160,6 +160,8 @@ MonoBehaviour:
   _ghost: {fileID: 765081861}
   _selection: {fileID: 549691049}
   _document: {fileID: 1272328360}
+  _bar: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
+  _gauge: {fileID: 2100000, guid: 240ba70504f64984f9877343c9c87472, type: 2}
   _players: 1
 --- !u!4 &167781753
 Transform:
