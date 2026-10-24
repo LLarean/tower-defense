@@ -32,6 +32,19 @@ namespace Game.Core.Towers
 
         public int UpgradeCost => _spec.Grade(Level + 1).Cost;
 
+        public int Worth
+        {
+            get
+            {
+                var worth = 0;
+                for (var level = 0; level <= Level; level++)
+                {
+                    worth += _spec.Grade(level).Cost;
+                }
+                return worth;
+            }
+        }
+
         public void Upgrade() => Level++;
 
         public void Tick(float seconds, Arena arena, Volley volley)
