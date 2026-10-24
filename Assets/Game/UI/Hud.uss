@@ -1,0 +1,139 @@
+.hud {
+    flex-grow: 1;
+    justify-content: space-between;
+}
+
+.bar {
+    flex-direction: row;
+    align-items: center;
+    align-self: center;
+    padding: 6px 12px;
+    margin: 10px;
+    background-color: rgba(18, 22, 30, 0.82);
+    border-radius: 10px;
+    border-width: 1px;
+    border-color: rgba(255, 255, 255, 0.12);
+}
+
+.stat {
+    font-size: 20px;
+    color: rgb(235, 238, 245);
+    margin: 0 14px;
+    -unity-font-style: bold;
+}
+
+.gold {
+    color: rgb(255, 210, 90);
+}
+
+.lives {
+    color: rgb(255, 120, 120);
+}
+
+.summon {
+    font-size: 18px;
+    padding: 6px 16px;
+    margin-left: 14px;
+    border-radius: 8px;
+    color: rgb(20, 24, 30);
+    background-color: rgb(255, 196, 70);
+    border-width: 0;
+}
+
+.summon:hover {
+    background-color: rgb(255, 220, 120);
+}
+
+.slot {
+    width: 108px;
+    height: 70px;
+    margin: 0 4px;
+    padding: 4px;
+    border-radius: 8px;
+    border-width: 2px;
+    border-color: rgba(255, 255, 255, 0.15);
+    background-color: rgba(40, 46, 60, 0.95);
+    color: rgb(235, 238, 245);
+    font-size: 15px;
+    white-space: normal;
+    -unity-text-align: middle-center;
+}
+
+.slot:hover {
+    border-color: rgba(255, 255, 255, 0.7);
+}
+
+.slot--poor {
+    opacity: 0.45;
+}
+
+.panel {
+    position: absolute;
+    right: 12px;
+    top: 80px;
+    width: 240px;
+    padding: 12px;
+    background-color: rgba(18, 22, 30, 0.88);
+    border-radius: 10px;
+    border-width: 1px;
+    border-color: rgba(255, 255, 255, 0.12);
+}
+
+.title {
+    font-size: 20px;
+    color: rgb(255, 255, 255);
+    -unity-font-style: bold;
+}
+
+.stats {
+    font-size: 15px;
+    color: rgb(200, 205, 215);
+    margin: 6px 0;
+    white-space: normal;
+}
+
+.actions {
+    flex-direction: row;
+}
+
+.action {
+    flex-grow: 1;
+    font-size: 15px;
+    padding: 6px;
+    border-radius: 6px;
+    border-width: 0;
+    color: rgb(20, 24, 30);
+    background-color: rgb(140, 220, 140);
+}
+
+.sell {
+    background-color: rgb(230, 150, 120);
+}
+
+.hidden {
+    display: none;
+}
+
+.verdict {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.55);
+}
+
+.outcome {
+    font-size: 64px;
+    color: rgb(255, 230, 150);
+    -unity-font-style: bold;
+    margin-bottom: 24px;
+}
+
+.again {
+    flex-grow: 0;
+    width: 220px;
+    font-size: 22px;
+}

@@ -7,10 +7,12 @@ using Game.Core.Waves;
 using Game.Stage.Config;
 using Game.Stage.Controls;
 using Game.Stage.Crowd;
+using Game.Stage.Hud;
 using Game.Stage.Map;
 using Game.Stage.Orders;
 using Game.Stage.Towers;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 namespace Game.Stage
 {
@@ -19,6 +21,7 @@ namespace Game.Stage
         private const float Step = 1f / 30f;
         private const int MaxSteps = 5;
         private const float Cell = 4f;
+        private const int Player = 0;
 
         [SerializeField] private LevelAsset _level;
         [SerializeField] private ChemistryAsset _chemistry;
@@ -28,12 +31,15 @@ namespace Game.Stage
         [SerializeField] private Camera _camera;
         [SerializeField] private Ghost _ghost;
         [SerializeField] private Ring _selection;
+        [SerializeField] private UIDocument _document;
         [SerializeField] private int _players = 1;
 
         private Battle _battle;
         private Throng _throng;
         private Barrage _barrage;
         private Hand _hand;
+        private Hotkeys _hotkeys;
+        private IWidget[] _widgets;
         private float _pending;
 
         private void Awake()
@@ -50,15 +56,27 @@ namespace Game.Stage
             _battle = new Battle(arena, invasion, garrison, lives);
             _throng = new Throng(bestiary.Stocks, _terrain);
             _barrage = new Barrage(armory, transform);
-            var orders = new LocalOrders(_battle, 0);
-            var blueprint = new Blueprint(plots, armory, orders, _ghost, _plots.Cell);
-            _hand = new Hand(_camera, armory, orders, blueprint, new Pick(garrison, _selection, _plots.Cell));
+            var orders = new LocalOrders(_battle, Player);
+            var root = _document.rootVisualElement;
+            var pick = new Pick(garrison, _selection, _plots.Cell);
+            _hand = new Hand(_camera, new Overlay(root), new Blueprint(plots, armory, orders, _ghost, _plots.Cell), pick);
+            _hotkeys = new Hotkeys(armory, orders, _hand, pick);
+            var wallet = treasury.Wallet(Player);
+            _widgets = new IWidget[]
+            {
+                new Purse(root, wallet, lives),
+                new Herald(root, _battle, orders),
+                new Arsenal(root, armory, wallet, _hand),
+                new Inspector(root, pick, armory, orders),
+                new Verdict(root, _battle),
+            };
             _ghost.Hide();
             _selection.Hide();
         }
 
         private void Update()
         {
+            _hotkeys.Tick();
             _hand.Tick();
             _pending = Math.Min(_pending + Time.deltaTime, Step * MaxSteps);
             while (_pending >= Step)
@@ -68,6 +86,10 @@ namespace Game.Stage
             }
             _throng.Sync(_battle.Arena.Horde.Monsters, Time.deltaTime);
             _barrage.Sync(_battle.Volley.Missiles);
+            foreach (var widget in _widgets)
+            {
+                widget.Refresh();
+            }
         }
 
         private Wave[] Waves(Bestiary bestiary)

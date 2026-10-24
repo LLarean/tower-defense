@@ -1,0 +1,24 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements">
+    <Style src="Hud.uss" />
+    <ui:VisualElement name="hud" class="hud" picking-mode="Ignore">
+        <ui:VisualElement name="top" class="bar top">
+            <ui:Label name="gold" class="stat gold" />
+            <ui:Label name="lives" class="stat lives" />
+            <ui:Label name="wave" class="stat wave" />
+            <ui:Button name="summon" class="summon" />
+        </ui:VisualElement>
+        <ui:VisualElement name="inspector" class="panel inspector">
+            <ui:Label name="title" class="title" />
+            <ui:Label name="stats" class="stats" />
+            <ui:VisualElement class="actions">
+                <ui:Button name="upgrade" class="action upgrade" />
+                <ui:Button name="sell" class="action sell" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+        <ui:VisualElement name="arsenal" class="bar bottom" />
+        <ui:VisualElement name="verdict" class="verdict">
+            <ui:Label name="outcome" class="outcome" />
+            <ui:Button name="again" class="action again" text="Play again" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>
