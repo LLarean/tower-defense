@@ -7,6 +7,8 @@ namespace Game.Core.Towers
 {
     public sealed class Tower
     {
+        private const int RefundPercent = 70;
+
         private readonly TowerSpec _spec;
         private readonly List<Monster> _near = new List<Monster>();
         private float _cooldown;
@@ -44,6 +46,8 @@ namespace Game.Core.Towers
                 return worth;
             }
         }
+
+        public int Refund => Worth * RefundPercent / 100;
 
         public void Upgrade() => Level++;
 
