@@ -7,22 +7,21 @@ namespace Game.Core.Towers
     public sealed class Missile
     {
         private readonly Monster _target;
-        private readonly float _speed;
         private readonly Strike _strike;
         private Vector3 _aim;
 
-        public Missile(Vector3 origin, Monster target, float speed, Strike strike)
+        public Missile(Tower source, Monster target, Strike strike)
         {
-            Position = origin;
+            Source = source;
+            Position = source.Position;
             _target = target;
-            _speed = speed;
             _strike = strike;
             _aim = target.Position;
         }
 
-        public Vector3 Position { get; private set; }
+        public Tower Source { get; }
 
-        public Strike Strike => _strike;
+        public Vector3 Position { get; private set; }
 
         public bool Done { get; private set; }
 
@@ -33,7 +32,7 @@ namespace Game.Core.Towers
                 _aim = _target.Position;
             }
             var offset = _aim - Position;
-            var step = _speed * seconds;
+            var step = Source.Spec.Speed * seconds;
             if (offset.Length() > step)
             {
                 Position += Vector3.Normalize(offset) * step;

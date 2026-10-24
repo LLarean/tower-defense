@@ -55,7 +55,7 @@ namespace Game.Core.Towers
                 return;
             }
             var grade = Grade;
-            volley.Launch(new Missile(Position, target, _spec.Speed, new Strike(_spec.Elements, grade)));
+            volley.Launch(new Missile(this, target, new Strike(_spec.Elements, grade)));
             _cooldown = grade.Cooldown;
         }
 
