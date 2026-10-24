@@ -23,6 +23,8 @@ namespace Game.Stage.Map
         [SerializeField] private GameObject[] _trees = new GameObject[0];
         [SerializeField] private int _forest = 120;
         [SerializeField] private float _clearance = 14f;
+        [SerializeField] private Vector2 _treeSize = new Vector2(0.45f, 0.7f);
+        [SerializeField, Range(0f, 1f)] private float _scatter = 0.1f;
         [SerializeField] private GameObject[] _grass = new GameObject[0];
         [SerializeField] private int _meadow = 6;
 
@@ -53,6 +55,10 @@ namespace Game.Stage.Map
         public int Forest => _forest;
 
         public float Clearance => _clearance;
+
+        public Vector2 TreeSize => _treeSize;
+
+        public float Scatter => _scatter;
 
         public IReadOnlyList<GameObject> Grass => _grass;
 

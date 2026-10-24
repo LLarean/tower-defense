@@ -83,11 +83,12 @@ namespace Game.Editor
             {
                 var share = new Vector2((float)random.NextDouble(), (float)random.NextDouble());
                 var point = new Vector2(origin.x + share.x * data.size.x, origin.z + share.y * data.size.z);
-                if (_corridor.Distance(point) < _landscape.Clearance)
+                var wild = _relief.Edge(point) < _landscape.Rim * 1.5f || random.NextDouble() < _landscape.Scatter;
+                if (!wild || _corridor.Distance(point) < _landscape.Clearance)
                 {
                     continue;
                 }
-                var size = 0.8f + (float)random.NextDouble() * 0.5f;
+                var size = Mathf.Lerp(_landscape.TreeSize.x, _landscape.TreeSize.y, (float)random.NextDouble());
                 trees.Add(new TreeInstance
                 {
                     prototypeIndex = random.Next(prototypes.Length),
