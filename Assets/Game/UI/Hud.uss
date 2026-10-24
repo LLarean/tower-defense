@@ -137,3 +137,30 @@
     width: 220px;
     font-size: 22px;
 }
+
+.tooltip {
+    position: absolute;
+    bottom: 100px;
+    align-self: center;
+    max-width: 520px;
+    padding: 10px 14px;
+    font-size: 15px;
+    color: rgb(225, 230, 240);
+    background-color: rgba(18, 22, 30, 0.94);
+    border-radius: 8px;
+    border-width: 1px;
+    border-color: rgba(255, 255, 255, 0.15);
+    white-space: normal;
+}
+
+.again {
+    margin: 4px;
+}
+
+.overlay {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+}

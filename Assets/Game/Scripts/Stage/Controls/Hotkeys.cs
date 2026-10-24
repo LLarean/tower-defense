@@ -1,3 +1,4 @@
+using Game.Stage.Hud;
 using Game.Stage.Orders;
 using Game.Stage.Towers;
 using UnityEngine.InputSystem;
@@ -11,14 +12,14 @@ namespace Game.Stage.Controls
         private readonly Armory _armory;
         private readonly IOrders _orders;
         private readonly Hand _hand;
-        private readonly Pick _pick;
+        private readonly Pause _pause;
 
-        public Hotkeys(Armory armory, IOrders orders, Hand hand, Pick pick)
+        public Hotkeys(Armory armory, IOrders orders, Hand hand, Pause pause)
         {
             _armory = armory;
             _orders = orders;
             _hand = hand;
-            _pick = pick;
+            _pause = pause;
         }
 
         public void Tick()
@@ -35,15 +36,15 @@ namespace Game.Stage.Controls
                     _hand.Choose(_armory.Specs[slot]);
                 }
             }
-            if (keyboard.escapeKey.wasPressedThisFrame)
+            if (keyboard.escapeKey.wasPressedThisFrame && !_hand.TryCancel())
             {
-                _hand.Cancel();
+                _pause.Toggle();
             }
             if (keyboard.spaceKey.wasPressedThisFrame)
             {
                 _orders.Summon();
             }
-            if (!_pick.TrySelected(out var tower))
+            if (!_hand.TrySelected(out var tower))
             {
                 return;
             }

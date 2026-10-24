@@ -1,0 +1,106 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f84c15895cb85d14ef177a611c635e82, type: 3}
+  m_Name: Lore
+  m_EditorClassIdentifier: Game.Stage::Game.Stage.Config.LoreAsset
+  _elements:
+  - _element: 0
+    _title: Fire
+  - _element: 1
+    _title: Water
+  - _element: 2
+    _title: Ice
+  - _element: 3
+    _title: Lightning
+  - _element: 4
+    _title: Poison
+  - _element: 5
+    _title: Earth
+  - _element: 6
+    _title: Oil
+  _states:
+  - _condition: 0
+    _title: Burning
+    _effect: takes fire damage over time
+  - _condition: 1
+    _title: Wet
+    _effect: conducts lightning and freezes easily
+  - _condition: 2
+    _title: Chilled
+    _effect: moves slower
+  - _condition: 3
+    _title: Charged
+    _effect: is stunned for a moment
+  - _condition: 4
+    _title: Poisoned
+    _effect: takes stacking poison damage
+  - _condition: 5
+    _title: Sundered
+    _effect: takes extra damage from everything
+  - _condition: 6
+    _title: Frozen
+    _effect: cannot move at all
+  - _condition: 7
+    _title: Corroded
+    _effect: loses armor
+  - _condition: 8
+    _title: Mired
+    _effect: is stuck and slowed
+  - _condition: 9
+    _title: Oiled
+    _effect: is slowed and ready to burn
+  _reactions:
+  - _kind: 0
+    _title: Electrocute
+    _text: Lightning arcs through every wet monster nearby.
+  - _kind: 1
+    _title: Freeze
+    _text: The monster freezes solid and stops.
+  - _kind: 2
+    _title: Shatter
+    _text: A frozen monster bursts and sprays shards at its neighbors.
+  - _kind: 3
+    _title: Steam
+    _text: A scalding cloud hurts and slows everything inside.
+  - _kind: 4
+    _title: Thermal shock
+    _text: A violent burst of heavy damage.
+  - _kind: 5
+    _title: Gas explosion
+    _text: Poison gas explodes and sets the neighbors on fire.
+  - _kind: 6
+    _title: Overload
+    _text: An explosion knocks monsters back along the road.
+  - _kind: 7
+    _title: Toxic puddle
+    _text: A puddle poisons everyone who walks through.
+  - _kind: 8
+    _title: Mud
+    _text: Mud slows everyone who walks through.
+  - _kind: 9
+    _title: Magma
+    _text: Molten ground burns everyone who walks through.
+  - _kind: 10
+    _title: Superconduct
+    _text: A cold current strips the armor of a whole group.
+  - _kind: 11
+    _title: Corrosion
+    _text: Acid eats away the armor of the target.
+  - _kind: 12
+    _title: Blaze
+    _text: Oil goes up in a huge fireball and burns everyone around.
+  - _kind: 13
+    _title: Slick
+    _text: An oil slick soaks everyone who walks through.
+  - _kind: 14
+    _title: Tar
+    _text: Sticky tar nearly stops everyone who walks through.

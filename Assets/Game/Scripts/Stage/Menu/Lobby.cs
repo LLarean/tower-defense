@@ -1,7 +1,6 @@
 using System;
 using System.Threading.Tasks;
 using Game.Stage.Net;
-using Unity.Netcode.Transports.UTP;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
@@ -13,9 +12,8 @@ namespace Game.Stage.Menu
         private const int Seats = 4;
 
         private readonly Match _match;
-        private readonly UnityTransport _transport;
-        private readonly string _map;
-        private readonly ushort _port;
+        private readonly Lan _lan;
+        private readonly Atlas _atlas;
         private readonly Cloud _cloud = new Cloud();
         private readonly VisualElement _doors;
         private readonly VisualElement _hall;
@@ -25,12 +23,11 @@ namespace Game.Stage.Menu
         private string _address = string.Empty;
         private int _shownPlayers = -1;
 
-        public Lobby(VisualElement root, Match match, UnityTransport transport, string map, ushort port)
+        public Lobby(VisualElement root, Match match, Lan lan, Atlas atlas)
         {
             _match = match;
-            _transport = transport;
-            _map = map;
-            _port = port;
+            _lan = lan;
+            _atlas = atlas;
             _doors = root.Q("doors");
             _hall = root.Q("hall");
             _status = root.Q<Label>("status");
@@ -38,13 +35,20 @@ namespace Game.Stage.Menu
             _begin = root.Q<Button>("begin");
             var ip = root.Q<TextField>("ip");
             var code = root.Q<TextField>("code");
-            root.Q<Button>("solo").clicked += () => SceneManager.LoadScene(_map);
+            var map = root.Q<Button>("map");
+            map.text = $"Map: {_atlas.Current}";
+            map.clicked += () =>
+            {
+                _atlas.Next();
+                map.text = $"Map: {_atlas.Current}";
+            };
+            root.Q<Button>("solo").clicked += () => SceneManager.LoadScene(_atlas.Current);
             root.Q<Button>("host-online").clicked += () => Attempt(HostOnline);
             root.Q<Button>("join-online").clicked += () => Attempt(() => JoinOnline(code.value.Trim().ToUpperInvariant()));
             root.Q<Button>("host-lan").clicked += () => Attempt(HostLan);
             root.Q<Button>("join-lan").clicked += () => Attempt(() => JoinLan(ip.value.Trim()));
             root.Q<Button>("quit").clicked += Application.Quit;
-            _begin.clicked += () => _match.Begin(_map);
+            _begin.clicked += () => _match.Begin(_atlas.Current);
             root.Q<Button>("leave").clicked += () => Attempt(Leave);
             _match.Manager.OnClientStopped += Stopped;
             Show(false, string.Empty);
@@ -77,17 +81,15 @@ namespace Game.Stage.Menu
 
         private Task HostLan()
         {
-            _transport.SetConnectionData("127.0.0.1", _port, "0.0.0.0");
-            _address = $"Port: {_port}";
-            Start(_match.Manager.StartHost());
+            _address = _lan.Address;
+            Start(_lan.Host(_match.Manager));
             return Task.CompletedTask;
         }
 
         private Task JoinLan(string address)
         {
-            _transport.SetConnectionData(address, _port);
             _address = $"Joined {address}";
-            Start(_match.Manager.StartClient());
+            Start(_lan.Join(_match.Manager, address));
             return Task.CompletedTask;
         }
 

@@ -28,6 +28,7 @@ namespace Game.Stage
         [SerializeField] private LevelAsset _level;
         [SerializeField] private ChemistryAsset _chemistry;
         [SerializeField] private SpectacleAsset _spectacle;
+        [SerializeField] private LoreAsset _lore;
         [SerializeField] private Tremor _tremor;
         [SerializeField] private RoutePath[] _routes = new RoutePath[0];
         [SerializeField] private PlotGrid _plots;
@@ -70,7 +71,8 @@ namespace Game.Stage
             _gauges = new Gauges(_bar, _gauge);
             _throng = new Throng(bestiary.Stocks, _terrain, new Palette(_spectacle), _gauges);
             _show = new Spectacle(_spectacle, _throng, _tremor, transform);
-            var arena = new Arena(_chemistry.Chemistry(), new Horde(Cell), new Feedbacks(new Ledger(treasury, lives), _show));
+            var chemistry = _chemistry.Chemistry();
+            var arena = new Arena(chemistry, new Horde(Cell), new Feedbacks(new Ledger(treasury, lives), _show));
             var invasion = new Invasion(routes, _level.Rest, Waves(bestiary));
             var plots = _plots.Plots(routes);
             _bastion = new Bastion(armory, transform);
@@ -81,9 +83,13 @@ namespace Game.Stage
             _pace = !online ? new SoloPace(timeline) : match.Hosting ? new HostPace(timeline, match.Manager) : (IPace)new GuestPace(timeline, match.Manager);
             var orders = new Courier(_pace.Post, armory.Specs, me);
             var root = _document.rootVisualElement;
+            root.pickingMode = PickingMode.Ignore;
             var pick = new Pick(garrison, arena.Horde, _selection, _plots.Cell);
             _hand = new Hand(_camera, new Overlay(root), new Blueprint(plots, armory, orders, _ghost, _plots.Cell), pick);
-            _hotkeys = new Hotkeys(armory, orders, _hand, pick);
+            var recipes = new Recipes(chemistry, _lore);
+            var codex = new Codex(root, recipes, _lore);
+            var pause = new Pause(root, codex, online, () => Leave(match));
+            _hotkeys = new Hotkeys(armory, orders, _hand, pause);
             var wallet = treasury.Wallet(me);
             _widgets = new IWidget[]
             {
@@ -95,6 +101,7 @@ namespace Game.Stage
                     ? new Verdict(root, _battle, "Leave", () => Leave(match))
                     : new Verdict(root, _battle, "Play again", () => SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex)),
             };
+            new Tooltip(root, armory, recipes, _lore);
             _ghost.Hide();
             _selection.Hide();
         }
@@ -136,7 +143,10 @@ namespace Game.Stage
 
         private static void Leave(Match match)
         {
-            match.Close();
+            if (match != null)
+            {
+                match.Close();
+            }
             SceneManager.LoadScene(Menu);
         }
 

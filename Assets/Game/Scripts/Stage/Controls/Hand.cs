@@ -28,6 +28,15 @@ namespace Game.Stage.Controls
             _blueprint.Choose(spec);
         }
 
+        public bool TrySelected(out Tower tower) => _pick.TrySelected(out tower);
+
+        public bool TryCancel()
+        {
+            var busy = _blueprint.Active || _pick.TrySelected(out _) || _pick.TryMonster(out _);
+            Cancel();
+            return busy;
+        }
+
         public void Cancel()
         {
             _blueprint.Cancel();

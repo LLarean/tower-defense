@@ -1,3 +1,5 @@
+using Game.Stage.Config;
+using Game.Stage.Hud;
 using Game.Stage.Net;
 using Unity.Netcode;
 using Unity.Netcode.Transports.UTP;
@@ -11,8 +13,10 @@ namespace Game.Stage.Menu
         [SerializeField] private UIDocument _document;
         [SerializeField] private Match _match;
         [SerializeField] private UnityTransport _transport;
-        [SerializeField] private string _map = "Meadow";
+        [SerializeField] private string[] _maps = { "Meadow" };
         [SerializeField] private ushort _port = 7777;
+        [SerializeField] private ChemistryAsset _chemistry;
+        [SerializeField] private LoreAsset _lore;
 
         private Lobby _lobby;
 
@@ -26,7 +30,10 @@ namespace Game.Stage.Menu
                 _transport = survivor.GetComponent<UnityTransport>();
             }
             _match.Prepare();
-            _lobby = new Lobby(_document.rootVisualElement, _match, _transport, _map, _port);
+            var root = _document.rootVisualElement;
+            _lobby = new Lobby(root, _match, new Lan(_transport, _port), new Atlas(_maps));
+            var codex = new Codex(root, new Recipes(_chemistry.Chemistry(), _lore), _lore);
+            root.Q<Button>("codex").clicked += codex.Open;
         }
 
         private void Update() => _lobby.Refresh();

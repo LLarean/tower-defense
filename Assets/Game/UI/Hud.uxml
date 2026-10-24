@@ -1,4 +1,5 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements">
+    <ui:Template name="Codex" src="Codex.uxml" />
     <Style src="Hud.uss" />
     <ui:VisualElement name="hud" class="hud" picking-mode="Ignore">
         <ui:VisualElement name="top" class="bar top">
@@ -15,10 +16,20 @@
                 <ui:Button name="sell" class="action sell" />
             </ui:VisualElement>
         </ui:VisualElement>
+        <ui:Label name="tooltip" class="tooltip" />
         <ui:VisualElement name="arsenal" class="bar bottom" />
         <ui:VisualElement name="verdict" class="verdict">
             <ui:Label name="outcome" class="outcome" />
             <ui:Button name="again" class="action again" text="Play again" />
         </ui:VisualElement>
+        <ui:VisualElement name="pause" class="verdict">
+            <ui:Label class="outcome" text="Paused" />
+            <ui:Button name="resume" class="action again" text="Resume" />
+            <ui:Button name="restart" class="action again" text="Restart" />
+            <ui:Button name="codex" class="action again" text="Codex" />
+            <ui:Button name="menu" class="action again" text="Main menu" />
+            <ui:Button name="quit" class="action again sell" text="Quit" />
+        </ui:VisualElement>
+        <ui:Instance template="Codex" class="overlay" picking-mode="Ignore" />
     </ui:VisualElement>
 </ui:UXML>

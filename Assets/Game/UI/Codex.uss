@@ -1,0 +1,70 @@
+.screen {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.6);
+}
+
+.sheet {
+    width: 760px;
+    max-height: 86%;
+    padding: 24px;
+    background-color: rgba(18, 22, 30, 0.96);
+    border-radius: 14px;
+    border-width: 1px;
+    border-color: rgba(255, 255, 255, 0.14);
+}
+
+.sheet-title {
+    font-size: 32px;
+    color: rgb(255, 214, 120);
+    -unity-font-style: bold;
+}
+
+.sheet-hint {
+    font-size: 16px;
+    color: rgb(170, 178, 192);
+    margin-bottom: 12px;
+    white-space: normal;
+}
+
+.codex-list {
+    flex-shrink: 1;
+}
+
+.codex-row {
+    padding: 8px 4px;
+    border-bottom-width: 1px;
+    border-color: rgba(255, 255, 255, 0.08);
+}
+
+.codex-name {
+    font-size: 19px;
+    color: rgb(235, 238, 245);
+    -unity-font-style: bold;
+}
+
+.codex-text {
+    font-size: 16px;
+    color: rgb(190, 196, 208);
+    white-space: normal;
+}
+
+.sheet-button {
+    align-self: center;
+    margin-top: 14px;
+    font-size: 20px;
+    padding: 8px 30px;
+    border-radius: 8px;
+    border-width: 0;
+    color: rgb(20, 24, 30);
+    background-color: rgb(255, 196, 70);
+}
+
+.hidden {
+    display: none;
+}
