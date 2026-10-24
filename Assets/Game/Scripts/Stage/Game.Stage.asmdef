@@ -2,7 +2,8 @@
   "name": "Game.Stage",
   "rootNamespace": "Game.Stage",
   "references": [
-    "Game.Core"
+    "Game.Core",
+    "Unity.InputSystem"
   ],
   "includePlatforms": [],
   "excludePlatforms": [],
