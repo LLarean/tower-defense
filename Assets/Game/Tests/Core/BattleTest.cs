@@ -51,12 +51,23 @@ namespace Game.Core.Tests
             Assert.That(lives.Left, Is.EqualTo(0));
         }
 
+        [Test]
+        public void SummonsFirstWaveAndThenTheNextOneEarly()
+        {
+            var battle = Battle(new Lives(10), out _);
+            battle.Summon();
+            Assert.That(battle.Started, Is.True);
+            Assert.That(battle.Invasion.Wave, Is.EqualTo(1));
+            battle.Summon();
+            Assert.That(battle.Invasion.Wave, Is.EqualTo(2));
+        }
+
         private static Battle Battle(Lives lives, out Arena arena)
         {
             var treasury = new Treasury(1, 500);
             arena = new Arena(new Chemistry(), new Horde(4f), new Ledger(treasury, lives));
             var route = new Route(Vector3.Zero, new Vector3(40f, 0f, 0f));
-            var invasion = new Invasion(new[] { route }, 1f, new Wave(new Squad(Grunt, 3, 0.5f, 0f, 0)));
+            var invasion = new Invasion(new[] { route }, 1f, new Wave(new Squad(Grunt, 3, 0.5f, 0f, 0)), new Wave(new Squad(Grunt, 1, 0.5f, 0f, 0)));
             var buildable = new bool[20, 2];
             buildable[5, 1] = true;
             var garrison = new Garrison(new Plots(new Vector3(0f, 0f, 0f), 2f, buildable), treasury);

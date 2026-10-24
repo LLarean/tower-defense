@@ -54,6 +54,16 @@ namespace Game.Core.Battles
             Invasion.Summon();
         }
 
+        public void Summon()
+        {
+            if (Started)
+            {
+                Invasion.Summon();
+                return;
+            }
+            Begin();
+        }
+
         public void Tick(float seconds)
         {
             if (!Started || Outcome != Outcome.Ongoing)
