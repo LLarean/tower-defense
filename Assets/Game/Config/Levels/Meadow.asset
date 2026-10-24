@@ -22,6 +22,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 795ba880e9a7e4949bb5fc6a3090c651, type: 2}
   - {fileID: 11400000, guid: 924d5855ac1a390479448b11d6918b96, type: 2}
   - {fileID: 11400000, guid: d04631060064cfd42b26a91c5d58671c, type: 2}
+  - {fileID: 11400000, guid: 725952ea03b1e89459b9ca0828006345, type: 2}
   _waves:
   - _squads:
     - _breed: {fileID: 11400000, guid: 356fc2d905277484f82b30ba8b719755, type: 2}

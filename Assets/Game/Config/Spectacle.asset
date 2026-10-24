@@ -49,6 +49,15 @@ MonoBehaviour:
   - _kind: 11
     _burst: {fileID: 4172239312233610446, guid: 1c2437bc3e6c22a45981a71d94cc547b, type: 3}
     _shake: 0
+  - _kind: 12
+    _burst: {fileID: 690757184564752192, guid: 9a9a3afd0c7247348b861fa07e9458a6, type: 3}
+    _shake: 0.7
+  - _kind: 13
+    _burst: {fileID: 7041709271319542289, guid: 04498fba53f4dae45b7645fea74c4bea, type: 3}
+    _shake: 0
+  - _kind: 14
+    _burst: {fileID: 6418314028354136660, guid: 7fd910534b78e174d94a8f5c2b197ef8, type: 3}
+    _shake: 0
   _marks:
   - _condition: 6
     _color: {r: 0.7, g: 1.1, b: 1.8, a: 1}
@@ -68,6 +77,8 @@ MonoBehaviour:
     _color: {r: 0.9, g: 0.55, b: 0.2, a: 1}
   - _condition: 8
     _color: {r: 0.4, g: 0.28, b: 0.15, a: 1}
+  - _condition: 9
+    _color: {r: 0.4, g: 0.25, b: 0.6, a: 1}
   _death: {fileID: 2517218875916853116, guid: 8cf1c9f25638b844cad9cb55797c8ea6, type: 3}
   _bolt: {fileID: 4794116015528985315, guid: 36fd38d8033585845b3f55cd31df4e77, type: 3}
   _bolting: 0.15

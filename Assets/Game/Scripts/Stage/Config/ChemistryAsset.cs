@@ -52,6 +52,18 @@ namespace Game.Stage.Config
         [Header("Corrosion: Poison + Lightning")]
         [SerializeField] private float _corrosionShred = 0.7f;
         [SerializeField] private float _corrosionSeconds = 6f;
+        [Header("Blaze: Oil + Fire")]
+        [SerializeField] private float _blazeRadius = 5f;
+        [SerializeField] private float _blazeMultiplier = 3f;
+        [SerializeField] private float _blazeSeconds = 6f;
+        [Header("Slick: Oil + Water")]
+        [SerializeField] private float _slickRadius = 4f;
+        [SerializeField] private float _slickSeconds = 6f;
+        [SerializeField] private float _slickSlow = 0.25f;
+        [Header("Tar: Oil + Earth")]
+        [SerializeField] private float _tarRadius = 3.5f;
+        [SerializeField] private float _tarSeconds = 6f;
+        [SerializeField] private float _tarSlow = 0.7f;
 
         public Chemistry Chemistry() =>
             new Chemistry()
@@ -66,6 +78,9 @@ namespace Game.Stage.Config
                 .With(Element.Earth, Element.Water, new Pool(ReactionKind.Mud, _mudRadius, _mudSeconds, new Affliction(Condition.Mired, _mudSlow)))
                 .With(Element.Earth, Element.Fire, new Pool(ReactionKind.Magma, _magmaRadius, _magmaSeconds, new Affliction(Condition.Burning, _magmaBurn)))
                 .With(Element.Ice, Element.Lightning, new Corrode(ReactionKind.Superconduct, _superconductRadius, _superconductShred, _superconductSeconds))
-                .With(Element.Poison, Element.Lightning, new Corrode(ReactionKind.Corrosion, 0f, _corrosionShred, _corrosionSeconds));
+                .With(Element.Poison, Element.Lightning, new Corrode(ReactionKind.Corrosion, 0f, _corrosionShred, _corrosionSeconds))
+                .With(Element.Oil, Element.Fire, new Ignition(ReactionKind.Blaze, _blazeRadius, _blazeMultiplier, _blazeSeconds))
+                .With(Element.Oil, Element.Water, new Pool(ReactionKind.Slick, _slickRadius, _slickSeconds, new Affliction(Condition.Oiled, _slickSlow)))
+                .With(Element.Oil, Element.Earth, new Pool(ReactionKind.Tar, _tarRadius, _tarSeconds, new Affliction(Condition.Mired, _tarSlow)));
     }
 }
