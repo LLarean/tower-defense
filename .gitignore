@@ -80,3 +80,5 @@ crashlytics-build.properties
 !/tools/**/*.csproj
 /tools/**/bin/
 /tools/**/obj/
+/[Aa]ssets/Scratch/
+/[Aa]ssets/Scratch.meta
