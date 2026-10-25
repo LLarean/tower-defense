@@ -1,0 +1,164 @@
+Battle of the Elements	Битва стихий
+Campaign	Кампания
+Co-op	Кооператив
+Codex	Кодекс
+Settings	Настройки
+Quit	Выход
+Continue	Продолжить
+Difficulty	Сложность
+Play solo	Играть одному
+Play co-op	Играть вместе
+Prologue	Пролог
+Back	Назад
+Online	Через интернет
+Host	Создать
+Join by code	Войти по коду
+Local network	Локальная сеть
+Join by IP	Войти по IP
+Start	Старт
+Copy code	Копировать код
+Leave	Выйти
+Enter code	Введите код
+Codex of Elements	Кодекс стихий
+A second element on a marked monster triggers a reaction.	Вторая стихия на помеченном монстре вызывает реакцию.
+Close	Закрыть
+Menu	Меню
+To battle	В бой
+Next mission	Следующая миссия
+Play again	Сыграть снова
+Main menu	Главное меню
+Paused	Пауза
+Resume	Продолжить
+Restart mission	Перезапустить миссию
+Controls	Управление
+Debug	Отладка
+Quit game	Выйти из игры
+1–7  choose a tower\nLeft click  build or select\nRight click  cancel\nU  upgrade selected tower\nX  sell selected tower\nSpace  start or call the next wave\nWASD, arrows, screen edge  move camera\nMouse wheel  zoom\nEsc  back or pause	1–7  выбрать башню\nЛевая кнопка  построить или выбрать\nПравая кнопка  отмена\nU  улучшить выбранную башню\nX  продать выбранную башню\nПробел  начать или вызвать следующую волну\nWASD, стрелки, край экрана  двигать камеру\nКолесо мыши  приблизить\nEsc  назад или пауза
++1000 gold	+1000 золота
++10 lives	+10 жизней
+Call next wave	Вызвать волну
+Kill all monsters	Убить всех монстров
+Progress in this mission will be lost.	Прогресс этой миссии будет потерян.
+Yes	Да
+Cancel	Отмена
+{0}: on	{0}: вкл
+{0}: off	{0}: выкл
+Sound	Звук
+Music	Музыка
+Damage numbers	Числа урона
+Language: {0}	Язык: {0}
+Speed ×{0}	Скорость ×{0}
+Wave {0}/{1}	Волна {0}/{1}
+Wave {0}/{1} — out of sync!	Волна {0}/{1} — рассинхронизация!
+Next wave {0}s	Волна через {0} с
+Pick a tower below or press 1–7, then click near the road to build it.	Выберите башню внизу или нажмите 1–7, затем кликните у дороги, чтобы построить.
+Build a few more or press Start (Space) when you are ready.	Постройте ещё или нажмите «Старт» (пробел), когда будете готовы.
+Victory	Победа
+Defeat	Поражение
+Difficulty: {0}	Сложность: {0}
+Restart the mission?	Перезапустить миссию?
+Leave to the main menu?	Выйти в главное меню?
+Quit the game?	Выйти из игры?
+{0} · level {1}	{0} · уровень {1}
+Damage	Урон
+Range	Дальность
+Reload	Перезарядка
+Upgrade {0}	Улучшить за {0}
+Max level	Макс. уровень
+Sell {0}	Продать за {0}
+Health	Здоровье
+Armor	Броня
+Speed	Скорость
+{0} gold	{0} золота
+Reacts with:	Реакции:
+{0}\nPlayers: {1}	{0}\nИгроков: {1}
+Code: {0}	Код: {0}
+Joined {0}	Подключено: {0}
+Port: {0}	Порт: {0}
+Waiting for players	Ждём игроков
+Waiting for the host to start	Ждём, пока создатель игры начнёт
+Disconnected	Соединение потеряно
+Connecting…	Подключение…
+Could not connect: {0}	Не удалось подключиться: {0}
+Hosting: {0}	Вы создаёте игру: {0}
+Grunt	Солдат
+Runner	Бегун
+Brute	Громила
+Colossus	Колосс
+Frost Colossus	Ледяной колосс
+The Last Architects	Последние зодчие
+The old wards have failed. From the broken lands beyond the rim, hordes march on the last free valleys, and no army of steel can stop them.\n\nOnly the mages can. Their towers bind fire, water, ice and storm into weapons that feed on one another: water carries lightning, frost makes stone shatter, oil begs for a spark.\n\nBut towers do not raise themselves. You are the Chief Architect of the Circle of Mages. You choose where every tower stands and how the elements meet. Place them well, and the realm endures. Place them poorly, and there will be nothing left to defend.	Древние обереги пали. Из разорённых земель за краем мира орды идут на последние свободные долины, и никакая армия из стали их не остановит.\n\nОстановить их могут только маги. Их башни сплетают огонь, воду, лёд и бурю в оружие, которое усиливает само себя: вода проводит молнию, мороз заставляет камень раскалываться, нефть ждёт лишь искры.\n\nНо башни не строятся сами. Вы — главный зодчий Круга магов. Вы решаете, где встанет каждая башня и где встретятся стихии. Расставите их мудро — и мир устоит. Ошибётесь — и защищать будет уже нечего.
+The enemy broke through. Regroup, rethink the layout and try again: the realm cannot afford a second fall.	Враг прорвался. Соберитесь, продумайте расстановку и попробуйте снова: второго падения мир не переживёт.
+Easy	Легко
+Frail monsters and generous gold. Learn how the elements react.	Хилые монстры и щедрое золото. Время разобраться, как реагируют стихии.
+Normal	Нормально
+The intended challenge for an architect who plans ahead.	Задуманная сложность для зодчего, который думает наперёд.
+Hard	Сложно
+Tough monsters, lean gold and few lives. Every reaction counts.	Крепкие монстры, мало золота и жизней. На счету каждая реакция.
+The Meadow	Луг
+The first raiders cross the grazing meadows of Elden. A single road winds toward the village. Learn your craft here: soak them with water and let lightning do the rest, chill them and shatter them with stone.	Первые налётчики пересекают пастбища Эльдена. К деревне петляет одна-единственная дорога. Освойте ремесло здесь: намочите врагов водой и дайте молнии закончить дело, заморозьте их и расколите камнем.
+The meadow is quiet again. Word of the new Architect spreads among the mages, and among the enemy.	На лугу снова тихо. Весть о новом зодчем разносится среди магов — и среди врагов.
+The Crossroads	Перекрёсток
+Two warbands march from the west and the north and meet at the old crossroads before the city gate. Guard the place where the roads join: one well-built knot of towers can hold them both, but do not leave either road bare.	Два отряда идут с запада и с севера и сходятся на старом перекрёстке у городских ворот. Стерегите место, где сливаются дороги: один хорошо собранный узел башен удержит обоих, но не оставляйте ни одну дорогу без защиты.
+Both warbands broke at the crossroads. Scouts report something far larger stirring in the frozen mountains.	Оба отряда разбились о перекрёсток. Разведчики доносят, что в ледяных горах пробуждается нечто куда большее.
+Siege of the Citadel	Осада цитадели
+A frost colossus, bound by dark magic, marches on the Circle's citadel with a horde at its feet. Ice cannot touch it and its hide turns steel. The road winds back and forth below the walls: build where the lanes run side by side and wear the giant down with every other reaction you know before it reaches the gate.	Ледяной колосс, скованный тёмной магией, идёт на цитадель Круга, а у его ног — целая орда. Лёд его не берёт, а шкура не пропускает сталь. Дорога петляет под стенами туда и обратно: стройте там, где её участки идут рядом, и изматывайте великана всеми другими реакциями, пока он не дошёл до ворот.
+The colossus crumbles at the foot of the citadel. The realm will remember the Architect who held the line.	Колосс рассыпается у подножия цитадели. Мир запомнит зодчего, который выстоял.
+Fire	Огонь
+Water	Вода
+Ice	Лёд
+Lightning	Молния
+Poison	Яд
+Earth	Земля
+Oil	Нефть
+Burning	Горение
+takes fire damage over time	получает урон огнём со временем
+Wet	Мокрый
+conducts lightning and freezes easily	проводит молнию и легко замерзает
+Chilled	Охлаждён
+moves slower	двигается медленнее
+Charged	Заряжен
+is stunned for a moment	на миг оглушён
+Poisoned	Отравлен
+takes stacking poison damage	получает накапливаемый урон ядом
+Sundered	Расколот
+takes extra damage from everything	получает больше урона от всего
+Frozen	Заморожен
+cannot move at all	совсем не может двигаться
+Corroded	Разъеден
+loses armor	теряет броню
+Mired	Увяз
+is stuck and slowed	застрял и замедлен
+Oiled	В нефти
+is slowed and ready to burn	замедлен и готов вспыхнуть
+Electrocute	Электрошок
+Lightning arcs through every wet monster nearby.	Молния перескакивает по всем мокрым монстрам рядом.
+Freeze	Заморозка
+The monster freezes solid and stops.	Монстр замерзает намертво и останавливается.
+Shatter	Раскалывание
+A frozen monster bursts and sprays shards at its neighbors.	Замёрзший монстр разлетается и осыпает соседей осколками.
+Steam	Пар
+A scalding cloud hurts and slows everything inside.	Обжигающее облако ранит и замедляет всех внутри.
+Thermal shock	Термошок
+A violent burst of heavy damage.	Резкий всплеск тяжёлого урона.
+Gas explosion	Взрыв газа
+Poison gas explodes and sets the neighbors on fire.	Ядовитый газ взрывается и поджигает соседей.
+Overload	Перегрузка
+An explosion knocks monsters back along the road.	Взрыв отбрасывает монстров назад по дороге.
+Toxic puddle	Ядовитая лужа
+A puddle poisons everyone who walks through.	Лужа отравляет каждого, кто через неё проходит.
+Mud	Грязь
+Mud slows everyone who walks through.	Грязь замедляет каждого, кто через неё проходит.
+Magma	Магма
+Molten ground burns everyone who walks through.	Расплавленная земля жжёт каждого, кто по ней проходит.
+Superconduct	Сверхпроводник
+A cold current strips the armor of a whole group.	Холодный ток срывает броню с целой группы.
+Corrosion	Коррозия
+Acid eats away the armor of the target.	Кислота разъедает броню цели.
+Blaze	Пожар
+Oil goes up in a huge fireball and burns everyone around.	Нефть вспыхивает огромным огненным шаром и жжёт всех вокруг.
+Slick	Разлив
+An oil slick soaks everyone who walks through.	Нефтяное пятно пачкает каждого, кто через него проходит.
+Tar	Смола
+Sticky tar nearly stops everyone who walks through.	Липкая смола почти останавливает каждого, кто через неё проходит.
+{0}s	{0} с
