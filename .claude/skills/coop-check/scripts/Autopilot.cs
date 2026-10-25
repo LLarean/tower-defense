@@ -18,6 +18,7 @@ public sealed class Autopilot : MonoBehaviour
     private string _codeFile = string.Empty;
     private string _mission = "Meadow";
     private int _difficulty = 1;
+    private int _players = 2;
     private bool _briefed;
     private Game.Stage.Menu.Cloud _cloud = new Game.Stage.Menu.Cloud("default");
     private float _since;
@@ -40,6 +41,7 @@ public sealed class Autopilot : MonoBehaviour
         pilot._codeFile = Value(args, "-td-codefile", string.Empty);
         pilot._mission = Value(args, "-td-mission", "Meadow");
         pilot._difficulty = int.Parse(Value(args, "-td-difficulty", "1"));
+        pilot._players = int.Parse(Value(args, "-td-players", "2"));
         DontDestroyOnLoad(pilot.gameObject);
         Application.targetFrameRate = 60;
         Debug.Log("[Pilot] role " + role);
@@ -129,7 +131,7 @@ public sealed class Autopilot : MonoBehaviour
             match.Open();
             Debug.Log($"[Pilot] network started {started}");
         }
-        if (_role == "host" && manager.IsListening && match.Players >= 2 && _step == 1)
+        if (_role == "host" && manager.IsListening && match.Players >= _players && _step == 1)
         {
             _step = 2;
             Debug.Log("[Pilot] starting match with " + match.Players);
