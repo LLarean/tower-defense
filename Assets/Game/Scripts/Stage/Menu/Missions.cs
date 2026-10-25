@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Game.Stage.Config;
+using Game.Stage.Speech;
 using Game.Stage.Story;
 using UnityEngine.UIElements;
 
@@ -10,14 +11,16 @@ namespace Game.Stage.Menu
         private readonly CampaignAsset _campaign;
         private readonly DifficultyAsset _difficulty;
         private readonly Sortie _sortie;
+        private readonly Lexicon _lexicon;
         private readonly List<Button> _entries = new List<Button>();
         private readonly List<Button> _tiers = new List<Button>();
         private readonly Label _title;
         private readonly Label _briefing;
         private readonly Label _summary;
 
-        public Missions(VisualElement root, CampaignAsset campaign, DifficultyAsset difficulty, Sortie sortie, Chronicle chronicle)
+        public Missions(VisualElement root, CampaignAsset campaign, DifficultyAsset difficulty, Sortie sortie, Chronicle chronicle, Lexicon lexicon)
         {
+            _lexicon = lexicon;
             _campaign = campaign;
             _difficulty = difficulty;
             _sortie = sortie;
@@ -35,7 +38,7 @@ namespace Game.Stage.Menu
             {
                 var mission = index;
                 var level = _campaign.Missions[index];
-                var entry = new Button(() => Select(mission)) { text = $"{index + 1}. {level.Title}" };
+                var entry = new Button(() => Select(mission)) { text = $"{index + 1}. {_lexicon.Say(level.Title)}" };
                 entry.AddToClassList("mission");
                 entry.EnableInClassList("mission--done", chronicle.Completed(level));
                 var unlocked = chronicle.Unlocked(_campaign, index);
@@ -51,7 +54,7 @@ namespace Game.Stage.Menu
             for (var index = 0; index < _difficulty.Count; index++)
             {
                 var tier = index;
-                var button = new Button(() => Pick(tier)) { text = _difficulty.Title(index) };
+                var button = new Button(() => Pick(tier)) { text = _lexicon.Say(_difficulty.Title(index)) };
                 button.AddToClassList("choice");
                 button.AddToClassList("seal");
                 button.AddToClassList("grow");
@@ -82,9 +85,9 @@ namespace Game.Stage.Menu
             {
                 _tiers[index].EnableInClassList("seal--quiet", index != _sortie.Difficulty);
             }
-            _title.text = _sortie.Level.Title;
-            _briefing.text = _sortie.Level.Briefing;
-            _summary.text = _difficulty.Summary(_sortie.Difficulty);
+            _title.text = _lexicon.Say(_sortie.Level.Title);
+            _briefing.text = _lexicon.Say(_sortie.Level.Briefing);
+            _summary.text = _lexicon.Say(_difficulty.Summary(_sortie.Difficulty));
         }
     }
 }

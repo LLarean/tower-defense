@@ -1,4 +1,5 @@
 using Game.Core.Battles;
+using Game.Stage.Speech;
 using UnityEngine.UIElements;
 
 namespace Game.Stage.Hud
@@ -10,10 +11,12 @@ namespace Game.Stage.Hud
 
         private readonly Battle _battle;
         private readonly Label _hint;
+        private readonly Lexicon _lexicon;
         private string _shown = string.Empty;
 
-        public Coach(VisualElement root, Battle battle)
+        public Coach(VisualElement root, Battle battle, Lexicon lexicon)
         {
+            _lexicon = lexicon;
             _battle = battle;
             _hint = root.Q<Label>("hint");
         }
@@ -26,7 +29,7 @@ namespace Game.Stage.Hud
                 return;
             }
             _shown = advice;
-            _hint.text = advice;
+            _hint.text = _lexicon.Say(advice);
             _hint.EnableInClassList("hidden", advice.Length == 0);
         }
     }

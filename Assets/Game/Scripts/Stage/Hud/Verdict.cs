@@ -1,5 +1,6 @@
 using System;
 using Game.Core.Battles;
+using Game.Stage.Speech;
 using UnityEngine.UIElements;
 
 namespace Game.Stage.Hud
@@ -12,10 +13,12 @@ namespace Game.Stage.Hud
         private readonly Label _story;
         private readonly (string Victory, string Defeat) _tale;
         private readonly Action _triumph;
+        private readonly Lexicon _lexicon;
         private Outcome _shown = Outcome.Ongoing;
 
-        public Verdict(VisualElement root, Battle battle, (string Victory, string Defeat) tale, Action triumph)
+        public Verdict(VisualElement root, Battle battle, (string Victory, string Defeat) tale, Action triumph, Lexicon lexicon)
         {
+            _lexicon = lexicon;
             _battle = battle;
             _tale = tale;
             _triumph = triumph;
@@ -34,8 +37,8 @@ namespace Game.Stage.Hud
             }
             _shown = outcome;
             var won = outcome == Outcome.Won;
-            _outcome.text = won ? "Victory" : "Defeat";
-            _story.text = won ? _tale.Victory : _tale.Defeat;
+            _outcome.text = _lexicon.Say(won ? "Victory" : "Defeat");
+            _story.text = _lexicon.Say(won ? _tale.Victory : _tale.Defeat);
             _screen.EnableInClassList("verdict--won", won);
             _screen.EnableInClassList("hidden", outcome == Outcome.Ongoing);
             if (won)

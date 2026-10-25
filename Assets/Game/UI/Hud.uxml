@@ -35,7 +35,7 @@
                 <ui:VisualElement class="page">
                     <ui:Label name="briefing-title" class="heading rune" />
                     <ui:Label name="briefing-text" class="lines story" />
-                    <ui:Label name="briefing-difficulty" class="lines" />
+                    <ui:Label name="briefing-difficulty" class="lines nowrap" />
                     <ui:Button name="briefing-go" class="seal again" text="To battle" />
                 </ui:VisualElement>
             </ui:VisualElement>

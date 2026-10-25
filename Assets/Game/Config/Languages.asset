@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48807321c8d9f724794f71fa6cda65c4, type: 3}
+  m_Name: Languages
+  m_EditorClassIdentifier: Game.Stage::Game.Stage.Config.LanguageAsset
+  _languages:
+  - _title: English
+    _system: 10
+    _table: {fileID: 0}
+    _look: 
+  - _title: "\u0420\u0443\u0441\u0441\u043A\u0438\u0439"
+    _system: 30
+    _table: {fileID: 4900000, guid: ff84b0c853e5e6046ab444754d321d10, type: 3}
+    _look: lang-ru

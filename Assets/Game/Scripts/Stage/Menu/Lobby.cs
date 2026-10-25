@@ -1,6 +1,7 @@
 using System;
 using System.Threading.Tasks;
 using Game.Stage.Net;
+using Game.Stage.Speech;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -13,6 +14,7 @@ namespace Game.Stage.Menu
         private readonly Match _match;
         private readonly Lan _lan;
         private readonly Sortie _sortie;
+        private readonly Lexicon _lexicon;
         private readonly Cloud _cloud = new Cloud("default");
         private readonly VisualElement _doors;
         private readonly VisualElement _hall;
@@ -24,8 +26,9 @@ namespace Game.Stage.Menu
         private string _code = string.Empty;
         private int _shownPlayers = -1;
 
-        public Lobby(VisualElement root, Match match, Lan lan, Sortie sortie)
+        public Lobby(VisualElement root, Match match, Lan lan, Sortie sortie, Lexicon lexicon)
         {
+            _lexicon = lexicon;
             _match = match;
             _lan = lan;
             _sortie = sortie;
@@ -36,7 +39,7 @@ namespace Game.Stage.Menu
             _begin = root.Q<Button>("begin");
             var ip = root.Q<TextField>("ip");
             var code = root.Q<TextField>("code");
-            code.textEdition.placeholder = "Enter code";
+            code.textEdition.placeholder = lexicon.Say("Enter code");
             code.maxLength = 8;
             _copy = root.Q<Button>("copy");
             _copy.clicked += () => GUIUtility.systemCopyBuffer = _code;
@@ -59,33 +62,33 @@ namespace Game.Stage.Menu
                 return;
             }
             _shownPlayers = _match.Players;
-            _roster.text = $"{_address}\nPlayers: {_shownPlayers}/{Seats}";
+            _roster.text = _lexicon.Say("{0}\nPlayers: {1}", _address, $"{_shownPlayers}/{Seats}");
         }
 
         private async Task HostOnline()
         {
             _code = await _cloud.Host(Seats);
-            _address = $"Code: {_code}";
+            _address = _lexicon.Say("Code: {0}", _code);
             Open();
         }
 
         private async Task JoinOnline(string code)
         {
             await _cloud.Join(code);
-            _address = $"Joined {code}";
+            _address = _lexicon.Say("Joined {0}", code);
             Open();
         }
 
         private Task HostLan()
         {
-            _address = _lan.Address;
+            _address = _lexicon.Say("Port: {0}", _lan.Port);
             Start(_lan.Host(_match.Manager));
             return Task.CompletedTask;
         }
 
         private Task JoinLan(string address)
         {
-            _address = $"Joined {address}";
+            _address = _lexicon.Say("Joined {0}", address);
             Start(_lan.Join(_match.Manager, address));
             return Task.CompletedTask;
         }
@@ -111,10 +114,10 @@ namespace Game.Stage.Menu
         {
             _match.Open();
             _shownPlayers = -1;
-            Show(true, _match.Hosting ? "Waiting for players" : "Waiting for the host to start");
+            Show(true, _lexicon.Say(_match.Hosting ? "Waiting for players" : "Waiting for the host to start"));
         }
 
-        private void Stopped(bool host) => Show(false, "Disconnected");
+        private void Stopped(bool host) => Show(false, _lexicon.Say("Disconnected"));
 
         private void Show(bool inside, string status)
         {
@@ -127,7 +130,7 @@ namespace Game.Stage.Menu
 
         private async void Attempt(Func<Task> action)
         {
-            _status.text = "Connecting…";
+            _status.text = _lexicon.Say("Connecting…");
             try
             {
                 await action();
@@ -135,7 +138,7 @@ namespace Game.Stage.Menu
             catch (Exception error)
             {
                 Debug.LogException(error);
-                _status.text = $"Could not connect: {error.Message}";
+                _status.text = _lexicon.Say("Could not connect: {0}", error.Message);
             }
         }
     }

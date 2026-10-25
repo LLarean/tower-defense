@@ -1,3 +1,4 @@
+using Game.Stage.Speech;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -7,11 +8,13 @@ namespace Game.Stage.Hud
     {
         private readonly Button _button;
         private readonly float[] _speeds;
+        private readonly Lexicon _lexicon;
         private int _index;
         private bool _halted;
 
-        public Tempo(Button button, float[] speeds, bool online)
+        public Tempo(Button button, float[] speeds, bool online, Lexicon lexicon)
         {
+            _lexicon = lexicon;
             _button = button;
             _speeds = speeds;
             button.EnableInClassList("hidden", online || speeds.Length < 2);
@@ -34,7 +37,7 @@ namespace Game.Stage.Hud
         private void Apply()
         {
             Time.timeScale = _halted ? 0f : _speeds[_index];
-            _button.text = $"Speed ×{_speeds[_index]:0.#}";
+            _button.text = _lexicon.Say("Speed ×{0}", _speeds[_index].ToString("0.#"));
         }
     }
 }

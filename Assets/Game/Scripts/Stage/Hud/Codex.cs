@@ -1,4 +1,5 @@
 using Game.Stage.Config;
+using Game.Stage.Speech;
 using UnityEngine.UIElements;
 
 namespace Game.Stage.Hud
@@ -7,7 +8,7 @@ namespace Game.Stage.Hud
     {
         private readonly VisualElement _screen;
 
-        public Codex(VisualElement root, Recipes recipes, LoreAsset lore)
+        public Codex(VisualElement root, Recipes recipes, LoreAsset lore, Lexicon lexicon)
         {
             _screen = root.Q("codex-screen");
             var list = root.Q<ScrollView>("codex-list");
@@ -15,9 +16,9 @@ namespace Game.Stage.Hud
             {
                 var row = new VisualElement();
                 row.AddToClassList("codex-row");
-                var name = new Label($"{first} + {second} → {lore.Title(kind)}");
+                var name = new Label($"{first} + {second} → {lexicon.Say(lore.Title(kind))}");
                 name.AddToClassList("codex-name");
-                var text = new Label(lore.Text(kind));
+                var text = new Label(lexicon.Say(lore.Text(kind)));
                 text.AddToClassList("codex-text");
                 row.Add(name);
                 row.Add(text);

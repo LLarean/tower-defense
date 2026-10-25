@@ -217,6 +217,7 @@ MonoBehaviour:
   _spectacle: {fileID: 11400000, guid: 473c32e45c23c9845930acc3ead3d474, type: 2}
   _lore: {fileID: 11400000, guid: c7c842ce45740c24ab1ae4850ba6cdbe, type: 2}
   _soundboard: {fileID: 11400000, guid: e4b05af66774e8648bc7eee71272b7ab, type: 2}
+  _languages: {fileID: 11400000, guid: 2e444be429785c14293e8f1b9f6db1bb, type: 2}
   _tremor: {fileID: 1876862026}
   _routes:
   - {fileID: 2114011444}

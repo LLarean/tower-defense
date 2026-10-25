@@ -2,6 +2,7 @@ using Game.Stage.Config;
 using Game.Stage.Hud;
 using Game.Stage.Net;
 using Game.Stage.Sound;
+using Game.Stage.Speech;
 using Game.Stage.Story;
 using Unity.Netcode;
 using Unity.Netcode.Transports.UTP;
@@ -28,6 +29,7 @@ namespace Game.Stage.Menu
         [SerializeField] private DifficultyAsset _difficulty;
         [SerializeField] private CampaignAsset _campaign;
         [SerializeField] private SoundboardAsset _soundboard;
+        [SerializeField] private LanguageAsset _languages;
 
         private Lobby _lobby;
         private Melody _melody;
@@ -43,12 +45,14 @@ namespace Game.Stage.Menu
             }
             _match.Prepare();
             var root = _document.rootVisualElement;
+            var tongue = new Tongue(_languages);
+            var lexicon = tongue.Lexicon;
             var pages = new Pages(root.Q("card"));
             var chronicle = new Chronicle();
             var sortie = new Sortie(_campaign, _difficulty, _match, chronicle);
-            new Missions(root, _campaign, _difficulty, sortie, chronicle);
-            _lobby = new Lobby(root, _match, new Lan(_transport, _port), sortie);
-            var codex = new Codex(root, new Recipes(_chemistry.Chemistry(), _lore), _lore);
+            new Missions(root, _campaign, _difficulty, sortie, chronicle, lexicon);
+            _lobby = new Lobby(root, _match, new Lan(_transport, _port), sortie, lexicon);
+            var codex = new Codex(root, new Recipes(_chemistry.Chemistry(), _lore, lexicon), _lore, lexicon);
             root.Q<Label>("campaign-title").text = _campaign.Title;
             root.Q<Label>("prologue-text").text = _campaign.Prologue;
             root.Q<Button>("campaign").clicked += () => pages.Open(chronicle.Prologued ? Board : Prologue);
@@ -60,16 +64,20 @@ namespace Game.Stage.Menu
             root.Q<Button>("story").clicked += () => pages.Open(Prologue);
             root.Q<Button>("solo").clicked += () => SceneManager.LoadScene(sortie.Level.Scene);
             var mission = root.Q<Label>("coop-mission");
-            root.Q<Button>("coop").clicked += () => Gather(pages, mission, sortie);
-            root.Q<Button>("to-coop").clicked += () => Gather(pages, mission, sortie);
+            root.Q<Button>("coop").clicked += () => Gather(pages, mission, sortie.Summary(lexicon), lexicon);
+            root.Q<Button>("to-coop").clicked += () => Gather(pages, mission, sortie.Summary(lexicon), lexicon);
             root.Q<Button>("codex").clicked += codex.Open;
             root.Q<Button>("quit").clicked += Application.Quit;
             root.Q<Button>("settings").clicked += () => pages.Open(Settings);
-            new Setting(root.Q<Button>("numbers"), "Damage numbers", "numbers");
-            var voices = new Voices(transform, _soundboard.Voices, new Setting(root.Q<Button>("sound"), "Sound", "sound"));
-            _melody = new Melody(transform, _soundboard.Menu, _soundboard.Music, new Setting(root.Q<Button>("music"), "Music", "music"));
+            new Setting(root.Q<Button>("numbers"), "Damage numbers", "numbers", lexicon);
+            var language = root.Q<Button>("language");
+            language.text = lexicon.Say("Language: {0}", tongue.Title);
+            language.clicked += tongue.Switch;
+            var voices = new Voices(transform, _soundboard.Voices, new Setting(root.Q<Button>("sound"), "Sound", "sound", lexicon));
+            _melody = new Melody(transform, _soundboard.Menu, _soundboard.Music, new Setting(root.Q<Button>("music"), "Music", "music", lexicon));
             new Chime(root, voices, _soundboard.Click);
             root.Query<Button>(className: "back").ForEach(back => back.clicked += () => pages.Open(Front));
+            tongue.Dress(root);
             pages.Open(Front);
         }
 
@@ -81,9 +89,9 @@ namespace Game.Stage.Menu
 
         private void OnDestroy() => _lobby.Dispose();
 
-        private static void Gather(Pages pages, Label mission, Sortie sortie)
+        private static void Gather(Pages pages, Label mission, string summary, Lexicon lexicon)
         {
-            mission.text = $"Hosting: {sortie.Summary}";
+            mission.text = lexicon.Say("Hosting: {0}", summary);
             pages.Open(Coop);
         }
     }

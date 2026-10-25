@@ -13,6 +13,7 @@ using Game.Stage.Map;
 using Game.Stage.Net;
 using Game.Stage.Orders;
 using Game.Stage.Sound;
+using Game.Stage.Speech;
 using Game.Stage.Story;
 using Game.Stage.Towers;
 using Unity.Netcode;
@@ -34,6 +35,7 @@ namespace Game.Stage
         [SerializeField] private SpectacleAsset _spectacle;
         [SerializeField] private LoreAsset _lore;
         [SerializeField] private SoundboardAsset _soundboard;
+        [SerializeField] private LanguageAsset _languages;
         [SerializeField] private Tremor _tremor;
         [SerializeField] private RoutePath[] _routes = new RoutePath[0];
         [SerializeField] private PlotGrid _plots;
@@ -82,9 +84,11 @@ namespace Game.Stage
             _throng = new Throng(bestiary.Stocks, _terrain, new Palette(_spectacle), _gauges);
             _show = new Spectacle(_spectacle, _throng, _tremor, transform);
             var root = _document.rootVisualElement;
+            var tongue = new Tongue(_languages);
+            var lexicon = tongue.Lexicon;
             root.pickingMode = PickingMode.Ignore;
-            _callouts = Callouts(root);
-            var voices = new Voices(transform, _soundboard.Voices, new Setting(root.Q<Button>("sound"), "Sound", "sound"));
+            _callouts = Callouts(root, lexicon);
+            var voices = new Voices(transform, _soundboard.Voices, new Setting(root.Q<Button>("sound"), "Sound", "sound", lexicon));
             var acoustics = new Acoustics(_soundboard, voices);
             var chemistry = _chemistry.Chemistry();
             var arena = new Arena(chemistry, new Horde(Cell), new Feedbacks(new Ledger(treasury, lives), _show, _callouts, acoustics));
@@ -101,29 +105,30 @@ namespace Game.Stage
             var overlay = new Overlay(root);
             _rig.Attend(overlay);
             _hand = new Hand(_camera, overlay, new Blueprint(plots, armory, orders, _ghost, _plots.Cell), pick);
-            var recipes = new Recipes(chemistry, _lore);
-            var glossary = new Glossary(_lore, _spectacle);
-            var codex = new Codex(root, recipes, _lore);
+            var recipes = new Recipes(chemistry, _lore, lexicon);
+            var glossary = new Glossary(_lore, _spectacle, lexicon);
+            var codex = new Codex(root, recipes, _lore, lexicon);
             root.Q<Button>("codex").clicked += codex.Open;
-            var pause = new Pause(root, new Tempo(root.Q<Button>("speed"), _speeds, online), online, () => Leave(match));
+            var pause = new Pause(root, new Tempo(root.Q<Button>("speed"), _speeds, online, lexicon), online, () => Leave(match), lexicon);
             _hotkeys = new Hotkeys(armory, orders, _hand, pause);
             var wallet = treasury.Wallet(me);
             new Cheats(root, _battle, wallet, orders);
             _widgets = new IWidget[]
             {
                 new Purse(root, wallet, lives),
-                new Herald(root, _battle, orders, _pace),
+                new Herald(root, _battle, orders, _pace, lexicon),
                 new Arsenal(root, armory, wallet, _hand),
-                new Inspector(root, pick, armory, orders, glossary),
-                new Briefing(root, _battle, _level, _difficulty.Title(tier)),
-                new Coach(root, _battle),
-                new Bossbar(root, arena.Horde, bestiary),
-                Debrief(root, online, match),
+                new Inspector(root, pick, armory, orders, glossary, lexicon),
+                new Briefing(root, _battle, _level, _difficulty.Title(tier), lexicon),
+                new Coach(root, _battle, lexicon),
+                new Bossbar(root, arena.Horde, bestiary, lexicon),
+                Debrief(root, online, match, lexicon),
                 new Fanfare(_battle, _soundboard, voices),
-                new Melody(transform, _soundboard.Battle, _soundboard.Music, new Setting(root.Q<Button>("music"), "Music", "music")),
+                new Melody(transform, _soundboard.Battle, _soundboard.Music, new Setting(root.Q<Button>("music"), "Music", "music", lexicon)),
             };
-            new Tooltip(root, armory, recipes, glossary);
+            new Tooltip(root, armory, recipes, glossary, lexicon);
             new Chime(root, voices, _soundboard.Click);
+            tongue.Dress(root);
             _ghost.Hide();
             _selection.Hide();
         }
@@ -173,10 +178,10 @@ namespace Game.Stage
             SceneManager.LoadScene(Menu);
         }
 
-        private Verdict Debrief(VisualElement root, bool online, Match match)
+        private Verdict Debrief(VisualElement root, bool online, Match match, Lexicon lexicon)
         {
             var again = root.Q<Button>("again");
-            again.text = online ? "Leave" : "Play again";
+            again.text = lexicon.Say(online ? "Leave" : "Play again");
             again.clicked += online ? () => Leave(match) : () => SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
             var exit = root.Q<Button>("verdict-menu");
             exit.EnableInClassList("hidden", online);
@@ -191,15 +196,15 @@ namespace Game.Stage
                 next.RemoveFromHierarchy();
             }
             var chronicle = new Chronicle();
-            return new Verdict(root, _battle, (_level.Victory, _campaign.Defeat), () => chronicle.Record(_level));
+            return new Verdict(root, _battle, (_level.Victory, _campaign.Defeat), () => chronicle.Record(_level), lexicon);
         }
 
-        private Callouts Callouts(VisualElement root)
+        private Callouts Callouts(VisualElement root, Lexicon lexicon)
         {
             var layer = root.Q("captions");
-            var numbers = new Setting(root.Q<Button>("numbers"), "Damage numbers", "numbers");
+            var numbers = new Setting(root.Q<Button>("numbers"), "Damage numbers", "numbers", lexicon);
             var tally = new Tally(_spectacle, new Captions(layer, _camera, _spectacle.Numbers), numbers);
-            return new Callouts(_spectacle, _lore, new Captions(layer, _camera, _spectacle.Titles), tally);
+            return new Callouts(_spectacle, _lore, new Captions(layer, _camera, _spectacle.Titles), tally, lexicon);
         }
 
         private Wave[] Waves(Bestiary bestiary)

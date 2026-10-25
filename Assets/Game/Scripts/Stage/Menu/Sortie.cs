@@ -1,5 +1,6 @@
 using Game.Stage.Config;
 using Game.Stage.Net;
+using Game.Stage.Speech;
 using Game.Stage.Story;
 using UnityEngine;
 
@@ -28,7 +29,7 @@ namespace Game.Stage.Menu
 
         public LevelAsset Level => _campaign.Missions[Mission];
 
-        public string Summary => $"{Level.Title} · {_difficulty.Title(Difficulty)}";
+        public string Summary(Lexicon lexicon) => $"{lexicon.Say(Level.Title)} · {lexicon.Say(_difficulty.Title(Difficulty))}";
 
         public void Choose(int mission) => Mission = mission;
 

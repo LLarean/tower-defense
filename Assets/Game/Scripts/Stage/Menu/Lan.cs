@@ -17,7 +17,7 @@ namespace Game.Stage.Menu
             _port = port;
         }
 
-        public string Address => $"Port: {_port}";
+        public ushort Port => _port;
 
         public bool Host(NetworkManager manager)
         {

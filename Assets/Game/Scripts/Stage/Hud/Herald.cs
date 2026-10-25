@@ -2,6 +2,7 @@ using System;
 using Game.Core.Battles;
 using Game.Stage.Net;
 using Game.Stage.Orders;
+using Game.Stage.Speech;
 using UnityEngine.UIElements;
 
 namespace Game.Stage.Hud
@@ -10,14 +11,16 @@ namespace Game.Stage.Hud
     {
         private readonly Battle _battle;
         private readonly IPace _pace;
+        private readonly Lexicon _lexicon;
         private readonly Label _wave;
         private readonly Button _summon;
         private int _shownWave = -1;
         private int _shownCountdown = -1;
         private bool _shownDesync;
 
-        public Herald(VisualElement root, Battle battle, IOrders orders, IPace pace)
+        public Herald(VisualElement root, Battle battle, IOrders orders, IPace pace, Lexicon lexicon)
         {
+            _lexicon = lexicon;
             _battle = battle;
             _pace = pace;
             _wave = root.Q<Label>("wave");
@@ -36,8 +39,8 @@ namespace Game.Stage.Hud
             _shownWave = invasion.Wave;
             _shownCountdown = countdown;
             _shownDesync = _pace.Desynced;
-            _wave.text = _shownDesync ? $"Wave {invasion.Wave}/{invasion.Waves} — out of sync!" : $"Wave {invasion.Wave}/{invasion.Waves}";
-            _summon.text = !_battle.Started ? "Start" : $"Next wave {countdown}s";
+            _wave.text = _lexicon.Say(_shownDesync ? "Wave {0}/{1} — out of sync!" : "Wave {0}/{1}", invasion.Wave, invasion.Waves);
+            _summon.text = !_battle.Started ? _lexicon.Say("Start") : _lexicon.Say("Next wave {0}s", countdown);
             _summon.EnableInClassList("hidden", invasion.Wave >= invasion.Waves);
         }
     }

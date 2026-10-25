@@ -1,4 +1,5 @@
 using Game.Core.Arenas;
+using Game.Stage.Speech;
 using UnityEngine.UIElements;
 
 namespace Game.Stage.Hud
@@ -12,10 +13,12 @@ namespace Game.Stage.Hud
         private readonly VisualElement _bar;
         private readonly Label _title;
         private readonly VisualElement _fill;
+        private readonly Lexicon _lexicon;
         private float _shown = -1f;
 
-        public Bossbar(VisualElement root, Horde horde, Bestiary bestiary)
+        public Bossbar(VisualElement root, Horde horde, Bestiary bestiary, Lexicon lexicon)
         {
+            _lexicon = lexicon;
             _horde = horde;
             _bestiary = bestiary;
             _bar = root.Q("bossbar");
@@ -45,7 +48,7 @@ namespace Game.Stage.Hud
         {
             if (_shown < 0f)
             {
-                _title.text = title;
+                _title.text = _lexicon.Say(title);
                 _bar.RemoveFromClassList("hidden");
             }
             if (System.Math.Abs(vitality - _shown) < Step)

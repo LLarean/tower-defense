@@ -3,6 +3,7 @@ using Game.Core.Elements;
 using Game.Core.Monsters;
 using Game.Core.Reactions;
 using Game.Stage.Config;
+using Game.Stage.Speech;
 using UnityEngine;
 
 namespace Game.Stage.Effects
@@ -17,12 +18,14 @@ namespace Game.Stage.Effects
         private readonly LoreAsset _lore;
         private readonly Captions _titles;
         private readonly Tally _tally;
+        private readonly Lexicon _lexicon;
         private readonly float[] _spoken;
         private readonly Vector3[] _spots;
         private float _time;
 
-        public Callouts(SpectacleAsset spectacle, LoreAsset lore, Captions titles, Tally tally)
+        public Callouts(SpectacleAsset spectacle, LoreAsset lore, Captions titles, Tally tally, Lexicon lexicon)
         {
+            _lexicon = lexicon;
             _spectacle = spectacle;
             _lore = lore;
             _titles = titles;
@@ -71,7 +74,7 @@ namespace Game.Stage.Effects
             }
             _spoken[index] = _time;
             _spots[index] = position;
-            _titles.Say(_lore.Title(kind), _spectacle.Color(kind), position + Lift, Look);
+            _titles.Say(_lexicon.Say(_lore.Title(kind)), _spectacle.Color(kind), position + Lift, Look);
         }
     }
 }

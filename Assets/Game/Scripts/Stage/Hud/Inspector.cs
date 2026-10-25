@@ -3,6 +3,7 @@ using Game.Core.Monsters;
 using Game.Core.Towers;
 using Game.Stage.Controls;
 using Game.Stage.Orders;
+using Game.Stage.Speech;
 using Game.Stage.Towers;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -16,6 +17,7 @@ namespace Game.Stage.Hud
         private readonly Pick _pick;
         private readonly Armory _armory;
         private readonly Glossary _glossary;
+        private readonly Lexicon _lexicon;
         private readonly VisualElement _panel;
         private readonly VisualElement _actions;
         private readonly Label _title;
@@ -27,8 +29,9 @@ namespace Game.Stage.Hud
         private int _shownLevel = -1;
         private float _next;
 
-        public Inspector(VisualElement root, Pick pick, Armory armory, IOrders orders, Glossary glossary)
+        public Inspector(VisualElement root, Pick pick, Armory armory, IOrders orders, Glossary glossary, Lexicon lexicon)
         {
+            _lexicon = lexicon;
             _pick = pick;
             _armory = armory;
             _glossary = glossary;
@@ -71,24 +74,24 @@ namespace Game.Stage.Hud
             _shownLevel = tower.Level;
             var grade = tower.Grade;
             var next = tower.Upgradable ? tower.Spec.Grade(tower.Level + 1) : grade;
-            _title.text = $"{_armory.Asset(tower.Spec).Title} · level {tower.Level + 1}/{tower.Spec.Levels}";
+            _title.text = _lexicon.Say("{0} · level {1}", _lexicon.Say(_armory.Asset(tower.Spec).Title), $"{tower.Level + 1}/{tower.Spec.Levels}");
             _text.Clear();
             foreach (var element in tower.Spec.Elements)
             {
                 _text.Append(_glossary.Element(element)).Append("  ");
             }
             _text.AppendLine();
-            Row("Damage", grade.Damage, next.Damage, "0");
-            Row("Range", grade.Range, next.Range, "0");
-            Row("Reload", grade.Cooldown, next.Cooldown, "0.0");
+            Row(_lexicon.Say("Damage"), grade.Damage, next.Damage, "0");
+            Row(_lexicon.Say("Range"), grade.Range, next.Range, "0");
+            Row(_lexicon.Say("Reload"), grade.Cooldown, next.Cooldown, "0.0");
             foreach (var element in tower.Spec.Elements)
             {
                 Row(_glossary.Condition(Statuses.MarkOf(element)), grade.Potency, next.Potency, "0.##");
             }
             _stats.text = _text.ToString().TrimEnd();
-            _upgrade.text = tower.Upgradable ? $"Upgrade {tower.UpgradeCost}" : "Max level";
+            _upgrade.text = tower.Upgradable ? _lexicon.Say("Upgrade {0}", tower.UpgradeCost) : _lexicon.Say("Max level");
             _upgrade.SetEnabled(tower.Upgradable);
-            _sell.text = $"Sell {tower.Refund}";
+            _sell.text = _lexicon.Say("Sell {0}", tower.Refund);
         }
 
         private void Show(Monster monster)
@@ -102,14 +105,15 @@ namespace Game.Stage.Hud
             }
             _next = Time.unscaledTime + Period;
             var breed = monster.Breed;
-            _title.text = breed.Name;
+            _title.text = _lexicon.Say(breed.Name);
             _text.Clear();
-            _text.Append($"Health <b>{monster.Health:0}</b> / {breed.Health:0}\nArmor {breed.Armor * 100f:0}%  ·  Speed {breed.Speed * monster.Pace:0.0}");
+            _text.Append(_lexicon.Say("Health")).Append($"  <b>{monster.Health:0}</b> / {breed.Health:0}\n");
+            _text.Append(_lexicon.Say("Armor")).Append($"  {breed.Armor * 100f:0}%  ·  ").Append(_lexicon.Say("Speed")).Append($"  {breed.Speed * monster.Pace:0.0}");
             foreach (var condition in Statuses.All)
             {
                 if (monster.Has(condition))
                 {
-                    _text.Append('\n').Append(_glossary.Condition(condition)).Append($"  {monster.Remaining(condition):0.0}s");
+                    _text.Append('\n').Append(_glossary.Condition(condition)).Append("  ").Append(_lexicon.Say("{0}s", monster.Remaining(condition).ToString("0.0")));
                 }
             }
             _stats.text = _text.ToString();

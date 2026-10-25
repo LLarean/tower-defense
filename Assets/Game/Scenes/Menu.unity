@@ -528,6 +528,7 @@ MonoBehaviour:
   _difficulty: {fileID: 11400000, guid: 64a1c21a3892a314ea654d003429fb1d, type: 2}
   _campaign: {fileID: 11400000, guid: d8931fa770ba3554a93c01d6e2892aa3, type: 2}
   _soundboard: {fileID: 11400000, guid: e4b05af66774e8648bc7eee71272b7ab, type: 2}
+  _languages: {fileID: 11400000, guid: 2e444be429785c14293e8f1b9f6db1bb, type: 2}
 --- !u!114 &1190211655
 MonoBehaviour:
   m_ObjectHideFlags: 0

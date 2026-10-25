@@ -4,6 +4,7 @@ using Game.Core.Elements;
 using Game.Core.Monsters;
 using Game.Core.Reactions;
 using Game.Stage.Config;
+using Game.Stage.Speech;
 
 namespace Game.Stage.Hud
 {
@@ -12,7 +13,7 @@ namespace Game.Stage.Hud
         private readonly List<(string First, string Second, ReactionKind Kind)> _all = new List<(string, string, ReactionKind)>();
         private readonly List<(Element Element, string Partner, ReactionKind Kind)> _pairs = new List<(Element, string, ReactionKind)>();
 
-        public Recipes(Chemistry chemistry, LoreAsset lore)
+        public Recipes(Chemistry chemistry, LoreAsset lore, Lexicon lexicon)
         {
             var sources = new Dictionary<Condition, Element>();
             foreach (Element element in Enum.GetValues(typeof(Element)))
@@ -22,15 +23,15 @@ namespace Game.Stage.Hud
             var seen = new HashSet<ReactionKind>();
             foreach (var (condition, element, kind) in chemistry.Entries)
             {
-                var first = sources.TryGetValue(condition, out var origin) ? lore.Title(origin) : lore.Title(condition);
+                var first = lexicon.Say(sources.TryGetValue(condition, out var origin) ? lore.Title(origin) : lore.Title(condition));
                 _pairs.Add((element, first, kind));
                 if (sources.ContainsKey(condition))
                 {
-                    _pairs.Add((origin, lore.Title(element), kind));
+                    _pairs.Add((origin, lexicon.Say(lore.Title(element)), kind));
                 }
                 if (seen.Add(kind))
                 {
-                    _all.Add((first, lore.Title(element), kind));
+                    _all.Add((first, lexicon.Say(lore.Title(element)), kind));
                 }
             }
         }
