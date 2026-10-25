@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4dcbbbf4872433ab34e8b8dcf47da43, type: 3}
   m_Name: Runner
   m_EditorClassIdentifier: Game.Stage::Game.Stage.Config.BreedAsset
+  _title: Runner
   _health: 40
   _armor: 0
   _speed: 5
@@ -19,3 +20,8 @@ MonoBehaviour:
   _harm: 1
   _immunities: 
   _model: {fileID: 2538729892970968916, guid: 67ba1261e7725e3458a83df5358038db, type: 3}
+  _boss: 0
+  _follower: {fileID: 0}
+  _followers: 0
+  _calls: 0
+  _spacing: 2

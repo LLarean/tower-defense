@@ -108,6 +108,7 @@ namespace Game.Stage
                 new Arsenal(root, armory, wallet, _hand),
                 new Inspector(root, pick, armory, orders),
                 new Briefing(root, _battle, _level, _difficulty.Title(tier)),
+                new Bossbar(root, arena.Horde, bestiary),
                 Debrief(root, online, match),
             };
             new Tooltip(root, armory, recipes, _lore);

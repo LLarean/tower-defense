@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4dcbbbf4872433ab34e8b8dcf47da43, type: 3}
   m_Name: Brute
   m_EditorClassIdentifier: Game.Stage::Game.Stage.Config.BreedAsset
+  _title: Brute
   _health: 400
   _armor: 0.3
   _speed: 2
@@ -19,3 +20,8 @@ MonoBehaviour:
   _harm: 3
   _immunities: 
   _model: {fileID: 4659334959236747153, guid: 15424c42d33255a49b226a951e949b95, type: 3}
+  _boss: 0
+  _follower: {fileID: 0}
+  _followers: 0
+  _calls: 0
+  _spacing: 2

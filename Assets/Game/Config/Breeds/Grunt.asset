@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4dcbbbf4872433ab34e8b8dcf47da43, type: 3}
   m_Name: Grunt
   m_EditorClassIdentifier: Game.Stage::Game.Stage.Config.BreedAsset
+  _title: Grunt
   _health: 100
   _armor: 0
   _speed: 3
@@ -19,3 +20,8 @@ MonoBehaviour:
   _harm: 1
   _immunities: 
   _model: {fileID: 3136331107324150676, guid: 72af84fb1de8b8c4ab395a24607dac08, type: 3}
+  _boss: 0
+  _follower: {fileID: 0}
+  _followers: 0
+  _calls: 0
+  _spacing: 2
