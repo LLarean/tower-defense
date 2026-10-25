@@ -87,6 +87,16 @@ namespace Game.Core.Tests
             Assert.That(garrison.TrySell(1, tower), Is.False);
         }
 
+        [Test]
+        public void TellsEveryListenerAboutNewTower()
+        {
+            var first = new FakeGarrisonFeedback();
+            var second = new FakeGarrisonFeedback();
+            var garrison = new Garrison(Plots(), new Treasury(1, 200), new GarrisonFeedbacks(first, second));
+            garrison.TryBuild(0, Fire, new Vector3(1f, 0f, 1f), out _);
+            Assert.That(first.Built + second.Built, Is.EqualTo(2));
+        }
+
         private static Garrison Garrison(int gold) => new Garrison(Plots(), new Treasury(1, gold));
 
         private static Plots Plots()
