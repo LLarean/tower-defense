@@ -1,0 +1,143 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a995e588fe915d8ed94b6061d0b279ca, type: 3}
+  m_Name: Crossroads
+  m_EditorClassIdentifier: Game.Stage::Game.Stage.Config.LevelAsset
+  _title: The Crossroads
+  _scene: Crossroads
+  _briefing: 'Two warbands march from the west and the north and meet at the old
+    crossroads before the city gate. Guard the place where the roads join: one well-built
+    knot of towers can hold them both, but do not leave either road bare.'
+  _victory: Both warbands broke at the crossroads. Scouts report something far larger
+    stirring in the frozen mountains.
+  _gold: 300
+  _lives: 20
+  _rest: 12
+  _arsenal:
+  - {fileID: 11400000, guid: 190d36a7ef7a52d458a49b1a75586b55, type: 2}
+  - {fileID: 11400000, guid: 1f0deeb18359aa04abd8b3cebc871359, type: 2}
+  - {fileID: 11400000, guid: d6962f2e2b103434b97903ff5ebf00b9, type: 2}
+  - {fileID: 11400000, guid: 795ba880e9a7e4949bb5fc6a3090c651, type: 2}
+  - {fileID: 11400000, guid: 924d5855ac1a390479448b11d6918b96, type: 2}
+  - {fileID: 11400000, guid: d04631060064cfd42b26a91c5d58671c, type: 2}
+  - {fileID: 11400000, guid: 725952ea03b1e89459b9ca0828006345, type: 2}
+  _waves:
+  - _squads:
+    - _breed: {fileID: 11400000, guid: 356fc2d905277484f82b30ba8b719755, type: 2}
+      _count: 8
+      _interval: 1.2
+      _delay: 0
+      _route: 0
+  - _squads:
+    - _breed: {fileID: 11400000, guid: 356fc2d905277484f82b30ba8b719755, type: 2}
+      _count: 8
+      _interval: 1.2
+      _delay: 0
+      _route: 1
+  - _squads:
+    - _breed: {fileID: 11400000, guid: cc8acf6fd47926f4bb1a24895d8e3f3d, type: 2}
+      _count: 10
+      _interval: 0.6
+      _delay: 0
+      _route: 0
+    - _breed: {fileID: 11400000, guid: cc8acf6fd47926f4bb1a24895d8e3f3d, type: 2}
+      _count: 10
+      _interval: 0.6
+      _delay: 0
+      _route: 1
+  - _squads:
+    - _breed: {fileID: 11400000, guid: 356fc2d905277484f82b30ba8b719755, type: 2}
+      _count: 10
+      _interval: 1
+      _delay: 0
+      _route: 0
+    - _breed: {fileID: 11400000, guid: 356fc2d905277484f82b30ba8b719755, type: 2}
+      _count: 10
+      _interval: 1
+      _delay: 3
+      _route: 1
+  - _squads:
+    - _breed: {fileID: 11400000, guid: 6a73b548b876cc14085c5835c140831a, type: 2}
+      _count: 3
+      _interval: 3
+      _delay: 0
+      _route: 1
+    - _breed: {fileID: 11400000, guid: cc8acf6fd47926f4bb1a24895d8e3f3d, type: 2}
+      _count: 14
+      _interval: 0.5
+      _delay: 2
+      _route: 0
+  - _squads:
+    - _breed: {fileID: 11400000, guid: 356fc2d905277484f82b30ba8b719755, type: 2}
+      _count: 14
+      _interval: 0.8
+      _delay: 0
+      _route: 0
+    - _breed: {fileID: 11400000, guid: 6a73b548b876cc14085c5835c140831a, type: 2}
+      _count: 3
+      _interval: 3
+      _delay: 4
+      _route: 0
+  - _squads:
+    - _breed: {fileID: 11400000, guid: cc8acf6fd47926f4bb1a24895d8e3f3d, type: 2}
+      _count: 20
+      _interval: 0.4
+      _delay: 0
+      _route: 1
+    - _breed: {fileID: 11400000, guid: 356fc2d905277484f82b30ba8b719755, type: 2}
+      _count: 12
+      _interval: 0.9
+      _delay: 0
+      _route: 0
+  - _squads:
+    - _breed: {fileID: 11400000, guid: 6a73b548b876cc14085c5835c140831a, type: 2}
+      _count: 4
+      _interval: 2.5
+      _delay: 0
+      _route: 0
+    - _breed: {fileID: 11400000, guid: 6a73b548b876cc14085c5835c140831a, type: 2}
+      _count: 4
+      _interval: 2.5
+      _delay: 0
+      _route: 1
+  - _squads:
+    - _breed: {fileID: 11400000, guid: 356fc2d905277484f82b30ba8b719755, type: 2}
+      _count: 18
+      _interval: 0.7
+      _delay: 0
+      _route: 0
+    - _breed: {fileID: 11400000, guid: 356fc2d905277484f82b30ba8b719755, type: 2}
+      _count: 18
+      _interval: 0.7
+      _delay: 0
+      _route: 1
+    - _breed: {fileID: 11400000, guid: cc8acf6fd47926f4bb1a24895d8e3f3d, type: 2}
+      _count: 16
+      _interval: 0.4
+      _delay: 6
+      _route: 0
+  - _squads:
+    - _breed: {fileID: 11400000, guid: 6a73b548b876cc14085c5835c140831a, type: 2}
+      _count: 6
+      _interval: 2
+      _delay: 0
+      _route: 0
+    - _breed: {fileID: 11400000, guid: 6a73b548b876cc14085c5835c140831a, type: 2}
+      _count: 6
+      _interval: 2
+      _delay: 0
+      _route: 1
+    - _breed: {fileID: 11400000, guid: cc8acf6fd47926f4bb1a24895d8e3f3d, type: 2}
+      _count: 20
+      _interval: 0.4
+      _delay: 4
+      _route: 1
