@@ -28,7 +28,7 @@
    Если закрыт — batchmode (`Unity.exe -batchmode -projectPath . -executeMethod ... -quit`); нужен вход в Unity Hub.
 4. Сцены, префабы и ассеты при открытом редакторе меняются через редактор (`script eval_file`), а не правкой YAML.
    Новые поля конфигов можно заполнять правкой `.asset`, пока редактор закрыт.
-5. Сборки для тестов: распакованная папка и zip рядом — `C:\Builds	ower-defense\<версия>` и `<версия>.zip` (версия — `PlayerSettings.bundleVersion`). Перед сборкой убрать автопилот из `Assets/Scratch`.
+5. Сборки для тестов: распакованная папка и zip рядом — `C:\Builds\tower-defense\<версия>` и `<версия>.zip` (версия — `PlayerSettings.bundleVersion`). Перед сборкой убрать автопилот из `Assets/Scratch`.
 6. Изменения, которые редактор сделал сам (материалы VFX, `ProjectSettings/EditorSettings.asset`), в коммиты не включать.
 
 ## Правила, о которых легко забыть
