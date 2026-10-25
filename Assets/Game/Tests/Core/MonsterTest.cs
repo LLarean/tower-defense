@@ -26,6 +26,15 @@ namespace Game.Core.Tests
         }
 
         [Test]
+        public void DiesWhenSlainDespiteImmunities()
+        {
+            var field = new Field();
+            var monster = field.Spawn(immunities: Element.Fire);
+            monster.Slay();
+            Assert.That(monster.Alive, Is.False);
+        }
+
+        [Test]
         public void IgnoresElementItResists()
         {
             var field = new Field();

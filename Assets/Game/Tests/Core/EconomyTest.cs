@@ -36,6 +36,14 @@ namespace Game.Core.Tests
         }
 
         [Test]
+        public void GainsLives()
+        {
+            var lives = new Lives(3);
+            lives.Gain(2);
+            Assert.That(lives.Left, Is.EqualTo(5));
+        }
+
+        [Test]
         public void PaysBountyForSlainMonster()
         {
             var treasury = new Treasury(2, 0);

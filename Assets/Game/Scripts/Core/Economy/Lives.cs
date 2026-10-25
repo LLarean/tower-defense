@@ -14,5 +14,7 @@ namespace Game.Core.Economy
         public bool Lost => Left <= 0;
 
         public void Lose(int count) => Left = Math.Max(0, Left - count);
+
+        public void Gain(int count) => Left += count;
     }
 }

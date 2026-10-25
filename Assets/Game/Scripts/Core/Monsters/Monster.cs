@@ -73,6 +73,8 @@ namespace Game.Core.Monsters
             arena.Feedback.Wounded(this, amount, element);
         }
 
+        public void Slay() => _health = 0f;
+
         public void Inflict(Condition condition, float potency, float duration) => _statuses.Inflict(condition, potency, duration);
 
         public void Cure(Condition condition) => _statuses.Cure(condition);
