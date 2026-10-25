@@ -36,12 +36,14 @@ namespace Game.Stage.Net
                 response.Approved = !_started;
                 response.CreatePlayerObject = false;
             };
+            _manager.OnClientStarted -= Listen;
+            _manager.OnClientStarted += Listen;
         }
 
         public void Open()
         {
             _started = false;
-            _manager.CustomMessagingManager.RegisterNamedMessageHandler(Channel, Receive);
+            Listen();
             if (_manager.IsServer)
             {
                 _manager.OnClientConnectedCallback += Announce;
@@ -62,6 +64,7 @@ namespace Game.Stage.Net
         public void Begin(string scene)
         {
             _started = true;
+            Announce(NetworkManager.ServerClientId);
             _manager.SceneManager.LoadScene(scene, LoadSceneMode.Single);
         }
 
@@ -76,6 +79,12 @@ namespace Game.Stage.Net
             _manager.Shutdown();
             Players = 1;
             Me = 0;
+        }
+
+        private void Listen()
+        {
+            _manager.CustomMessagingManager.UnregisterNamedMessageHandler(Channel);
+            _manager.CustomMessagingManager.RegisterNamedMessageHandler(Channel, Receive);
         }
 
         private void Announce(ulong changed)
