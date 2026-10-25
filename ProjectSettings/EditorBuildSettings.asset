@@ -11,5 +11,11 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Game/Scenes/Meadow.unity
     guid: 25b7af8eb3ff7cd48aca75aaf27ebf59
+  - enabled: 1
+    path: Assets/Game/Scenes/Crossroads.unity
+    guid: 27705c11afb524a45b587bfefcf0bbe2
+  - enabled: 1
+    path: Assets/Game/Scenes/Citadel.unity
+    guid: b9a86ae094508b246a53bf83c081aea5
   m_configObjects: {}
   m_UseUCBPForAssetBundles: 0

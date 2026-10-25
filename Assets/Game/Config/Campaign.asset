@@ -31,3 +31,5 @@ MonoBehaviour:
     realm cannot afford a second fall.'
   _missions:
   - {fileID: 11400000, guid: e0eb6021d38de774a8cb7d7e582a0d3a, type: 2}
+  - {fileID: 11400000, guid: 46aa5b5eff78ea843adbf6f4bd181899, type: 2}
+  - {fileID: 11400000, guid: d8ef75dbb49648e42aab5d3bb210afa7, type: 2}
