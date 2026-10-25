@@ -8,8 +8,13 @@ namespace Game.Stage.Controls
         [SerializeField] private Rect _bounds = new Rect(0f, 0f, 200f, 200f);
         [SerializeField] private float _speed = 40f;
         [SerializeField] private float _edge = 12f;
-        [SerializeField] private float _zoom = 0.05f;
+        [SerializeField] private float _zoom = 0.15f;
+        [SerializeField] private float _smoothing = 12f;
         [SerializeField] private Vector2 _height = new Vector2(25f, 110f);
+
+        private float _altitude;
+
+        private void Awake() => _altitude = transform.position.y;
 
         private void Update()
         {
@@ -38,8 +43,9 @@ namespace Game.Stage.Controls
                 move.y += 1f;
             }
             var position = transform.position + new Vector3(move.x, 0f, move.y) * (_speed * Time.unscaledDeltaTime);
-            var scroll = mouse.scroll.ReadValue().y * _zoom;
-            var height = Mathf.Clamp(position.y - scroll, _height.x, _height.y);
+            var scroll = Mathf.Clamp(mouse.scroll.ReadValue().y, -1f, 1f);
+            _altitude = Mathf.Clamp(_altitude * (1f - scroll * _zoom), _height.x, _height.y);
+            var height = Mathf.Lerp(position.y, _altitude, 1f - Mathf.Exp(-_smoothing * Time.unscaledDeltaTime));
             position += transform.forward * ((position.y - height) / Mathf.Max(0.01f, -transform.forward.y));
             position.x = Mathf.Clamp(position.x, _bounds.xMin, _bounds.xMax);
             position.z = Mathf.Clamp(position.z, _bounds.yMin, _bounds.yMax);
