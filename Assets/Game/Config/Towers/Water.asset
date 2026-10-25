@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Water
   m_EditorClassIdentifier: Game.Stage::Game.Stage.Config.TowerAsset
   _title: Water
-  _icon: {fileID: 0}
+  _icon: {fileID: 21300000, guid: 2e7dcc36fa23b8844a9076df68fa9d72, type: 3}
   _elements: 01000000
   _missileSpeed: 25
   _grades:

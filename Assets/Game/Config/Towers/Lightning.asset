@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Lightning
   m_EditorClassIdentifier: Game.Stage::Game.Stage.Config.TowerAsset
   _title: Lightning
-  _icon: {fileID: 0}
+  _icon: {fileID: 21300000, guid: ee7f245467b2be34faaed95fa418aee1, type: 3}
   _elements: 03000000
   _missileSpeed: 45
   _grades:

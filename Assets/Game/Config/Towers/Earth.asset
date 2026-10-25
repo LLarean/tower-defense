@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Earth
   m_EditorClassIdentifier: Game.Stage::Game.Stage.Config.TowerAsset
   _title: Earth
-  _icon: {fileID: 0}
+  _icon: {fileID: 21300000, guid: ceff5e7612301014fa81cda2fca9d8c7, type: 3}
   _elements: 05000000
   _missileSpeed: 18
   _grades:

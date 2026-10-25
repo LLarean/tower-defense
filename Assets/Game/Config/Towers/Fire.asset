@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Fire
   m_EditorClassIdentifier: Game.Stage::Game.Stage.Config.TowerAsset
   _title: Fire
-  _icon: {fileID: 0}
+  _icon: {fileID: 21300000, guid: d36b9fe7b35756c4e86ba312f385607c, type: 3}
   _elements: 00000000
   _missileSpeed: 25
   _grades:

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Ice
   m_EditorClassIdentifier: Game.Stage::Game.Stage.Config.TowerAsset
   _title: Ice
-  _icon: {fileID: 0}
+  _icon: {fileID: 21300000, guid: 1bc1353f6248f7149be446f86fa45b1b, type: 3}
   _elements: 02000000
   _missileSpeed: 25
   _grades:
