@@ -19,7 +19,9 @@ namespace Game.Stage.Menu
         private readonly Label _status;
         private readonly Label _roster;
         private readonly Button _begin;
+        private readonly Button _copy;
         private string _address = string.Empty;
+        private string _code = string.Empty;
         private int _shownPlayers = -1;
 
         public Lobby(VisualElement root, Match match, Lan lan, Sortie sortie)
@@ -34,6 +36,10 @@ namespace Game.Stage.Menu
             _begin = root.Q<Button>("begin");
             var ip = root.Q<TextField>("ip");
             var code = root.Q<TextField>("code");
+            code.textEdition.placeholder = "Enter code";
+            code.maxLength = 8;
+            _copy = root.Q<Button>("copy");
+            _copy.clicked += () => GUIUtility.systemCopyBuffer = _code;
             root.Q<Button>("host-online").clicked += () => Attempt(HostOnline);
             root.Q<Button>("join-online").clicked += () => Attempt(() => JoinOnline(code.value.Trim().ToUpperInvariant()));
             root.Q<Button>("host-lan").clicked += () => Attempt(HostLan);
@@ -58,7 +64,8 @@ namespace Game.Stage.Menu
 
         private async Task HostOnline()
         {
-            _address = $"Code: {await _cloud.Host(Seats)}";
+            _code = await _cloud.Host(Seats);
+            _address = $"Code: {_code}";
             Open();
         }
 
@@ -85,6 +92,7 @@ namespace Game.Stage.Menu
 
         private async Task Leave()
         {
+            _code = string.Empty;
             _match.Close();
             await _cloud.Leave();
             Show(false, string.Empty);
@@ -113,6 +121,7 @@ namespace Game.Stage.Menu
             _doors.EnableInClassList("hidden", inside);
             _hall.EnableInClassList("hidden", !inside);
             _begin.EnableInClassList("hidden", !_match.Hosting);
+            _copy.EnableInClassList("hidden", !inside || _code.Length == 0 || !_match.Hosting);
             _status.text = status;
         }
 
@@ -126,7 +135,7 @@ namespace Game.Stage.Menu
             catch (Exception error)
             {
                 Debug.LogException(error);
-                _status.text = error.Message;
+                _status.text = $"Could not connect: {error.Message}";
             }
         }
     }

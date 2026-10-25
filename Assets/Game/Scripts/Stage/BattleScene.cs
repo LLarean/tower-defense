@@ -37,6 +37,7 @@ namespace Game.Stage
         [SerializeField] private PlotGrid _plots;
         [SerializeField] private Terrain _terrain;
         [SerializeField] private Camera _camera;
+        [SerializeField] private Rig _rig;
         [SerializeField] private Ghost _ghost;
         [SerializeField] private Ring _selection;
         [SerializeField] private UIDocument _document;
@@ -93,7 +94,9 @@ namespace Game.Stage
             _pace = !online ? new SoloPace(timeline) : match.Hosting ? new HostPace(timeline, match.Manager) : (IPace)new GuestPace(timeline, match.Manager);
             var orders = new Courier(_pace.Post, armory.Specs, me);
             var pick = new Pick(garrison, arena.Horde, _selection, _plots.Cell);
-            _hand = new Hand(_camera, new Overlay(root), new Blueprint(plots, armory, orders, _ghost, _plots.Cell), pick);
+            var overlay = new Overlay(root);
+            _rig.Attend(overlay);
+            _hand = new Hand(_camera, overlay, new Blueprint(plots, armory, orders, _ghost, _plots.Cell), pick);
             var recipes = new Recipes(chemistry, _lore);
             var codex = new Codex(root, recipes, _lore);
             root.Q<Button>("codex").clicked += codex.Open;
@@ -108,6 +111,7 @@ namespace Game.Stage
                 new Arsenal(root, armory, wallet, _hand),
                 new Inspector(root, pick, armory, orders),
                 new Briefing(root, _battle, _level, _difficulty.Title(tier)),
+                new Coach(root, _battle),
                 new Bossbar(root, arena.Horde, bestiary),
                 Debrief(root, online, match),
             };

@@ -56,6 +56,7 @@
                     <ui:Label name="roster" class="roster" />
                     <ui:VisualElement class="row">
                         <ui:Button name="begin" class="choice primary" text="Start" />
+                        <ui:Button name="copy" class="choice" text="Copy code" />
                         <ui:Button name="leave" class="choice" text="Leave" />
                     </ui:VisualElement>
                 </ui:VisualElement>
