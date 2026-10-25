@@ -13,7 +13,7 @@ namespace Game.Stage.Menu
         private readonly Match _match;
         private readonly Lan _lan;
         private readonly Sortie _sortie;
-        private readonly Cloud _cloud = new Cloud();
+        private readonly Cloud _cloud = new Cloud("default");
         private readonly VisualElement _doors;
         private readonly VisualElement _hall;
         private readonly Label _status;

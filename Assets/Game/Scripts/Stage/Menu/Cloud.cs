@@ -7,7 +7,13 @@ namespace Game.Stage.Menu
 {
     public sealed class Cloud
     {
+        private readonly string _profile;
         private ISession _session;
+
+        public Cloud(string profile)
+        {
+            _profile = profile;
+        }
 
         public async Task<string> Host(int players)
         {
@@ -35,11 +41,11 @@ namespace Game.Stage.Menu
             await session.LeaveAsync();
         }
 
-        private static async Task Ready()
+        private async Task Ready()
         {
             if (UnityServices.State != ServicesInitializationState.Initialized)
             {
-                await UnityServices.InitializeAsync();
+                await UnityServices.InitializeAsync(new InitializationOptions().SetProfile(_profile));
             }
             if (!AuthenticationService.Instance.IsSignedIn)
             {
