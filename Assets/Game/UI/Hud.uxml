@@ -1,6 +1,7 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements">
     <ui:Template name="Codex" src="Codex.uxml" />
     <Style src="Hud.uss" />
+    <ui:VisualElement name="captions" class="overlay" picking-mode="Ignore" />
     <ui:VisualElement name="hud" class="hud" picking-mode="Ignore">
         <ui:VisualElement name="top" class="bar top">
             <ui:Label name="gold" class="stat gold" />
@@ -27,6 +28,7 @@
             <ui:Button name="resume" class="action again" text="Resume" />
             <ui:Button name="restart" class="action again" text="Restart" />
             <ui:Button name="codex" class="action again" text="Codex" />
+            <ui:Button name="numbers" class="action again" />
             <ui:Button name="menu" class="action again" text="Main menu" />
             <ui:Button name="quit" class="action again sell" text="Quit" />
         </ui:VisualElement>

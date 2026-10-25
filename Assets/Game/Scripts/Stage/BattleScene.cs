@@ -47,6 +47,7 @@ namespace Game.Stage
         private Throng _throng;
         private Barrage _barrage;
         private Spectacle _show;
+        private Callouts _callouts;
         private Gauges _gauges;
         private Bastion _bastion;
         private Hand _hand;
@@ -71,8 +72,11 @@ namespace Game.Stage
             _gauges = new Gauges(_bar, _gauge);
             _throng = new Throng(bestiary.Stocks, _terrain, new Palette(_spectacle), _gauges);
             _show = new Spectacle(_spectacle, _throng, _tremor, transform);
+            var root = _document.rootVisualElement;
+            root.pickingMode = PickingMode.Ignore;
+            _callouts = Callouts(root);
             var chemistry = _chemistry.Chemistry();
-            var arena = new Arena(chemistry, new Horde(Cell), new Feedbacks(new Ledger(treasury, lives), _show));
+            var arena = new Arena(chemistry, new Horde(Cell), new Feedbacks(new Ledger(treasury, lives), _show, _callouts));
             var invasion = new Invasion(routes, _level.Rest, Waves(bestiary));
             var plots = _plots.Plots(routes);
             _bastion = new Bastion(armory, transform);
@@ -82,8 +86,6 @@ namespace Game.Stage
             var timeline = new Timeline(_battle, armory.Specs, treasury);
             _pace = !online ? new SoloPace(timeline) : match.Hosting ? new HostPace(timeline, match.Manager) : (IPace)new GuestPace(timeline, match.Manager);
             var orders = new Courier(_pace.Post, armory.Specs, me);
-            var root = _document.rootVisualElement;
-            root.pickingMode = PickingMode.Ignore;
             var pick = new Pick(garrison, arena.Horde, _selection, _plots.Cell);
             _hand = new Hand(_camera, new Overlay(root), new Blueprint(plots, armory, orders, _ghost, _plots.Cell), pick);
             var recipes = new Recipes(chemistry, _lore);
@@ -117,6 +119,7 @@ namespace Game.Stage
             _gauges.Draw();
             _barrage.Sync(_battle.Volley.Missiles);
             _show.Tick(Time.deltaTime);
+            _callouts.Tick(Time.deltaTime);
             foreach (var widget in _widgets)
             {
                 widget.Refresh();
@@ -148,6 +151,14 @@ namespace Game.Stage
                 match.Close();
             }
             SceneManager.LoadScene(Menu);
+        }
+
+        private Callouts Callouts(VisualElement root)
+        {
+            var layer = root.Q("captions");
+            var numbers = new Setting(root.Q<Button>("numbers"), "Damage numbers", "numbers");
+            var tally = new Tally(_spectacle, new Captions(layer, _camera, _spectacle.Numbers), numbers);
+            return new Callouts(_spectacle, _lore, new Captions(layer, _camera, _spectacle.Titles), tally);
         }
 
         private Wave[] Waves(Bestiary bestiary)

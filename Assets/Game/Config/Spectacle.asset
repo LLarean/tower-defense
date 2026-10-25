@@ -16,48 +16,63 @@ MonoBehaviour:
   - _kind: 0
     _burst: {fileID: 4894084331881772674, guid: 501510900b8121f4d81ea91cd39bd6e2, type: 3}
     _shake: 0.15
+    _color: {r: 1, g: 0.93, b: 0.35, a: 1}
   - _kind: 1
     _burst: {fileID: 1029094513332641657, guid: 5056251152fd0ff438efa82b7bee778a, type: 3}
     _shake: 0
+    _color: {r: 0.6, g: 0.9, b: 1, a: 1}
   - _kind: 2
     _burst: {fileID: 767062797195188625, guid: 6c537376921aa4a428af0a5dc12dc2a5, type: 3}
     _shake: 0.35
+    _color: {r: 0.85, g: 0.95, b: 1, a: 1}
   - _kind: 3
     _burst: {fileID: 8394364046267082139, guid: 760a31a6b276ca54b93e7c72e6d9bba0, type: 3}
     _shake: 0
+    _color: {r: 0.9, g: 0.92, b: 0.96, a: 1}
   - _kind: 4
     _burst: {fileID: 1030871657207567036, guid: d1a10db13bb0c0946a577302cd80e6e2, type: 3}
     _shake: 0.25
+    _color: {r: 1, g: 0.6, b: 0.45, a: 1}
   - _kind: 5
     _burst: {fileID: 2710049365445156702, guid: 55130db536de9ac49b46b6d13afd014d, type: 3}
     _shake: 0.6
+    _color: {r: 0.75, g: 1, b: 0.3, a: 1}
   - _kind: 6
     _burst: {fileID: 5927487274865510081, guid: 49180ecbd27e49341b68c5620c44f1bc, type: 3}
     _shake: 0.45
+    _color: {r: 0.85, g: 0.6, b: 1, a: 1}
   - _kind: 7
     _burst: {fileID: 7415844442456994942, guid: aa6e209a7744a014b841c6e8e78d3475, type: 3}
     _shake: 0
+    _color: {r: 0.5, g: 1, b: 0.4, a: 1}
   - _kind: 8
     _burst: {fileID: 4583725269969794599, guid: 528e8955b91ef9144aa55831a206b6a1, type: 3}
     _shake: 0
+    _color: {r: 0.8, g: 0.6, b: 0.35, a: 1}
   - _kind: 9
     _burst: {fileID: 8122220436521272119, guid: 41ea8059e19f4f541b290b1a2c45d6d0, type: 3}
     _shake: 0.1
+    _color: {r: 1, g: 0.4, b: 0.15, a: 1}
   - _kind: 10
     _burst: {fileID: 758653653581081799, guid: 7c9199c98607f5e44b25f57f0e3cb78b, type: 3}
     _shake: 0.1
+    _color: {r: 0.55, g: 0.8, b: 1, a: 1}
   - _kind: 11
     _burst: {fileID: 4172239312233610446, guid: 1c2437bc3e6c22a45981a71d94cc547b, type: 3}
     _shake: 0
+    _color: {r: 0.8, g: 1, b: 0.3, a: 1}
   - _kind: 12
     _burst: {fileID: 690757184564752192, guid: 9a9a3afd0c7247348b861fa07e9458a6, type: 3}
     _shake: 0.7
+    _color: {r: 1, g: 0.55, b: 0.15, a: 1}
   - _kind: 13
     _burst: {fileID: 7041709271319542289, guid: 04498fba53f4dae45b7645fea74c4bea, type: 3}
     _shake: 0
+    _color: {r: 0.75, g: 0.6, b: 0.9, a: 1}
   - _kind: 14
     _burst: {fileID: 6418314028354136660, guid: 7fd910534b78e174d94a8f5c2b197ef8, type: 3}
     _shake: 0
+    _color: {r: 0.7, g: 0.6, b: 0.55, a: 1}
   _marks:
   - _condition: 6
     _color: {r: 0.7, g: 1.1, b: 1.8, a: 1}
@@ -82,3 +97,32 @@ MonoBehaviour:
   _death: {fileID: 2517218875916853116, guid: 8cf1c9f25638b844cad9cb55797c8ea6, type: 3}
   _bolt: {fileID: 4794116015528985315, guid: 36fd38d8033585845b3f55cd31df4e77, type: 3}
   _bolting: 0.15
+  _tints:
+  - _element: 0
+    _color: {r: 1, g: 0.55, b: 0.2, a: 1}
+  - _element: 1
+    _color: {r: 0.35, g: 0.65, b: 1, a: 1}
+  - _element: 2
+    _color: {r: 0.65, g: 0.9, b: 1, a: 1}
+  - _element: 3
+    _color: {r: 1, g: 0.92, b: 0.35, a: 1}
+  - _element: 4
+    _color: {r: 0.55, g: 1, b: 0.35, a: 1}
+  - _element: 5
+    _color: {r: 0.85, g: 0.65, b: 0.4, a: 1}
+  - _element: 6
+    _color: {r: 0.7, g: 0.55, b: 0.85, a: 1}
+  _titles:
+    _count: 16
+    _life: 1.4
+    _rise: 50
+    _pop: 0.6
+  _numbers:
+    _count: 96
+    _life: 0.8
+    _rise: 40
+    _pop: 0.3
+  _tallying: 0.3
+  _noticeable: 1
+  _heavy: 50
+  _hush: 6
