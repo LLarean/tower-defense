@@ -1,8 +1,6 @@
 using System.Text;
-using Game.Core.Elements;
 using Game.Core.Monsters;
 using Game.Core.Towers;
-using Game.Stage.Config;
 using Game.Stage.Towers;
 using UnityEngine.UIElements;
 
@@ -11,14 +9,14 @@ namespace Game.Stage.Hud
     public sealed class Tooltip
     {
         private readonly Recipes _recipes;
-        private readonly LoreAsset _lore;
+        private readonly Glossary _glossary;
         private readonly Label _label;
         private readonly StringBuilder _text = new StringBuilder();
 
-        public Tooltip(VisualElement root, Armory armory, Recipes recipes, LoreAsset lore)
+        public Tooltip(VisualElement root, Armory armory, Recipes recipes, Glossary glossary)
         {
             _recipes = recipes;
-            _lore = lore;
+            _glossary = glossary;
             _label = root.Q<Label>("tooltip");
             var slots = root.Query<Button>(className: "slot").ToList();
             for (var index = 0; index < slots.Count && index < armory.Specs.Count; index++)
@@ -35,15 +33,16 @@ namespace Game.Stage.Hud
         {
             var grade = spec.Grade(0);
             _text.Clear();
-            _text.Append($"<b>{title}</b>  {spec.Price} gold\n");
-            _text.Append($"Damage {grade.Damage:0} · Range {grade.Range:0} · Reload {grade.Cooldown:0.0}s\n");
+            _text.Append($"<size=120%><b>{title}</b></size>   <color=#FFCD64>{spec.Price} gold</color>\n");
+            _text.Append($"Damage <b>{grade.Damage:0}</b>  ·  Range <b>{grade.Range:0}</b>  ·  Reload <b>{grade.Cooldown:0.0}s</b>\n");
             foreach (var element in spec.Elements)
             {
                 var mark = Statuses.MarkOf(element);
-                _text.Append($"{_lore.Title(mark)}: {_lore.Effect(mark)}\n");
+                _text.Append($"{_glossary.Condition(mark)}: {_glossary.Effect(mark)}\n");
+                _text.Append("<color=#A0A8B8>Reacts with:</color>\n");
                 foreach (var (partner, kind) in _recipes.With(element))
                 {
-                    _text.Append($"  + {partner} → {_lore.Title(kind)}\n");
+                    _text.Append($"   + {partner}  →  {_glossary.Reaction(kind)}\n");
                 }
             }
             _label.text = _text.ToString().TrimEnd();

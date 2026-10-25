@@ -102,6 +102,7 @@ namespace Game.Stage
             _rig.Attend(overlay);
             _hand = new Hand(_camera, overlay, new Blueprint(plots, armory, orders, _ghost, _plots.Cell), pick);
             var recipes = new Recipes(chemistry, _lore);
+            var glossary = new Glossary(_lore, _spectacle);
             var codex = new Codex(root, recipes, _lore);
             root.Q<Button>("codex").clicked += codex.Open;
             var pause = new Pause(root, new Tempo(root.Q<Button>("speed"), _speeds, online), online, () => Leave(match));
@@ -113,7 +114,7 @@ namespace Game.Stage
                 new Purse(root, wallet, lives),
                 new Herald(root, _battle, orders, _pace),
                 new Arsenal(root, armory, wallet, _hand),
-                new Inspector(root, pick, armory, orders),
+                new Inspector(root, pick, armory, orders, glossary),
                 new Briefing(root, _battle, _level, _difficulty.Title(tier)),
                 new Coach(root, _battle),
                 new Bossbar(root, arena.Horde, bestiary),
@@ -121,7 +122,7 @@ namespace Game.Stage
                 new Fanfare(_battle, _soundboard, voices),
                 new Melody(transform, _soundboard.Battle, _soundboard.Music, new Setting(root.Q<Button>("music"), "Music", "music")),
             };
-            new Tooltip(root, armory, recipes, _lore);
+            new Tooltip(root, armory, recipes, glossary);
             new Chime(root, voices, _soundboard.Click);
             _ghost.Hide();
             _selection.Hide();

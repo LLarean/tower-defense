@@ -15,6 +15,7 @@ namespace Game.Stage.Hud
 
         private readonly Pick _pick;
         private readonly Armory _armory;
+        private readonly Glossary _glossary;
         private readonly VisualElement _panel;
         private readonly VisualElement _actions;
         private readonly Label _title;
@@ -26,10 +27,11 @@ namespace Game.Stage.Hud
         private int _shownLevel = -1;
         private float _next;
 
-        public Inspector(VisualElement root, Pick pick, Armory armory, IOrders orders)
+        public Inspector(VisualElement root, Pick pick, Armory armory, IOrders orders, Glossary glossary)
         {
             _pick = pick;
             _armory = armory;
+            _glossary = glossary;
             _panel = root.Q("inspector");
             _actions = _panel.Q(className: "actions");
             _title = root.Q<Label>("title");
@@ -68,11 +70,22 @@ namespace Game.Stage.Hud
             _shown = tower;
             _shownLevel = tower.Level;
             var grade = tower.Grade;
-            _title.text = $"{_armory.Asset(tower.Spec).Title} — level {tower.Level + 1}";
+            var next = tower.Upgradable ? tower.Spec.Grade(tower.Level + 1) : grade;
+            _title.text = $"{_armory.Asset(tower.Spec).Title} · level {tower.Level + 1}/{tower.Spec.Levels}";
             _text.Clear();
-            _text.Append("Elements ").AppendJoin(" + ", tower.Spec.Elements).AppendLine();
-            _text.Append($"Damage {grade.Damage:0}\nRange {grade.Range:0}\nReload {grade.Cooldown:0.0}s\nStatus power {grade.Potency:0.##} for {grade.Duration:0.#}s");
-            _stats.text = _text.ToString();
+            foreach (var element in tower.Spec.Elements)
+            {
+                _text.Append(_glossary.Element(element)).Append("  ");
+            }
+            _text.AppendLine();
+            Row("Damage", grade.Damage, next.Damage, "0");
+            Row("Range", grade.Range, next.Range, "0");
+            Row("Reload", grade.Cooldown, next.Cooldown, "0.0");
+            foreach (var element in tower.Spec.Elements)
+            {
+                Row(_glossary.Condition(Statuses.MarkOf(element)), grade.Potency, next.Potency, "0.##");
+            }
+            _stats.text = _text.ToString().TrimEnd();
             _upgrade.text = tower.Upgradable ? $"Upgrade {tower.UpgradeCost}" : "Max level";
             _upgrade.SetEnabled(tower.Upgradable);
             _sell.text = $"Sell {tower.Refund}";
@@ -91,15 +104,25 @@ namespace Game.Stage.Hud
             var breed = monster.Breed;
             _title.text = breed.Name;
             _text.Clear();
-            _text.Append($"Health {monster.Health:0}/{breed.Health:0}\nArmor {breed.Armor * 100f:0}%\nSpeed {breed.Speed * monster.Pace:0.0}");
+            _text.Append($"Health <b>{monster.Health:0}</b> / {breed.Health:0}\nArmor {breed.Armor * 100f:0}%  ·  Speed {breed.Speed * monster.Pace:0.0}");
             foreach (var condition in Statuses.All)
             {
                 if (monster.Has(condition))
                 {
-                    _text.Append($"\n{condition} {monster.Remaining(condition):0.0}s");
+                    _text.Append('\n').Append(_glossary.Condition(condition)).Append($"  {monster.Remaining(condition):0.0}s");
                 }
             }
             _stats.text = _text.ToString();
+        }
+
+        private void Row(string name, float now, float next, string format)
+        {
+            _text.Append(name).Append("  <b>").Append(now.ToString(format)).Append("</b>");
+            if (!Mathf.Approximately(now, next))
+            {
+                _text.Append("  <color=#8CDC8C>→ ").Append(next.ToString(format)).Append("</color>");
+            }
+            _text.AppendLine();
         }
 
         private void Apply(System.Action<Tower> order)
