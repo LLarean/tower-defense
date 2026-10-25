@@ -17,8 +17,12 @@ Water a crowd and shock it, freeze a column and shatter it, poison a pack and se
 | `Space` | Start the battle or call the next wave early |
 | `WASD`, screen edges, wheel | Move and zoom the camera |
 
+The campaign "The Last Architects" has three missions with a prologue, briefings and a boss siege; every mission is playable solo or in co-op on Easy, Normal or Hard.
 Co-op is started from the main menu: host online and share the code, or host and join by IP on a local network.
 Every player has their own gold, the base lives are shared, and the bounty for every kill is split between all players.
+
+The game speaks English and Russian; it follows the system language and can be switched in the menu settings.
+Testers get a zip with a Russian guide, the same as [docs/PLAYTEST.md](docs/PLAYTEST.md).
 
 ## Elements
 
