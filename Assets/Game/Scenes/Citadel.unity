@@ -191,6 +191,7 @@ MonoBehaviour:
   _plots: {fileID: 1973549422}
   _terrain: {fileID: 1665165210}
   _camera: {fileID: 1876862023}
+  _rig: {fileID: 1876862025}
   _ghost: {fileID: 765081861}
   _selection: {fileID: 549691049}
   _document: {fileID: 1272328360}
