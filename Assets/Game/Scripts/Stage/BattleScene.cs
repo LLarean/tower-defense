@@ -12,6 +12,7 @@ using Game.Stage.Hud;
 using Game.Stage.Map;
 using Game.Stage.Net;
 using Game.Stage.Orders;
+using Game.Stage.Sound;
 using Game.Stage.Story;
 using Game.Stage.Towers;
 using Unity.Netcode;
@@ -32,6 +33,7 @@ namespace Game.Stage
         [SerializeField] private ChemistryAsset _chemistry;
         [SerializeField] private SpectacleAsset _spectacle;
         [SerializeField] private LoreAsset _lore;
+        [SerializeField] private SoundboardAsset _soundboard;
         [SerializeField] private Tremor _tremor;
         [SerializeField] private RoutePath[] _routes = new RoutePath[0];
         [SerializeField] private PlotGrid _plots;
@@ -82,14 +84,16 @@ namespace Game.Stage
             var root = _document.rootVisualElement;
             root.pickingMode = PickingMode.Ignore;
             _callouts = Callouts(root);
+            var voices = new Voices(transform, _soundboard.Voices, new Setting(root.Q<Button>("sound"), "Sound", "sound"));
+            var acoustics = new Acoustics(_soundboard, voices);
             var chemistry = _chemistry.Chemistry();
-            var arena = new Arena(chemistry, new Horde(Cell), new Feedbacks(new Ledger(treasury, lives), _show, _callouts));
+            var arena = new Arena(chemistry, new Horde(Cell), new Feedbacks(new Ledger(treasury, lives), _show, _callouts, acoustics));
             var invasion = new Invasion(routes, _level.Rest, Waves(bestiary));
             var plots = _plots.Plots(routes);
             _bastion = new Bastion(armory, transform);
-            var garrison = new Garrison(plots, treasury, _bastion);
+            var garrison = new Garrison(plots, treasury, new GarrisonFeedbacks(_bastion, acoustics));
             _battle = new Battle(arena, invasion, garrison, lives);
-            _barrage = new Barrage(armory, transform);
+            _barrage = new Barrage(armory, transform, acoustics);
             var timeline = new Timeline(_battle, armory.Specs, treasury);
             _pace = !online ? new SoloPace(timeline) : match.Hosting ? new HostPace(timeline, match.Manager) : (IPace)new GuestPace(timeline, match.Manager);
             var orders = new Courier(_pace.Post, armory.Specs, me);
@@ -114,8 +118,11 @@ namespace Game.Stage
                 new Coach(root, _battle),
                 new Bossbar(root, arena.Horde, bestiary),
                 Debrief(root, online, match),
+                new Fanfare(_battle, _soundboard, voices),
+                new Melody(transform, _soundboard.Battle, _soundboard.Music, new Setting(root.Q<Button>("music"), "Music", "music")),
             };
             new Tooltip(root, armory, recipes, _lore);
+            new Chime(root, voices, _soundboard.Click);
             _ghost.Hide();
             _selection.Hide();
         }

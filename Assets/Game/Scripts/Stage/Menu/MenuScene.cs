@@ -1,6 +1,7 @@
 using Game.Stage.Config;
 using Game.Stage.Hud;
 using Game.Stage.Net;
+using Game.Stage.Sound;
 using Game.Stage.Story;
 using Unity.Netcode;
 using Unity.Netcode.Transports.UTP;
@@ -16,6 +17,7 @@ namespace Game.Stage.Menu
         private const string Prologue = "prologue";
         private const string Board = "missions";
         private const string Coop = "coop-page";
+        private const string Settings = "settings-page";
 
         [SerializeField] private UIDocument _document;
         [SerializeField] private Match _match;
@@ -25,8 +27,10 @@ namespace Game.Stage.Menu
         [SerializeField] private LoreAsset _lore;
         [SerializeField] private DifficultyAsset _difficulty;
         [SerializeField] private CampaignAsset _campaign;
+        [SerializeField] private SoundboardAsset _soundboard;
 
         private Lobby _lobby;
+        private Melody _melody;
 
         private void Awake()
         {
@@ -60,11 +64,20 @@ namespace Game.Stage.Menu
             root.Q<Button>("to-coop").clicked += () => Gather(pages, mission, sortie);
             root.Q<Button>("codex").clicked += codex.Open;
             root.Q<Button>("quit").clicked += Application.Quit;
+            root.Q<Button>("settings").clicked += () => pages.Open(Settings);
+            new Setting(root.Q<Button>("numbers"), "Damage numbers", "numbers");
+            var voices = new Voices(transform, _soundboard.Voices, new Setting(root.Q<Button>("sound"), "Sound", "sound"));
+            _melody = new Melody(transform, _soundboard.Menu, _soundboard.Music, new Setting(root.Q<Button>("music"), "Music", "music"));
+            new Chime(root, voices, _soundboard.Click);
             root.Query<Button>(className: "back").ForEach(back => back.clicked += () => pages.Open(Front));
             pages.Open(Front);
         }
 
-        private void Update() => _lobby.Refresh();
+        private void Update()
+        {
+            _lobby.Refresh();
+            _melody.Refresh();
+        }
 
         private void OnDestroy() => _lobby.Dispose();
 

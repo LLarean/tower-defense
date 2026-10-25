@@ -66,6 +66,8 @@
                 </ui:VisualElement>
                 <ui:VisualElement name="pause-settings" class="page">
                     <ui:Label class="heading rune" text="Settings" />
+                    <ui:Button name="sound" class="seal again seal--quiet" />
+                    <ui:Button name="music" class="seal again seal--quiet" />
                     <ui:Button name="numbers" class="seal again seal--quiet" />
                     <ui:Button class="seal again back seal--quiet" text="Back" />
                 </ui:VisualElement>

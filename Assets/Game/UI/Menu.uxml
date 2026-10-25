@@ -8,7 +8,15 @@
                 <ui:Button name="campaign" class="choice seal primary" text="Campaign" />
                 <ui:Button name="coop" class="choice seal" text="Co-op" />
                 <ui:Button name="codex" class="choice seal seal--quiet" text="Codex" />
+                <ui:Button name="settings" class="choice seal seal--quiet" text="Settings" />
                 <ui:Button name="quit" class="choice seal seal--quiet" text="Quit" />
+            </ui:VisualElement>
+            <ui:VisualElement name="settings-page" class="page">
+                <ui:Label class="title rune" text="Settings" />
+                <ui:Button name="sound" class="choice seal seal--quiet" />
+                <ui:Button name="music" class="choice seal seal--quiet" />
+                <ui:Button name="numbers" class="choice seal seal--quiet" />
+                <ui:Button class="choice seal back seal--quiet" text="Back" />
             </ui:VisualElement>
             <ui:VisualElement name="prologue" class="page">
                 <ui:Label name="campaign-title" class="title rune" />

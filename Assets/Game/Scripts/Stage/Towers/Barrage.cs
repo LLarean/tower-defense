@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Game.Core.Towers;
+using Game.Stage.Sound;
 using UnityEngine;
 
 namespace Game.Stage.Towers
@@ -10,15 +11,17 @@ namespace Game.Stage.Towers
 
         private readonly Armory _armory;
         private readonly Transform _root;
+        private readonly Acoustics _acoustics;
         private readonly Dictionary<TowerSpec, Stock<Streak>> _stocks = new Dictionary<TowerSpec, Stock<Streak>>();
         private readonly Dictionary<Missile, Streak> _flying = new Dictionary<Missile, Streak>();
         private readonly HashSet<Missile> _seen = new HashSet<Missile>();
         private readonly List<Missile> _gone = new List<Missile>();
 
-        public Barrage(Armory armory, Transform root)
+        public Barrage(Armory armory, Transform root, Acoustics acoustics)
         {
             _armory = armory;
             _root = root;
+            _acoustics = acoustics;
         }
 
         public void Sync(IReadOnlyList<Missile> missiles)
@@ -32,6 +35,7 @@ namespace Game.Stage.Towers
                     streak = Stock(missile.Source.Spec).Take(position, Quaternion.identity);
                     streak.Restart();
                     _flying.Add(missile, streak);
+                    _acoustics.Fired(missile.Source.Spec);
                 }
                 streak.Fly(position);
                 _seen.Add(missile);
