@@ -36,7 +36,6 @@ namespace Game.Stage.Menu
                 var mission = index;
                 var level = _campaign.Missions[index];
                 var entry = new Button(() => Select(mission)) { text = $"{index + 1}. {level.Title}" };
-                entry.AddToClassList("choice");
                 entry.AddToClassList("mission");
                 entry.EnableInClassList("mission--done", chronicle.Completed(level));
                 var unlocked = chronicle.Unlocked(_campaign, index);
@@ -54,6 +53,7 @@ namespace Game.Stage.Menu
                 var tier = index;
                 var button = new Button(() => Pick(tier)) { text = _difficulty.Title(index) };
                 button.AddToClassList("choice");
+                button.AddToClassList("seal");
                 button.AddToClassList("grow");
                 row.Add(button);
                 _tiers.Add(button);
@@ -80,7 +80,7 @@ namespace Game.Stage.Menu
             }
             for (var index = 0; index < _tiers.Count; index++)
             {
-                _tiers[index].EnableInClassList("tier--chosen", index == _sortie.Difficulty);
+                _tiers[index].EnableInClassList("seal--quiet", index != _sortie.Difficulty);
             }
             _title.text = _sortie.Level.Title;
             _briefing.text = _sortie.Level.Briefing;

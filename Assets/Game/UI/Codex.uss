@@ -1,3 +1,5 @@
+@import url("Theme.uss");
+
 .screen {
     position: absolute;
     left: 0;
@@ -10,26 +12,23 @@
 }
 
 .sheet {
-    width: 760px;
+    width: 780px;
     max-height: 86%;
-    padding: 24px;
-    background-color: rgba(18, 22, 30, 0.96);
-    border-radius: 14px;
-    border-width: 1px;
-    border-color: rgba(255, 255, 255, 0.14);
+    padding: 30px 40px;
 }
 
 .sheet-title {
-    font-size: 32px;
-    color: rgb(255, 214, 120);
-    -unity-font-style: bold;
+    font-size: 38px;
+    color: var(--ink);
+    -unity-text-align: middle-center;
 }
 
 .sheet-hint {
     font-size: 16px;
-    color: rgb(170, 178, 192);
+    color: var(--ink-soft);
     margin-bottom: 12px;
     white-space: normal;
+    -unity-text-align: middle-center;
 }
 
 .codex-list {
@@ -39,30 +38,27 @@
 .codex-row {
     padding: 8px 4px;
     border-bottom-width: 1px;
-    border-color: rgba(255, 255, 255, 0.08);
+    border-color: rgba(90, 60, 35, 0.25);
 }
 
 .codex-name {
-    font-size: 19px;
-    color: rgb(235, 238, 245);
+    font-size: 20px;
+    color: var(--ink);
     -unity-font-style: bold;
 }
 
 .codex-text {
     font-size: 16px;
-    color: rgb(190, 196, 208);
+    color: var(--ink-soft);
     white-space: normal;
 }
 
 .sheet-button {
     align-self: center;
     margin-top: 14px;
-    font-size: 20px;
-    padding: 8px 30px;
-    border-radius: 8px;
-    border-width: 0;
-    color: rgb(20, 24, 30);
-    background-color: rgb(255, 196, 70);
+    font-size: 22px;
+    padding: 8px 40px;
+    min-height: 46px;
 }
 
 .hidden {

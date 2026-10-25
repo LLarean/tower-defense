@@ -1,0 +1,63 @@
+:root {
+    --ink: rgb(62, 40, 24);
+    --ink-soft: rgb(110, 82, 58);
+    --cream: rgb(246, 233, 200);
+    --gold: rgb(255, 205, 100);
+    --night: rgba(16, 20, 30, 0.88);
+    --night-line: rgba(255, 214, 140, 0.22);
+    -unity-font-definition: url("../../Fonts/Sources/Ubuntu-M.ttf");
+}
+
+.rune {
+    -unity-font-definition: url("../../Fonts/Sources/MedievalSharp.ttf");
+    -unity-font-style: normal;
+}
+
+.parchment {
+    background-image: url("Skin/Parchment.png");
+    -unity-slice-left: 26;
+    -unity-slice-right: 26;
+    -unity-slice-top: 26;
+    -unity-slice-bottom: 26;
+    background-color: rgba(0, 0, 0, 0);
+    border-width: 0;
+    border-radius: 0;
+    color: var(--ink);
+}
+
+.seal {
+    background-image: url("Skin/Button.png");
+    -unity-slice-left: 10;
+    -unity-slice-right: 10;
+    -unity-slice-top: 10;
+    -unity-slice-bottom: 10;
+    background-color: rgba(0, 0, 0, 0);
+    border-width: 0;
+    border-radius: 0;
+    color: var(--cream);
+    -unity-font-definition: url("../../Fonts/Sources/MedievalSharp.ttf");
+    -unity-font-style: normal;
+    -unity-text-outline-width: 0.5px;
+    -unity-text-outline-color: rgba(40, 10, 5, 0.8);
+}
+
+.seal:hover {
+    background-image: url("Skin/ButtonHover.png");
+    background-color: rgba(0, 0, 0, 0);
+}
+
+.seal:active {
+    background-image: url("Skin/ButtonPressed.png");
+}
+
+.seal:disabled {
+    opacity: 0.45;
+}
+
+.seal--quiet {
+    -unity-background-image-tint-color: rgb(150, 125, 100);
+}
+
+.seal--chosen {
+    -unity-background-image-tint-color: rgb(255, 225, 160);
+}

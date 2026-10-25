@@ -1,3 +1,5 @@
+@import url("Theme.uss");
+
 .menu {
     flex-grow: 1;
     justify-content: center;
@@ -7,23 +9,19 @@
 
 .card {
     min-width: 560px;
-    padding: 28px;
-    background-color: rgba(18, 22, 30, 0.86);
-    border-radius: 14px;
-    border-width: 1px;
-    border-color: rgba(255, 255, 255, 0.12);
+    padding: 30px 40px 34px 40px;
 }
 
 .title {
-    font-size: 40px;
-    color: rgb(255, 214, 120);
-    -unity-font-style: bold;
-    margin-bottom: 18px;
+    font-size: 44px;
+    color: var(--ink);
+    -unity-text-align: middle-center;
+    margin-bottom: 16px;
 }
 
 .caption {
     font-size: 16px;
-    color: rgb(170, 178, 192);
+    color: var(--ink-soft);
     margin: 14px 0 4px 2px;
 }
 
@@ -33,26 +31,14 @@
 }
 
 .choice {
-    font-size: 20px;
-    padding: 10px 18px;
+    font-size: 22px;
+    padding: 10px 22px;
     margin: 4px;
-    border-radius: 8px;
-    border-width: 0;
-    color: rgb(235, 238, 245);
-    background-color: rgb(52, 60, 78);
+    min-height: 48px;
 }
 
-.choice:hover {
-    background-color: rgb(72, 82, 104);
-}
-
-.primary {
-    color: rgb(20, 24, 30);
-    background-color: rgb(255, 196, 70);
-}
-
-.primary:hover {
-    background-color: rgb(255, 220, 120);
+.page > .choice {
+    margin: 5px 40px;
 }
 
 .quit {
@@ -65,30 +51,32 @@
     margin: 4px;
 }
 
+.field .unity-text-field__input {
+    background-color: rgba(255, 250, 235, 0.75);
+    color: var(--ink);
+    border-color: rgba(90, 60, 35, 0.6);
+    border-width: 1px;
+    border-radius: 4px;
+    padding: 8px 10px;
+}
+
 .roster {
     font-size: 24px;
-    color: rgb(235, 238, 245);
+    color: var(--ink);
     margin-bottom: 12px;
     white-space: normal;
+    -unity-text-align: middle-center;
 }
 
 .status {
     font-size: 16px;
-    color: rgb(255, 150, 130);
+    color: rgb(150, 40, 25);
     margin-top: 14px;
     white-space: normal;
 }
 
 .hidden {
     display: none;
-}
-
-.field .unity-text-field__input {
-    background-color: rgb(32, 38, 50);
-    color: rgb(235, 238, 245);
-    border-color: rgba(255, 255, 255, 0.18);
-    border-radius: 6px;
-    padding: 6px 10px;
 }
 
 .grow {
@@ -103,12 +91,8 @@
     bottom: 0;
 }
 
-.page > .choice {
-    margin: 5px 4px;
-}
-
 .wide {
-    width: 920px;
+    width: 960px;
 }
 
 .top {
@@ -118,26 +102,44 @@
 
 .mission-list {
     width: 280px;
-    margin-right: 18px;
+    margin-right: 22px;
+    padding-right: 14px;
+    border-right-width: 1px;
+    border-color: rgba(90, 60, 35, 0.35);
 }
 
 .mission {
+    font-size: 20px;
+    padding: 10px 14px;
+    margin: 3px 0;
     -unity-text-align: middle-left;
+    color: var(--ink);
+    background-color: rgba(0, 0, 0, 0);
+    border-width: 0;
     border-left-width: 4px;
     border-left-color: rgba(0, 0, 0, 0);
+    border-radius: 0;
+}
+
+.mission:hover {
+    background-color: rgba(120, 80, 40, 0.12);
 }
 
 .mission--done {
-    border-left-color: rgb(140, 220, 140);
+    border-left-color: rgb(80, 140, 60);
 }
 
 .mission--locked {
     opacity: 0.4;
 }
 
-.mission--chosen,
-.tier--chosen {
-    background-color: rgb(92, 104, 132);
+.mission--chosen {
+    background-image: url("Skin/Title.png");
+    -unity-slice-left: 12;
+    -unity-slice-right: 12;
+    -unity-slice-top: 12;
+    -unity-slice-bottom: 12;
+    color: var(--cream);
 }
 
 .mission-detail {
@@ -146,27 +148,22 @@
 }
 
 .heading {
-    font-size: 28px;
-    color: rgb(255, 230, 150);
-    -unity-font-style: bold;
+    font-size: 32px;
+    color: var(--ink);
     margin-bottom: 8px;
 }
 
 .story {
-    font-size: 18px;
-    color: rgb(220, 225, 235);
+    font-size: 19px;
+    color: var(--ink);
     white-space: normal;
-    margin-bottom: 14px;
+    margin-bottom: 16px;
     max-width: 640px;
 }
 
 .hint {
     font-size: 15px;
-    color: rgb(170, 178, 192);
+    color: var(--ink-soft);
     white-space: normal;
     margin: 4px 2px;
-}
-
-.back {
-    background-color: rgb(40, 46, 60);
 }

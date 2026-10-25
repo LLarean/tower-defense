@@ -1,11 +1,11 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements">
     <Style src="Codex.uss" />
     <ui:VisualElement name="codex-screen" class="screen">
-        <ui:VisualElement class="sheet">
-            <ui:Label class="sheet-title" text="Codex of Elements" />
+        <ui:VisualElement class="sheet parchment">
+            <ui:Label class="sheet-title rune" text="Codex of Elements" />
             <ui:Label class="sheet-hint" text="A second element on a marked monster triggers a reaction." />
             <ui:ScrollView name="codex-list" class="codex-list" />
-            <ui:Button name="codex-close" class="sheet-button" text="Close" />
+            <ui:Button name="codex-close" class="sheet-button seal" text="Close" />
         </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>
