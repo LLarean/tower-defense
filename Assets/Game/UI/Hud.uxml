@@ -21,10 +21,26 @@
         </ui:VisualElement>
         <ui:Label name="tooltip" class="tooltip" />
         <ui:VisualElement name="arsenal" class="bar bottom" />
+        <ui:VisualElement name="briefing" class="verdict">
+            <ui:VisualElement class="dialog">
+                <ui:VisualElement class="page">
+                    <ui:Label name="briefing-title" class="heading" />
+                    <ui:Label name="briefing-text" class="lines story" />
+                    <ui:Label name="briefing-difficulty" class="lines" />
+                    <ui:Button name="briefing-go" class="action again" text="To battle" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+        </ui:VisualElement>
         <ui:VisualElement name="verdict" class="verdict">
-            <ui:Label name="outcome" class="outcome" />
-            <ui:Button name="again" class="action again" text="Play again" />
-            <ui:Button name="verdict-menu" class="action again" text="Main menu" />
+            <ui:VisualElement class="dialog">
+                <ui:VisualElement class="page">
+                    <ui:Label name="outcome" class="outcome" />
+                    <ui:Label name="verdict-story" class="lines story" />
+                    <ui:Button name="verdict-next" class="action again next" text="Next mission" />
+                    <ui:Button name="again" class="action again" text="Play again" />
+                    <ui:Button name="verdict-menu" class="action again back" text="Main menu" />
+                </ui:VisualElement>
+            </ui:VisualElement>
         </ui:VisualElement>
         <ui:VisualElement name="pause" class="verdict">
             <ui:VisualElement class="dialog">

@@ -233,3 +233,18 @@
     color: rgb(235, 238, 245);
     background-color: rgb(52, 60, 78);
 }
+
+.story {
+    max-width: 520px;
+    font-size: 18px;
+    -unity-text-align: upper-center;
+}
+
+.next {
+    display: none;
+    background-color: rgb(255, 196, 70);
+}
+
+.verdict--won .next {
+    display: flex;
+}

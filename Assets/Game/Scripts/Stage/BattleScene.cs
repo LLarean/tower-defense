@@ -12,6 +12,7 @@ using Game.Stage.Hud;
 using Game.Stage.Map;
 using Game.Stage.Net;
 using Game.Stage.Orders;
+using Game.Stage.Story;
 using Game.Stage.Towers;
 using Unity.Netcode;
 using UnityEngine;
@@ -27,6 +28,7 @@ namespace Game.Stage
 
         [SerializeField] private LevelAsset _level;
         [SerializeField] private DifficultyAsset _difficulty;
+        [SerializeField] private CampaignAsset _campaign;
         [SerializeField] private ChemistryAsset _chemistry;
         [SerializeField] private SpectacleAsset _spectacle;
         [SerializeField] private LoreAsset _lore;
@@ -99,18 +101,14 @@ namespace Game.Stage
             _hotkeys = new Hotkeys(armory, orders, _hand, pause);
             var wallet = treasury.Wallet(me);
             new Cheats(root, _battle, wallet, orders);
-            var exit = root.Q<Button>("verdict-menu");
-            exit.EnableInClassList("hidden", online);
-            exit.clicked += () => Leave(match);
             _widgets = new IWidget[]
             {
                 new Purse(root, wallet, lives),
                 new Herald(root, _battle, orders, _pace),
                 new Arsenal(root, armory, wallet, _hand),
                 new Inspector(root, pick, armory, orders),
-                online
-                    ? new Verdict(root, _battle, "Leave", () => Leave(match))
-                    : new Verdict(root, _battle, "Play again", () => SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex)),
+                new Briefing(root, _battle, _level, _difficulty.Title(tier)),
+                Debrief(root, online, match),
             };
             new Tooltip(root, armory, recipes, _lore);
             _ghost.Hide();
@@ -160,6 +158,27 @@ namespace Game.Stage
                 match.Close();
             }
             SceneManager.LoadScene(Menu);
+        }
+
+        private Verdict Debrief(VisualElement root, bool online, Match match)
+        {
+            var again = root.Q<Button>("again");
+            again.text = online ? "Leave" : "Play again";
+            again.clicked += online ? () => Leave(match) : () => SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            var exit = root.Q<Button>("verdict-menu");
+            exit.EnableInClassList("hidden", online);
+            exit.clicked += () => Leave(match);
+            var next = root.Q<Button>("verdict-next");
+            if (_campaign.TryNext(_level, out var following) && (!online || match.Hosting))
+            {
+                next.clicked += online ? () => match.Begin(following.Scene) : () => SceneManager.LoadScene(following.Scene);
+            }
+            else
+            {
+                next.RemoveFromHierarchy();
+            }
+            var chronicle = new Chronicle();
+            return new Verdict(root, _battle, (_level.Victory, _campaign.Defeat), () => chronicle.Record(_level));
         }
 
         private Callouts Callouts(VisualElement root)
