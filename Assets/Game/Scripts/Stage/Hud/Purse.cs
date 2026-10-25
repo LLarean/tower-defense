@@ -25,12 +25,12 @@ namespace Game.Stage.Hud
             if (_wallet.Gold != _shownGold)
             {
                 _shownGold = _wallet.Gold;
-                _gold.text = $"Gold {_shownGold}";
+                _gold.text = $"{_shownGold}";
             }
             if (_lives.Left != _shownLives)
             {
                 _shownLives = _lives.Left;
-                _hearts.text = $"Lives {_shownLives}";
+                _hearts.text = $"{_shownLives}";
             }
         }
     }

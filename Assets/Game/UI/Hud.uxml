@@ -4,21 +4,23 @@
     <ui:VisualElement name="captions" class="overlay" picking-mode="Ignore" />
     <ui:VisualElement name="hud" class="hud" picking-mode="Ignore">
         <ui:VisualElement name="top" class="bar top">
+            <ui:VisualElement class="icon coin" />
             <ui:Label name="gold" class="stat gold" />
+            <ui:VisualElement class="icon shield" />
             <ui:Label name="lives" class="stat lives" />
-            <ui:Label name="wave" class="stat wave" />
+            <ui:Label name="wave" class="stat wave rune" />
             <ui:Button name="summon" class="summon" />
             <ui:Button name="speed" class="summon tool" />
             <ui:Button name="open-menu" class="summon tool" text="Menu" />
         </ui:VisualElement>
         <ui:VisualElement name="bossbar" class="bossbar" picking-mode="Ignore">
-            <ui:Label name="boss-title" class="boss-title" picking-mode="Ignore" />
+            <ui:Label name="boss-title" class="boss-title rune" picking-mode="Ignore" />
             <ui:VisualElement class="boss-track" picking-mode="Ignore">
                 <ui:VisualElement name="boss-fill" class="boss-fill" picking-mode="Ignore" />
             </ui:VisualElement>
         </ui:VisualElement>
         <ui:VisualElement name="inspector" class="panel inspector">
-            <ui:Label name="title" class="title" />
+            <ui:Label name="title" class="title rune" />
             <ui:Label name="stats" class="stats" />
             <ui:VisualElement class="actions">
                 <ui:Button name="upgrade" class="action upgrade" />
@@ -29,62 +31,62 @@
         <ui:Label name="tooltip" class="tooltip" />
         <ui:VisualElement name="arsenal" class="bar bottom" />
         <ui:VisualElement name="briefing" class="verdict">
-            <ui:VisualElement class="dialog">
+            <ui:VisualElement class="dialog parchment">
                 <ui:VisualElement class="page">
-                    <ui:Label name="briefing-title" class="heading" />
+                    <ui:Label name="briefing-title" class="heading rune" />
                     <ui:Label name="briefing-text" class="lines story" />
                     <ui:Label name="briefing-difficulty" class="lines" />
-                    <ui:Button name="briefing-go" class="action again" text="To battle" />
+                    <ui:Button name="briefing-go" class="seal again" text="To battle" />
                 </ui:VisualElement>
             </ui:VisualElement>
         </ui:VisualElement>
         <ui:VisualElement name="verdict" class="verdict">
-            <ui:VisualElement class="dialog">
+            <ui:VisualElement class="dialog parchment">
                 <ui:VisualElement class="page">
-                    <ui:Label name="outcome" class="outcome" />
+                    <ui:Label name="outcome" class="outcome rune" />
                     <ui:Label name="verdict-story" class="lines story" />
-                    <ui:Button name="verdict-next" class="action again next" text="Next mission" />
-                    <ui:Button name="again" class="action again" text="Play again" />
-                    <ui:Button name="verdict-menu" class="action again back" text="Main menu" />
+                    <ui:Button name="verdict-next" class="seal again next" text="Next mission" />
+                    <ui:Button name="again" class="seal again" text="Play again" />
+                    <ui:Button name="verdict-menu" class="seal again back seal--quiet" text="Main menu" />
                 </ui:VisualElement>
             </ui:VisualElement>
         </ui:VisualElement>
         <ui:VisualElement name="pause" class="verdict">
-            <ui:VisualElement class="dialog">
+            <ui:VisualElement class="dialog parchment">
                 <ui:VisualElement name="pause-main" class="page">
-                    <ui:Label class="outcome" text="Paused" />
-                    <ui:Button name="resume" class="action again" text="Resume" />
-                    <ui:Button name="restart" class="action again" text="Restart mission" />
-                    <ui:Button name="settings" class="action again" text="Settings" />
-                    <ui:Button name="controls" class="action again" text="Controls" />
-                    <ui:Button name="codex" class="action again" text="Codex" />
-                    <ui:Button name="cheats" class="action again" text="Debug" />
-                    <ui:Button name="menu" class="action again" text="Main menu" />
-                    <ui:Button name="quit" class="action again sell" text="Quit game" />
+                    <ui:Label class="outcome rune" text="Paused" />
+                    <ui:Button name="resume" class="seal again" text="Resume" />
+                    <ui:Button name="restart" class="seal again seal--quiet" text="Restart mission" />
+                    <ui:Button name="settings" class="seal again seal--quiet" text="Settings" />
+                    <ui:Button name="controls" class="seal again seal--quiet" text="Controls" />
+                    <ui:Button name="codex" class="seal again seal--quiet" text="Codex" />
+                    <ui:Button name="cheats" class="seal again seal--quiet" text="Debug" />
+                    <ui:Button name="menu" class="seal again seal--quiet" text="Main menu" />
+                    <ui:Button name="quit" class="seal again seal--quiet" text="Quit game" />
                 </ui:VisualElement>
                 <ui:VisualElement name="pause-settings" class="page">
-                    <ui:Label class="heading" text="Settings" />
-                    <ui:Button name="numbers" class="action again" />
-                    <ui:Button class="action again back" text="Back" />
+                    <ui:Label class="heading rune" text="Settings" />
+                    <ui:Button name="numbers" class="seal again seal--quiet" />
+                    <ui:Button class="seal again back seal--quiet" text="Back" />
                 </ui:VisualElement>
                 <ui:VisualElement name="pause-controls" class="page">
-                    <ui:Label class="heading" text="Controls" />
+                    <ui:Label class="heading rune" text="Controls" />
                     <ui:Label class="lines" text="1–7  choose a tower&#10;Left click  build or select&#10;Right click  cancel&#10;U  upgrade selected tower&#10;X  sell selected tower&#10;Space  start or call the next wave&#10;WASD, arrows, screen edge  move camera&#10;Mouse wheel  zoom&#10;Esc  back or pause" />
-                    <ui:Button class="action again back" text="Back" />
+                    <ui:Button class="seal again back seal--quiet" text="Back" />
                 </ui:VisualElement>
                 <ui:VisualElement name="pause-cheats" class="page">
-                    <ui:Label class="heading" text="Debug" />
-                    <ui:Button name="cheat-gold" class="action again" text="+1000 gold" />
-                    <ui:Button name="cheat-lives" class="action again" text="+10 lives" />
-                    <ui:Button name="cheat-wave" class="action again" text="Call next wave" />
-                    <ui:Button name="cheat-kill" class="action again sell" text="Kill all monsters" />
-                    <ui:Button class="action again back" text="Back" />
+                    <ui:Label class="heading rune" text="Debug" />
+                    <ui:Button name="cheat-gold" class="seal again seal--quiet" text="+1000 gold" />
+                    <ui:Button name="cheat-lives" class="seal again seal--quiet" text="+10 lives" />
+                    <ui:Button name="cheat-wave" class="seal again seal--quiet" text="Call next wave" />
+                    <ui:Button name="cheat-kill" class="seal again seal--quiet" text="Kill all monsters" />
+                    <ui:Button class="seal again back seal--quiet" text="Back" />
                 </ui:VisualElement>
                 <ui:VisualElement name="pause-prompt" class="page">
-                    <ui:Label name="prompt-question" class="heading" />
+                    <ui:Label name="prompt-question" class="heading rune" />
                     <ui:Label class="lines" text="Progress in this mission will be lost." />
-                    <ui:Button name="prompt-yes" class="action again sell" text="Yes" />
-                    <ui:Button class="action again back" text="Cancel" />
+                    <ui:Button name="prompt-yes" class="seal again" text="Yes" />
+                    <ui:Button class="seal again back seal--quiet" text="Cancel" />
                 </ui:VisualElement>
             </ui:VisualElement>
         </ui:VisualElement>

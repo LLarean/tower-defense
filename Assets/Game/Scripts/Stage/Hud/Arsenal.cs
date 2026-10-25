@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Game.Core.Economy;
 using Game.Core.Towers;
+using Game.Stage.Config;
 using Game.Stage.Controls;
 using Game.Stage.Towers;
 using UnityEngine.UIElements;
@@ -22,8 +23,8 @@ namespace Game.Stage.Hud
             for (var index = 0; index < armory.Specs.Count; index++)
             {
                 var spec = armory.Specs[index];
-                var slot = new Button(() => hand.Choose(spec)) { text = $"[{index + 1}] {armory.Asset(spec).Title}\n{spec.Price} gold" };
-                slot.AddToClassList("slot");
+                var slot = Slot(armory.Asset(spec), spec, index + 1);
+                slot.clicked += () => hand.Choose(spec);
                 bar.Add(slot);
                 _slots.Add(slot);
             }
@@ -40,6 +41,27 @@ namespace Game.Stage.Hud
             {
                 _slots[index].EnableInClassList("slot--poor", _armory.Specs[index].Price > _shownGold);
             }
+        }
+
+        private static Button Slot(TowerAsset asset, TowerSpec spec, int key)
+        {
+            var slot = new Button();
+            slot.AddToClassList("slot");
+            slot.AddToClassList($"slot--{spec.Elements[0].ToString().ToLowerInvariant()}");
+            var icon = new VisualElement { pickingMode = PickingMode.Ignore };
+            icon.AddToClassList("slot-icon");
+            icon.style.backgroundImage = new StyleBackground(asset.Icon);
+            slot.Add(icon);
+            slot.Add(Caption($"{key}", "slot-key"));
+            slot.Add(Caption($"{spec.Price}", "slot-price"));
+            return slot;
+        }
+
+        private static Label Caption(string text, string look)
+        {
+            var label = new Label(text) { pickingMode = PickingMode.Ignore };
+            label.AddToClassList(look);
+            return label;
         }
     }
 }
