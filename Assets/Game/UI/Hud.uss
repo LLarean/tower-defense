@@ -196,7 +196,7 @@
     background-color: rgb(72, 82, 104);
 }
 
-.sheet {
+.dialog {
     min-width: 340px;
     padding: 24px 32px;
     background-color: rgba(18, 22, 30, 0.92);

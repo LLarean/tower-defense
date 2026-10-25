@@ -27,7 +27,7 @@
             <ui:Button name="verdict-menu" class="action again" text="Main menu" />
         </ui:VisualElement>
         <ui:VisualElement name="pause" class="verdict">
-            <ui:VisualElement class="sheet">
+            <ui:VisualElement class="dialog">
                 <ui:VisualElement name="pause-main" class="page">
                     <ui:Label class="outcome" text="Paused" />
                     <ui:Button name="resume" class="action again" text="Resume" />
