@@ -26,5 +26,6 @@ description: Verify a change in the user's open Unity Editor through the Unity C
 
 - `runtime simulate_key` не всегда попадает в `wasPressedThisFrame` — для UI надёжнее `click.cs`.
 - Пути вне проекта `capture` отклоняет.
+- `AudioSource.isPlaying` не доказывает, что звук слышен: нужен активный `AudioListener` в сцене (на камере). Проверять и его.
 - `FindFirstObjectByType` в eval-скриптах — нормально: это инструмент проверки, а не игровой код.
 - Изменения сцены сохранять явно (`EditorSceneManager.SaveScene`) и смотреть `git diff` сцены.
