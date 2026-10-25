@@ -30,6 +30,9 @@ namespace Game.Core.Monsters
 
         public int Harm { get; }
 
+        public Breed Scaled(float health, float bounty) =>
+            new Breed(Name, Health * health, Armor, Speed, (int)Math.Round(Bounty * bounty), Harm, _immunities);
+
         public bool Resists(Element element) => Array.IndexOf(_immunities, element) >= 0;
     }
 }
