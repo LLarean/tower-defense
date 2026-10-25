@@ -164,6 +164,10 @@ MonoBehaviour:
   _bar: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
   _gauge: {fileID: 2100000, guid: 240ba70504f64984f9877343c9c87472, type: 2}
   _players: 1
+  _speeds:
+  - 1
+  - 2
+  - 3
 --- !u!4 &167781753
 Transform:
   m_ObjectHideFlags: 0
@@ -1361,7 +1365,8 @@ MonoBehaviour:
     height: 160
   _speed: 40
   _edge: 12
-  _zoom: 0.05
+  _zoom: 0.15
+  _smoothing: 12
   _height: {x: 25, y: 110}
 --- !u!114 &1876862026
 MonoBehaviour:

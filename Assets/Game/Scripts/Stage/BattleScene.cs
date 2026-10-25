@@ -40,6 +40,7 @@ namespace Game.Stage
         [SerializeField] private Mesh _bar;
         [SerializeField] private Material _gauge;
         [SerializeField] private int _players = 1;
+        [SerializeField] private float[] _speeds = { 1f, 2f, 3f };
 
         private Battle _battle;
         private IPace _pace;
@@ -90,9 +91,14 @@ namespace Game.Stage
             _hand = new Hand(_camera, new Overlay(root), new Blueprint(plots, armory, orders, _ghost, _plots.Cell), pick);
             var recipes = new Recipes(chemistry, _lore);
             var codex = new Codex(root, recipes, _lore);
-            var pause = new Pause(root, codex, online, () => Leave(match));
+            root.Q<Button>("codex").clicked += codex.Open;
+            var pause = new Pause(root, new Tempo(root.Q<Button>("speed"), _speeds, online), online, () => Leave(match));
             _hotkeys = new Hotkeys(armory, orders, _hand, pause);
             var wallet = treasury.Wallet(me);
+            new Cheats(root, _battle, wallet, orders);
+            var exit = root.Q<Button>("verdict-menu");
+            exit.EnableInClassList("hidden", online);
+            exit.clicked += () => Leave(match);
             _widgets = new IWidget[]
             {
                 new Purse(root, wallet, lives),

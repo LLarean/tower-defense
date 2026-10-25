@@ -38,7 +38,7 @@ namespace Game.Stage.Controls
             }
             if (keyboard.escapeKey.wasPressedThisFrame && !_hand.TryCancel())
             {
-                _pause.Toggle();
+                _pause.Escape();
             }
             if (keyboard.spaceKey.wasPressedThisFrame)
             {

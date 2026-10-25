@@ -185,3 +185,51 @@
     font-size: 32px;
     -unity-text-outline-width: 1.5px;
 }
+
+.tool {
+    margin-left: 8px;
+    color: rgb(235, 238, 245);
+    background-color: rgb(52, 60, 78);
+}
+
+.tool:hover {
+    background-color: rgb(72, 82, 104);
+}
+
+.sheet {
+    min-width: 340px;
+    padding: 24px 32px;
+    background-color: rgba(18, 22, 30, 0.92);
+    border-radius: 14px;
+    border-width: 1px;
+    border-color: rgba(255, 255, 255, 0.12);
+}
+
+.page {
+    align-items: center;
+}
+
+.page .outcome {
+    font-size: 48px;
+    margin-bottom: 12px;
+}
+
+.heading {
+    font-size: 30px;
+    color: rgb(255, 230, 150);
+    -unity-font-style: bold;
+    margin-bottom: 12px;
+}
+
+.lines {
+    font-size: 17px;
+    color: rgb(210, 215, 225);
+    margin-bottom: 12px;
+    white-space: normal;
+}
+
+.back {
+    margin-top: 12px;
+    color: rgb(235, 238, 245);
+    background-color: rgb(52, 60, 78);
+}

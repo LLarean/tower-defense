@@ -7,32 +7,59 @@ namespace Game.Stage.Hud
 {
     public sealed class Pause
     {
+        private const string Main = "pause-main";
+
         private readonly VisualElement _screen;
+        private readonly Pages _pages;
+        private readonly Tempo _tempo;
         private readonly bool _online;
 
-        public Pause(VisualElement root, Codex codex, bool online, Action menu)
+        public Pause(VisualElement root, Tempo tempo, bool online, Action menu)
         {
             _screen = root.Q("pause");
+            _pages = new Pages(_screen);
+            _tempo = tempo;
             _online = online;
+            var prompt = new Prompt(root, _pages);
+            root.Q<Button>("open-menu").clicked += Toggle;
             root.Q<Button>("resume").clicked += Toggle;
-            var restart = root.Q<Button>("restart");
-            restart.EnableInClassList("hidden", online);
-            restart.clicked += () => SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-            root.Q<Button>("codex").clicked += codex.Open;
-            root.Q<Button>("menu").clicked += menu;
-            root.Q<Button>("quit").clicked += Application.Quit;
+            root.Q<Button>("restart").clicked += prompt.Ask("Restart the mission?", Restart);
+            Navigate(root, "settings", "pause-settings");
+            Navigate(root, "controls", "pause-controls");
+            Navigate(root, "cheats", "pause-cheats");
+            root.Q<Button>("restart").EnableInClassList("hidden", online);
+            root.Q<Button>("cheats").EnableInClassList("hidden", online);
+            root.Q<Button>("menu").clicked += prompt.Ask("Leave to the main menu?", menu);
+            root.Q<Button>("quit").clicked += prompt.Ask("Quit the game?", Application.Quit);
+            _screen.Query<Button>(className: "back").ForEach(back => back.clicked += () => _pages.Open(Main));
             _screen.AddToClassList("hidden");
-            Time.timeScale = 1f;
+        }
+
+        public void Escape()
+        {
+            if (Opened && _pages.Current != Main)
+            {
+                _pages.Open(Main);
+                return;
+            }
+            Toggle();
         }
 
         public void Toggle()
         {
-            var open = _screen.ClassListContains("hidden");
+            var open = !Opened;
             _screen.EnableInClassList("hidden", !open);
+            _pages.Open(Main);
             if (!_online)
             {
-                Time.timeScale = open ? 0f : 1f;
+                _tempo.Halt(open);
             }
         }
+
+        private bool Opened => !_screen.ClassListContains("hidden");
+
+        private void Navigate(VisualElement root, string name, string page) => root.Q<Button>(name).clicked += () => _pages.Open(page);
+
+        private static void Restart() => SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }
