@@ -2,35 +2,62 @@
     <ui:Template name="Codex" src="Codex.uxml" />
     <Style src="Menu.uss" />
     <ui:VisualElement class="menu">
-        <ui:VisualElement class="card">
-            <ui:Label class="title" text="Battle of the Elements" />
-            <ui:VisualElement name="doors" class="doors">
+        <ui:VisualElement name="card" class="card">
+            <ui:VisualElement name="front" class="page">
+                <ui:Label class="title" text="Battle of the Elements" />
+                <ui:Button name="campaign" class="choice primary" text="Campaign" />
+                <ui:Button name="coop" class="choice" text="Co-op" />
+                <ui:Button name="codex" class="choice" text="Codex" />
+                <ui:Button name="quit" class="choice" text="Quit" />
+            </ui:VisualElement>
+            <ui:VisualElement name="prologue" class="page">
+                <ui:Label name="campaign-title" class="title" />
+                <ui:Label name="prologue-text" class="story" />
+                <ui:Button name="prologue-continue" class="choice primary" text="Continue" />
+            </ui:VisualElement>
+            <ui:VisualElement name="missions" class="page wide">
+                <ui:Label class="title" text="Campaign" />
+                <ui:VisualElement class="row top">
+                    <ui:VisualElement name="mission-list" class="mission-list" />
+                    <ui:VisualElement class="mission-detail">
+                        <ui:Label name="mission-title" class="heading" />
+                        <ui:Label name="mission-briefing" class="story" />
+                        <ui:Label class="caption" text="Difficulty" />
+                        <ui:VisualElement name="tiers" class="row" />
+                        <ui:Label name="tier-summary" class="hint" />
+                    </ui:VisualElement>
+                </ui:VisualElement>
                 <ui:VisualElement class="row">
-                    <ui:Button name="map" class="choice" />
                     <ui:Button name="solo" class="choice primary grow" text="Play solo" />
-                </ui:VisualElement>
-                <ui:Label class="caption" text="Online co-op" />
-                <ui:VisualElement class="row">
-                    <ui:Button name="host-online" class="choice" text="Host" />
-                    <ui:TextField name="code" class="field" />
-                    <ui:Button name="join-online" class="choice" text="Join by code" />
-                </ui:VisualElement>
-                <ui:Label class="caption" text="Local network" />
-                <ui:VisualElement class="row">
-                    <ui:Button name="host-lan" class="choice" text="Host" />
-                    <ui:TextField name="ip" class="field" value="127.0.0.1" />
-                    <ui:Button name="join-lan" class="choice" text="Join by IP" />
-                </ui:VisualElement>
-                <ui:VisualElement class="row quit">
-                    <ui:Button name="codex" class="choice grow" text="Codex" />
-                    <ui:Button name="quit" class="choice grow" text="Quit" />
+                    <ui:Button name="to-coop" class="choice grow" text="Play co-op" />
+                    <ui:Button name="story" class="choice" text="Prologue" />
+                    <ui:Button class="choice back" text="Back" />
                 </ui:VisualElement>
             </ui:VisualElement>
-            <ui:VisualElement name="hall" class="hall">
-                <ui:Label name="roster" class="roster" />
-                <ui:VisualElement class="row">
-                    <ui:Button name="begin" class="choice primary" text="Start" />
-                    <ui:Button name="leave" class="choice" text="Leave" />
+            <ui:VisualElement name="coop-page" class="page">
+                <ui:Label class="title" text="Co-op" />
+                <ui:VisualElement name="doors" class="doors">
+                    <ui:Label name="coop-mission" class="hint" />
+                    <ui:Label class="caption" text="Online" />
+                    <ui:VisualElement class="row">
+                        <ui:Button name="host-online" class="choice" text="Host" />
+                        <ui:TextField name="code" class="field" />
+                        <ui:Button name="join-online" class="choice" text="Join by code" />
+                    </ui:VisualElement>
+                    <ui:Label class="caption" text="Local network" />
+                    <ui:VisualElement class="row">
+                        <ui:Button name="host-lan" class="choice" text="Host" />
+                        <ui:TextField name="ip" class="field" value="127.0.0.1" />
+                        <ui:Button name="join-lan" class="choice" text="Join by IP" />
+                    </ui:VisualElement>
+                    <ui:Button class="choice back" text="Back" />
+                </ui:VisualElement>
+                <ui:VisualElement name="hall" class="hall">
+                    <ui:Label name="roster" class="roster" />
+                    <ui:VisualElement class="row">
+                        <ui:Button name="begin" class="choice primary" text="Start" />
+                        <ui:Button name="leave" class="choice" text="Leave" />
+                    </ui:VisualElement>
                 </ui:VisualElement>
             </ui:VisualElement>
             <ui:Label name="status" class="status" />

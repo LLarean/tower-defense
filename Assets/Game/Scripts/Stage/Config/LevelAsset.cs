@@ -6,11 +6,23 @@ namespace Game.Stage.Config
     [CreateAssetMenu(menuName = "Game/Level")]
     public sealed class LevelAsset : ScriptableObject
     {
+        [SerializeField] private string _title = "Mission";
+        [SerializeField] private string _scene = "Meadow";
+        [SerializeField, TextArea(3, 8)] private string _briefing = string.Empty;
+        [SerializeField, TextArea(2, 6)] private string _victory = string.Empty;
         [SerializeField] private int _gold = 300;
         [SerializeField] private int _lives = 20;
         [SerializeField] private float _rest = 15f;
         [SerializeField] private TowerAsset[] _arsenal = new TowerAsset[0];
         [SerializeField] private WaveData[] _waves = new WaveData[0];
+
+        public string Title => _title;
+
+        public string Scene => _scene;
+
+        public string Briefing => _briefing;
+
+        public string Victory => _victory;
 
         public int Gold => _gold;
 

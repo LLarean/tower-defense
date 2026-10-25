@@ -6,7 +6,7 @@
 }
 
 .card {
-    width: 560px;
+    min-width: 560px;
     padding: 28px;
     background-color: rgba(18, 22, 30, 0.86);
     border-radius: 14px;
@@ -101,4 +101,72 @@
     right: 0;
     top: 0;
     bottom: 0;
+}
+
+.page > .choice {
+    margin: 5px 4px;
+}
+
+.wide {
+    width: 920px;
+}
+
+.top {
+    align-items: flex-start;
+    margin-bottom: 14px;
+}
+
+.mission-list {
+    width: 280px;
+    margin-right: 18px;
+}
+
+.mission {
+    -unity-text-align: middle-left;
+    border-left-width: 4px;
+    border-left-color: rgba(0, 0, 0, 0);
+}
+
+.mission--done {
+    border-left-color: rgb(140, 220, 140);
+}
+
+.mission--locked {
+    opacity: 0.4;
+}
+
+.mission--chosen,
+.tier--chosen {
+    background-color: rgb(92, 104, 132);
+}
+
+.mission-detail {
+    flex-grow: 1;
+    flex-shrink: 1;
+}
+
+.heading {
+    font-size: 28px;
+    color: rgb(255, 230, 150);
+    -unity-font-style: bold;
+    margin-bottom: 8px;
+}
+
+.story {
+    font-size: 18px;
+    color: rgb(220, 225, 235);
+    white-space: normal;
+    margin-bottom: 14px;
+    max-width: 640px;
+}
+
+.hint {
+    font-size: 15px;
+    color: rgb(170, 178, 192);
+    white-space: normal;
+    margin: 4px 2px;
+}
+
+.back {
+    background-color: rgb(40, 46, 60);
 }

@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 028b1116645bd8b4981650adf501c6d8, type: 3}
+  m_Name: Campaign
+  m_EditorClassIdentifier: Game.Stage::Game.Stage.Config.CampaignAsset
+  _title: The Last Architects
+  _prologue: 'The old wards have failed. From the broken lands beyond the rim, hordes
+    march on the last free valleys, and no army of steel can stop them.
+
+
+    Only
+    the mages can. Their towers bind fire, water, ice and storm into weapons that
+    feed on one another: water carries lightning, frost makes stone shatter, oil
+    begs for a spark.
+
+
+    But towers do not raise themselves. You are the Chief
+    Architect of the Circle of Mages. You choose where every tower stands and how
+    the elements meet. Place them well, and the realm endures. Place them poorly,
+    and there will be nothing left to defend.'
+  _defeat: 'The enemy broke through. Regroup, rethink the layout and try again: the
+    realm cannot afford a second fall.'
+  _missions:
+  - {fileID: 11400000, guid: e0eb6021d38de774a8cb7d7e582a0d3a, type: 2}

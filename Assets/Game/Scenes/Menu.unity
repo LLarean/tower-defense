@@ -522,12 +522,11 @@ MonoBehaviour:
   _document: {fileID: 1190211655}
   _match: {fileID: 2041642445}
   _transport: {fileID: 2041642446}
-  _maps:
-  - Meadow
   _port: 7777
   _chemistry: {fileID: 11400000, guid: 6962652423265b4449074f07ec7819fc, type: 2}
   _lore: {fileID: 11400000, guid: c7c842ce45740c24ab1ae4850ba6cdbe, type: 2}
   _difficulty: {fileID: 11400000, guid: 64a1c21a3892a314ea654d003429fb1d, type: 2}
+  _campaign: {fileID: 11400000, guid: d8931fa770ba3554a93c01d6e2892aa3, type: 2}
 --- !u!114 &1190211655
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -12,6 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a995e588fe915d8ed94b6061d0b279ca, type: 3}
   m_Name: Meadow
   m_EditorClassIdentifier: Game.Stage::Game.Stage.Config.LevelAsset
+  _title: The Meadow
+  _scene: Meadow
+  _briefing: 'The first raiders cross the grazing meadows of Elden. A single road
+    winds toward the village. Learn your craft here: soak them with water and let
+    lightning do the rest, chill them and shatter them with stone.'
+  _victory: The meadow is quiet again. Word of the new Architect spreads among the
+    mages, and among the enemy.
   _gold: 250
   _lives: 20
   _rest: 12
