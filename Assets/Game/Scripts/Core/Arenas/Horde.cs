@@ -7,6 +7,7 @@ namespace Game.Core.Arenas
     public sealed class Horde
     {
         private readonly List<Monster> _monsters = new List<Monster>();
+        private readonly List<Monster> _recruits = new List<Monster>();
         private readonly Buckets _buckets;
 
         public Horde(float cell)
@@ -21,6 +22,8 @@ namespace Game.Core.Arenas
             _monsters.Add(monster);
             _buckets.Put(monster);
         }
+
+        public void Recruit(Monster monster) => _recruits.Add(monster);
 
         public void Near(Vector3 point, float radius, List<Monster> found) => _buckets.Near(point, radius, found);
 
@@ -44,6 +47,8 @@ namespace Game.Core.Arenas
                     Remove(index);
                 }
             }
+            _monsters.AddRange(_recruits);
+            _recruits.Clear();
             _buckets.Clear();
             foreach (var monster in _monsters)
             {

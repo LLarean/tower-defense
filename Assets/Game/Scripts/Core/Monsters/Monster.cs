@@ -14,6 +14,7 @@ namespace Game.Core.Monsters
         private readonly Statuses _statuses = new Statuses();
         private float _health;
         private float _distance;
+        private int _calls;
 
         public Monster(Breed breed, Route route)
         {
@@ -71,9 +72,25 @@ namespace Game.Core.Monsters
             var amount = damage * (1f - armor) * (1f + _statuses.Potency(Condition.Sundered));
             _health -= amount;
             arena.Feedback.Wounded(this, amount, element);
+            Rally(arena);
         }
 
         public void Slay() => _health = 0f;
+
+        private void Rally(Arena arena)
+        {
+            var retinue = _breed.Retinue;
+            while (Alive && _calls < retinue.Calls && Vitality <= retinue.Threshold(_calls))
+            {
+                _calls++;
+                for (var index = 0; index < retinue.Count; index++)
+                {
+                    var follower = new Monster(retinue.Follower, _route);
+                    follower.Push(-Math.Max(0f, _distance - retinue.Spacing * (index + 1)));
+                    arena.Horde.Recruit(follower);
+                }
+            }
+        }
 
         public void Inflict(Condition condition, float potency, float duration) => _statuses.Inflict(condition, potency, duration);
 
