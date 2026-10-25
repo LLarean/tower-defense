@@ -26,6 +26,7 @@ namespace Game.Stage
         private const string Menu = "Menu";
 
         [SerializeField] private LevelAsset _level;
+        [SerializeField] private DifficultyAsset _difficulty;
         [SerializeField] private ChemistryAsset _chemistry;
         [SerializeField] private SpectacleAsset _spectacle;
         [SerializeField] private LoreAsset _lore;
@@ -58,9 +59,8 @@ namespace Game.Stage
         private void Awake()
         {
             var routes = Array.ConvertAll(_routes, path => path.Route());
-            var bestiary = new Bestiary(transform);
-            var armory = new Armory(_level.Arsenal);
-            var online = TryMatch(out var match);
+            var briefed = TryMatch(out var match);
+            var online = briefed && match.Online;
             _match = match;
             if (online && !match.Hosting)
             {
@@ -68,8 +68,11 @@ namespace Game.Stage
             }
             var players = online ? match.Players : _players;
             var me = online ? match.Me : 0;
-            var treasury = new Treasury(players, _level.Gold);
-            var lives = new Lives(_level.Lives);
+            var tier = briefed ? match.Difficulty : _difficulty.Default;
+            var bestiary = new Bestiary(transform, _difficulty.Threat(tier, players));
+            var armory = new Armory(_level.Arsenal);
+            var treasury = new Treasury(players, _difficulty.Gold(tier, _level.Gold));
+            var lives = new Lives(_difficulty.Lives(tier, _level.Lives));
             _gauges = new Gauges(_bar, _gauge);
             _throng = new Throng(bestiary.Stocks, _terrain, new Palette(_spectacle), _gauges);
             _show = new Spectacle(_spectacle, _throng, _tremor, transform);
@@ -147,12 +150,12 @@ namespace Game.Stage
         {
             var manager = NetworkManager.Singleton;
             match = null;
-            return manager != null && manager.IsListening && manager.TryGetComponent(out match);
+            return manager != null && manager.TryGetComponent(out match);
         }
 
         private static void Leave(Match match)
         {
-            if (match != null)
+            if (match != null && match.Online)
             {
                 match.Close();
             }

@@ -19,6 +19,8 @@ namespace Game.Stage.Net
 
         public int Me { get; private set; }
 
+        public int Difficulty { get; private set; }
+
         public bool Online => _manager.IsListening;
 
         public bool Hosting => _manager.IsServer;
@@ -44,6 +46,15 @@ namespace Game.Stage.Net
             {
                 _manager.OnClientConnectedCallback += Announce;
                 _manager.OnClientDisconnectCallback += Announce;
+                Announce(NetworkManager.ServerClientId);
+            }
+        }
+
+        public void Choose(int difficulty)
+        {
+            Difficulty = difficulty;
+            if (_manager.IsServer)
+            {
                 Announce(NetworkManager.ServerClientId);
             }
         }
@@ -80,9 +91,10 @@ namespace Game.Stage.Net
                 {
                     continue;
                 }
-                using var writer = new FastBufferWriter(sizeof(int) * 2, Allocator.Temp);
+                using var writer = new FastBufferWriter(sizeof(int) * 3, Allocator.Temp);
                 writer.WriteValueSafe(Players);
                 writer.WriteValueSafe(index);
+                writer.WriteValueSafe(Difficulty);
                 _manager.CustomMessagingManager.SendNamedMessage(Channel, _clients[index], writer, NetworkDelivery.ReliableSequenced);
             }
         }
@@ -91,8 +103,10 @@ namespace Game.Stage.Net
         {
             reader.ReadValueSafe(out int players);
             reader.ReadValueSafe(out int me);
+            reader.ReadValueSafe(out int difficulty);
             Players = players;
             Me = me;
+            Difficulty = difficulty;
         }
     }
 }

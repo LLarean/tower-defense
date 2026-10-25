@@ -149,6 +149,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Game.Stage::Game.Stage.BattleScene
   _level: {fileID: 11400000, guid: e0eb6021d38de774a8cb7d7e582a0d3a, type: 2}
+  _difficulty: {fileID: 11400000, guid: 64a1c21a3892a314ea654d003429fb1d, type: 2}
   _chemistry: {fileID: 11400000, guid: 6962652423265b4449074f07ec7819fc, type: 2}
   _spectacle: {fileID: 11400000, guid: 473c32e45c23c9845930acc3ead3d474, type: 2}
   _lore: {fileID: 11400000, guid: c7c842ce45740c24ab1ae4850ba6cdbe, type: 2}

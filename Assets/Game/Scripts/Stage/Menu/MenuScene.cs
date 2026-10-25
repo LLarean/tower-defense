@@ -17,6 +17,7 @@ namespace Game.Stage.Menu
         [SerializeField] private ushort _port = 7777;
         [SerializeField] private ChemistryAsset _chemistry;
         [SerializeField] private LoreAsset _lore;
+        [SerializeField] private DifficultyAsset _difficulty;
 
         private Lobby _lobby;
 
@@ -30,6 +31,7 @@ namespace Game.Stage.Menu
                 _transport = survivor.GetComponent<UnityTransport>();
             }
             _match.Prepare();
+            _match.Choose(_difficulty.Default);
             var root = _document.rootVisualElement;
             _lobby = new Lobby(root, _match, new Lan(_transport, _port), new Atlas(_maps));
             var codex = new Codex(root, new Recipes(_chemistry.Chemistry(), _lore), _lore);
