@@ -30,6 +30,7 @@ namespace Game.Stage.Menu
         [SerializeField] private CampaignAsset _campaign;
         [SerializeField] private SoundboardAsset _soundboard;
         [SerializeField] private LanguageAsset _languages;
+        [SerializeField, Range(0.3f, 1f)] private float _window = 0.75f;
 
         private Lobby _lobby;
         private Melody _melody;
@@ -70,6 +71,7 @@ namespace Game.Stage.Menu
             root.Q<Button>("quit").clicked += Application.Quit;
             root.Q<Button>("settings").clicked += () => pages.Open(Settings);
             new Setting(root.Q<Button>("numbers"), "Damage numbers", "numbers", lexicon);
+            new Fullscreen(root.Q<Button>("fullscreen"), _window, lexicon);
             var language = root.Q<Button>("language");
             language.text = lexicon.Say("Language: {0}", tongue.Title);
             language.clicked += tongue.Switch;

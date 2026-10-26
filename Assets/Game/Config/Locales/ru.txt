@@ -46,6 +46,7 @@ Cancel	Отмена
 Sound	Звук
 Music	Музыка
 Damage numbers	Числа урона
+Fullscreen	Полный экран
 Language: {0}	Язык: {0}
 Speed ×{0}	Скорость ×{0}
 Wave {0}/{1}	Волна {0}/{1}

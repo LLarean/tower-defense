@@ -16,6 +16,7 @@
                 <ui:Button name="sound" class="choice seal seal--quiet" />
                 <ui:Button name="music" class="choice seal seal--quiet" />
                 <ui:Button name="numbers" class="choice seal seal--quiet" />
+                <ui:Button name="fullscreen" class="choice seal seal--quiet" />
                 <ui:Button name="language" class="choice seal seal--quiet" />
                 <ui:Button class="choice seal back seal--quiet" text="Back" />
             </ui:VisualElement>
