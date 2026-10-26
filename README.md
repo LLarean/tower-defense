@@ -4,9 +4,12 @@
 
 **A co-op tower defense for 1–4 players where elements react with each other.**
 
+[**▶ Play in browser**](https://llarean.org/tower-defense/) · [**⬇ Download for Windows**](https://github.com/LLarean/tower-defense/releases/latest)
+
 [![Unity](https://img.shields.io/badge/Unity-6000.3-000000?logo=unity&logoColor=white)](https://unity.com/releases/editor/whats-new/6000.3.12f1)
 [![URP](https://img.shields.io/badge/render-URP-4a8bd1)](https://unity.com/srp/universal-render-pipeline)
-[![Platform](https://img.shields.io/badge/platform-Windows-0078d4)](#play)
+[![Release](https://img.shields.io/github/v/release/LLarean/tower-defense)](https://github.com/LLarean/tower-defense/releases/latest)
+[![Platform](https://img.shields.io/badge/platform-Windows%20%7C%20Web-0078d4)](#download)
 [![Players](https://img.shields.io/badge/players-1–4%20co--op-ff8c00)](#play)
 <br>
 [![Core](https://github.com/LLarean/tower-defense/actions/workflows/core.yml/badge.svg)](https://github.com/LLarean/tower-defense/actions/workflows/core.yml)
@@ -33,6 +36,11 @@ Seven elements put a status on a monster; a second element on the same monster t
   <img src="docs/media/reactions.jpg" width="49%" alt="Towers freezing a column of monsters">
   <img src="docs/media/battle.jpg" width="49%" alt="Oil and fire setting a pack ablaze">
 </p>
+
+## Download
+
+- **Browser** — [llarean.org/tower-defense](https://llarean.org/tower-defense/), no install. Online co-op by code is available here too; local network play needs the Windows build.
+- **Windows** — the zip from the [latest release](https://github.com/LLarean/tower-defense/releases/latest): unpack and run `BattleOfTheElements.exe`.
 
 ## Play
 
