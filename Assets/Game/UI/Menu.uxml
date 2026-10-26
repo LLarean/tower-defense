@@ -9,14 +9,14 @@
                 <ui:Button name="coop" class="choice seal" text="Co-op" />
                 <ui:Button name="codex" class="choice seal seal--quiet" text="Codex" />
                 <ui:Button name="settings" class="choice seal seal--quiet" text="Settings" />
-                <ui:Button name="quit" class="choice seal seal--quiet" text="Quit" />
+                <ui:Button name="quit" class="choice seal seal--quiet desktop" text="Quit" />
             </ui:VisualElement>
             <ui:VisualElement name="settings-page" class="page">
                 <ui:Label class="title rune" text="Settings" />
                 <ui:Button name="sound" class="choice seal seal--quiet" />
                 <ui:Button name="music" class="choice seal seal--quiet" />
                 <ui:Button name="numbers" class="choice seal seal--quiet" />
-                <ui:Button name="fullscreen" class="choice seal seal--quiet" />
+                <ui:Button name="fullscreen" class="choice seal seal--quiet desktop" />
                 <ui:Button name="language" class="choice seal seal--quiet" />
                 <ui:Button class="choice seal back seal--quiet" text="Back" />
             </ui:VisualElement>
@@ -54,8 +54,8 @@
                         <ui:TextField name="code" class="field" />
                         <ui:Button name="join-online" class="choice seal" text="Join by code" />
                     </ui:VisualElement>
-                    <ui:Label class="caption" text="Local network" />
-                    <ui:VisualElement class="row">
+                    <ui:Label class="caption desktop" text="Local network" />
+                    <ui:VisualElement class="row desktop">
                         <ui:Button name="host-lan" class="choice seal" text="Host" />
                         <ui:TextField name="ip" class="field" value="127.0.0.1" />
                         <ui:Button name="join-lan" class="choice seal" text="Join by IP" />

@@ -30,6 +30,7 @@ namespace Game.Stage.Hud
             Navigate(root, "cheats", "pause-cheats");
             root.Q<Button>("restart").EnableInClassList("hidden", online);
             root.Q<Button>("cheats").EnableInClassList("hidden", online);
+            root.Q<Button>("quit").EnableInClassList("hidden", Application.platform == RuntimePlatform.WebGLPlayer);
             root.Q<Button>("menu").clicked += prompt.Ask(lexicon.Say("Leave to the main menu?"), menu);
             root.Q<Button>("quit").clicked += prompt.Ask(lexicon.Say("Quit the game?"), Application.Quit);
             _screen.Query<Button>(className: "back").ForEach(back => back.clicked += () => _pages.Open(Main));
