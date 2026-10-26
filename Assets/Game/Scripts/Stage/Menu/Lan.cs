@@ -21,12 +21,14 @@ namespace Game.Stage.Menu
 
         public bool Host(NetworkManager manager)
         {
+            _transport.UseWebSockets = false;
             _transport.SetConnectionData(Loopback, _port, Everyone);
             return manager.StartHost();
         }
 
         public bool Join(NetworkManager manager, string address)
         {
+            _transport.UseWebSockets = false;
             _transport.SetConnectionData(address, _port);
             return manager.StartClient();
         }

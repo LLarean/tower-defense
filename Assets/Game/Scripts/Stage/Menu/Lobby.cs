@@ -15,7 +15,7 @@ namespace Game.Stage.Menu
         private readonly Lan _lan;
         private readonly Sortie _sortie;
         private readonly Lexicon _lexicon;
-        private readonly Cloud _cloud = new Cloud("default");
+        private readonly Cloud _cloud;
         private readonly VisualElement _doors;
         private readonly VisualElement _hall;
         private readonly Label _status;
@@ -26,11 +26,12 @@ namespace Game.Stage.Menu
         private string _code = string.Empty;
         private int _shownPlayers = -1;
 
-        public Lobby(VisualElement root, Match match, Lan lan, Sortie sortie, Lexicon lexicon)
+        public Lobby(VisualElement root, Match match, Lan lan, Cloud cloud, Sortie sortie, Lexicon lexicon)
         {
             _lexicon = lexicon;
             _match = match;
             _lan = lan;
+            _cloud = cloud;
             _sortie = sortie;
             _doors = root.Q("doors");
             _hall = root.Q("hall");

@@ -20,7 +20,7 @@ public sealed class Autopilot : MonoBehaviour
     private int _difficulty = 1;
     private int _players = 2;
     private bool _briefed;
-    private Game.Stage.Menu.Cloud _cloud = new Game.Stage.Menu.Cloud("default");
+    private Game.Stage.Menu.Cloud _cloud;
     private float _since;
     private int _logged = -1;
     private int _step;
@@ -37,7 +37,6 @@ public sealed class Autopilot : MonoBehaviour
         var pilot = new GameObject("Autopilot").AddComponent<Autopilot>();
         pilot._role = role;
         pilot._online = Array.IndexOf(args, "-td-online") >= 0;
-        pilot._cloud = new Game.Stage.Menu.Cloud(role);
         pilot._codeFile = Value(args, "-td-codefile", string.Empty);
         pilot._mission = Value(args, "-td-mission", "Meadow");
         pilot._difficulty = int.Parse(Value(args, "-td-difficulty", "1"));
@@ -56,6 +55,7 @@ public sealed class Autopilot : MonoBehaviour
         if (!_hooked && manager != null)
         {
             _hooked = true;
+            _cloud = new Game.Stage.Menu.Cloud(_role, manager.GetComponent<UnityTransport>());
             manager.LogLevel = Unity.Netcode.LogLevel.Developer;
             manager.OnClientDisconnectCallback += id => Debug.Log($"[Net] disconnect {id} reason '{manager.DisconnectReason}' scene {SceneManager.GetActiveScene().name}");
             manager.OnTransportFailure += () => Debug.Log("[Net] transport failure");

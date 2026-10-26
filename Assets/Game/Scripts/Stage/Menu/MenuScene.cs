@@ -52,7 +52,7 @@ namespace Game.Stage.Menu
             var chronicle = new Chronicle();
             var sortie = new Sortie(_campaign, _difficulty, _match, chronicle);
             new Missions(root, _campaign, _difficulty, sortie, chronicle, lexicon);
-            _lobby = new Lobby(root, _match, new Lan(_transport, _port), sortie, lexicon);
+            _lobby = new Lobby(root, _match, new Lan(_transport, _port), new Cloud("default", _transport), sortie, lexicon);
             var codex = new Codex(root, new Recipes(_chemistry.Chemistry(), _lore, lexicon), _lore, lexicon);
             root.Q<Label>("campaign-title").text = _campaign.Title;
             root.Q<Label>("prologue-text").text = _campaign.Prologue;
@@ -79,6 +79,8 @@ namespace Game.Stage.Menu
             _melody = new Melody(transform, _soundboard.Menu, _soundboard.Music, new Setting(root.Q<Button>("music"), "Music", "music", lexicon));
             new Chime(root, voices, _soundboard.Click);
             root.Query<Button>(className: "back").ForEach(back => back.clicked += () => pages.Open(Front));
+            var web = Application.platform == RuntimePlatform.WebGLPlayer;
+            root.Query(className: "desktop").ForEach(element => element.EnableInClassList("hidden", web));
             tongue.Dress(root);
             pages.Open(Front);
         }
