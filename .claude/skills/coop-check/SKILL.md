@@ -31,3 +31,9 @@ sleep 90; taskkill //F //IM BattleOfTheElements.exe
 - `[Brief]` — у гостя `players`, `difficulty`, `lives` совпадают с хостом, `me` — свой номер.
 - `[Sum] tick=N sum=...` — на общих тиках суммы одинаковые (`diff` по строкам `[Sum]`); гость может отставать на пару отметок.
 - `[Net]` — нет `disconnect`/`client stopped` посреди боя. `Curl error 28` у хоста — сбой связи с сервисами Unity, прогон повторить.
+
+## Уборка
+
+- Убрать `Assets/Scratch/Runtime/Autopilot.cs`.
+- Окно 800×450 из `-screen-*` Unity запоминает в реестре, и потом так открывается любая сборка игры. Сбросить:
+  `powershell -c "$k='HKCU:\Software\Manul Wizard\Battle of the Elements'; (Get-ItemProperty $k).PSObject.Properties | ? Name -like 'Screenmanager*' | % { Remove-ItemProperty $k $_.Name }"`
