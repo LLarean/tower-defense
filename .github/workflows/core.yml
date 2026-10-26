@@ -16,9 +16,28 @@ jobs:
       - name: Build core like Unity does
         run: dotnet build tools/Core/Core.csproj
       - name: Test core
-        run: dotnet test tools/CoreTests/CoreTests.csproj --logger "trx;LogFileName=core.trx"
+        run: >
+          dotnet test tools/CoreTests/CoreTests.csproj
+          --logger "trx;LogFileName=core.trx"
+          --collect "XPlat Code Coverage"
+          --results-directory TestResults
+      - name: Summarize coverage
+        if: always()
+        uses: danielpalme/ReportGenerator-GitHub-Action@5
+        with:
+          reports: TestResults/**/coverage.cobertura.xml
+          targetdir: TestResults/report
+          reporttypes: MarkdownSummaryGithub
+      - name: Publish coverage summary
+        if: always()
+        run: cat TestResults/report/SummaryGithub.md >> "$GITHUB_STEP_SUMMARY" || true
+      - uses: codecov/codecov-action@v5
+        with:
+          files: TestResults/**/coverage.cobertura.xml
+          token: ${{ secrets.CODECOV_TOKEN }}
+          fail_ci_if_error: false
       - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: core-tests
-          path: tools/CoreTests/TestResults
+          path: TestResults

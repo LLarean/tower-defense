@@ -82,3 +82,6 @@ crashlytics-build.properties
 /tools/**/obj/
 /[Aa]ssets/Scratch/
 /[Aa]ssets/Scratch.meta
+
+# Test results and coverage from dotnet test
+TestResults/
