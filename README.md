@@ -10,7 +10,7 @@
 [![Players](https://img.shields.io/badge/players-1–4%20co--op-ff8c00)](#play)
 <br>
 [![Core](https://github.com/LLarean/tower-defense/actions/workflows/core.yml/badge.svg)](https://github.com/LLarean/tower-defense/actions/workflows/core.yml)
-[![Unity](https://github.com/LLarean/tower-defense/actions/workflows/unity.yml/badge.svg)](https://github.com/LLarean/tower-defense/actions/workflows/unity.yml)
+[![Build](https://github.com/LLarean/tower-defense/actions/workflows/build.yml/badge.svg)](https://github.com/LLarean/tower-defense/actions/workflows/build.yml)
 [![Coverage](https://codecov.io/gh/LLarean/tower-defense/graph/badge.svg)](https://codecov.io/gh/LLarean/tower-defense)
 [![CodeFactor](https://www.codefactor.io/repository/github/llarean/tower-defense/badge)](https://www.codefactor.io/repository/github/llarean/tower-defense)
 
